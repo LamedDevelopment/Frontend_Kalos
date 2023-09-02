@@ -1,0 +1,23 @@
+<div
+    class="h-100vh pt-50 pb-50"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.card-borderd-theme]="themeService.isCardBorder()"
+    [class.card-border-radius]="themeService.isCardBorderRadius()"
+>
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="logout-box text-center bg-white border-radius ms-auto me-auto">
+                <div class="logo">
+                    <img src="assets/img/logo.png" alt="logo">
+                </div>
+                <div class="logo white-logo">
+                    <img src="assets/img/white-logo.png" alt="logo">
+                </div>
+                <img src="assets/img/icon/coffee.png" alt="coffee">
+                <h5 class="fw-semibold mb-12">Estas Desconectado</h5>
+                <p>Gracias por usar <span class="fw-semibold">Kalos</span> by LamedDev</p>
+                <a mat-flat-button class="tagus d-block fw-semibold" routerLink="/authentication/login">Ingresar</a>
+            </div>
+        </div>
+    </div>
+</div>

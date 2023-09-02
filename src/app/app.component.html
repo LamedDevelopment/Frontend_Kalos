@@ -1,0 +1,20 @@
+<div
+    [ngClass]="{'blank-page': router.url === '/error-500' || router.url === '/auth/reset-password' || router.url === '/auth/forgot-password' || router.url === '/auth/login' || router.url === '/auth/register' || router.url === '/auth/signin-signup' || router.url === '/auth/logout' || router.url === '/auth/confirm-mail' || router.url === '/auth/lock-screen'}"
+    [class.dark-theme]="themeService.isDark()"
+    [class.card-borderd-theme]="themeService.isCardBorder()"
+    [class.card-border-radius]="themeService.isCardBorderRadius()"
+    [class.rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <app-sidebar></app-sidebar>
+    <div
+        class="main-content d-flex flex-column"
+        [ngClass]="{'active': isToggled}"
+        [class.hide-sidebar]="themeService.isHideSidebar()"
+    >
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+        <div class="flex-grow-1"></div>
+        <app-footer></app-footer>
+    </div>
+    <!-- <app-customizer-settings></app-customizer-settings> -->
+</div>
