@@ -10,9 +10,17 @@ import { ShowcaseModule } from './showcase/showcase.module';
 import { UserModule } from './user/user.module';
 
 import { ComponentsComponent } from './components.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-    { path: '', component: ComponentsComponent },
+    {
+        path: '',
+        component: ComponentsComponent,
+        children: [
+            { path: 'home', component: HomeComponent },
+            { path: '', redirectTo: '/home', pathMatch: 'full' },
+        ]
+    },
 ];
 
 @NgModule({

@@ -39,7 +39,8 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/manifest.webmanifest",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/assets/icons/favicon"
             ],
             "styles": [
               "src/assets/fonts/flaticon_tagus.css",
@@ -119,8 +120,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",
-              "src/manifest.webmanifest",
-              "src/manifest.webmanifest"
+              "src/assets/icons/favicon"
             ],
             "styles": [
               "src/styles.scss"

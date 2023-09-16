@@ -55,7 +55,7 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { QuillModule } from 'ngx-quill';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ColorPickerModule } from 'ngx-color-picker';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
