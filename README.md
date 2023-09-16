@@ -4,7 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `docker build -t kalos:latest --build-arg configuration="staging" .` for build docker. Navigate to `http://localhost`. The application will automatically reload if you change any of the source files.
+Change name configuration for production or dev, for other environments
+
+Run `docker run -d -p 80:80 kalos:latest` for run docker
 
 ## Code scaffolding
 
