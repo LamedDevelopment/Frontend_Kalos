@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     name:'dev',
-    url_api: 'https://api.efdi.cloud/api/front/',
+    url_api: 'https://devback.bellezaap.com/api/v1/',
 };
 
 
