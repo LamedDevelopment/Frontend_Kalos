@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { RouterModule, Route } from '@angular/router';
 
 import { LoginComponent } from './components/authentication/login/login.component';
 import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
@@ -10,13 +9,17 @@ import { SigninSignupComponent } from './components/authentication/signin-signup
 import { LogoutComponent } from './components/authentication/logout/logout.component';
 import { ConfirmMailComponent } from './components/authentication/confirm-mail/confirm-mail.component';
 import { LockScreenComponent } from './components/authentication/lock-screen/lock-screen.component';
+import { NoAuthGuard } from './components/authentication/auth/guards/noAuth.guard';
+import { AuthGuard } from './components/authentication/auth/guards/auth.guard';
 import { PagesModule } from './pages/pages.module';
+import { PagesComponent } from './pages/pages.component';
 
 
 
-const routes: Routes = [
 
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+export const appRoutes: Route[] = [
+
+    { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
     { path: 'auth/login', component: LoginComponent },
     { path: 'auth/forgot-password', component: ForgotPasswordComponent},
     { path: 'auth/reset-password', component: ResetPasswordComponent},
@@ -25,13 +28,8 @@ const routes: Routes = [
     { path: 'auth/logout', component: LogoutComponent},
     { path: 'auth/confirm-mail', component: ConfirmMailComponent},
     { path: 'auth/lock-screen', component: LockScreenComponent},
+
+
 ];
 
-@NgModule({
-    imports: [
-        RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
-        PagesModule,
-    ],
-    exports: [RouterModule]
-})
-export class AppRoutingModule { }
+

@@ -11,14 +11,15 @@ import { UserModule } from './user/user.module';
 
 import { ComponentsComponent } from './components.component';
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 
 const routes: Routes = [
     {
         path: '',
         component: ComponentsComponent,
+        canActivate: [AuthGuard],
         children: [
             { path: 'home', component: HomeComponent },
-            { path: '', redirectTo: '/home', pathMatch: 'full' },
         ]
     },
 ];

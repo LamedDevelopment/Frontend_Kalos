@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ComponentsModule } from './components/components.module';
 import { PagesComponent } from './pages.component';
+import { AuthGuard } from '../components/authentication/auth/guards/auth.guard';
 
 const routes: Routes = [
-    { path: '', component: PagesComponent },
+    { path: '', component: PagesComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

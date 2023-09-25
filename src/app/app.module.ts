@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule,FormControl, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -58,7 +58,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
+import { appRoutes } from './app-routing';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './shared/componentsShared/header/header.module';
 import { SidebarModule } from './shared/componentsShared/sidebar/sidebar.module';
@@ -66,18 +66,24 @@ import { FooterModule } from './shared/componentsShared/footer/footer.module';
 
 
 import { CustomizerSettingsModule } from './shared/componentsShared/customizer-settings/customizer-settings.module';
-import { LoginComponent } from './components/authentication/login/login.component';
-import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
-import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
-import { RegisterComponent } from './components/authentication/register/register.component';
-import { SigninSignupComponent } from './components/authentication/signin-signup/signin-signup.component';
-import { LogoutComponent } from './components/authentication/logout/logout.component';
-import { ConfirmMailComponent } from './components/authentication/confirm-mail/confirm-mail.component';
-import { LockScreenComponent } from './components/authentication/lock-screen/lock-screen.component';
-import { PagesModule } from './pages/pages.module';
+
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ExtraOptions, PreloadAllModules, RouterModule} from '@angular/router';
+import { PagesModule } from './pages/pages.module';
+import { ConfirmMailComponent } from './components/authentication/confirm-mail/confirm-mail.component';
+import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
+import { LockScreenComponent } from './components/authentication/lock-screen/lock-screen.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { LogoutComponent } from './components/authentication/logout/logout.component';
+import { RegisterComponent } from './components/authentication/register/register.component';
+import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
+import { SigninSignupComponent } from './components/authentication/signin-signup/signin-signup.component';
+import { AuthService } from './pages/services/auth/auth.service';
 
-
+const routerConfig: ExtraOptions = {
+  preloadingStrategy: PreloadAllModules,
+  scrollPositionRestoration: 'enabled',
+};
 
 @NgModule({
     declarations: [
@@ -93,7 +99,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
+        RouterModule.forRoot(appRoutes, routerConfig),
         MatMenuModule,
         MatCardModule,
         MatTableModule,
@@ -151,12 +157,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         QuillModule.forRoot(),
         NgxDropzoneModule,
         ColorPickerModule,
-        HeaderModule,
-        SidebarModule,
-        FooterModule,
         CustomizerSettingsModule,
-        PagesModule,
         ScrollingModule,
+        PagesModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: !isDevMode(),
           // Register the ServiceWorker as soon as the application is stable
@@ -165,8 +168,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         }),
     ],
     providers: [
-        DatePipe
+        DatePipe,
+        AuthService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [],
 })
 export class AppModule { }
