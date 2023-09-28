@@ -1,4 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
+import { APP_BASE_HREF,HashLocationStrategy,LocationStrategy } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule,FormControl, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -169,7 +170,8 @@ const routerConfig: ExtraOptions = {
     ],
     providers: [
         DatePipe,
-        AuthService
+        AuthService,
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
