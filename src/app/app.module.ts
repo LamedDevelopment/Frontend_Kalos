@@ -68,7 +68,7 @@ import { FooterModule } from './shared/componentsShared/footer/footer.module';
 
 import { CustomizerSettingsModule } from './shared/componentsShared/customizer-settings/customizer-settings.module';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
+
 import { ExtraOptions, PreloadAllModules, RouterModule} from '@angular/router';
 import { PagesModule } from './pages/pages.module';
 import { ConfirmMailComponent } from './components/authentication/confirm-mail/confirm-mail.component';
@@ -161,12 +161,6 @@ const routerConfig: ExtraOptions = {
         CustomizerSettingsModule,
         ScrollingModule,
         PagesModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: !isDevMode(),
-          // Register the ServiceWorker as soon as the application is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
-        }),
     ],
     providers: [
         DatePipe,
