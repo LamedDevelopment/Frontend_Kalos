@@ -1,41 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { concat, concatMap, last, map, Observable, of, ReplaySubject, switchMap, take, tap } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import { ApiServiceHttp } from '../api.service';
 import { User } from '../../models/user';
+
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class UserService
-{
-    private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
+export class UserService {
+  private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
 
-    /**
-     * Constructor
-     */
-    constructor(private _httpClient: HttpClient, private _apiServiceHttp: ApiServiceHttp)
-    {
-    }
+  constructor(private _httpClient: HttpClient, private _apiServiceHttp: ApiServiceHttp) {}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
+  // Setter & getter for user
+  set user(value: User) {
+    // Almacena el valor y lo emite a los observadores
+    this._user.next(value);
+  }
 
-    /**
-     * Setter & getter for user
-     *
-     * @param value
-     */
-    set user(value: User)
-    {
-        // Store the value
-        this._user.next(value);
-    }
-
-    get user$(): Observable<User>
-    {
-        return this._user.asObservable();
-    }
-
-
+  get user$(): Observable<User> {
+    return this._user.asObservable();
+  }
 }

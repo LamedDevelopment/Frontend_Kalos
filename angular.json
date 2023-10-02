@@ -58,9 +58,7 @@
             "scripts": [
               "node_modules/quill/dist/quill.min.js",
               "node_modules/apexcharts/dist/apexcharts.min.js"
-            ],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            ]
           },
           "configurations": {
             "production": {
