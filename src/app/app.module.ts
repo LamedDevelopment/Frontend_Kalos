@@ -1,16 +1,11 @@
-<<<<<<< HEAD
 import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule, isDevMode } from '@angular/core';
-=======
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
-import { APP_BASE_HREF,HashLocationStrategy,LocationStrategy } from '@angular/common';
->>>>>>> fff63aba013b7832f9751b36aa2f22f1ec630fc6
 
 import { FormsModule, ReactiveFormsModule,FormControl, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DatePipe, HashLocationStrategy, LocationStrategy, APP_BASE_HREF } from '@angular/common';
 import { NgxEditorModule } from 'ngx-editor';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatCardModule } from '@angular/material/card';
@@ -167,6 +162,9 @@ registerLocaleData(localeEs, 'es');
         CustomizerSettingsModule,
         ScrollingModule,
         PagesModule,
+        HeaderModule,
+        SidebarModule,
+        FooterModule
     ],
     providers: [
         DatePipe,
@@ -181,7 +179,7 @@ registerLocaleData(localeEs, 'es');
           provide: LOCALE_ID,
           useValue: 'es',
         },
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        /* { provide: LocationStrategy, useClass: HashLocationStrategy }, */
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
