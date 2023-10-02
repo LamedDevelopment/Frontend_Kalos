@@ -41,7 +41,7 @@ export class AuthUtils
         {
             return true;
         }
-
+        //console.log('fecha', (date.valueOf() > new Date().valueOf() + offsetSeconds * 1000), token)
         // Check if the token is expired
         return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
     }

@@ -13,9 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BarFiltersComponent } from './class/bar-filters/bar-filters.component';
 import { PagesComponent } from './pages.component';
-import { FooterModule } from '../shared/componentsShared/footer/footer.module';
-import { HeaderModule } from '../shared/componentsShared/header/header.module';
-import { SidebarModule } from '../shared/componentsShared/sidebar/sidebar.module';
+import { ModelsComponent } from '../shared/models/models.component';
 
 
 @NgModule({
@@ -35,15 +33,13 @@ import { SidebarModule } from '../shared/componentsShared/sidebar/sidebar.module
     MatCardModule,
     FlexLayoutModule,
     SharedModule,
-    HeaderModule,
-    SidebarModule,
-    FooterModule,
     ],
     exports: [
     HelpersComponent,
+    ModelsComponent,
     PipesComponent,
     HomeComponent,
     BarFiltersComponent
-  ]
+  ],
 })
 export class PagesModule { }

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ApiServiceHttp } from './api.service';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,23 @@ export class ServicesService {
         { type: 'Tatuajes', icono:'ri-ghost-2-line', count: 25},
     ]
 
-    constructor() { }
+    constructor(private _apiServiceHttp: ApiServiceHttp,) { }
     getData() {
     return this.Services;
+  }
+
+  async InfoUserApi(){
+    console.log('ingresa función home')
+    this._apiServiceHttp.post('login/token', {}).pipe(
+      map((response: any) => {
+        console.log(response)
+        // Store the user on the user service
+        //this._userService.user = this.token;
+      },
+      (error:any) =>{
+        console.log(error)
+      }
+      ),
+    );
   }
 }

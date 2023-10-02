@@ -22,6 +22,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatIconModule,
       FlexLayoutModule,
 
-  ]
+  ],
 })
 export class ComponentsModule { }

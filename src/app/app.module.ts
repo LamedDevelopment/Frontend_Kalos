@@ -1,10 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, isDevMode } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule,FormControl, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { NgxEditorModule } from 'ngx-editor';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -58,7 +58,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { appRoutes } from './app-routing';
+import { AppRoutingModule } from './app-routing';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './shared/componentsShared/header/header.module';
 import { SidebarModule } from './shared/componentsShared/sidebar/sidebar.module';
@@ -79,11 +79,13 @@ import { RegisterComponent } from './components/authentication/register/register
 import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
 import { SigninSignupComponent } from './components/authentication/signin-signup/signin-signup.component';
 import { AuthService } from './pages/services/auth/auth.service';
+import { AuthInterceptor } from './components/authentication/auth/auth.interceptor';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { ApiServiceHttp } from './pages/services/api.service';
 
-const routerConfig: ExtraOptions = {
-  preloadingStrategy: PreloadAllModules,
-  scrollPositionRestoration: 'enabled',
-};
+registerLocaleData(localeEs, 'es');
+
 
 @NgModule({
     declarations: [
@@ -99,7 +101,7 @@ const routerConfig: ExtraOptions = {
     ],
     imports: [
         BrowserModule,
-        RouterModule.forRoot(appRoutes, routerConfig),
+        AppRoutingModule,
         MatMenuModule,
         MatCardModule,
         MatTableModule,
@@ -166,10 +168,23 @@ const routerConfig: ExtraOptions = {
           // or after 30 seconds (whichever comes first).
           registrationStrategy: 'registerWhenStable:30000'
         }),
+        HeaderModule,
+        SidebarModule,
+        FooterModule,
     ],
     providers: [
         DatePipe,
-        AuthService
+        AuthService,
+        ApiServiceHttp,
+        {
+            provide : HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi   : true
+        },
+        {
+          provide: LOCALE_ID,
+          useValue: 'es',
+        },
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class ApiServiceHttp {
   constructor(private http: HttpClient) {}
 
   post(path: string, data: any): Observable<any>{
-    return this.http.post<any>(`${environment.url_api}${path}`, data).pipe(map((d) => d));
+    return this.http.post<any>(`${environment.url_api}${path}`, data, ).pipe(map((d) => d, (err:any) => console.log(err)));
   }
 
   public get(
@@ -39,6 +39,7 @@ export class ApiServiceHttp {
   }
 
   getParams(path: string, params: any): any {
+
     return this.http.get<any>(`${environment.url_api}${path}`, { params: params }).pipe(map((d) => d));
   }
 

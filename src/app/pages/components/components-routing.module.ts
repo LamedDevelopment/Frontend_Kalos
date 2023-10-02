@@ -15,12 +15,9 @@ import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.gu
 
 const routes: Routes = [
     {
-        path: '',
-        component: ComponentsComponent,
+        path: 'home',
+        component: HomeComponent,
         canActivate: [AuthGuard],
-        children: [
-            { path: 'home', component: HomeComponent },
-        ]
     },
 ];
 
@@ -33,7 +30,7 @@ const routes: Routes = [
         ManagerModule,
         OwnerModule,
         ShowcaseModule,
-        UserModule,
+        UserModule
     ],
   exports: [RouterModule]
 })

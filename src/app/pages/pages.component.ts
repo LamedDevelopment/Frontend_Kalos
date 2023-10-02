@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToggleService } from '../shared/services/toggle.service';
 import { CustomizerSettingsService } from '../shared/services/customizer-settings.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pages',
@@ -11,6 +12,7 @@ export class PagesComponent {
     isToggled = false;
 
     constructor(
+         public router: Router,
         private toggleService: ToggleService,
         public themeService: CustomizerSettingsService
     ) {

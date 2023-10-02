@@ -29,7 +29,7 @@ export class AuthGuard
      * @param route
      * @param state
      */
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
+    canActivate(state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
     {
         const redirectUrl = state.url === '/auth/logout' ? '/' : state.url;
         return this._check(redirectUrl);
@@ -74,7 +74,6 @@ export class AuthGuard
         return this._authService.check()
                    .pipe(
                        switchMap((authenticated) => {
-
                            // If the user is not authenticated...
                            if ( !authenticated )
                            {

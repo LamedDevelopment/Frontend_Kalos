@@ -3,15 +3,26 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from 'src/app/pages/services/auth/auth.service';
 import { AuthUtils } from './auth.utils';
+import { ApiServiceHttp } from 'src/app/pages/services/api.service';
+
+
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor
 {
+    private readonly methods = {
+        'GET': 'See',
+        'POST': 'Create',
+        'PUT': 'Update',
+        'DELETE': 'Delete'
+    };
+
     /**
      * Constructor
      */
-    constructor(private _authService: AuthService)
+    constructor(private _authService: AuthService, private _apiServiceHttp:ApiServiceHttp)
     {
+
     }
 
     /**
@@ -24,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor
     {
         // Clone the request object
         let newReq = req.clone();
-
+        let token = this._authService.accessToken
         // Request
         //
         // If the access token didn't expire, add the Authorization header.
@@ -33,17 +44,20 @@ export class AuthInterceptor implements HttpInterceptor
         // for the protected API routes which our response interceptor will
         // catch and delete the access token from the local storage while logging
         // the user out from the app.
-        if ( this._authService.accessToken && !AuthUtils.isTokenExpired(this._authService.accessToken) )
+        if ( token && !AuthUtils.isTokenExpired(token) )
         {
+            console.log(token)
             newReq = req.clone({
-                headers: req.headers.set('Authorization', 'Bearer ' + this._authService.accessToken)
+                headers: req.headers.set('x-token', token),
+                body:null,
             });
+            console.log(newReq)
         }
 
         // Response
         return next.handle(newReq).pipe(
-            catchError((error) => {
-
+            catchError((error:HttpErrorResponse) => {
+                console.log(error)
                 // Catch "401 Unauthorized" responses
                 if ( error instanceof HttpErrorResponse && error.status === 401 )
                 {

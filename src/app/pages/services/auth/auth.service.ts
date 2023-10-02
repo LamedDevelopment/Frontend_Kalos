@@ -5,6 +5,7 @@ import { AuthUtils } from '../../../components/authentication/auth/auth.utils';
 import { Router } from '@angular/router';
 import { ApiServiceHttp } from '../api.service';
 import { UserService } from '../user/user.service';
+import jwt_decode from 'jwt-decode';
 @Injectable()
 export class AuthService {
   private _authenticated: boolean = false;
@@ -29,6 +30,7 @@ export class AuthService {
    */
   set accessToken(token: string) {
     sessionStorage.setItem('accessToken', token);
+    console.log(token)
   }
 
   get accessToken(): string {
@@ -96,7 +98,6 @@ export class AuthService {
    * @param credentials
    */
   signIn(credentials: { email: string; pass: string; rememberMe: boolean }): Observable<any> {
-    console.log(credentials);
     // Throw error, if the user is already logged in
     if (this._authenticated) {
       return throwError('User is already logged in.');
@@ -104,21 +105,13 @@ export class AuthService {
 
     return this._apiServiceHttp.post('login', credentials).pipe(
       map((response: any) => {
-        console.log('authenticate', response);
-        if (!response.status) {
-          return this.signInStudent(credentials);
-        }
-
         // Store the access token in the local storage
-        this.accessToken = response.data.auth_info.access_token;
-        this.token = response.data.auth_info.user;
-        sessionStorage.setItem('dataAuth', JSON.stringify(this.token));
+        this.accessToken = response.login;
 
         // Set the authenticated flag to true
         this._authenticated = true;
 
-        // Store the user on the user service
-        this._userService.user = this.token;
+
 
         // Return a new observable with the response
         return of(response);
@@ -144,38 +137,21 @@ export class AuthService {
       }),
     );
   }
-  /**
-   * Sign in
-   *
-   * @param credentials
-   */
-  signInStudent(credentials: { email: string; pass: string }): Observable<any> {
-    // Throw error, if the user is already logged in
-    if (this._authenticated) {
-      return throwError('User is already logged in.');
-    }
 
-    return this._apiServiceHttp.post('authenticate_student', credentials).pipe(
-      map((response: any) => {
-        // Store the access token in the local storage
-        console.log(response)
-        this.accessToken = response.data.auth_info.access_token;
-        this.token = response.data.auth_info.user;
-        if(this.token.login_first === 1){
-            sessionStorage.setItem('dataAuth', JSON.stringify(this.token));
-            // Set the authenticated flag to true
-            this._authenticated = true;
-
-            // Store the user on the user service
-            this._userService.user = this.token;
-
-            // Return a new observable with the response
-            return of(response);
-        } else {
-            this._router.navigateByUrl('/forgot-password');
-        }
-      }),
-    );
+  InfoUserApi(): Observable<any> {
+    return this._apiServiceHttp.post('login/token', {}).pipe(
+          map((response: any) => {
+              console.log(response);
+              return of(response);
+              // Store the user on the user service
+              //this._userService.user = this.token;
+          },
+              (error: any) => {
+                  console.log(error);
+                  return of(error);
+              }
+          )
+      );
   }
 
   /**
@@ -262,25 +238,5 @@ export class AuthService {
     } else {
       return of(false);
     }
-    // Check if the user is logged in
-    /* if ( this._authenticated )
-        {
-            return of(true);
-        }
-
-        // Check the access token availability
-        if ( !this.accessToken )
-        {
-            return of(false);
-        }
-
-        // Check the access token expire date
-        if ( AuthUtils.isTokenExpired(this.accessToken) )
-        {
-            return of(false);
-        }
-
-        // If the access token exists and it didn't expire, sign in using it
-        return this.signInUsingToken(); */
   }
 }
