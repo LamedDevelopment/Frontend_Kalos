@@ -153,7 +153,6 @@ export class AuthService {
           )
       );
   }
-
   /**
    * Sign in using the access token
    */
