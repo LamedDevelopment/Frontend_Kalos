@@ -170,11 +170,11 @@ registerLocaleData(localeEs, 'es');
         DatePipe,
         AuthService,
         ApiServiceHttp,
-        {
+        /* {
             provide : HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi   : true
-        },
+        }, */
         {
           provide: LOCALE_ID,
           useValue: 'es',
