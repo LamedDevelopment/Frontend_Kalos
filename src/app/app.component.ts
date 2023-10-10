@@ -4,7 +4,9 @@ import { CustomizerSettingsService } from './shared/services/customizer-settings
 import { ToggleService } from './shared/services/toggle.service';
 import { AuthGuard } from './components/authentication/auth/guards/auth.guard';
 import { AuthService } from './pages/services/auth/auth.service';
-import { of, switchMap } from 'rxjs';
+import { of, throwError } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
 
 @Component({
     selector: 'app-root',

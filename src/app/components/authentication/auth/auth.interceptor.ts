@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { AuthService } from 'src/app/pages/services/auth/auth.service';
 import { AuthUtils } from './auth.utils';
 import { ApiServiceHttp } from 'src/app/pages/services/api.service';
+import { catchError } from 'rxjs/operators';
 
 
 

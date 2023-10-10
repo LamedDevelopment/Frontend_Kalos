@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiServiceHttp } from './api.service';
-import { map } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

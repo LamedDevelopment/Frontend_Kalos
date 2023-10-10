@@ -7,9 +7,10 @@ import {
   HttpErrorResponse,
   HttpHeaders
 } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable,  throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthUtils } from './components/authentication/auth/auth.utils';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -31,7 +32,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
     }
     return next.handle(request).pipe(
-      catchError((err: HttpErrorResponse) => {
+      catchError ((err: HttpErrorResponse) => {
 
         if (err.status === 401) {
           this.router.navigateByUrl('/auth/login');
