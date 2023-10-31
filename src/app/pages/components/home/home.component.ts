@@ -35,7 +35,6 @@ export class HomeComponent {
           this.salones = this.hair.getData();
           this.servicios = this.services.getData();
           await this.authService.InfoUserApi().subscribe((data:any)=> {
-            console.log(data)
           });
         // Aquí puedes realizar cualquier procesamiento adicional con los datos de salones
       }

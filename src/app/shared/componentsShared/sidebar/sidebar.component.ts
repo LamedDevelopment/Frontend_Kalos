@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { ToggleService } from '../../services/toggle.service';
 import { CustomizerSettingsService } from '../../services/customizer-settings.service';
+import { UTILITIES_CONSTANTS } from 'src/app/utilities';
+import { menu } from 'src/app/pages/models/user';
+
+
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +17,7 @@ export class SidebarComponent {
     panelOpenState = false;
 
     isToggled = false;
-
+    menuItems:menu[];
     constructor(
         private toggleService: ToggleService,
         public themeService: CustomizerSettingsService
@@ -21,6 +25,8 @@ export class SidebarComponent {
         this.toggleService.isToggled$.subscribe(isToggled => {
             this.isToggled = isToggled;
         });
+
+        this.menuItems = UTILITIES_CONSTANTS.plans
     }
 
     toggle() {

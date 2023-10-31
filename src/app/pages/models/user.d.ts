@@ -10,3 +10,14 @@ export interface User {
   id_status?: string;
   roles?: any;
 }
+
+
+export interface menu
+{
+    id: number,
+    title: string,
+    content?: string,
+    url: string,
+    icon?:string,
+    childs: Array<any>
+}

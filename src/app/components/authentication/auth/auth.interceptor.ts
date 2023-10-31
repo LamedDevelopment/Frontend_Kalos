@@ -47,18 +47,15 @@ export class AuthInterceptor implements HttpInterceptor
         // the user out from the app.
         if ( token && !AuthUtils.isTokenExpired(token) )
         {
-            console.log(token)
             newReq = req.clone({
-                headers: req.headers.set('x-token', token),
-                body:null,
+                headers: req.headers.set('x-token', token)
+                .set('Content-Type', 'application/json'),
             });
-            console.log(newReq)
         }
 
         // Response
         return next.handle(newReq).pipe(
             catchError((error:HttpErrorResponse) => {
-                console.log(error)
                 // Catch "401 Unauthorized" responses
                 if ( error instanceof HttpErrorResponse && error.status === 401 )
                 {

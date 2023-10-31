@@ -1,11 +1,11 @@
 <div
-    class="h-100vh pt-50 pb-50"
+    class="h-150vh pt-50 pb-50"
     [class.component-dark-theme]="themeService.isDark()"
     [class.card-borderd-theme]="themeService.isCardBorder()"
     [class.card-border-radius]="themeService.isCardBorderRadius()"
     [class.component-rtl-enabled]="themeService.isRTLEnabled()"
 >
-    <div class="d-table">
+    <div class="d-table" style="overflow:auto !important">
         <div class="d-table-cell">
             <div class="tagus-form ms-auto me-auto">
                 <div class="title">
@@ -15,41 +15,78 @@
                     </div>
                     <p>¿Ya tienes una cuenta? <a routerLink="/auth/login" class="main-color fw-medium">Ingresar ahora! </a></p>
                 </div>
-                <form>
+                <form [formGroup]="signUpForm" #signUpNgForm>
                     <div class="bg-white border-radius pt-5 ps-5 pe-5">
                         <div class="tagus-form-group without-icon">
-                            <!-- <label class="d-block mb-12 fw-semibold gray-color">Nombres<span>*</span></label> -->
-                            <mat-form-field appearance="fill">
-                                <mat-label>Ingrese sus Nombres</mat-label>
-                                <input matInput>
+                            <!-- Name field -->
+                            <mat-form-field class="w-full">
+                                <mat-label>Nombres</mat-label>
+                                <input
+                                    id="name"
+                                    matInput
+                                    [formControlName]="'name'">
+                                <mat-error *ngIf="signUpForm.get('name')?.hasError('required')">
+                                    Nombre requerido
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="tagus-form-group without-icon">
-                            <!-- <label class="d-block mb-12 fw-semibold gray-color">Apellidos<span>*</span></label> -->
-                            <mat-form-field appearance="fill">
-                                <mat-label>Ingrese sus Apellidos</mat-label>
-                                <input matInput>
+                            <!-- Name field -->
+                            <mat-form-field class="w-full">
+                                <mat-label>Apellidos</mat-label>
+                                <input
+                                    id="name"
+                                    matInput
+                                    [formControlName]="'lastName'">
+                                <mat-error *ngIf="signUpForm.get('lastName')?.hasError('required')">
+                                    Apellidos requeridos
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="tagus-form-group without-icon">
-                            <!-- <label class="d-block mb-12 fw-semibold gray-color">Correo Electronico<span>*</span></label> -->
-                            <mat-form-field appearance="fill">
-                                <mat-label>Ingrese su Correo Electronico</mat-label>
-                                <input matInput>
+                            <!-- Email field -->
+                            <mat-form-field class="w-full">
+                                <mat-label>Email</mat-label>
+                                <input
+                                    id="email"
+                                    matInput
+                                    [formControlName]="'email'">
+                                <mat-error *ngIf="signUpForm.get('email')?.hasError('required')">
+                                    Email es requerido
+                                </mat-error>
+                                <mat-error *ngIf="signUpForm.get('email')?.hasError('email')">
+                                    Por favor ingrese un email válido
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="tagus-form-group without-icon">
+                            <!-- Email field -->
+                            <mat-form-field class="w-full">
+                                <mat-label>Confirmar email</mat-label>
+                                <input
+                                    id="email"
+                                    matInput
+                                    [formControlName]="'emailConfirm'">
+                                <mat-error *ngIf="signUpForm.get('emailConfirm')?.hasError('required')">
+                                    Confirmación de email es requerido
+                                </mat-error>
+                                <mat-error *ngIf="signUpForm.get('emailConfirm')?.hasError('email')">
+                                    Por favor ingrese un email válido
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="tagus-form-group without-icon">
                             <!-- <label class="d-block mb-12 fw-semibold gray-color">Numero de Celular<span>*</span></label> -->
                             <mat-form-field appearance="fill">
                                 <mat-label>Ingrese su Numero de Celular</mat-label>
-                                <input matInput>
+                                <input type="number" [formControlName]="'movil'" matInput>
                             </mat-form-field>
                         </div>
                         <div class="tagus-form-group without-icon">
                             <!-- <label class="d-block mb-12 fw-semibold gray-color">Contraseña <span>*</span></label> -->
                             <mat-form-field appearance="fill">
                                 <mat-label>Ingrese su Contraseña</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'">
+                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="pass" >
                                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>
@@ -58,16 +95,35 @@
                         <div class="tagus-form-group without-icon">
                             <!-- <label class="d-block mb-12 fw-semibold gray-color">Confirmar Contraseña <span>*</span></label> -->
                             <mat-form-field appearance="fill">
-                                <mat-label>Ingrese su Contraseña</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'">
-                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-label>Confirma la Contraseña</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+                                <button mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>
                             </mat-form-field>
                         </div>
+                        <div class="tagus-form-group without-icon">
+                            <mat-checkbox
+                                [color]="'primary'"
+                                [formControlName]="'terms'">
+                                <span>Acepto los </span>
+                                <a
+                                    class="ml-1 text-primary-500 hover:underline"
+                                    [routerLink]="['./']"> Terminos
+                                </a>
+                                <span> y </span>
+                                <a
+                                    class="ml-1 text-primary-500 hover:underline"
+                                    [routerLink]="['./']"> Políticas
+                                </a>
+                                <span> del servicio </span>
+                            </mat-checkbox>
+                        </div>
                     </div>
-                    <button mat-flat-button class="tagus d-block fw-semibold">Registrarse</button>
+                    <button mat-flat-button [disabled]="signUpForm.invalid"
+                    (click)="signUp()" class="tagus d-block fw-semibold">Registrarse</button>
                 </form>
+
             </div>
         </div>
     </div>

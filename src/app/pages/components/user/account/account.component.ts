@@ -1,22 +1,23 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/pages/services/auth/auth.service';
 import { AccountService } from 'src/app/pages/services/user/account.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import Swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-security',
-    templateUrl: './security.component.html',
-    styleUrls: ['./security.component.scss']
+    selector: 'app-account',
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.scss']
 })
-export class SecurityComponent {
+export class AccountComponent {
 
-    hide = true;
     @ViewChild('accountNgForm') accountNgForm: NgForm;
     accountForm: FormGroup;
     validar: boolean = false;
     showAlert: boolean = false;
+    user: any;
 
     constructor(
         public themeService: CustomizerSettingsService,
@@ -32,25 +33,43 @@ export class SecurityComponent {
     {
         // Create the form
         this.accountForm = this._formBuilder.group({
-                pass:['', Validators.required],
-                validationPass:['', Validators.required],
-                passOld:['', Validators.required],
+                name:['', Validators.required],
+                lastName:['', Validators.required],
+                celusu:['', Validators.required],
+                email:['', [Validators.required, Validators.email]],
+                city:['', Validators.required],
+                address:['', Validators.required],
+                birthdate:['', Validators.required],
+                gender:['', Validators.required],
             }
         );
+
+        this._accountService.getAccount().subscribe((account:any) => {
+            this.user = account.userDB;
+            console.log(this.user)
+            if(this.user){
+                // Create the form
+                this.accountForm.controls["name"].setValue(this.user.name);
+                this.accountForm.controls["lastName"].setValue(this.user.lastName);
+                this.accountForm.controls["celusu"].setValue(this.user.movil);
+                this.accountForm.controls["email"].setValue(this.user.email);
+                this.accountForm.controls["city"].setValue(this.user?.city);
+                this.accountForm.controls["address"].setValue(this.user?.address);
+                this.accountForm.controls["birthdate"].setValue(this.user?.birthdate);
+                this.accountForm.controls["gender"].setValue(this.user?.gender);
+            }
+        })
     }
+
 
     /**
      * Update Account
      */
-    updatePass(): void
+    updateAccount(): void
     {
-        console.log('Here', this.accountForm.value)
         // Do nothing if the form is invalid
         if ( this.accountForm.invalid )
         {
-            return;
-        }
-        if (!this.validateClient()) {
             return;
         }
 
@@ -61,10 +80,10 @@ export class SecurityComponent {
         this.showAlert = false;
         let body = this.accountForm.value;
         // Sign up
-        this._accountService.updatePass(body)
+        this._accountService.updateAccount(body, this.user.uid)
             .subscribe(
                 (response) => {
-                    console.log(response)
+
                     // Navigate to the confirmation required page
                     this.ngOnInit();
                     this.accountForm.enable();
@@ -91,40 +110,5 @@ export class SecurityComponent {
     toggleRTLEnabledTheme() {
         this.themeService.toggleRTLEnabledTheme();
     }
-
-    validateClient() {
-    if (!this.validar) {
-      this.validar = true;
-      this.validate(this.validar, this.PasswordOk(), 'La contraseña no es segura', 'confirmPassword');
-    }
-    return this.validar;
-  }
-
-  validate(validate:any, condition:any, msg:any, id:any) {
-    if (validate) {
-      if (!condition) {
-        this.validar = false;
-        this.fireToast(msg);
-        return false;
-      }
-    }
-  }
-
-  fireToast(msg:any) {
-    Swal.fire('Información', msg, 'info');
-  }
-
-    PasswordOk() {
-    const regex = /\d/;
-    const regex1 = /[A-Z]/;
-    const regex2 = /\W/;
-
-    return (
-      regex.test(this.accountForm.get('pass')?.value.trim()) &&
-      regex1.test(this.accountForm.get('pass')?.value.trim()) &&
-      regex2.test(this.accountForm?.get('pass')?.value.trim()) &&
-      this.accountForm.get('pass')?.value.trim().length >= 8
-    );
-  }
 
 }
