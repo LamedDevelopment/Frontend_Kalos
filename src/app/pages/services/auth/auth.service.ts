@@ -30,7 +30,6 @@ export class AuthService {
    */
   set accessToken(token: string) {
     sessionStorage.setItem('accessToken', token);
-    console.log(token)
   }
 
   get accessToken(): string {
@@ -47,11 +46,8 @@ export class AuthService {
    * @param email
    */
   forgotPassword(email: string): Observable<any> {
-    return this._apiServiceHttp.post('authenticate/forgot-password', email).pipe(
+    return this._apiServiceHttp.post('forpass/usr', email).pipe(
       switchMap((response: any) => {
-        if (!response.status) {
-          return this.forgotPasswordStudent(email);
-        }
         return of(response);
       }),
     );
@@ -105,34 +101,19 @@ export class AuthService {
 
     return this._apiServiceHttp.post('login', credentials).pipe(
       map((response: any) => {
-        // Store the access token in the local storage
-        this.accessToken = response.login;
+        if(response.ok){
+            // Store the access token in the local storage
+            this.accessToken = response.login;
 
-        // Set the authenticated flag to true
-        this._authenticated = true;
-
-
-
-        // Return a new observable with the response
-        return of(response);
-        /* if(this.token.login_first === 1){
-           if (credentials.rememberMe) {
-              localStorage.setItem('dataAuth', JSON.stringify(this.token));
-            }
-
-            sessionStorage.setItem('dataAuth', JSON.stringify(this.token));
 
             // Set the authenticated flag to true
             this._authenticated = true;
-
-            // Store the user on the user service
-            this._userService.user = this.token;
-
             // Return a new observable with the response
-            return of(response);
+            return response;
         } else {
-            this._router.navigateByUrl('/forgot-password');
-        } */
+            // Return a new observable with the response
+            return response;
+        }
 
       }),
     );
@@ -141,10 +122,11 @@ export class AuthService {
   InfoUserApi(): Observable<any> {
     return this._apiServiceHttp.post('login/token', {}).pipe(
           map((response: any) => {
-              console.log(response);
-              return of(response);
+              console.log(response.msg.user);
+
               // Store the user on the user service
-              //this._userService.user = this.token;
+              this._userService.user = response.msg;
+              return of(response);
           },
               (error: any) => {
                   console.log(error);
@@ -215,8 +197,14 @@ export class AuthService {
    *
    * @param user
    */
-  signUp(user: { name: string; email: string; password: string; company: string }): Observable<any> {
-    return this._httpClient.post('api/auth/sign-up', user);
+  signUp(user:any): Observable<any> {
+    return this._apiServiceHttp.post('usr', user).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return of(response);
+
+      }),
+    );
   }
 
   /**

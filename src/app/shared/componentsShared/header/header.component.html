@@ -215,8 +215,8 @@
             <li>
                 <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
                     <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
-                    Tipo de Usuario
-                    <span class="fw-semibold">Nombre Usuario</span>
+
+                    <span class="fw-semibold">{{ user?.name}} {{user?.lastName}}</span>
                 </button>
                 <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before">
                     <ul class="m-0">
@@ -225,11 +225,11 @@
                                 <i class="ri-user-3-line"></i> Perfil
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a routerLink="#">
                                 <i class="ri-settings-3-line"></i> Configuraciones
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a routerLink="auth/logout">
                                 <i class="ri-shut-down-line"></i> Salir

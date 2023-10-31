@@ -2,6 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { CustomizerSettingsService } from '../../services/customizer-settings.service';
 import { ToggleService } from '../../services/toggle.service';
+import { UserService } from 'src/app/pages/services/user/user.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +13,8 @@ import { ToggleService } from '../../services/toggle.service';
 export class HeaderComponent {
 
     isSticky: boolean = false;
+    user: any;;
+    private _unsubscribeAll: Subject<any> = new Subject<any>();
     @HostListener('window:scroll', ['$event'])
     checkScroll() {
         const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -26,11 +30,19 @@ export class HeaderComponent {
     constructor(
         private toggleService: ToggleService,
         private datePipe: DatePipe,
-        public themeService: CustomizerSettingsService
+        public themeService: CustomizerSettingsService,
+        private _userService: UserService,
     ) {
         this.toggleService.isToggled$.subscribe(isToggled => {
             this.isToggled = isToggled;
         });
+    }
+    ngOnInit(): void {
+        this._userService.user$
+            .pipe((takeUntil(this._unsubscribeAll)))
+            .subscribe((user: any) => {
+                this.user = user.user;
+            });
     }
 
     toggleTheme() {

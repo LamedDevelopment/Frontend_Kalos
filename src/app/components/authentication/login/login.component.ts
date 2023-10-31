@@ -69,29 +69,37 @@ export class LoginComponent {
         // Sign in
         this._authService.signIn(this.signInForm.value).subscribe(
             async (res) => {
-            // Set the redirect url.
-            // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
-            // to the correct page after a successful sign in. This way, that url can be set via
-            // routing file and we don't have to touch here.
-            //await this._authService.InfoUserApi()
-            const redirectURL =
-                this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/home';
-            console.log(redirectURL);
+                if(res.ok){
+                    const redirectURL =
+                    this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/home';
 
-            // Navigate to the redirect url
-            this._router.navigateByUrl(redirectURL);
+                    // Navigate to the redirect url
+                    this._router.navigateByUrl(redirectURL);
+                } else {
+                    // Re-enable the form
+                    this.signInForm.enable();
+
+                    // Reset the form
+                    this.signInNgForm.resetForm();
+
+                    // Set the alert
+                    this.openCreateUserDialog('300ms', '100ms')
+                    // Show the alert
+                    this.showAlert = true;
+                }
+
             },
             (response) => {
-            // Re-enable the form
-            this.signInForm.enable();
+                // Re-enable the form
+                this.signInForm.enable();
 
-            // Reset the form
-            this.signInNgForm.resetForm();
+                // Reset the form
+                this.signInNgForm.resetForm();
 
-            // Set the alert
-            this.openCreateUserDialog('300ms', '100ms')
-            // Show the alert
-            this.showAlert = true;
+                // Set the alert
+                this.openCreateUserDialog('300ms', '100ms')
+                // Show the alert
+                this.showAlert = true;
             },
         );
     }

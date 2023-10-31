@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
+
 @Component({
-    selector: 'app-terms-conditions',
-    templateUrl: './terms-conditions.component.html',
-    styleUrls: ['./terms-conditions.component.scss']
+    selector: 'app-privacy-policy',
+    templateUrl: './privacy-policy.component.html',
+    styleUrls: ['./privacy-policy.component.scss']
 })
-export class TermsConditionsComponent {
+export class PrivacyPolicyComponent {
 
     constructor(
         public themeService: CustomizerSettingsService
