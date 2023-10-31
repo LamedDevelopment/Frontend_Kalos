@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, of, switchMap, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { AuthUtils } from '../../../components/authentication/auth/auth.utils';
 import { Router } from '@angular/router';
 import { ApiServiceHttp } from '../api.service';
