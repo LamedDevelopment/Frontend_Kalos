@@ -43,8 +43,9 @@ export class ApiServiceHttp {
     return this.http.get<any>(`${environment.url_api}${path}`, { params: params }).pipe(map((d) => d));
   }
 
-  delete(path: string): any {
-    return this.http.delete<any>(`${environment.url_api}${path}`).pipe(map((d) => d));
+  delete(path: string, data:any): any {
+    console.log(this.http.delete<any>(`${environment.url_api}${path}`, data).pipe(map((d) => d)))
+    return this.http.delete<any>(`${environment.url_api}${path}`, data).pipe(map((d) => d));
   }
 
   put(path: string, data: any): any {

@@ -1,0 +1,11 @@
+tr.row-data {
+  height: 0;
+}
+
+tr.row-data:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.row-data:not(.example-expanded-row):active {
+  background: #efefef;
+}
