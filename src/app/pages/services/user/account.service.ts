@@ -28,6 +28,22 @@ constructor(
   }
 
   /**
+   * Account
+   *
+   * @param data
+   * @param id
+   */
+  updateAccountFun(data:any, id:number): Observable<any> {
+    return this._apiServiceHttp.put(`bususu/${id}`, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return of(response);
+
+      }),
+    );
+  }
+
+  /**
    * update password
    *
    * @param data
@@ -42,12 +58,28 @@ constructor(
     );
   }
 
+
+
   /**
    * GetAccount
    *
    */
   getAccount(): Observable<any> {
     return this._apiServiceHttp.get('usr/oneusr').pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
+   * GetAccount Funcionario
+   *
+   */
+  getAccountFun(): Observable<any> {
+    return this._apiServiceHttp.get('bususu/onecol').pipe(
       map((response: any) => {
         // Return a new observable with the response
         return response;

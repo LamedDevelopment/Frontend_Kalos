@@ -12,7 +12,7 @@ import { CreateUserDialogBox } from 'src/app/shared/componentsShared/modal-dialo
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponentFun {
     @ViewChild('signInNgForm') signInNgForm: NgForm;
     @ViewChild('politicasPrivacidad') politicasPrivacidad: TemplateRef<any>;
     signInForm: FormGroup;
@@ -67,11 +67,11 @@ export class LoginComponent {
         this.showAlert = false;
 
         // Sign in
-        this._authService.signIn(this.signInForm.value).subscribe(
+        this._authService.signInFun(this.signInForm.value).subscribe(
             async (res) => {
                 if(res.ok){
                     const redirectURL =
-                    this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/user/dash';
+                    this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/bus/dash';
 
                     // Navigate to the redirect url
                     this._router.navigateByUrl(redirectURL);

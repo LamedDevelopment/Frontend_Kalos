@@ -10,10 +10,9 @@
             <div class="tagus-form ms-auto me-auto">
                 <div class="title">
                     <div class="d-flex mb-10 align-items-center">
-                        <h2 class="mb-0 me-30">Iniciar Sesion</h2>
+                        <h2 class="mb-0 me-30">Iniciar Sesion funcionario</h2>
                         <!-- <img src="assets/img/logo-icon.png" alt="logo-icon"> -->
                     </div>
-                    <p>Crear Cuenta <a routerLink="/auth/register" class="main-color fw-medium">Registrarse</a></p>
                 </div>
                 <form [formGroup]="signInForm" #signInNgForm="ngForm">
                     <!-- <div class="login-with-socials d-md-flex align-items-center justify-content-space-between">
@@ -54,10 +53,6 @@
                     <div class="d-flex info align-items-center justify-content-space-between">
                         <mat-checkbox class="gray-color" formControlName="rememberMe">Recordar Sesion</mat-checkbox>
                         <a routerLink="/auth/forgot-password" class="d-inline-block main-color fw-medium">¿Olvido su contraseña?</a>
-                    </div>
-                    <div class="d-flex info align-items-center justify-content-space-between">
-                        <div></div>
-                        <a routerLink="/auth/login-fun" class="d-inline-block main-color fw-medium">Iniciar sesión en Negocio</a>
                     </div>
                     <button mat-flat-button class="tagus d-block fw-semibold" [disabled]="signInForm.invalid" (click)="signIn()">
                         <span *ngIf="!signInForm.disabled">

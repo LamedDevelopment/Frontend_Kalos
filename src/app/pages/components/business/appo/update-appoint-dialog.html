@@ -1,0 +1,25 @@
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Actualizar la fecha de la cita</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="updateForm" #updateNgForm>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Fecha incio</label>
+                    <input type="date" [formControlName]="'dateini'" class="input-control">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Fecha fin</label>
+                    <input type="date" [formControlName]="'datefin'" class="input-control">
+                </div>
+            </div>
+        </div>
+        <div class="text-end">
+            <button type="submit" (click)="Updaterow()"><i class="ri-add-fill"></i> Actualizar fecha</button>
+        </div>
+    </form>
+</div>

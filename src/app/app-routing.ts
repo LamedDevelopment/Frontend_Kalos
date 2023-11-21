@@ -14,6 +14,7 @@ import { AuthGuard } from './components/authentication/auth/guards/auth.guard';
 import { PagesComponent } from './pages/pages.component';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
     { path: 'home', redirectTo: 'auth/login', pathMatch: 'full' },
     { path: 'auth/login', component: LoginComponent },
+    { path: 'auth/login-fun', component: LoginComponentFun },
     { path: 'auth/forgot-password', component: ForgotPasswordComponent},
     { path: 'auth/reset-password', component: ResetPasswordComponent},
     { path: 'auth/register', component: RegisterComponent},

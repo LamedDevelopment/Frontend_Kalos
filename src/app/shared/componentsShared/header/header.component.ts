@@ -4,6 +4,7 @@ import { CustomizerSettingsService } from '../../services/customizer-settings.se
 import { ToggleService } from '../../services/toggle.service';
 import { UserService } from 'src/app/pages/services/user/user.service';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/pages/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -32,16 +33,20 @@ export class HeaderComponent {
         private datePipe: DatePipe,
         public themeService: CustomizerSettingsService,
         private _userService: UserService,
+        private authService: AuthService
     ) {
         this.toggleService.isToggled$.subscribe(isToggled => {
             this.isToggled = isToggled;
         });
     }
     ngOnInit(): void {
+        this.authService.InfoUserApi().subscribe((data:any)=> {
+          });
         this._userService.user$
             .pipe((takeUntil(this._unsubscribeAll)))
             .subscribe((user: any) => {
-                this.user = user.user;
+                this.user = user.user ? user.user : user[0];
+                console.log(this.user)
             });
     }
 

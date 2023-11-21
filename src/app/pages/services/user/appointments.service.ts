@@ -30,7 +30,49 @@ constructor(
    * GetAppointments
    *
    */
+  getAppointmentDayOrWeekFun(url:any): Observable<any> {
+    return this._apiServiceHttp.get(url).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
+   * GetAppointments
+   *
+   */
   getAppointmentHistory(url:any): Observable<any> {
+    return this._apiServiceHttp.get(url).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
+   * GetAppointments hours
+   *
+   */
+  gethoursCollaborator(url:any, data:any): Observable<any> {
+    return this._apiServiceHttp.post(url, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
+   * Get Collaborators
+   *@url
+   */
+  getCollaborators(url:any): Observable<any> {
     return this._apiServiceHttp.get(url).pipe(
       map((response: any) => {
         // Return a new observable with the response
@@ -55,6 +97,52 @@ constructor(
     );
   }
 
+    /**
+   * start or stop appointment
+   *
+   * @param data
+   */
+  StartStopAppointmentFun(url:string,data:any): Observable<any> {
+    return this._apiServiceHttp.put(url, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
+   * update appointment fun
+   *
+   * @param data
+   */
+  updateAppointmentFun(data:any): Observable<any> {
+    return this._apiServiceHttp.post(`apu/addser`, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+
+  /**
+   * create appointment fun
+   *
+   * @param data
+   */
+  CreateAppointmentFun(data:any): Observable<any> {
+    return this._apiServiceHttp.post(`apu`, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
   /**
    * delete appointment
    *
@@ -62,6 +150,21 @@ constructor(
    */
   deleteAppointment(data:any): Observable<any> {
     return this._apiServiceHttp.post(`apu/canapp`, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
+   * delete appointment fun
+   *
+   * @param data
+   */
+  deleteAppointmentFun(data:any): Observable<any> {
+    return this._apiServiceHttp.post(`apu/onestf`, data).pipe(
       map((response: any) => {
         // Return a new observable with the response
         return response;

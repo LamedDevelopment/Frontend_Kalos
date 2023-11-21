@@ -1,0 +1,128 @@
+<mat-card
+    class="mb-25 tagus-card"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card-header class="border-bottom">
+        <h5 class="mb-0">Configuraciones</h5>
+    </mat-card-header>
+
+    <mat-card-content>
+        <nav>
+            <ul class="ps-0 mt-0">
+                <li>
+                    <a routerLink="/bus/account" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Cuenta</a>
+                </li>
+                <li>
+                    <a routerLink="/bus/security" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Seguridad</a>
+                </li>
+                <li>
+                    <a routerLink="/bus/privacy" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Privacidad y políticas</a>
+                </li>
+                <li>
+                    <a routerLink="/bus/terms" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Terminos y condiciones</a>
+                </li>
+            </ul>
+        </nav>
+        <form [formGroup]="accountForm" #accountNgForm>
+            <h5 class="fw-semibold mb-8">Perfil</h5>
+            <p>Actualice su información personal aquí.</p>
+            <div class="row mt-20">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Nombres</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-user-3-line"></i>
+                            <input matInput [formControlName]="'name'">
+                            <mat-error *ngIf="accountForm.get('name')?.hasError('required')">
+                                Nombre requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Apellidos</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-user-3-line"></i>
+                            <input matInput [formControlName]="'lastName'">
+                            <mat-error *ngIf="accountForm.get('lastName')?.hasError('required')">
+                                Apellidos requeridos
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Email</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-mail-line"></i>
+                            <input type="email" matInput [formControlName]="'email'" readonly>
+                            <mat-error *ngIf="accountForm.get('email')?.hasError('required')">
+                                    Email es requerido
+                                </mat-error>
+                                <mat-error *ngIf="accountForm.get('email')?.hasError('email')">
+                                    Por favor ingrese un email válido
+                                </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Teléfono</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-phone-line"></i>
+                            <input type="number" matInput [formControlName]="'celusu'">
+                            <mat-error *ngIf="accountForm.get('celusu')?.hasError('required')">
+                                Teléfono requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Ciudad</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-home-7-line"></i>
+                            <input matInput placeholder="Bogotá" [formControlName]="'city'">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Dirección</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-home-7-line"></i>
+                            <input matInput [formControlName]="'address'">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Fecha de nacimiento</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-cake-2-line"></i>
+                            <input matInput placeholder="MM/DD/YYYY" [matDatepicker]="picker" [formControlName]="'birthdate'">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Genero</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-men-line"></i>
+                            <mat-select [formControlName]="'gender'">
+                                <mat-option value="male" selected>Hombre</mat-option>
+                                <mat-option value="famale">Mujer</mat-option>
+                                <mat-option value="otro">Otro</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <button mat-raised-button class="tagus fw-semibold" [disabled]="accountForm.invalid" (click)="updateAccount()">Actualizar</button>
+        </form>
+    </mat-card-content>
+</mat-card>

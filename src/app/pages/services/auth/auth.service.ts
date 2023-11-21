@@ -121,12 +121,38 @@ export class AuthService {
     );
   }
 
-  InfoUserApi(): Observable<any> {
+  signInFun(credentials: { email: string; pass: string; rememberMe: boolean }): Observable<any> {
+    // Throw error, if the user is already logged in
+    if (this._authenticated) {
+      return throwError('User is already logged in.');
+    }
+
+    return this._apiServiceHttp.post('login/bx', credentials).pipe(
+      map((response: any) => {
+        if(response.ok){
+            // Store the access token in the local storage
+            this.accessToken = response.login;
+
+            this.InfoBussines().subscribe();
+            // Set the authenticated flag to true
+            this._authenticated = true;
+            // Return a new observable with the response
+            return response;
+        } else {
+            // Return a new observable with the response
+            return response;
+        }
+
+      }),
+    );
+  }
+
+InfoUserApi(): Observable<any> {
     return this._apiServiceHttp.post('login/token', {}).pipe(
           map((response: any) => {
-              console.log(response.msg.user);
 
               // Store the user on the user service
+              sessionStorage.setItem('dataUser', response.msg.user ? JSON.stringify(response.msg.user) : JSON.stringify(response.msg[0]));
               this._userService.user = response.msg;
               return of(response);
           },
@@ -136,7 +162,27 @@ export class AuthService {
               }
           )
       );
+}
+
+InfoBussines(): Observable<any> {
+    return this._apiServiceHttp.get('bus', {}).pipe(
+          map((response: any) => {
+              console.log(response);
+
+              // Store the user on the user service
+            //   sessionStorage.setItem('bussines', JSON.stringify(response.msg.user));
+              return of(response);
+          },
+              (error: any) => {
+                  console.log(error);
+                  return of(error);
+              }
+          )
+      );
   }
+
+
+
   /**
    * Sign in using the access token
    */

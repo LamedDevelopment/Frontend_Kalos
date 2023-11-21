@@ -216,12 +216,12 @@
                 <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
                     <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
 
-                    <span class="fw-semibold">{{ user?.name}} {{user?.lastName}}</span>
+                    <span class="fw-semibold">{{ user?.name ? user?.name : user?.businessName}} {{user?.lastName}}</span>
                 </button>
                 <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before">
                     <ul class="m-0">
                         <li>
-                            <a routerLink="#">
+                            <a [routerLink]=" user?.businessName ? '/bus/account': '/user/account'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                                 <i class="ri-user-3-line"></i> Perfil
                             </a>
                         </li>

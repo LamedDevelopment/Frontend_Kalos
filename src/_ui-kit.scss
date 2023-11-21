@@ -16,6 +16,21 @@
     --mdc-circular-progress-active-indicator-color: var(--heraBlueColor);
 }
 
+table {
+  width: 300px;
+  max-width: 80%;
+  overflow-x: auto;
+}
+
+.greenClass{
+    background-color:#84FFBF !important;
+}
+
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+  background-color: #f0fff3;
+}
+
 // Mat Button
 .mdc-button {
     display: inline-block !important;
@@ -1075,7 +1090,7 @@ blockquote {
             .inner {
                 float: right;
                 text-align: left;
-                
+
                 .d-flex {
                     justify-content: unset;
                 }
@@ -1449,7 +1464,7 @@ blockquote {
             border-bottom: none;
             padding: 15px 20px;
             position: relative;
-            
+
             &:last-child {
                 &::after {
                     display: none;
@@ -1933,7 +1948,7 @@ blockquote {
         .accordion-item {
             .accordion-item-header {
                 color: var(--whiteColor);
-                
+
                 .accordion-item-icon {
                     background: #1e2227;
                 }
@@ -1993,7 +2008,7 @@ blockquote {
             }
         }
     }
-    
+
     // Mat Radio
     .mat-mdc-radio-button {
         .mdc-form-field {
@@ -2080,7 +2095,7 @@ blockquote {
             }
         }
     }
-    
+
 }
 
 // RTL CSS
@@ -2450,7 +2465,7 @@ blockquote {
                 float: unset;
                 text-align: left;
                 padding-left: 55px;
-    
+
                 .date {
                     line-height: 38px;
                     height: 40px;
@@ -2475,7 +2490,7 @@ blockquote {
     .tagus-basic-accordion {
         .accordion-item {
             margin-bottom: 15px;
-    
+
             .accordion-item-header {
                 font-size: 14px;
                 padding: {
@@ -2500,7 +2515,7 @@ blockquote {
     .tagus-advance-accordion {
         .accordion-item {
             padding: 15px 30px 15px 15px;
-    
+
             .accordion-item-header {
                 font-size: 14px;
 

@@ -9,7 +9,7 @@
 const plans: any = [
     {
         id: 0,
-        title: 'User',
+        title: 'Cliente',
         content: '',
         url: '/home',
         icon:'user',
@@ -23,7 +23,33 @@ const plans: any = [
             {path: '/user/pay', name: 'Pago' },
             {path: '/user/pays', name: 'Pagos' },
             {path: '/user/services', name: 'Servicios' },
-        ]
+        ],
+        rol:'role'
+    },
+    {
+        id: 0,
+        title: 'Negocio',
+        content: '',
+        url: '/home',
+        icon:'user',
+        childs: [
+            {path: '/bus/account', name: 'Cuenta' },
+            {path: '/bus/appoinments', name: 'Citas' },
+            {path: '/bus/collas', name: 'Colaboradores'},
+        ],
+        rol:'businessName'
+    },
+    {
+        id: 0,
+        title: 'Colaborador',
+        content: '',
+        url: '/home',
+        icon:'user',
+        childs: [
+            {path: '/colla/account', name: 'Cuenta' },
+            {path: '/colla/appoinments', name: 'Citas' },
+        ],
+        rol:'businessName'
     },
 
 ];

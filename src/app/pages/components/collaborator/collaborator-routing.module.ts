@@ -11,6 +11,11 @@ import { ServiceComponent } from './service/service.component';
 import { ServicesComponent } from './services/services.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketsComponent } from './tickets/tickets.component';
+import { AppointmentComponentColl } from './appo/appo.component';
+import { AccountComponentColl } from './account/account.component';
+import { PrivacyPolicyComponentColl } from './privacy-policy/privacy-policy.component';
+import { SecurityComponentColl } from './security/security.component';
+import { TermsConditionsComponentColl } from './terms-conditions/terms-conditions.component';
 
 const routes: Routes = [
     {
@@ -18,11 +23,11 @@ const routes: Routes = [
         component: CollaboratorComponent,
         children: [
             { path: 'dash', component: DashComponent },
-            { path: 'his', component: HistoricalComponent },
-            { path: 'pay', component: PaymentComponent },
-            { path: 'pays', component: PaymentsComponent },
-            { path: 'payr', component: PayrollComponent },
-            { path: 'payrs', component: PayrollsComponent },
+            { path: 'appoinments', component: AppointmentComponentColl },
+            { path: 'account', component: AccountComponentColl },
+            { path: 'privacy', component: PrivacyPolicyComponentColl },
+            { path: 'security', component: SecurityComponentColl },
+            { path: 'terms', component: TermsConditionsComponentColl },
             { path: 'ser', component: ServiceComponent },
             { path: 'sers', component: ServicesComponent },
             { path: 'ticket', component: TicketComponent },

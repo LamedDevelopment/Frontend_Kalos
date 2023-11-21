@@ -83,6 +83,7 @@ import { AuthInterceptor } from './components/authentication/auth/auth.intercept
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { ApiServiceHttp } from './pages/services/api.service';
+import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -98,6 +99,7 @@ registerLocaleData(localeEs, 'es');
         LogoutComponent,
         ConfirmMailComponent,
         LockScreenComponent,
+        LoginComponentFun
     ],
     imports: [
         BrowserModule,
