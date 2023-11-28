@@ -10,8 +10,8 @@
                     <label class="d-block fw-semibold">Colaborador</label>
                     <mat-form-field appearance="fill">
                         <mat-select name="staff" [formControlName]="'staff'">
-                            <mat-option *ngFor="let coll of collaborators" [value]="coll.user" >
-                                {{coll.lastname}} {{coll.name}}
+                            <mat-option *ngFor="let coll of collaborators" [value]="coll._id" >
+                                {{coll?.user?.name}} {{coll?.user?.lastName}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -31,7 +31,7 @@
             <div class="form-group w-full">
                 <label class="d-block fw-semibold">Nombre de cliente</label>
                 <mat-form-field class="w-full">
-                    <input type="text" class="w-full" name="nameClient" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" matInput disabled>
+                    <input type="text" class="w-full" name="nameClient" value="{{name?.name}} {{name?.lastName}}" matInput disabled>
                 </mat-form-field>
             </div>
         </div>
@@ -67,8 +67,8 @@
                     <label class="d-block fw-semibold">Servicio</label>
                     <mat-form-field appearance="fill">
                         <mat-select name="Services" [formControlName]="'services'">
-                            <mat-option *ngFor="let type of tipoDeServicio" [value]="type" (click)="tipeSelected($event)">
-                                {{type}}
+                            <mat-option *ngFor="let type of tipoDeServicio" [value]="type._id" (click)="tipeSelected($event)">
+                                {{type.name}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -79,8 +79,8 @@
                     <label class="d-block fw-semibold">Tipos de servicio</label>
                     <mat-form-field appearance="fill">
                         <mat-select name="typeService" [formControlName]="'typeServices'" [disabled]="typeServicesSelected.length == 0">
-                            <mat-option *ngFor="let ser of typeServicesSelected" [value]="ser">
-                                {{ser}}
+                            <mat-option *ngFor="let ser of typeServicesSelected" [value]="ser._id">
+                                {{ser.typeService}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -114,16 +114,6 @@
             </div>
         </div>
 
-        <div class="">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Descuento</label>
-                    <mat-form-field appearance="fill" floatLabel="always">
-                        <input matInput type="number" [formControlName]="'discount'"  class="example-right-align" placeholder="0">
-                        <span matPrefix>$&nbsp;</span>
-                        <span matSuffix>.00</span>
-                    </mat-form-field>
-                </div>
-        </div>
         <div class="text-end">
             <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancelar</button>
             <button type="submit" (click)="CreateAppiment()"><i class="ri-add-fill"></i> Agendar</button>

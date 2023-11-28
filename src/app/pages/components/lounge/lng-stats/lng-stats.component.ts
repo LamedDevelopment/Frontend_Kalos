@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
   styleUrls: ['./lng-stats.component.scss']
 })
 export class LngStatsComponent {
+     @Input()
+    services:any;
 
     constructor(
         public themeService: CustomizerSettingsService

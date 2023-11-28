@@ -8,94 +8,21 @@
             Servicios
         </button>
         <mat-menu #monthMenu="matMenu" class="monthMenu" xPosition="before">
-            <button mat-menu-item type="button" class="bg-transparent border-none">Todos los Servicios</button>
-            <button mat-menu-item type="button" class="bg-transparent border-none">Estilista</button>
-            <button mat-menu-item type="button" class="bg-transparent border-none">Estilista Integral</button>
-            <button mat-menu-item type="button" class="bg-transparent border-none">Spa de Uñas</button>
+            <button mat-menu-item type="button" class="bg-transparent border-none" *ngFor="let serv of servicios" (click)="ServicioFilter(serv)">{{serv.name}}</button>
         </mat-menu>
     </mat-card-header>
     <mat-card-content>
         <div class="instructors-list d-flex flex-wrap">
-            <div class="list-item">
+            <div class="list-item" *ngFor="let col of colaboradores">
                 <div class="instructor-box bg-gray border-radius d-flex align-items-center justify-content-space-between">
                     <div class="d-flex align-items-center">
                         <img src="assets/img/avatars/brian-hughes.jpg" class="border-radius" alt="user">
                         <div class="info">
-                            <h5>Francisco Sierra</h5>
-                            <span class="d-block muted-color">Estilista</span>
+                            <h5>{{col.name}} {{col.lastname}}</h5>
+                            <span class="d-block muted-color" *ngFor="let i of col.StaffType">{{i.name}}</span>
                         </div>
                     </div>
-                    <a href="javascript:void(0);" class="position-relative muted-color plus-btn bg-white p-0 border-none rounded-circle">
-                        <i class="ri-add-fill"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="instructor-box bg-gray border-radius d-flex align-items-center justify-content-space-between">
-                    <div class="d-flex align-items-center">
-                        <img src="assets/img//avatars/female-03.jpg" class="border-radius" alt="user">
-                        <div class="info">
-                            <h5>Angela Cobos</h5>
-                            <span class="d-block muted-color">Estilista</span>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0);" class="position-relative muted-color plus-btn bg-white p-0 border-none rounded-circle">
-                        <i class="ri-add-fill"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="instructor-box bg-gray border-radius d-flex align-items-center justify-content-space-between">
-                    <div class="d-flex align-items-center">
-                        <img src="assets/img/avatars/male-05.jpg" class="border-radius" alt="user">
-                        <div class="info">
-                            <h5>Giovanny Sierra Melo</h5>
-                            <span class="d-block muted-color">Estilista</span>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0);" class="position-relative muted-color plus-btn bg-white p-0 border-none rounded-circle">
-                        <i class="ri-add-fill"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="instructor-box bg-gray border-radius d-flex align-items-center justify-content-space-between">
-                    <div class="d-flex align-items-center">
-                        <img src="assets/img/avatars/female-17.jpg" class="border-radius" alt="user">
-                        <div class="info">
-                            <h5>Olga Machuca</h5>
-                            <span class="d-block muted-color">Estilista Integral</span>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0);" class="position-relative muted-color plus-btn bg-white p-0 border-none rounded-circle">
-                        <i class="ri-add-fill"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="instructor-box bg-gray border-radius d-flex align-items-center justify-content-space-between">
-                    <div class="d-flex align-items-center">
-                        <img src="assets/img/avatars/female-07.jpg" class="border-radius" alt="user">
-                        <div class="info">
-                            <h5>Edilma Sanchez</h5>
-                            <span class="d-block muted-color">Estilista Integral</span>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0);" class="position-relative muted-color plus-btn bg-white p-0 border-none rounded-circle">
-                        <i class="ri-add-fill"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="list-item">
-                <div class="instructor-box bg-gray border-radius d-flex align-items-center justify-content-space-between">
-                    <div class="d-flex align-items-center">
-                        <img src="assets/img/avatars/male-08.jpg" class="border-radius" alt="user">
-                        <div class="info">
-                            <h5>Jhon Jairo Buenaparte</h5>
-                            <span class="d-block muted-color">Spa de Uñas</span>
-                        </div>
-                    </div>
-                    <a href="javascript:void(0);" class="position-relative muted-color plus-btn bg-white p-0 border-none rounded-circle">
+                    <a href="javascript:void(0);" class="position-relative muted-color plus-btn bg-white p-0 border-none rounded-circle" (click)="selectColl(col)">
                         <i class="ri-add-fill"></i>
                     </a>
                 </div>

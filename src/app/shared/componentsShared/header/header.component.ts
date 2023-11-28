@@ -45,7 +45,7 @@ export class HeaderComponent {
         this._userService.user$
             .pipe((takeUntil(this._unsubscribeAll)))
             .subscribe((user: any) => {
-                this.user = user.user ? user.user : user[0];
+                this.user = user.user ? user.user : user;
                 console.log(this.user)
             });
     }

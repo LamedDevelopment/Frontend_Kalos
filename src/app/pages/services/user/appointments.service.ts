@@ -69,10 +69,52 @@ constructor(
   }
 
   /**
+   * GetAppointments hours
+   *
+   */
+  getCollaborator(url:any, data:any): Observable<any> {
+    return this._apiServiceHttp.post(url, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
+   * GetType services
+   *
+   */
+  getTypeServices(url:any, data:any): Observable<any> {
+    return this._apiServiceHttp.post(url, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
+   * Get clients
+   *
+   */
+  getClients(url:any, data:any): Observable<any> {
+    return this._apiServiceHttp.post(url, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
    * Get Collaborators
    *@url
    */
-  getCollaborators(url:any): Observable<any> {
+  getData(url:any): Observable<any> {
     return this._apiServiceHttp.get(url).pipe(
       map((response: any) => {
         // Return a new observable with the response
@@ -81,6 +123,8 @@ constructor(
       }),
     );
   }
+
+
 
   /**
    * update appointment

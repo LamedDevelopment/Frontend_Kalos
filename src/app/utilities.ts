@@ -17,14 +17,14 @@ const plans: any = [
             {path: '/user/appo', name: 'Citas'},
             {path: '/user/account', name: 'Cuenta' },
             {path: '/user/dash', name: 'Dashboard' },
-            {path: '/user/invoiced', name: 'Detalle de factura' },
-            {path: '/user/invoicel', name: 'Lista de facturas' },
+            /* {path: '/user/invoiced', name: 'Detalle de factura' },
+            {path: '/user/invoicel', name: 'Lista de facturas' }, */
             {path: '/user/lounges', name: 'Salones' },
-            {path: '/user/pay', name: 'Pago' },
+            /* {path: '/user/pay', name: 'Pago' },
             {path: '/user/pays', name: 'Pagos' },
-            {path: '/user/services', name: 'Servicios' },
+            {path: '/user/services', name: 'Servicios' },*/
         ],
-        rol:'role'
+        rol:'USER_ROLE'
     },
     {
         id: 0,
@@ -37,7 +37,7 @@ const plans: any = [
             {path: '/bus/appoinments', name: 'Citas' },
             {path: '/bus/collas', name: 'Colaboradores'},
         ],
-        rol:'businessName'
+        rol:'MANAGER_ROLE'
     },
     {
         id: 0,
@@ -49,7 +49,7 @@ const plans: any = [
             {path: '/colla/account', name: 'Cuenta' },
             {path: '/colla/appoinments', name: 'Citas' },
         ],
-        rol:'businessName'
+        rol:'CLLTR_ROLE'
     },
 
 ];

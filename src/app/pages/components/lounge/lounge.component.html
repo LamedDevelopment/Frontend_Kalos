@@ -1,43 +1,92 @@
-<app-lng-stats></app-lng-stats>
-<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
 
-    <div fxFlex="66.666666%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
 
-        <!-- <app-lms-progress></app-lms-progress> -->
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+    *ngIf="!loungeSelected"
+>
+    <div class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between">
+        <h5 class="mb-0">Establecimientos</h5>
+        <ol class="breadcrumb mb-0 ps-0">
+            <li class="breadcrumb-item">
+                <a routerLink="/user/appo">
+                    <i class="ri-home-8-line"></i>
+                    User
+                </a>
+            </li>
+            <li class="breadcrumb-item fw-semibold">Establecimientos</li>
+        </ol>
+    </div>
+    <div class="col-lg-4 col-md-6" *ngFor="let bus of Business">
+        <mat-card
+            class="mb-25 tagus-card"
+            style="background: url(assets/img/salon/barber1.jpg); background-position: center center; filter:  grayscale(30%); background-color: rgba(255, 255, 255, 0.5);  background-repeat: no-repeat; background-size: cover;"
 
-        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0">
-            <div fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="67%" class="col">
+        >
+            <mat-card-content style="z-index:99999;">
+                <span class="badge text-bg-info" style="cursor:pointer; z-index:99999;" (click)="SelectLounge(bus)">Agendar cita</span>
+                <div style="height: 200px;"></div>
+                <h5 class="mb-12 mt-20 text-white text-center" style="z-index:99999;">{{bus.branchoffices[0].businessName}}</h5>
+                <p class="text-white text-center" style="z-index:99999;">{{bus.branchoffices[0].address}} {{bus.branchoffices[0].city}}</p>
+                <p class="text-white text-center" style="z-index:99999;">{{bus.branchoffices[0].email}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
 
-                <app-lng-collaborators></app-lng-collaborators>
+<div *ngIf="loungeSelected">
+    <div class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between">
+        <h5 class="mb-0">{{nameLoung}}</h5>
+        <ol class="breadcrumb mb-0 ps-0">
+            <li class="breadcrumb-item">
+                <a routerLink="/user/appo">
+                    <i class="ri-home-8-line"></i>
+                    User
+                </a>
+            </li>
+            <li class="breadcrumb-item fw-semibold">Establecimientos</li>
+        </ol>
+    </div>
+    <div class="flex items-center mt-3 mb-8">
+        <button class="px-3" mat-button [color]="'primary'" (click)="goBack()">
+            <mat-icon>arrow_back_ios</mat-icon>
+            Volver
+        </button>
+    </div>
+    <app-lng-stats [services]="Servicios"></app-lng-stats>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
 
+        <div fxFlex="40%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+
+            <!-- <app-lms-progress></app-lms-progress> -->
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0">
+
+                    <app-lng-collaborators [colaboradores]="colaboradores" [servicios]="Servicios" (setColaboratorSelected)="ColaboratorSeledted($event)"></app-lng-collaborators>
             </div>
-            <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="33%" class="col">
 
-                <!-- <app-lms-planning></app-lms-planning>
+            <!-- <app-lms-current-courses></app-lms-current-courses>
 
-                <app-lms-status></app-lms-status> -->
+            <app-lms-enrolled-created></app-lms-enrolled-created> -->
 
-            </div>
         </div>
 
-        <!-- <app-lms-current-courses></app-lms-current-courses>
+        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
 
-        <app-lms-enrolled-created></app-lms-enrolled-created> -->
+            <app-lng-services-completation [colaborador]="collSelected" [Business]="businessSelected" [TypeServices]="TypeServicios" *ngIf="collSelected?.user"></app-lng-services-completation>
 
-    </div>
+            <!-- <app-lms-experience></app-lms-experience>
 
-    <div fxFlex="33.333333%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+            <app-lms-active-course></app-lms-active-course>
 
-        <!-- <app-lms-experience></app-lms-experience>
+            <app-lms-course-completion></app-lms-course-completion>
 
-        <app-lms-active-course></app-lms-active-course>
+            <app-lms-messages></app-lms-messages>
 
-        <app-lms-course-completion></app-lms-course-completion>
+            <app-lms-students></app-lms-students> -->
 
-        <app-lms-messages></app-lms-messages>
-
-        <app-lms-students></app-lms-students> -->
+        </div>
 
     </div>
-
 </div>

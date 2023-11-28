@@ -47,9 +47,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         const fun = this._userService.user$
             .pipe((takeUntil(this._unsubscribeAll)))
             .subscribe((user: any) => {
-                this.user = user.user ? user.user : user[0];
-                console.log(this.user)
-                this.menuItems = UTILITIES_CONSTANTS.plans.filter((el:any) => Object.keys(this.user).includes(el.rol));
+                this.user = user.user ? user.user : user;
+                const role = this.user.role ? this.user.role : this.user.staff.profile
+                this.menuItems = UTILITIES_CONSTANTS.plans.filter((el:any) => role === el.rol);
             });
         setTimeout(() => {fun}, 500)
 

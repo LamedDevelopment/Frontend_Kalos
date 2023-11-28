@@ -24,14 +24,14 @@ const routes: Routes = [
             {path: 'appo', component: AppointmentComponent},
             {path: 'account', component: AccountComponent },
             {path: 'dash', component: DashComponent },
-            {path: 'invoiced', component: InvoiceDetailsComponent },
-            {path: 'invoicel', component: InvoiceListComponent },
+            /* {path: 'invoiced', component: InvoiceDetailsComponent },
+            {path: 'invoicel', component: InvoiceListComponent }, */
             {path: 'lounges', component: LoungeComponent },
-            {path: 'pay', component: PaymentComponent },
-            {path: 'pays', component: PaymentsComponent },
+            /* {path: 'pay', component: PaymentComponent },
+            {path: 'pays', component: PaymentsComponent }, */
             {path: 'privacy', component: PrivacyPolicyComponent },
             {path: 'security', component: SecurityComponent },
-            {path: 'services', component: ServicesComponent },
+            /* {path: 'services', component: ServicesComponent }, */
             { path: 'terms', component: TermsConditionsComponent },
             { path: '', redirectTo: '/user/appo', pathMatch: 'full' },
         ]

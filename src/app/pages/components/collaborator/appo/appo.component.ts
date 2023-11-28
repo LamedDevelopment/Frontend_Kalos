@@ -433,23 +433,47 @@ export class CreateAppointmentDialogBox {
         this._userService.user$
             .pipe((takeUntil(this._unsubscribeAll)))
             .subscribe((user: any) => {
-                this.user = user[0];
+                this.user = user;
                 console.log(this.user)
-                this.collaborators = this.user.branchoffices[0].collaborators
+
             });
+            this.GetServices();
+             this.GetCollaborators();
     }
 
     GetHoursCollaborator(){
         const body = {
-            user: this.user._id,
-            business:this.user.branchoffices[0]._id,
-            tradename:this.user.branchoffices[0].tradename,
+            business:this.user.business.business,
+            tradename:this.user.business.branchOffices[0].tradeName,
             staff:this.updateForm.get('staff')?.value,
             dateService:moment(this.updateForm.get('dateService')?.value).format('DD/MM/YYYY')
         };
-        console.log(body)
         this._getAppointment.gethoursCollaborator('apu/horact', body).subscribe((hours:any) => {
-            console.log(hours)
+            this.horarioDisponible = hours.msg;
+            });
+    }
+
+    GetServices(){
+        this._getAppointment.getData('sv/allse').subscribe((coll:any) => {
+            this.tipoDeServicio = coll.msg;
+            });
+    }
+
+    GetCollaborators(){
+        const body = {
+            nitBusiness:this.user.business.nit
+        }
+        this._getAppointment.getCollaborator('sf/allco', body).subscribe((coll:any) => {
+            this.collaborators = coll.msg.filter((el:any) => el.TypeCollaborator[0].name !== "Administrador(a)")
+            });
+    }
+
+    GetTypeServices(id:any){
+        const body = {
+            serviceID:id
+        }
+        this._getAppointment.getTypeServices('tsv/tsxserid', body).subscribe((type:any) => {
+            this.typeServicesSelected = type.msg;
             });
     }
 
@@ -471,9 +495,9 @@ export class CreateAppointmentDialogBox {
         // Hide the alert
         this.showAlert = false;
         const body = this.updateForm.getRawValue();
-        body.manager =  this.user._id;
-        body.business = this.user.branchoffices[0]._id;
-        body.tradename = this.user.branchoffices[0].tradename;
+        body.manager =  this.user.staff.id;
+        body.business = this.user.business.business
+        body.tradename = this.user.business.branchOffices[0].tradeName;
         console.log(body)
         this._getAppointment.CreateAppointmentFun(body)
             .subscribe(
@@ -550,19 +574,8 @@ export class CreateAppointmentDialogBox {
 
 
     tipeSelected(e:any){
-        console.log(e.target.innerText)
-        if(e.target.innerText == 'Peluqueria'){
-            this.typeServicesSelected = this.ServicioCabello
-        } else if(e.target.innerText == 'Peinados'){
-            this.typeServicesSelected = this.ServiciosPeinados
-        } else if(e.target.innerText == 'Tinturas'){
-            this.typeServicesSelected = this.ServiciosTinturas
-        } else if(e.target.innerText == 'Barberia'){
-            this.typeServicesSelected = this.ServicioBarb
-        } else {
-            this.typeServicesSelected = this.ServicioCabello
-        }
-
+        console.log(this.updateForm.get('services')?.value)
+        this.GetTypeServices(this.updateForm.get('services')?.value);
         this.updateForm.get('typeServices')?.enable()
     }
 

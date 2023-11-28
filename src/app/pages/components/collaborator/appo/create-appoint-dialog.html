@@ -7,18 +7,6 @@
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="form-group">
-                    <label class="d-block fw-semibold">Colaborador</label>
-                    <mat-form-field appearance="fill">
-                        <mat-select name="staff" [formControlName]="'staff'">
-                            <mat-option *ngFor="let coll of collaborators" [value]="coll.user" >
-                                {{coll.lastname}} {{coll.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
                     <label class="d-block fw-semibold">Email de cliente</label>
                     <mat-form-field appearance="fill">
                         <mat-label>Ingrese email</mat-label>
@@ -26,13 +14,13 @@
                     </mat-form-field>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group w-full">
-                <label class="d-block fw-semibold">Nombre de cliente</label>
-                <mat-form-field class="w-full">
-                    <input type="text" class="w-full" name="nameClient" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" matInput disabled>
-                </mat-form-field>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group w-full">
+                    <label class="d-block fw-semibold">Nombre de cliente</label>
+                    <mat-form-field class="w-full">
+                        <input type="text" class="w-full" name="nameClient" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" matInput disabled>
+                    </mat-form-field>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -112,17 +100,6 @@
                     </mat-form-field>
                 </div>
             </div>
-        </div>
-
-        <div class="">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Descuento</label>
-                    <mat-form-field appearance="fill" floatLabel="always">
-                        <input matInput type="number" [formControlName]="'discount'"  class="example-right-align" placeholder="0">
-                        <span matPrefix>$&nbsp;</span>
-                        <span matSuffix>.00</span>
-                    </mat-form-field>
-                </div>
         </div>
         <div class="text-end">
             <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancelar</button>

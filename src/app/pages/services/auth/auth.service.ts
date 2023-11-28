@@ -129,6 +129,7 @@ export class AuthService {
 
     return this._apiServiceHttp.post('login/bx', credentials).pipe(
       map((response: any) => {
+        console.log(response)
         if(response.ok){
             // Store the access token in the local storage
             this.accessToken = response.login;

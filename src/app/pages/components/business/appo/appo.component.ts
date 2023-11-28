@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, NgModule, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -32,7 +32,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser'
 import { UserService } from 'src/app/pages/services/user/user.service';
 import { AuthService } from 'src/app/pages/services/auth/auth.service';
-import { Subject, takeUntil } from 'rxjs';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { Observable, Subject, map, startWith, takeUntil } from 'rxjs';
 import * as moment from 'moment';
 
 export interface PeriodicElement {
@@ -97,7 +98,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 console.log(appo.msg)
                 this.ELEMENT_DATA = appo.msg;
                 this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
-                console.log(this.dataSource)
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.filterPredicate = function(data:any, filter: string): boolean {
 
@@ -114,7 +114,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
                 appo.msg.map((el:any) => {
                     el.startStop = true;
                 });
-                console.log(appo.msg)
                 this.ELEMENT_DATA = appo.msg;
                 this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
                 this.dataSource.paginator = this.paginator;
@@ -138,7 +137,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
-        console.log(filterValue, this.dataSource)
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
@@ -359,7 +357,6 @@ export class UpdateAppointmentDialogBox {
     }
 
     CloseAppointment(){
-        console.log(Business._id)
         const body = {
             appointmentID: Business._id
         }
@@ -412,19 +409,21 @@ export class ZippyModule {}
 export class CreateAppointmentDialogBox {
     @ViewChild('updateNgForm') signUpNgForm: NgForm;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    nameCli = new FormControl('');
+    filteredOptions: Observable<string[]>;
     updateForm: FormGroup;
     showAlert: boolean = false;
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
     durationInSeconds = 5;
-    typeServicesSelected: string[]  = [];
-    tipoDeServicio: string[] = ['Peluqueria', 'Peinados', 'Tinturas', 'Barberia'];
+    typeServicesSelected: any[]  = [];
+    tipoDeServicio: any[];
     collaborators: any[] = [{id:1, coll:'Pablo'}, {id:2, coll:'Pedro'}, {id:3, coll:'Juan'}, {id:4, coll:'Santiago'}];
     ServicioCabello: string[] = ['Corte', 'lavado', 'aliser'];
     ServiciosPeinados: string[] = ['Blower', 'Peinado con crespos'];
     ServiciosTinturas: string[] = ['Color', 'Matices Canas'];
     ServicioBarb: string[] = ['Afeitar', 'diseño'];
-    name: string;
+    name: any;
     emailClient:string
     user: any;
     horarioDisponible:string[] = [];
@@ -464,23 +463,46 @@ export class CreateAppointmentDialogBox {
         this._userService.user$
             .pipe((takeUntil(this._unsubscribeAll)))
             .subscribe((user: any) => {
-                this.user = user[0];
-                console.log(this.user)
-                this.collaborators = this.user.branchoffices[0].collaborators
+                this.user = user;
+
             });
+            this.GetServices();
+             this.GetCollaborators();
     }
 
     GetHoursCollaborator(){
         const body = {
-            user: this.user._id,
-            business:this.user.branchoffices[0]._id,
-            tradename:this.user.branchoffices[0].tradename,
+            business:this.user.business.business,
+            tradename:this.user.business.branchOffices[0].tradeName,
             staff:this.updateForm.get('staff')?.value,
             dateService:moment(this.updateForm.get('dateService')?.value).format('DD/MM/YYYY')
         };
-        console.log(body)
         this._getAppointment.gethoursCollaborator('apu/horact', body).subscribe((hours:any) => {
-            console.log(hours)
+            this.horarioDisponible = hours.msg;
+            });
+    }
+
+    GetServices(){
+        this._getAppointment.getData('sv/allse').subscribe((coll:any) => {
+            this.tipoDeServicio = coll.msg;
+            });
+    }
+
+    GetCollaborators(){
+        const body = {
+            nitBusiness:this.user.business.nit
+        }
+        this._getAppointment.getCollaborator('sf/allco', body).subscribe((coll:any) => {
+            this.collaborators = coll.msg.filter((el:any) => el.TypeCollaborator[0].name !== "Administrador(a)")
+            });
+    }
+
+    GetTypeServices(id:any){
+        const body = {
+            serviceID:id
+        }
+        this._getAppointment.getTypeServices('tsv/tsxserid', body).subscribe((type:any) => {
+            this.typeServicesSelected = type.msg;
             });
     }
 
@@ -502,9 +524,10 @@ export class CreateAppointmentDialogBox {
         // Hide the alert
         this.showAlert = false;
         const body = this.updateForm.getRawValue();
-        body.manager =  this.user._id;
-        body.business = this.user.branchoffices[0]._id;
-        body.tradename = this.user.branchoffices[0].tradename;
+        body.user = this.name.uid;
+        body.manager =  this.user.staff.id;
+        body.business = this.user.business.business
+        body.tradename = this.user.business.branchOffices[0].tradeName;
         console.log(body)
         this._getAppointment.CreateAppointmentFun(body)
             .subscribe(
@@ -538,10 +561,44 @@ export class CreateAppointmentDialogBox {
     }
 
     searchUser(e:any){
-        console.log(e)
+
+        const body = {
+            emailUser:e
+        }
+        this._getAppointment.getClients('usr/usem', body).subscribe((user:any) => {
+            this.name = user.msg;
+            if(typeof this.name === "object"){
+                this._snackBar.open('Usuario encontrado!!!', '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                        panelClass: ['greenClass']
+                    });
+            } else {
+                this._snackBar.open('Usuario no encontrado, digite un correo completo y válido!!!', '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+            }
+        });
+
+
+        /* console.log(e)
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value || '')),
+        );
         this.name = 'Caleb Saenz';
-        this.updateForm.get('user')?.setValue(138739083930)
+
+        this.updateForm.get('user')?.setValue(138739083930) */
     }
+
+    /* private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return this.options.filter(option => option.toLowerCase().includes(filterValue));
+      } */
 
     close(){
         this.dialogRef.close(true);
@@ -549,19 +606,8 @@ export class CreateAppointmentDialogBox {
 
 
     tipeSelected(e:any){
-        console.log(e.target.innerText)
-        if(e.target.innerText == 'Peluqueria'){
-            this.typeServicesSelected = this.ServicioCabello
-        } else if(e.target.innerText == 'Peinados'){
-            this.typeServicesSelected = this.ServiciosPeinados
-        } else if(e.target.innerText == 'Tinturas'){
-            this.typeServicesSelected = this.ServiciosTinturas
-        } else if(e.target.innerText == 'Barberia'){
-            this.typeServicesSelected = this.ServicioBarb
-        } else {
-            this.typeServicesSelected = this.ServicioCabello
-        }
-
+        console.log(this.updateForm.get('services')?.value)
+        this.GetTypeServices(this.updateForm.get('services')?.value);
         this.updateForm.get('typeServices')?.enable()
     }
 
@@ -597,7 +643,8 @@ export class CreateAppointmentDialogBox {
     MatSlideToggleModule,
     MatListModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule
   ],
 })
 export class CreateModule {}
