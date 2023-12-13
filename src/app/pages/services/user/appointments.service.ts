@@ -188,11 +188,26 @@ constructor(
   }
 
   /**
-   * delete appointment
+   * delete Service
    *
    * @param data
    */
   deleteAppointment(data:any): Observable<any> {
+    return this._apiServiceHttp.delete(`apu/oneser`, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+   /**
+   * delete cita
+   *
+   * @param data
+   */
+  deleteCompleteAppointment(data:any): Observable<any> {
     return this._apiServiceHttp.post(`apu/canapp`, data).pipe(
       map((response: any) => {
         // Return a new observable with the response

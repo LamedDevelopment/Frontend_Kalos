@@ -17,7 +17,8 @@ export class LngServicesCompletationComponent implements  OnInit {
 
     @Input()
     Business:any;
-
+    @Input()
+    ServicesSelected:any;
     @Input()
     TypeServices:any;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -97,9 +98,23 @@ export class LngServicesCompletationComponent implements  OnInit {
             lastname: this.colaborador.lastname,
             date: moment(this.DateSelected).format('DD/MM/YYYY'),
             hour: this.horarioSelected,
-            Service: this.ServiceSelected
+            Service: this.ServiceSelected+':00'
         });
+        console.log(this.ServicesSelected._id)
     const body =
+            /* {
+                "user": this.user.id,
+                "discount": "",
+                "business": "655456e56eb1b0c5c3523c8a",
+                "tradename": "Nombre Sede O comercial",
+                "manager": "",
+                "observationManager": "",
+                "staff": "655709768197f57fe38ae973",
+                "services": "64ab9174923ff67b725791b7",
+                "typeServices": "64ab92e0063c636a40004149",
+                "dateService": "15/12/2023",
+                "timeService": "09:00:00"
+            } */
         {
             user: this.user.id,
             discount: "",
@@ -108,10 +123,10 @@ export class LngServicesCompletationComponent implements  OnInit {
             manager: "",
             observationManager: "",
             staff: this.colaborador.user,
-            services: this.ServiceSelected.typeServices,
+            services: this.ServicesSelected._id,
             typeServices: this.ServiceSelected.typeServices,
             dateService: moment(this.DateSelected).format('DD/MM/YYYY'),
-            timeService: this.horarioSelected
+            timeService: this.horarioSelected+':00'
         }
 
         this._loungService.createAppoinment('apu', body).subscribe(

@@ -1,26 +1,97 @@
-<div class="create-dialog-box scrollable-dialog">
-    <div class="title d-flex align-items-center justify-content-space-between">
-        <h4 class="mb-0">Actualizar la fecha de la cita</h4>
-        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <!-- <div class="d-flex align-items-center">
+        <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+            <mat-button-toggle value="1" (click)="CloseAppointment()">Cancelar cita</mat-button-toggle>
+            <mat-button-toggle value="2" (click)="OpenAgendarCita()">Agregar servicio</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div> -->
+    <div class="d-flex align-items-center">
+
+        <mat-card
+            class=" tagus-card top-instructors-box"
+            [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+        >
+            <mat-card-content style="overflow:hidden important;">
+                <!-- <div class="instructors-list d-flex flex-wrap">
+                        <div class="row w-full mb-3">
+                            <mat-card class="mb-3" *ngFor="let app of appoimentAdd">
+                                <tr class="w-full">
+                                    <td WIDTH="200" HEIGHT="20">
+                                        <span>{{app.name}} {{app.lastname}}</span>
+                                    </td>
+                                    <td WIDTH="200" HEIGHT="20">
+                                        <span>{{app.date}}</span>
+                                    </td>
+                                    <td WIDTH="200" HEIGHT="20">
+                                        <span>{{app.hour}}</span>
+                                    </td>
+                                    <td WIDTH="200" HEIGHT="20">
+                                        <span>{{app.Service.typeService}}</span>
+                                    </td>
+                                    <td WIDTH="200" HEIGHT="20">
+                                        <div class="text-end my-5 ml-5">
+                                            <button mat-raised-button class="mt-4 mb-4" (click)="DeleteService(app)" color="warn"> Eliminar </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </mat-card>
+                        </div>
+                </div> -->
+                <form [formGroup]="updateForm" #updateNgForm>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label class="d-block mb-12 fw-semibold gray-color">Tipo Servicio</label>
+                            <mat-form-field >
+                                <mat-label>Tipo servicio</mat-label>
+                                <mat-select  [formControlName]="'services'" (selectionChange)="SelectCollaborator()">
+                                    <mat-option *ngFor="let serv of Servicios" [value]="serv._id" >{{serv.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label class="d-block mb-12 fw-semibold gray-color">Colaborador</label>
+                            <mat-form-field >
+                                <mat-label>Colaborador</mat-label>
+                                <mat-select [formControlName]="'staff'" [disabled]="updateForm.get('services')?.value === ''">
+                                    <mat-option *ngFor="let col of colaboradores" [value]="col" >{{col.name}} {{col.lastname}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label class="d-block mb-12 fw-semibold gray-color">Fecha</label>
+                            <mat-form-field appearance="fill" class="date-input">
+                                <mat-label>MM/DD/YYYY</mat-label>
+                                <input matInput  name="date" [formControlName]="'dateService'"  [matDatepickerFilter]="myFilter" [matDatepicker]="picker" (dateChange)="valueChanged($event)">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker touchUi #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label class="d-block mb-12 fw-semibold gray-color">Horario</label>
+                            <mat-form-field appearance="fill">
+                                <mat-select [formControlName]="'timeService'" >
+                                    <mat-option *ngFor="let h of Hours" [value]="h">{{h}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label class="d-block mb-12 fw-semibold gray-color">Servicio</label>
+                            <mat-form-field appearance="fill">
+                                <mat-select [formControlName]="'typeServices'">
+                                    <mat-option *ngFor="let serCol of ServicesColaborator" [value]="serCol.typeServices">{{serCol.typeService}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <button mat-raised-button class="mt-4 mb-4 col-span-3" color="primary" [disabled]="updateForm.invalid" (click)="AgendarCita()"> Agendar </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+
     </div>
-    <form [formGroup]="updateForm" #updateNgForm>
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Fecha incio</label>
-                    <input type="date" [formControlName]="'dateini'" class="input-control">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Fecha fin</label>
-                    <input type="date" [formControlName]="'datefin'" class="input-control">
-                </div>
-            </div>
-        </div>
-        <div class="text-end">
-            <button type="button" class="gray" (click)="CloseAppointment()"><i class="ri-close-fill"></i> Cancelar cita</button>
-            <button type="submit" (click)="Updaterow()"><i class="ri-add-fill"></i> Actualizar fecha</button>
-        </div>
-    </form>
 </div>
+

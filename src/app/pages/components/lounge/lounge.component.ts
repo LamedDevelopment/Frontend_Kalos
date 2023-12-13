@@ -23,6 +23,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     Servicios:any[] = [];
     TypeServicios:any[] = [];
     businessSelected: any;
+    ServiceSelected: any;
     constructor(
         public themeService: CustomizerSettingsService,
         private _getAppointment: AppointmentsService,
@@ -57,6 +58,10 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         this.collSelected = e;
         this.TypeServicios = e.typeService;
         console.log(this.collSelected)
+    }
+
+    setServicioSelected(e:any){
+        this.ServiceSelected = e;
     }
 
     getBusiness(){

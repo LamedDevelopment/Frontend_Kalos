@@ -63,7 +63,7 @@
 
             <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0">
 
-                    <app-lng-collaborators [colaboradores]="colaboradores" [servicios]="Servicios" (setColaboratorSelected)="ColaboratorSeledted($event)"></app-lng-collaborators>
+                    <app-lng-collaborators [colaboradores]="colaboradores" [servicios]="Servicios" (setColaboratorSelected)="ColaboratorSeledted($event)" (setServicioSelected)="setServicioSelected($event)"></app-lng-collaborators>
             </div>
 
             <!-- <app-lms-current-courses></app-lms-current-courses>
@@ -74,7 +74,7 @@
 
         <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
 
-            <app-lng-services-completation [colaborador]="collSelected" [Business]="businessSelected" [TypeServices]="TypeServicios" *ngIf="collSelected?.user"></app-lng-services-completation>
+            <app-lng-services-completation [colaborador]="collSelected" [ServicesSelected]="ServiceSelected" [Business]="businessSelected" [TypeServices]="TypeServicios" *ngIf="collSelected?.user"></app-lng-services-completation>
 
             <!-- <app-lms-experience></app-lms-experience>
 

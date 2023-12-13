@@ -16,6 +16,10 @@
     --mdc-circular-progress-active-indicator-color: var(--heraBlueColor);
 }
 
+.mat-mdc-dialog-container .mdc-dialog__surface{
+    overflow: hidden !important;
+}
+
 table {
   width: 300px;
   max-width: 80%;
