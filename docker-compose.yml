@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: kalos_front
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "4200:80"
+    command: ["npm", "run", "watch"]
