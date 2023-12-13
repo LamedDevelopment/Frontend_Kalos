@@ -215,7 +215,7 @@ export class AppointmentComponent implements AfterViewInit  {
             service:serv._id
         }
         console.log(body)
-        /* this._getAppointment.deleteAppointment(body)
+        this._getAppointment.deleteAppointment(body)
             .subscribe(
                 (response) => {
                     this._snackBar.open('Servicio eliminado exitosamente!!!', '', {
@@ -233,7 +233,7 @@ export class AppointmentComponent implements AfterViewInit  {
                         duration: this.durationInSeconds * 1000,
                     });
                 }
-            ); */
+            );
     }
 
     toggleTheme() {
@@ -441,54 +441,6 @@ export class UpdateAppointmentDialogBox implements  OnInit {
         this.appoimentAdd = this.appoimentAdd.filter((item:any) => item.id !== el.id)
     }
 
-    /**
-     * Register
-     */
-   /*  Updaterow(): void
-    {
-        // Do nothing if the form is invalid
-        if ( this.updateForm.invalid )
-        {
-            return;
-        }
-
-        // Disable the form
-        this.updateForm.disable();
-
-        // Hide the alert
-        this.showAlert = false;
-        const body = this.updateForm.getRawValue();
-        var dias = 1;
-        body.dateini = new Date(new Date(body.dateini).setDate( new Date(body.dateini).getDate() + dias)).toLocaleDateString()
-        body.datefin = new Date(new Date(body.datefin).setDate( new Date(body.datefin).getDate() + dias)).toLocaleDateString()
-        body.business = Business.business.business;
-        // Sign up
-        this._getAppointment.updateAppointment(body)
-            .subscribe(
-                (response) => {
-                    this._snackBar.open('Cita actualizada exitosamente!!!', '', {
-                        horizontalPosition: this.horizontalPosition,
-                        verticalPosition: this.verticalPosition,
-                        duration: this.durationInSeconds * 1000,
-                    });
-                    this.dialogRef.close(true);
-                },
-                (response) => {
-
-                    // Re-enable the form
-                    this.updateForm.enable();
-
-                    // Reset the form
-                    this.updateForm.reset();
-
-                    // Set the alert
-
-
-                    // Show the alert
-                    this.showAlert = true;
-                }
-            );
-    } */
 
     close(){
         this.dialogRef.close(true);
