@@ -25,21 +25,27 @@ const routes: Routes = [
             { path: 'collas', component: CollaboratorsComponent },
             { path: 'manager', component: ManagerComponent },
             { path: 'managers', component: ManagersComponent },
-            { path: 'services-parameter', component: ServicesParameterComponent },
-            { path: 'services-parameters', component: ServicesParametersComponent },
-            { path: 'type-service', component: TypeServiceComponent  },
+            {
+                path: 'services-parameter',
+                component: ServicesParameterComponent,
+            },
+            {
+                path: 'services-parameters',
+                component: ServicesParametersComponent,
+            },
+            { path: 'type-service', component: TypeServiceComponent },
             { path: 'type-services', component: TypeServicesComponent },
-            {path: 'account', component: AccountComponentBis },
-            {path: 'privacy', component: PrivacyPolicyComponentBis },
-            {path: 'security', component: SecurityComponentBis },
+            { path: 'account', component: AccountComponentBis },
+            { path: 'privacy', component: PrivacyPolicyComponentBis },
+            { path: 'security', component: SecurityComponentBis },
             { path: 'terms', component: TermsConditionsComponentBis },
             { path: '', redirectTo: '/bus/dash', pathMatch: 'full' },
-        ]
-    }
+        ],
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class BusinessRoutingModule { }
+export class BusinessRoutingModule {}

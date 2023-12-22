@@ -30,8 +30,8 @@ const routes: Routes = [
         ManagerModule,
         OwnerModule,
         ShowcaseModule,
-        UserModule
+        UserModule,
     ],
-  exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class ComponentsRoutingModule { }
+export class ComponentsRoutingModule {}
