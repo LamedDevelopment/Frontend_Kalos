@@ -1,0 +1,30 @@
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card class="example-card">
+        <mat-card-content>
+            <form [formGroup]="startServiceform">
+                <div class="row">
+                    <div class="col-12">
+                        <mat-form-field class="w-100">
+                            <mat-label>Comentarios</mat-label>
+                            <textarea
+                                matInput
+                                placeholder=""
+                                formControlName="observacion"
+                            ></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions class="mb-3">
+            <button mat-button (click)="startService()">
+                Iniciar Servicio
+            </button>
+            <button mat-button (click)="closeDialog()">Cerrar</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

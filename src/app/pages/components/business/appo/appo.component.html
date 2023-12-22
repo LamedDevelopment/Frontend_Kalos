@@ -14,11 +14,8 @@
     </ol>
 </div>
 
-<div
-    class="grid justify-content-center"
-    [class.component-dark-theme]="themeService.isDark()"
-    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
->
+<div class="grid justify-content-center" [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()">
     <!-- <div class="col-lg-4 col-xl-3 col-md-12">
         <mat-card class="mb-25 tacking-box tagus-card">
             <mat-card-header class="border-bottom">
@@ -37,7 +34,7 @@
             </mat-card-content>
         </mat-card>
     </div> -->
-    <div class="col-lg-12 col-xl-12 col-md-12" >
+    <div class="col-lg-12 col-xl-12 col-md-12">
         <mat-card class="mb-25 tagus-card w-auto">
             <mat-card-header>
                 <h5 class="mb-0">Próximas citas</h5>
@@ -49,13 +46,14 @@
                 </div>
                 <div class="d-flex align-items-center">
                     <form class="search-box position-relative d-none d-md-block">
-                        <input type="text" class="input-search d-block" (keyup)="applyFilter($event)" placeholder="Buscar...">
+                        <input type="text" class="input-search d-block" (keyup)="applyFilter($event)"
+                            placeholder="Buscar...">
                         <button type="submit"><i class="ri-search-line"></i></button>
                     </form>
                 </div>
             </mat-card-header>
             <mat-card-content>
-                <div class="mat-elevation-z8 tagus-mat-table" >
+                <div class="mat-elevation-z8 tagus-mat-table">
                     <table mat-table [dataSource]="dataSource">
                         <!-- Product Column -->
                         <ng-container matColumnDef="product">
@@ -70,19 +68,22 @@
                         <!-- Price Column -->
                         <ng-container matColumnDef="price">
                             <th mat-header-cell *matHeaderCellDef>Precio</th>
-                            <td mat-cell *matCellDef="let element">${{element.services[0].servicePrice | currency:'COP':'symbol':'4.2-2'}}</td>
+                            <td mat-cell *matCellDef="let element">${{element.services[0].servicePrice |
+                                currency:'COP':'symbol':'4.2-2'}}</td>
                         </ng-container>
 
                         <!-- Vendor Column -->
                         <ng-container matColumnDef="vendor">
                             <th mat-header-cell *matHeaderCellDef>Colaborador</th>
-                            <td mat-cell *matCellDef="let element">{{element.services[0].staffServices[0].nameCollaborator}}</td>
+                            <td mat-cell *matCellDef="let element">
+                                {{element.appointmentDate[0].collaboratorAppointment[0].staff}}</td>
                         </ng-container>
 
                         <!-- Date Column -->
                         <ng-container matColumnDef="date">
                             <th mat-header-cell *matHeaderCellDef>Fecha</th>
-                            <td mat-cell *matCellDef="let element">{{element.appointmentDate[0].dateService }} {{element.appointmentDate[0].timeService}}</td>
+                            <td mat-cell *matCellDef="let element">{{element.appointmentDate[0].dateService }}
+                                {{element.appointmentDate[0].timeService}}</td>
                         </ng-container>
 
                         <!-- Status Column -->
@@ -90,7 +91,8 @@
                             <th mat-header-cell *matHeaderCellDef>Estado</th>
                             <td mat-cell *matCellDef="let element">
                                 <span class="badge" *ngIf="element.appointmentStatus === 'true'">Pendiente</span>
-                                <span class="badge outOfStock" *ngIf="element.appointmentStatus === 'false'">Cancelado</span>
+                                <span class="badge outOfStock"
+                                    *ngIf="element.appointmentStatus === 'false'">Cancelado</span>
                                 <!-- <span class="badge delivered" *ngIf="element.status.delivered">{{element.status.delivered}}</span> -->
                             </td>
                         </ng-container>
@@ -100,7 +102,9 @@
                             <th mat-header-cell *matHeaderCellDef></th>
                             <td mat-cell *matCellDef="let element">
                                 <div class="text-end">
-                                    <button type="submit" mat-raised-button color="primary" (click)="openCreateUserDialog('300ms', '100ms', element)"><i class="ri-add-fill"></i> Editar</button>
+                                    <button type="submit" mat-raised-button color="primary"
+                                        (click)="openCreateUserDialog('300ms', '100ms', element)"><i
+                                            class="ri-add-fill"></i> Editar</button>
                                 </div>
                             </td>
                         </ng-container>
@@ -110,7 +114,9 @@
                             <th mat-header-cell *matHeaderCellDef></th>
                             <td mat-cell *matCellDef="let element">
                                 <div class="text-end">
-                                    <button mat-raised-button type="button" color="warn" (click)="CloseAppointment(element)"><i class="ri-close-fill"></i> Eliminar cita</button>
+                                    <button mat-raised-button type="button" color="warn"
+                                        (click)="CloseAppointment(element)"><i class="ri-close-fill"></i> Eliminar
+                                        cita</button>
                                 </div>
                             </td>
                         </ng-container>
@@ -120,24 +126,21 @@
                             <th mat-header-cell *matHeaderCellDef></th>
                             <td mat-cell *matCellDef="let element">
                                 <div class="text-end">
-                                    <button mat-raised-button color="warn" (click)="StartStopService(element, 2)" *ngIf="!element.startStop"><i class="ri-close-fill"></i> Stop</button>
-                                    <button mat-raised-button [class.greenClass]="startStop" (click)="StartStopService(element, 1)" *ngIf="element.startStop"><i class="ri-add-fill"></i> Start</button>
+                                    <button mat-raised-button color="warn" (click)="StartStopService(element, 2)"
+                                        *ngIf="!element.startStop"><i class="ri-close-fill"></i> Stop</button>
+                                    <button mat-raised-button [class.greenClass]="startStop"
+                                        (click)="StartStopService(element, 1)" *ngIf="element.startStop"><i
+                                            class="ri-add-fill"></i> Start</button>
                                 </div>
                             </td>
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row
-                            class="row-data"
-                            style="cursor:pointer"
-                            *matRowDef="let row; columns: displayedColumns;"
-                            >
+                        <tr mat-row class="row-data" style="cursor:pointer"
+                            *matRowDef="let row; columns: displayedColumns;">
                         </tr>
                     </table>
-                    <mat-paginator
-                        [pageSizeOptions]="[5, 10, 15, 20]"
-                        showFirstLastButtons
-                    >
+                    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons>
                     </mat-paginator>
                 </div>
             </mat-card-content>
