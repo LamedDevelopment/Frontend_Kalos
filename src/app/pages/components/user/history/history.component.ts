@@ -9,9 +9,9 @@ import { AppointmentsService } from 'src/app/pages/services/user/appointments.se
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
 @Component({
-  selector: 'app-invoice-list',
-  templateUrl: './invoice-list.component.html',
-  styleUrls: ['./invoice-list.component.scss']
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.scss']
 })
 export class InvoiceListComponent implements AfterViewInit {
 

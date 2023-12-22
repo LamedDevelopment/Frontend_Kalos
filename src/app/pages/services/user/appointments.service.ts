@@ -232,4 +232,18 @@ constructor(
     );
   }
 
+  /**
+   * Get Wallet
+   *
+   */
+  getWallet(url:any): Observable<any> {
+    return this._apiServiceHttp.get(url).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
 }

@@ -17,8 +17,8 @@ const plans: any = [
             {path: '/user/appo', name: 'Citas'},
             {path: '/user/account', name: 'Cuenta' },
             {path: '/user/dash', name: 'Dashboard' },
-            /* {path: '/user/invoiced', name: 'Detalle de factura' },
-            {path: '/user/invoicel', name: 'Lista de facturas' }, */
+            // {path: '/user/invoiced', name: 'Detalle de factura' },
+            {path: '/user/billetera', name: 'Lista de facturas' },
             {path: '/user/lounges', name: 'Salones' },
             /* {path: '/user/pay', name: 'Pago' },
             {path: '/user/pays', name: 'Pagos' },

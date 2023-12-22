@@ -24,8 +24,8 @@ const routes: Routes = [
             {path: 'appo', component: AppointmentComponent},
             {path: 'account', component: AccountComponent },
             {path: 'dash', component: DashComponent },
-            /* {path: 'invoiced', component: InvoiceDetailsComponent },
-            {path: 'invoicel', component: InvoiceListComponent }, */
+            // {path: 'invoiced', component: InvoiceDetailsComponent },
+            {path: 'billetera', component: InvoiceListComponent },
             {path: 'lounges', component: LoungeComponent },
             /* {path: 'pay', component: PaymentComponent },
             {path: 'pays', component: PaymentsComponent }, */
