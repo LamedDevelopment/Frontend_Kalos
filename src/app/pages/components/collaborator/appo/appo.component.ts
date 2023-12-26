@@ -54,6 +54,7 @@ import * as moment from 'moment';
 import { ModalservicesService } from '../../../services/modalservices.service';
 declare const $: any;
 import { ModalserviceComponent } from '../modals/modalservice/modalservice.component';
+import { CloseserviceComponent } from '../modals/closeservice/closeservice.component';
 
 export interface DataElement {
     appointmentDate: Array<any>;
@@ -217,83 +218,38 @@ export class AppointmentComponentColl implements OnInit, AfterViewInit {
 
         this.dialog
             .open(ModalserviceComponent, {
-                width: '600px',
+                width: '1000px',
                 enterAnimationDuration,
                 exitAnimationDuration,
             })
             .afterClosed()
             .subscribe((data) => {
-                console.log(
-                    'El diálogo se ha cerrado desde el componente de tabla.'
-                );
+                // una vez cerrado el modal se refresca la data
+                this.GetCitas(2);
+                this.GetHistoricoCitas();
             });
     }
 
-    StartStopService(el: any, type: any) {
-        console.log(el);
-        let body;
-        let url;
-        if (type === 1) {
-            url = 'apu/iniser';
-            body = {
-                appointmentID: el._id,
-                businessID: el.business.business,
-                serviceID: el.services[0]._id,
-                staffID: el.services[0].staffServices[0]._id,
-                appointmentDateID: el.appointmentDate[0]._id,
-                observationAppointment:
-                    'Datos que el Collaborador ingresa para iniciar el Servicio.',
-                startAddDescriptionService: [
-                    {
-                        serviceName: '2 Mechones Permanentes Azul y Futcia,',
-                        CostService: el.services[0].servicePrice,
-                    },
-                ],
-            };
-            el.startStop = false;
-        } else {
-            url = 'apu/finser';
-            body = {
-                appointmentID: el._id,
-                businessID: el.business.business,
-                serviceID: el.services[0]._id,
-                staffID: el.services[0].staffServices[0]._id,
-                appointmentDateID: el.appointmentDate[0]._id,
-                observationAppointment:
-                    'Datos que el Collaborador ingresa para iniciar el Servicio.',
-                endAddDescriptionService: [
-                    {
-                        serviceName: '2 Mechones Permanentes Azul y Futcia,',
-                        CostService: el.services[0].servicePrice,
-                    },
-                ],
-            };
-        }
+    openModalCloseService(
+        enterAnimationDuration: string,
+        exitAnimationDuration: string,
+        bs: any
+    ): void {
+        Business = bs;
+        this.modalservice.setBusinessData(Business);
 
-        this._getAppointment.StartStopAppointmentFun(url, body).subscribe(
-            (response) => {
-                this._snackBar.open(
-                    `Servicio ${
-                        type == 1 ? 'iniciado' : 'finalizado'
-                    } exitosamente!!!`,
-                    '',
-                    {
-                        horizontalPosition: this.horizontalPosition,
-                        verticalPosition: this.verticalPosition,
-                        duration: this.durationInSeconds * 1000,
-                    }
-                );
-                if (type == 2) {
-                    this.GetCitas(1);
-                }
-            },
-            (response) => {
-                // Set the alert
-
-                // Show the alert
-                this.showAlert = true;
-            }
-        );
+        this.dialog
+            .open(CloseserviceComponent, {
+                width: '1000px',
+                enterAnimationDuration,
+                exitAnimationDuration,
+            })
+            .afterClosed()
+            .subscribe((data) => {
+                // una vez cerrado el modal se refresca la data
+                this.GetCitas(2);
+                this.GetHistoricoCitas();
+            });
     }
 
     applyFilter(event: Event) {

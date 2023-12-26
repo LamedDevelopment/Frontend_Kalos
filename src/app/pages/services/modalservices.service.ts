@@ -8,6 +8,7 @@ export class ModalservicesService {
     constructor() {}
 
     setBusinessData(data: any) {
+        this.data = null;
         this.data = data;
     }
 

@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Validators } from 'ngx-editor';
-import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
-
-import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
 import { ModalservicesService } from 'src/app/pages/services/modalservices.service';
+import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
+import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
+import { ModalserviceComponent } from '../modalservice/modalservice.component';
 import Swal from 'sweetalert2';
+
 @Component({
-    selector: 'app-modalservice',
-    templateUrl: './modalservice.component.html',
-    styleUrls: ['./modalservice.component.scss'],
+    selector: 'app-closeservice',
+    templateUrl: './closeservice.component.html',
+    styleUrls: ['./closeservice.component.scss'],
 })
-export class ModalserviceComponent {
-    startServiceform: FormGroup;
+export class CloseserviceComponent {
+    endServiceform: FormGroup;
     businessData: any;
+
     constructor(
         public themeService: CustomizerSettingsService,
         private dialogRef: MatDialogRef<ModalserviceComponent>,
@@ -24,21 +25,20 @@ export class ModalserviceComponent {
     ) {}
 
     ngOnInit(): void {
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
-
         this.businessData = this.modalservice.getBusinessData();
-        console.log('data en el modal', this.businessData);
-
-        this.startServiceform = this._formBuilder.group({
+        this.endServiceform = this._formBuilder.group({
             observacion: [''],
             servicio: this._formBuilder.array([]),
             supplies: this._formBuilder.array([]),
         });
     }
 
-    startService() {
-        console.log(this.startServiceform.value);
+    closeDialog() {
+        this.dialogRef.close();
+    }
+
+    endService() {
+        console.log(this.endServiceform.value);
 
         const body = {
             appointmentID: this.businessData._id,
@@ -49,14 +49,14 @@ export class ModalserviceComponent {
                     .staff,
             appointmentDateID: this.businessData.appointmentDate[0]._id,
             observationAppointment:
-                this.startServiceform?.get('observacion')?.value,
-            startAddDescriptionService:
-                this.startServiceform.get('servicio')?.value,
-            supplies: this.startServiceform.get('supplies')?.value,
+                this.endServiceform?.get('observacion')?.value,
+            endAddDescriptionService:
+                this.endServiceform.get('servicio')?.value,
+            supplies: this.endServiceform.get('supplies')?.value,
         };
         console.log(body);
 
-        this._getAppointment.startService(body).subscribe(
+        this._getAppointment.closeService(body).subscribe(
             (response) => {
                 console.log('res', response);
                 if (response.ok == true) {
@@ -76,10 +76,6 @@ export class ModalserviceComponent {
         );
     }
 
-    closeDialog() {
-        this.dialogRef.close();
-    }
-
     agregarServicio() {
         const nuevoServicio = this._formBuilder.group({
             serviceName: [''],
@@ -87,17 +83,15 @@ export class ModalserviceComponent {
         });
 
         // Agregar el nuevo objeto al form array
-        (this.startServiceform.get('servicio') as FormArray).push(
-            nuevoServicio
-        );
+        (this.endServiceform.get('servicio') as FormArray).push(nuevoServicio);
     }
 
     eliminarServicio(index: number) {
-        (this.startServiceform.get('servicio') as FormArray).removeAt(index);
+        (this.endServiceform.get('servicio') as FormArray).removeAt(index);
     }
 
     get servicioArray(): any {
-        return this.startServiceform.get('servicio') as FormArray;
+        return this.endServiceform.get('servicio') as FormArray;
     }
 
     agregarSuministros() {
@@ -110,16 +104,16 @@ export class ModalserviceComponent {
         });
 
         // Agregar el nuevo objeto al form array
-        (this.startServiceform.get('supplies') as FormArray).push(
+        (this.endServiceform.get('supplies') as FormArray).push(
             nuevosuministro
         );
     }
 
     eliminarSuministro(index: number) {
-        (this.startServiceform.get('supplies') as FormArray).removeAt(index);
+        (this.endServiceform.get('supplies') as FormArray).removeAt(index);
     }
 
     get suministrosArray(): any {
-        return this.startServiceform.get('supplies') as FormArray;
+        return this.endServiceform.get('supplies') as FormArray;
     }
 }

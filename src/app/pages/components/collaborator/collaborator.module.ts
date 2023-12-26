@@ -68,6 +68,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ModalserviceComponent } from './modals/modalservice/modalservice.component';
+import { CloseserviceComponent } from './modals/closeservice/closeservice.component';
 
 @NgModule({
     declarations: [
@@ -89,6 +90,7 @@ import { ModalserviceComponent } from './modals/modalservice/modalservice.compon
         SecurityComponentColl,
         TermsConditionsComponentColl,
         ModalserviceComponent,
+        CloseserviceComponent,
     ],
     imports: [
         CommonModule,

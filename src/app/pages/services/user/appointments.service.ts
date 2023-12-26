@@ -182,19 +182,18 @@ export class AppointmentsService {
         );
     }
 
-  /**
-   * Get Wallet
-   *
-   */
-  getWallet(url:any): Observable<any> {
-    return this._apiServiceHttp.get(url).pipe(
-      map((response: any) => {
-        // Return a new observable with the response
-        return response;
-
-      }),
-    );
-  }
+    /**
+     * Get Wallet
+     *
+     */
+    getWallet(url: any): Observable<any> {
+        return this._apiServiceHttp.get(url).pipe(
+            map((response: any) => {
+                // Return a new observable with the response
+                return response;
+            })
+        );
+    }
 
     /**
      * delete cita
@@ -211,7 +210,16 @@ export class AppointmentsService {
     }
 
     startService(data: any): Observable<any> {
-        return this._apiServiceHttp.post(`apu/iniser`, data).pipe(
+        return this._apiServiceHttp.put(`apu/iniser`, data).pipe(
+            map((response: any) => {
+                // Return a new observable with the response
+                return response;
+            })
+        );
+    }
+
+    closeService(data: any): Observable<any> {
+        return this._apiServiceHttp.put(`apu/finser`, data).pipe(
             map((response: any) => {
                 // Return a new observable with the response
                 return response;
