@@ -27,7 +27,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <ul class="sidebar-sub-menu">
-                            <li class="sidemenu-item" *ngFor="let submenu of menu.children; let i = index;">
+                            <li class="sidemenu-item" *ngFor="let submenu of menu.childs; let i = index;">
                                 <a [routerLink]="submenu.path" routerLinkActive="active"
                                     [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     {{submenu.title}}

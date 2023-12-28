@@ -33,12 +33,12 @@ const routes: Routes = [
             { path: 'ticket', component: TicketComponent },
             { path: 'tickets', component: TicketsComponent },
             { path: '', redirectTo: '/colla/dash', pathMatch: 'full' },
-        ]
-    }
+        ],
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class CollaboratorRoutingModule { }
+export class CollaboratorRoutingModule {}

@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     panelOpenState = false;
 
     isToggled = false;
-    menuItems: any[];
+    menuItems: any[] = [];
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     user: any;
     constructor(
