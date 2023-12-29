@@ -21,7 +21,7 @@
                         *ngFor="let menu of menuItems; let i = index;">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <i class="flaticon-menu-1"></i>
+                                <i class="{{menu.icontype}}"></i>
                                 <span class="title">{{menu.title}}</span>
                                 <!--  <span class="badge">{{menu.childs.length}}</span> -->
                             </mat-panel-title>
