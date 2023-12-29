@@ -14,31 +14,32 @@ import { AccountComponentBis } from './account/account.component';
 import { PrivacyPolicyComponentBis } from './privacy-policy/privacy-policy.component';
 import { SecurityComponentBis } from './security/security.component';
 import { TermsConditionsComponentBis } from './terms-conditions/terms-conditions.component';
+import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 
 const routes: Routes = [
     {
         path: 'bus',
-        component: BusinessComponent,
+        component: BusinessComponent, canActivate: [AuthGuard],
         children: [
-            { path: 'dash', component: DashComponent },
-            { path: 'appoinments', component: AppointmentComponent },
-            { path: 'collas', component: CollaboratorsComponent },
-            { path: 'manager', component: ManagerComponent },
-            { path: 'managers', component: ManagersComponent },
+            { path: 'dash', component: DashComponent, canActivate: [AuthGuard] },
+            { path: 'appoinments', component: AppointmentComponent, canActivate: [AuthGuard] },
+            { path: 'collas', component: CollaboratorsComponent, canActivate: [AuthGuard] },
+            { path: 'manager', component: ManagerComponent, canActivate: [AuthGuard] },
+            { path: 'managers', component: ManagersComponent, canActivate: [AuthGuard] },
             {
                 path: 'services-parameter',
-                component: ServicesParameterComponent,
+                component: ServicesParameterComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'services-parameters',
-                component: ServicesParametersComponent,
+                component: ServicesParametersComponent, canActivate: [AuthGuard]
             },
-            { path: 'type-service', component: TypeServiceComponent },
-            { path: 'type-services', component: TypeServicesComponent },
-            { path: 'account', component: AccountComponentBis },
-            { path: 'privacy', component: PrivacyPolicyComponentBis },
-            { path: 'security', component: SecurityComponentBis },
-            { path: 'terms', component: TermsConditionsComponentBis },
+            { path: 'type-service', component: TypeServiceComponent,  canActivate: [AuthGuard] },
+            { path: 'type-services', component: TypeServicesComponent, canActivate: [AuthGuard] },
+            { path: 'account', component: AccountComponentBis, canActivate: [AuthGuard] },
+            { path: 'privacy', component: PrivacyPolicyComponentBis, canActivate: [AuthGuard] },
+            { path: 'security', component: SecurityComponentBis, canActivate: [AuthGuard] },
+            { path: 'terms', component: TermsConditionsComponentBis, canActivate: [AuthGuard] },
             { path: '', redirectTo: '/bus/dash', pathMatch: 'full' },
         ],
     },

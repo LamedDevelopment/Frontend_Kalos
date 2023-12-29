@@ -16,22 +16,23 @@ import { AccountComponentColl } from './account/account.component';
 import { PrivacyPolicyComponentColl } from './privacy-policy/privacy-policy.component';
 import { SecurityComponentColl } from './security/security.component';
 import { TermsConditionsComponentColl } from './terms-conditions/terms-conditions.component';
+import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 
 const routes: Routes = [
     {
         path: 'colla',
-        component: CollaboratorComponent,
+        component: CollaboratorComponent, canActivate: [AuthGuard],
         children: [
-            { path: 'dash', component: DashComponent },
-            { path: 'appoinments', component: AppointmentComponentColl },
-            { path: 'account', component: AccountComponentColl },
-            { path: 'privacy', component: PrivacyPolicyComponentColl },
-            { path: 'security', component: SecurityComponentColl },
-            { path: 'terms', component: TermsConditionsComponentColl },
-            { path: 'ser', component: ServiceComponent },
-            { path: 'sers', component: ServicesComponent },
-            { path: 'ticket', component: TicketComponent },
-            { path: 'tickets', component: TicketsComponent },
+            { path: 'dash', component: DashComponent, canActivate: [AuthGuard] },
+            { path: 'appoinments', component: AppointmentComponentColl, canActivate: [AuthGuard] },
+            { path: 'account', component: AccountComponentColl, canActivate: [AuthGuard] },
+            { path: 'privacy', component: PrivacyPolicyComponentColl, canActivate: [AuthGuard] },
+            { path: 'security', component: SecurityComponentColl, canActivate: [AuthGuard] },
+            { path: 'terms', component: TermsConditionsComponentColl, canActivate: [AuthGuard] },
+            { path: 'ser', component: ServiceComponent, canActivate: [AuthGuard] },
+            { path: 'sers', component: ServicesComponent, canActivate: [AuthGuard] },
+            { path: 'ticket', component: TicketComponent, canActivate: [AuthGuard] },
+            { path: 'tickets', component: TicketsComponent, canActivate: [AuthGuard] },
             { path: '', redirectTo: '/colla/dash', pathMatch: 'full' },
         ],
     },

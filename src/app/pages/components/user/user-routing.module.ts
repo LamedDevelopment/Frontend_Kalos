@@ -14,25 +14,27 @@ import { TermsConditionsComponent } from './terms-conditions/terms-conditions.co
 import { UserComponent } from './user.component';
 import { SecurityComponent } from './security/security.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
+import { HistoricoListComponent } from './history/history.component';
 
 
 const routes: Routes = [
     {
         path: 'user',
-        component: UserComponent,
+        component: UserComponent, canActivate: [AuthGuard],
         children: [
-            {path: 'appo', component: AppointmentComponent},
-            {path: 'account', component: AccountComponent },
-            {path: 'dash', component: DashComponent },
-            // {path: 'invoiced', component: InvoiceDetailsComponent },
-            {path: 'billetera', component: InvoiceListComponent },
-            {path: 'lounges', component: LoungeComponent },
+            {path: 'appo', component: AppointmentComponent, canActivate: [AuthGuard]},
+            {path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
+            {path: 'dash', component: DashComponent, canActivate: [AuthGuard] },
+            {path: 'hisuap', component: HistoricoListComponent, canActivate: [AuthGuard] },
+            {path: 'billetera', component: InvoiceListComponent, canActivate: [AuthGuard] },
+            {path: 'lounges', component: LoungeComponent, canActivate: [AuthGuard] },
             /* {path: 'pay', component: PaymentComponent },
             {path: 'pays', component: PaymentsComponent }, */
-            {path: 'privacy', component: PrivacyPolicyComponent },
-            {path: 'security', component: SecurityComponent },
+            {path: 'privacy', component: PrivacyPolicyComponent, canActivate: [AuthGuard] },
+            {path: 'security', component: SecurityComponent, canActivate: [AuthGuard] },
             /* {path: 'services', component: ServicesComponent }, */
-            { path: 'terms', component: TermsConditionsComponent },
+            { path: 'terms', component: TermsConditionsComponent, canActivate: [AuthGuard] },
             { path: '', redirectTo: '/user/appo', pathMatch: 'full' },
         ]
     }

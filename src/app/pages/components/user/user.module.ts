@@ -64,6 +64,7 @@ import { RouterModule } from '@angular/router';
 import { AccountComponent } from './account/account.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HistoricoListComponent } from './history/history.component';
 
 @NgModule({
     declarations: [
@@ -81,6 +82,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         ServicesComponent,
         TermsConditionsComponent,
         UserComponent,
+        HistoricoListComponent
     ],
     imports: [
         CommonModule,

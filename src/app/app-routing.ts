@@ -15,6 +15,7 @@ import { PagesComponent } from './pages/pages.component';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -28,7 +29,7 @@ const routes: Routes = [
     { path: 'auth/logout', component: LogoutComponent },
     { path: 'auth/confirm-mail', component: ConfirmMailComponent },
     { path: 'auth/lock-screen', component: LockScreenComponent },
-    { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
+    { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

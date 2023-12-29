@@ -13,9 +13,9 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss']
 })
-export class InvoiceListComponent implements AfterViewInit {
+export class HistoricoListComponent implements AfterViewInit {
 
-    displayedColumns: string[] = ['negocio', 'servicio', 'others', 'valorOtros', 'subtotal', 'total'];
+    displayedColumns: string[] = ['negocio', 'servicio', 'subtotal', 'fecha',];
     dataSource:any;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,11 +38,11 @@ export class InvoiceListComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.getWallet()
+        this.getHist()
     }
 
-    getWallet(){
-        this.appointmentsService.getWallet('bill/user').subscribe((bill:any) => {
+    getHist(){
+        this.appointmentsService.getAppointmentHistory('apu/hisuap').subscribe((bill:any) => {
             console.log(bill)
             this.dataSource = new MatTableDataSource<any>(bill.msg);
             this.dataSource.paginator = this.paginator;
