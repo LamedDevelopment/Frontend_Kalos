@@ -1,14 +1,23 @@
-### Stage 1
-FROM node:current-slim AS build
-WORKDIR /usr/src/app
-# COPY ./ /usr/src/app/  # No necesitas copiar aquí si utilizas volúmenes en Docker Compose
-RUN npm install --legacy-peer-deps
+# RUN npm install --legacy-peer-deps
 
-### No necesitas ejecutar el comando de compilación aquí
+FROM node:current-slim AS build
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV PNPM_HOME=/usr/local/bin
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN pnpm install
 
 ### Stage 2
 FROM nginx:alpine
-VOLUME /usr/share/nginx/html
-COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
-CMD ["nginx", "-g", "daemon off"]
+WORKDIR /usr/src/app
 
+COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/node_modules ./node_modules
+COPY --from=build /usr/src/app/package*.json ./
+
+# CMD ["npm", "start"] # Comentamos esta línea ya que no se necesita en la construcción de la imagen de NGINX
+
+# El resto del archivo se mantiene igual
