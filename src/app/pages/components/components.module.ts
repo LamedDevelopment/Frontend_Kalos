@@ -9,19 +9,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
 @NgModule({
-  declarations: [
-    ComponentsComponent
-  ],
-  imports: [
-    CommonModule,
-      ComponentsRoutingModule,
-      MatFormFieldModule,
-      MatCardModule,
-      MatIconModule,
-      FlexLayoutModule,
-
-  ],
+    declarations: [ComponentsComponent],
+    imports: [
+        CommonModule,
+        ComponentsRoutingModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatIconModule,
+        FlexLayoutModule,
+    ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

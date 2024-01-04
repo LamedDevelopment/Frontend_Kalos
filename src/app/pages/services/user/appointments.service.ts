@@ -240,4 +240,19 @@ export class AppointmentsService {
             })
         );
     }
+
+    /**
+     * The `loadService` function sends a POST request to the `lose/solcolla` endpoint with the
+     * provided data and returns an Observable that emits the response.
+     * @param {any} data - The `data` parameter is of type `any`, which means it can accept any type of
+     * data.
+     * @returns The `loadService` function is returning an Observable of type `any`.
+     */
+    loadService(data: any): Observable<any> {
+        return this._apiServiceHttp.post(`lose/solcolla`, data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
 }

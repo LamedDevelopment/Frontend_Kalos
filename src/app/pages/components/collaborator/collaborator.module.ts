@@ -69,6 +69,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ModalserviceComponent } from './modals/modalservice/modalservice.component';
 import { CloseserviceComponent } from './modals/closeservice/closeservice.component';
+import { SolicitudcollaComponent } from './solicitudcolla/solicitudcolla.component';
+import { LoanmodalComponent } from './modals/loanmodal/loanmodal.component';
+import { HelpermoduleModule } from '../../helpers/helpermodule.module';
 
 @NgModule({
     declarations: [
@@ -91,6 +94,8 @@ import { CloseserviceComponent } from './modals/closeservice/closeservice.compon
         TermsConditionsComponentColl,
         ModalserviceComponent,
         CloseserviceComponent,
+        SolicitudcollaComponent,
+        LoanmodalComponent,
     ],
     imports: [
         CommonModule,
@@ -145,6 +150,7 @@ import { CloseserviceComponent } from './modals/closeservice/closeservice.compon
         HttpClientModule,
         CdkAccordionModule,
         NgxMaterialTimepickerModule,
+        HelpermoduleModule,
     ],
 })
 export class CollaboratorModule {}

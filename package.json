@@ -45,6 +45,7 @@
     "ng-apexcharts": "^1.8.0",
     "ng2-charts": "^5.0.3",
     "ngx-color-picker": "^16.0.0",
+    "ngx-currency": "^4.0.0",
     "ngx-dropzone": "^3.1.0",
     "ngx-echarts": "^16.2.0",
     "ngx-editor": "^16.0.1",

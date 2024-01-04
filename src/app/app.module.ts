@@ -1,11 +1,26 @@
-import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule, isDevMode } from '@angular/core';
+import {
+    CUSTOM_ELEMENTS_SCHEMA,
+    LOCALE_ID,
+    NgModule,
+    isDevMode,
+} from '@angular/core';
 
-import { FormsModule, ReactiveFormsModule,FormControl, Validators } from '@angular/forms';
+import {
+    FormsModule,
+    ReactiveFormsModule,
+    FormControl,
+    Validators,
+} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DatePipe, HashLocationStrategy, LocationStrategy, APP_BASE_HREF } from '@angular/common';
+import {
+    DatePipe,
+    HashLocationStrategy,
+    LocationStrategy,
+    APP_BASE_HREF,
+} from '@angular/common';
 import { NgxEditorModule } from 'ngx-editor';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +28,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -64,11 +79,9 @@ import { HeaderModule } from './shared/componentsShared/header/header.module';
 import { SidebarModule } from './shared/componentsShared/sidebar/sidebar.module';
 import { FooterModule } from './shared/componentsShared/footer/footer.module';
 
-
 import { CustomizerSettingsModule } from './shared/componentsShared/customizer-settings/customizer-settings.module';
 
-
-import { ExtraOptions, PreloadAllModules, RouterModule} from '@angular/router';
+import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
 import { PagesModule } from './pages/pages.module';
 import { ConfirmMailComponent } from './components/authentication/confirm-mail/confirm-mail.component';
 import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
@@ -87,7 +100,6 @@ import { LoginComponentFun } from './components/authentication/loginFuncionarios
 
 registerLocaleData(localeEs, 'es');
 
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -99,7 +111,7 @@ registerLocaleData(localeEs, 'es');
         LogoutComponent,
         ConfirmMailComponent,
         LockScreenComponent,
-        LoginComponentFun
+        LoginComponentFun,
     ],
     imports: [
         BrowserModule,
@@ -145,7 +157,7 @@ registerLocaleData(localeEs, 'es');
         NgScrollbarModule,
         FormsModule,
         FullCalendarModule,
-        MatNativeDateModule ,
+        MatNativeDateModule,
         ReactiveFormsModule,
         CarouselModule,
         NgxEditorModule,
@@ -153,7 +165,7 @@ registerLocaleData(localeEs, 'es');
         HttpClientModule,
         CdkAccordionModule,
         NgxEchartsModule.forRoot({
-            echarts: () => import('echarts')
+            echarts: () => import('echarts'),
         }),
         NgxGaugeModule,
         NgChartsModule,
@@ -166,20 +178,20 @@ registerLocaleData(localeEs, 'es');
         PagesModule,
         HeaderModule,
         SidebarModule,
-        FooterModule
+        FooterModule,
     ],
     providers: [
         DatePipe,
         AuthService,
         ApiServiceHttp,
         {
-            provide : HTTP_INTERCEPTORS,
+            provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
-            multi   : true
+            multi: true,
         },
         {
-          provide: LOCALE_ID,
-          useValue: 'es',
+            provide: LOCALE_ID,
+            useValue: 'es',
         },
         /* { provide: LocationStrategy, useClass: HashLocationStrategy }, */
     ],
@@ -187,4 +199,4 @@ registerLocaleData(localeEs, 'es');
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [],
 })
-export class AppModule { }
+export class AppModule {}

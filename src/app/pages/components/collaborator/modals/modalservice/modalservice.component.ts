@@ -38,8 +38,6 @@ export class ModalserviceComponent {
     }
 
     startService() {
-        console.log(this.startServiceform.value);
-
         const body = {
             appointmentID: this.businessData._id,
             businessID: this.businessData?.business?.business,
