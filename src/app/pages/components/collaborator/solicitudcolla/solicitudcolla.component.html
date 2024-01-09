@@ -20,7 +20,10 @@
                         Monto
                     </th>
                     <td mat-cell *matCellDef="let element" class="text-start">
-                        {{ element?.loanAmount }}
+                        {{
+                            element?.loanAmount
+                                | currency : "COP" : "symbol" : "0.0-0"
+                        }}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="plazo">
