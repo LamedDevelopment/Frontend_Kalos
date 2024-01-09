@@ -6,6 +6,7 @@ import { ModalservicesService } from 'src/app/pages/services/modalservices.servi
 import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { LoanmodalComponent } from '../modals/loanmodal/loanmodal.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
     selector: 'app-solicitudcolla',
@@ -13,17 +14,20 @@ import { LoanmodalComponent } from '../modals/loanmodal/loanmodal.component';
     styleUrls: ['./solicitudcolla.component.scss'],
 })
 export class SolicitudcollaComponent {
-    displayedColumns: string[] = ['fecha', 'comision'];
+    displayedColumns: string[] = ['monto', 'plazo', 'status', 'fecha'];
     dataSource: any;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     constructor(
         public themeService: CustomizerSettingsService,
-        private _getAppointment: AppointmentsService,
+        private appointmentsService: AppointmentsService,
         public dialog: MatDialog,
         private _snackBar: MatSnackBar,
         private modalservice: ModalservicesService
     ) {}
+    ngOnInit(): void {
+        this.getLoans();
+    }
 
     openModal(enterAnimationDuration: string, exitAnimationDuration: string) {
         this.dialog
@@ -36,5 +40,13 @@ export class SolicitudcollaComponent {
             .subscribe((data) => {
                 // una vez cerrado el modal se refresca la data
             });
+    }
+
+    getLoans() {
+        this.appointmentsService.getService().subscribe((res: any) => {
+            console.log(res);
+            this.dataSource = new MatTableDataSource<any>(res.msg);
+            this.dataSource.paginator = this.paginator;
+        });
     }
 }

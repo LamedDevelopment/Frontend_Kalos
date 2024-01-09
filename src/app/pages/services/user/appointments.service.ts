@@ -241,6 +241,14 @@ export class AppointmentsService {
         );
     }
 
+    getService(): Observable<any> {
+        return this._apiServiceHttp.get(`lose/vwcolla`).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
     /**
      * The `loadService` function sends a POST request to the `lose/solcolla` endpoint with the
      * provided data and returns an Observable that emits the response.
