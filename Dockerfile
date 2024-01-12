@@ -1,18 +1,22 @@
-### Stage 1
-FROM node:current-slim AS build
-WORKDIR /usr/scr/app
-COPY ./ /usr/scr/app/
-RUN npm install --legacy-peer-deps
-ARG configuration=production
-RUN npm run build --  --configuration=$configuration
-# RUN RUN npm install -g @angular/cli
-# COPY . .
-# RUN npm run build --prod
-# RUN npm run dev
-RUN ls -alt
+WORKDIR /usr/src/app
 
-### Stage 2
-FROM  nginx:alpine
-COPY --from=build /usr/scr/app/dist/Kalos /usr/share/nginx/html
-COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
-##CMD ["nginx","-g","daemon off"]
+# Copia solo el archivo package.json necesario para instalar las dependencias
+COPY package.json .
+
+# Instala las dependencias utilizando PNPM
+RUN npm install -g pnpm && pnpm install
+
+# Copia el resto del código
+COPY . .
+
+# Construye tu aplicación
+RUN npm run build
+
+# Etapa de producción
+FROM nginx:alpine
+
+# Copia los archivos estáticos generados por la aplicación a NGINX
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+
+# Configura el comando de inicio para NGINX
+CMD ["nginx", "-g", "daemon off;"]
