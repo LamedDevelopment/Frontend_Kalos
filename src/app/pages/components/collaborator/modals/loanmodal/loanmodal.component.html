@@ -1,0 +1,43 @@
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card class="example-card">
+        <div class="container-fluid">
+            <h3 class="text-center mt-3">Solicitud de Prestamo</h3>
+
+            <mat-card-content>
+                <form [formGroup]="loanServiceform">
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <app-inputnumeric
+                                [label]="'Valor'"
+                                [control]="loanAmountControl"
+                            ></app-inputnumeric>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="w-100">
+                                <mat-label>Tiempo limite de Pago</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="paymentDeadline"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="w-100">
+                                <mat-label>Descripción</mat-label>
+                                <input matInput formControlName="loanDetail" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <button mat-button (click)="startLoan()">Solicitar</button>
+                <button mat-button (click)="closeDialog()">Cerrar</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

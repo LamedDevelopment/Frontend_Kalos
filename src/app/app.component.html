@@ -4,17 +4,18 @@
     [class.card-borderd-theme]="themeService.isCardBorder()"
     [class.card-border-radius]="themeService.isCardBorderRadius()"
     [class.rtl-enabled]="themeService.isRTLEnabled()"
+    (change)="checkStatus"
 >
-    <app-sidebar></app-sidebar>
+    <app-sidebar *ngIf="_authService.check() | async"></app-sidebar>
     <div
         class="main-content d-flex flex-column"
         [ngClass]="{'active': isToggled}"
         [class.hide-sidebar]="themeService.isHideSidebar()"
     >
-        <app-header></app-header>
+        <app-header *ngIf="_authService.check() | async"></app-header>
         <router-outlet></router-outlet>
-        <div class="flex-grow-1"></div>
-        <app-footer></app-footer>
+        <div class="flex-grow-1" *ngIf="_authService.check()"></div>
+        <app-footer *ngIf="_authService.check() | async"></app-footer>
     </div>
     <!-- <app-customizer-settings></app-customizer-settings> -->
 </div>

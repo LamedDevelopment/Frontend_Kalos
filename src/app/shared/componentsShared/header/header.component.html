@@ -1,6 +1,6 @@
 <header
     class="header-area bg-white border-bottom-radius box-shadow mb-25"
-    [ngClass]="{'active': isToggled, 'sticky': isSticky}"
+    [ngClass]="{ active: isToggled, sticky: isSticky }"
     [class.component-dark-theme]="themeService.isDark()"
     [class.right-sidebar]="themeService.isRightSidebar()"
     [class.hide-sidebar]="themeService.isHideSidebar()"
@@ -11,7 +11,11 @@
 >
     <div class="d-md-flex align-items-center justify-content-space-between">
         <div class="header-left-side d-flex align-items-center">
-            <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+            <div
+                class="burger-menu"
+                (click)="toggle()"
+                [ngClass]="{ active: isToggled }"
+            >
                 <span class="top-bar"></span>
                 <span class="middle-bar"></span>
                 <span class="bottom-bar"></span>
@@ -159,51 +163,91 @@
                 </mat-menu>
             </li> -->
             <li>
-                <button mat-icon-button [matMenuTriggerFor]="notificationMenu" class="btn p-0 border-none rounded-circle position-relative notification-btn">
+                <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="notificationMenu"
+                    class="btn p-0 border-none rounded-circle position-relative notification-btn"
+                >
                     <i class="flaticon-bell-2"></i>
                 </button>
-                <mat-menu class="menu-dropdown" #notificationMenu="matMenu" xPosition="before">
-                    <div class="menu-header d-flex align-items-center justify-content-space-between">
+                <mat-menu
+                    class="menu-dropdown"
+                    #notificationMenu="matMenu"
+                    xPosition="before"
+                >
+                    <div
+                        class="menu-header d-flex align-items-center justify-content-space-between"
+                    >
                         <h5 class="m-0">Notificaciones</h5>
-                        <button type="button" class="bg-transparent p-0 border-none">Marcar como leido</button>
+                        <button
+                            type="button"
+                            class="bg-transparent p-0 border-none"
+                        >
+                            Marcar como leido
+                        </button>
                     </div>
                     <ul class="menu-body">
                         <li class="position-relative">
                             <div class="d-flex">
                                 <i class="flaticon-file-1 icon"></i>
                                 <div class="title">
-                                    <h6>Mensaje #1 en Notificaciones </h6>
-                                    <span><i class="flaticon-timer"></i>Tiempo transcurrido del Mensaje</span>
+                                    <h6>Mensaje #1 en Notificaciones</h6>
+                                    <span
+                                        ><i class="flaticon-timer"></i>Tiempo
+                                        transcurrido del Mensaje</span
+                                    >
                                 </div>
                             </div>
                             <a routerLink="/notifications" class="link-btn"></a>
-                            <button class="close-btn bg-transparent border-none p-0"><i class="flaticon-close"></i></button>
+                            <button
+                                class="close-btn bg-transparent border-none p-0"
+                            >
+                                <i class="flaticon-close"></i>
+                            </button>
                         </li>
                         <li class="position-relative">
                             <div class="d-flex align-items-center">
                                 <i class="flaticon-pdf-file icon"></i>
                                 <div class="title">
-                                    <h6>Mensaje #2 en Notificaciones </h6>
-                                    <span><i class="flaticon-timer"></i>Tiempo transcurrido del Mensaje</span>
+                                    <h6>Mensaje #2 en Notificaciones</h6>
+                                    <span
+                                        ><i class="flaticon-timer"></i>Tiempo
+                                        transcurrido del Mensaje</span
+                                    >
                                 </div>
                             </div>
                             <a routerLink="/notifications" class="link-btn"></a>
-                            <button class="close-btn bg-transparent border-none p-0"><i class="flaticon-close"></i></button>
+                            <button
+                                class="close-btn bg-transparent border-none p-0"
+                            >
+                                <i class="flaticon-close"></i>
+                            </button>
                         </li>
                         <li class="position-relative">
                             <div class="d-flex align-items-center">
                                 <i class="flaticon-to-do-list icon"></i>
                                 <div class="title">
-                                    <h6>Mensaje #3 en Notificaciones </h6>
-                                    <span><i class="flaticon-timer"></i>Tiempo transcurrido del Mensaje</span>
+                                    <h6>Mensaje #3 en Notificaciones</h6>
+                                    <span
+                                        ><i class="flaticon-timer"></i>Tiempo
+                                        transcurrido del Mensaje</span
+                                    >
                                 </div>
                             </div>
                             <a routerLink="/notifications" class="link-btn"></a>
-                            <button class="close-btn bg-transparent border-none p-0"><i class="flaticon-close"></i></button>
+                            <button
+                                class="close-btn bg-transparent border-none p-0"
+                            >
+                                <i class="flaticon-close"></i>
+                            </button>
                         </li>
                     </ul>
                     <div class="menu-footer">
-                        <a routerLink="/notifications" class="fw-medium position-relative">Ver todos<i class="flaticon-chevron"></i></a>
+                        <a
+                            routerLink="/notifications"
+                            class="fw-medium position-relative"
+                            >Ver todos<i class="flaticon-chevron"></i
+                        ></a>
                     </div>
                 </mat-menu>
             </li>
@@ -213,25 +257,50 @@
                 </div>
             </li>
             <li>
-                <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
-                    <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
-                    Tipo de Usuario
-                    <span class="fw-semibold">Nombre Usuario</span>
+                <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="profileMenu"
+                    class="profile-btn main-color border-none bg-transparent position-relative"
+                >
+                    <img
+                        src="assets/img/admin.jpg"
+                        class="rounded-circle"
+                        alt="admin"
+                    />
+
+                    <span class="fw-semibold"
+                        >{{ user?.name ? user?.name : user?.staff?.name }}
+                        {{
+                            user?.lastName
+                                ? user?.lastName
+                                : user?.staff?.lastName
+                        }}</span
+                    >
                 </button>
-                <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before">
+                <mat-menu
+                    class="profile-menu-dropdown"
+                    #profileMenu="matMenu"
+                    xPosition="before"
+                >
                     <ul class="m-0">
                         <li>
-                            <a routerLink="#">
+                            <a
+                                [routerLink]="
+                                    user?.staff?.profile === 'CLLTR_ROLE'
+                                        ? '/colla/account'
+                                        : user?.staff?.profile ===
+                                          'MANAGER_ROLE'
+                                        ? '/bus/account'
+                                        : '/user/account'
+                                "
+                                routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }"
+                            >
                                 <i class="ri-user-3-line"></i> Perfil
                             </a>
                         </li>
                         <li>
-                            <a routerLink="#">
-                                <i class="ri-settings-3-line"></i> Configuraciones
-                            </a>
-                        </li>
-                        <li>
-                            <a routerLink="#">
+                            <a (click)="logOut()">
                                 <i class="ri-shut-down-line"></i> Salir
                             </a>
                         </li>

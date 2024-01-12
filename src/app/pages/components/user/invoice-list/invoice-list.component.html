@@ -1,1 +1,68 @@
-<p>invoice-list works!</p>
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h5 class="mb-0">Detalle de facturas</h5>
+        <div class="d-flex align-items-center">
+            <!-- <form class="search-box position-relative d-none d-md-block">
+                <input type="text" class="input-search d-block" placeholder="Search here..">
+                <button type="submit"><i class="ri-search-line"></i></button>
+            </form> -->
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="mat-elevation-z8 tagus-mat-table">
+            <table mat-table [dataSource]="dataSource">
+                <!-- Order ID Column -->
+                <ng-container matColumnDef="negocio">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">Negocio</th>
+                    <td mat-cell *matCellDef="let element" class="fw-semibold text-start">{{element.business.brachOffice.tradename}}</td>
+                </ng-container>
+
+                <!-- Product Column -->
+                <ng-container matColumnDef="servicio">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">Servicio</th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        {{element.services[0].nameService}}
+                    </td>
+                </ng-container>
+
+
+                <!-- Customer Column -->
+                <ng-container matColumnDef="subtotal">
+                    <th mat-header-cell *matHeaderCellDef>Sub total servicio</th>
+                    <td mat-cell *matCellDef="let element">{{element.services[0].servicePrice | currency:'COP':'symbol'}}</td>
+                </ng-container>
+
+                <!-- Product Column -->
+                <ng-container matColumnDef="others">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">Otros servicios</th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        {{element.services[0].AddServiceDescription[0].serviceName}}
+                    </td>
+                </ng-container>
+
+                <!-- Product Column -->
+                <ng-container matColumnDef="valorOtros">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">Valor otros servicios</th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        {{element.services[0].AddServiceDescription[0].costService | currency:'COP':'symbol'}}
+                    </td>
+                </ng-container>
+
+                <!-- Price Column -->
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef>Total servicios</th>
+                    <td mat-cell *matCellDef="let element">{{element.grandTotal | currency:'COP':'symbol'}}</td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator
+                [pageSizeOptions]="[10, 15, 20]"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,11 +1,26 @@
-import { NgModule, isDevMode } from '@angular/core';
+import {
+    CUSTOM_ELEMENTS_SCHEMA,
+    LOCALE_ID,
+    NgModule,
+    isDevMode,
+} from '@angular/core';
 
-import { FormsModule, ReactiveFormsModule,FormControl, Validators } from '@angular/forms';
+import {
+    FormsModule,
+    ReactiveFormsModule,
+    FormControl,
+    Validators,
+} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {
+    DatePipe,
+    HashLocationStrategy,
+    LocationStrategy,
+    APP_BASE_HREF,
+} from '@angular/common';
 import { NgxEditorModule } from 'ngx-editor';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +28,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -55,29 +70,35 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { QuillModule } from 'ngx-quill';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ColorPickerModule } from 'ngx-color-picker';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './shared/componentsShared/header/header.module';
 import { SidebarModule } from './shared/componentsShared/sidebar/sidebar.module';
 import { FooterModule } from './shared/componentsShared/footer/footer.module';
 
-
 import { CustomizerSettingsModule } from './shared/componentsShared/customizer-settings/customizer-settings.module';
-import { LoginComponent } from './components/authentication/login/login.component';
-import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
-import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
-import { RegisterComponent } from './components/authentication/register/register.component';
-import { SigninSignupComponent } from './components/authentication/signin-signup/signin-signup.component';
-import { LogoutComponent } from './components/authentication/logout/logout.component';
-import { ConfirmMailComponent } from './components/authentication/confirm-mail/confirm-mail.component';
-import { LockScreenComponent } from './components/authentication/lock-screen/lock-screen.component';
+
+import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
 import { PagesModule } from './pages/pages.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ConfirmMailComponent } from './components/authentication/confirm-mail/confirm-mail.component';
+import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
+import { LockScreenComponent } from './components/authentication/lock-screen/lock-screen.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { LogoutComponent } from './components/authentication/logout/logout.component';
+import { RegisterComponent } from './components/authentication/register/register.component';
+import { ResetPasswordComponent } from './components/authentication/reset-password/reset-password.component';
+import { SigninSignupComponent } from './components/authentication/signin-signup/signin-signup.component';
+import { AuthService } from './pages/services/auth/auth.service';
+import { AuthInterceptor } from './components/authentication/auth/auth.interceptor';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { ApiServiceHttp } from './pages/services/api.service';
+import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
 
-
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
     declarations: [
@@ -90,6 +111,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         LogoutComponent,
         ConfirmMailComponent,
         LockScreenComponent,
+        LoginComponentFun,
     ],
     imports: [
         BrowserModule,
@@ -135,7 +157,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         NgScrollbarModule,
         FormsModule,
         FullCalendarModule,
-        MatNativeDateModule ,
+        MatNativeDateModule,
         ReactiveFormsModule,
         CarouselModule,
         NgxEditorModule,
@@ -143,7 +165,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         HttpClientModule,
         CdkAccordionModule,
         NgxEchartsModule.forRoot({
-            echarts: () => import('echarts')
+            echarts: () => import('echarts'),
         }),
         NgxGaugeModule,
         NgChartsModule,
@@ -151,22 +173,30 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         QuillModule.forRoot(),
         NgxDropzoneModule,
         ColorPickerModule,
+        CustomizerSettingsModule,
+        ScrollingModule,
+        PagesModule,
         HeaderModule,
         SidebarModule,
         FooterModule,
-        CustomizerSettingsModule,
-        PagesModule,
-        ScrollingModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: !isDevMode(),
-          // Register the ServiceWorker as soon as the application is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
-        }),
     ],
     providers: [
-        DatePipe
+        DatePipe,
+        AuthService,
+        ApiServiceHttp,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+        {
+            provide: LOCALE_ID,
+            useValue: 'es',
+        },
+        /* { provide: LocationStrategy, useClass: HashLocationStrategy }, */
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [],
 })
-export class AppModule { }
+export class AppModule {}

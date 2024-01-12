@@ -1,0 +1,16 @@
+<mat-form-field class="w-100">
+    <mat-label>{{ label }}</mat-label>
+    <input
+        matInput
+        currencyMask
+        [placeholder]="placeholder"
+        [formControl]="control"
+        (input)="onInputChange($event)"
+        [options]="{
+            prefix: '$ ',
+            thousands: '.',
+            decimal: ',',
+            precision: 0
+        }"
+    />
+</mat-form-field>

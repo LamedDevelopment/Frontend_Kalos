@@ -18,29 +18,30 @@ import { RatingserviceComponent } from './ratingservice/ratingservice.component'
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 
 const routes: Routes = [
     {
         path: 'man',
-        component: ManagerComponent,
+        component: ManagerComponent, canActivate: [AuthGuard],
         children: [
-            { path: 'dash', component: DashComponent },
-            { path: 'appo', component: AppointmentComponent },
-            { path: 'agend', component: AgendadayComponent },
-            { path: 'agenm', component: AgendamonthComponent },
-            { path: 'agenw', component: AgendaweekComponent },
-            { path: 'bill', component: BillingComponent },
-            { path: 'colla', component: CollaboratorComponent },
-            { path: 'collas', component: CollaboratorsComponent },
-            { path: 'cusr', component: CustomerratingComponent },
-            { path: 'cust', component: CustomersComponent },
-            { path: 'pay', component: PaymentComponent },
-            { path: 'pays', component: PaymentsComponent },
-            { path: 'payr', component: PayrollComponent },
-            { path: 'payrl', component: PayrollsComponent },
-            { path: 'raser', component: RatingserviceComponent },
-            { path: 'ticket', component: TicketComponent },
-            { path: 'tickets', component: TicketsComponent },
+            { path: 'dash', component: DashComponent, canActivate: [AuthGuard] },
+            { path: 'appo', component: AppointmentComponent, canActivate: [AuthGuard] },
+            { path: 'agend', component: AgendadayComponent, canActivate: [AuthGuard] },
+            { path: 'agenm', component: AgendamonthComponent, canActivate: [AuthGuard] },
+            { path: 'agenw', component: AgendaweekComponent, canActivate: [AuthGuard] },
+            { path: 'bill', component: BillingComponent, canActivate: [AuthGuard] },
+            { path: 'colla', component: CollaboratorComponent, canActivate: [AuthGuard] },
+            { path: 'collas', component: CollaboratorsComponent, canActivate: [AuthGuard] },
+            { path: 'cusr', component: CustomerratingComponent, canActivate: [AuthGuard] },
+            { path: 'cust', component: CustomersComponent, canActivate: [AuthGuard] },
+            { path: 'pay', component: PaymentComponent, canActivate: [AuthGuard] },
+            { path: 'pays', component: PaymentsComponent, canActivate: [AuthGuard] },
+            { path: 'payr', component: PayrollComponent, canActivate: [AuthGuard] },
+            { path: 'payrl', component: PayrollsComponent, canActivate: [AuthGuard] },
+            { path: 'raser', component: RatingserviceComponent, canActivate: [AuthGuard] },
+            { path: 'ticket', component: TicketComponent, canActivate: [AuthGuard] },
+            { path: 'tickets', component: TicketsComponent, canActivate: [AuthGuard] },
             { path: '', redirectTo: '/man/dash', pathMatch: 'full' },
         ]
     }

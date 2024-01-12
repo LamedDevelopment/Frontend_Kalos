@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/pages/services/auth/auth.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
 
@@ -7,11 +8,19 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
     templateUrl: './logout.component.html',
     styleUrls: ['./logout.component.scss']
 })
-export class LogoutComponent {
+export class LogoutComponent implements OnInit {
 
     constructor(
-        public themeService: CustomizerSettingsService
+        public themeService: CustomizerSettingsService,
+        private _authService: AuthService,
     ) {}
+
+    /**
+     * On init
+     */
+    ngOnInit(): void {
+        this._authService.signOut()
+    }
 
     toggleTheme() {
         this.themeService.toggleTheme();

@@ -1,0 +1,109 @@
+<div class="create-dialog-box scrollable-dialog" style="overflow-y:auto">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Agendar una nueva cita</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="updateForm" #updateNgForm>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Email de cliente</label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Ingrese email</mat-label>
+                        <input type="email" matInput [ngModel]="emailClient" [ngModelOptions]="{standalone: true}" (ngModelChange)="searchUser($event)">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group w-full">
+                    <label class="d-block fw-semibold">Nombre de cliente</label>
+                    <mat-form-field class="w-full">
+                        <input type="text" class="w-full" name="nameClient" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" matInput disabled>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Fecha</label>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <input matInput [formControlName]="'dateService'" (dateChange)="GetHoursCollaborator()" [matDatepicker]="picker" [disabled]="this.updateForm.get('staff')?.value === ''">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="this.updateForm.get('staff')?.value === ''"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">hora</label>
+                    <!-- <input type="time" class="input-control"  [formControlName]="'timeService'"  placeholder="06:00 am" > -->
+                    <mat-form-field appearance="fill">
+                        <mat-select name="Services" [formControlName]="'timeService'" [disabled]="horarioDisponible.length === 0">
+                            <mat-option *ngFor="let type of horarioDisponible" [value]="type" (click)="tipeSelected($event)">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Servicio</label>
+                    <mat-form-field appearance="fill">
+                        <mat-select name="Services" [formControlName]="'services'">
+                            <mat-option *ngFor="let type of tipoDeServicio" [value]="type" (click)="tipeSelected($event)">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Tipos de servicio</label>
+                    <mat-form-field appearance="fill">
+                        <mat-select name="typeService" [formControlName]="'typeServices'" [disabled]="typeServicesSelected.length == 0">
+                            <mat-option *ngFor="let ser of typeServicesSelected" [value]="ser">
+                                {{ser}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Descuento</label>
+                    <mat-form-field appearance="fill" floatLabel="always">
+                        <input matInput type="number" [formControlName]="'discount'"  class="example-right-align" placeholder="0">
+                        <span matPrefix>$&nbsp;</span>
+                        <span matSuffix>.00</span>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Observaciones</label>
+                    <mat-form-field class="w-full">
+                        <textarea
+                        class="min-h-5 my-0 resize-none"
+                        style="margin: 11px 0 !important; padding: 0 !important;"
+                        [rows]="1"
+                        [formControlName]="'observationManager'"
+                        matInput
+                        #messageInput></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancelar</button>
+            <button type="submit" (click)="Updaterow()"><i class="ri-add-fill"></i> Agendar</button>
+        </div>
+    </form>
+</div>

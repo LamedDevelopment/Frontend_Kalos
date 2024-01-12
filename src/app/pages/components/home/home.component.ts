@@ -4,6 +4,7 @@ import { HomeService } from '../../services/home.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { ServicesService } from '../../services/services.service';
 import { ServiceCategoryService } from '../../services/service-category.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 
@@ -24,14 +25,17 @@ export class HomeComponent {
         public themeService: CustomizerSettingsService,
         private services: ServicesService,
         private hair: HomeService,
+        private authService:AuthService
     ) {
         console.log(this.salones);
       }
 
-      ngOnInit() {
+      async ngOnInit() {
 
           this.salones = this.hair.getData();
           this.servicios = this.services.getData();
+          await this.authService.InfoUserApi().subscribe((data:any)=> {
+          });
         // Aquí puedes realizar cualquier procesamiento adicional con los datos de salones
       }
 //     getServiceIcon(type: string) {

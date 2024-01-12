@@ -1,3 +1,6 @@
+# Usa la imagen base de Node.js
+FROM node:14
+
 WORKDIR /usr/src/app
 
 # Copia solo el archivo package.json necesario para instalar las dependencias

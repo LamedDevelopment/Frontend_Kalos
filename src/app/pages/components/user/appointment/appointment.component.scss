@@ -1,0 +1,70 @@
+.mat-mdc-dialog-container .mdc-dialog__surface{
+    overflow: hidden !important;
+}
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+  min-height: 0px
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail-1 {
+//   overflow: hidden;
+  display: grid;
+  margin-bottom: 30px;
+  height: 30px;
+}
+
+.example-element-detail {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-service {
+  font-weight: 800;
+  font-size: 10px;
+  line-height: normal;
+  margin-left: 10px;
+  min-width: 100px;
+}
+
+.deleteButon{
+    margin-left: 10px;
+    min-width: 100px;
+    margin-top: -15px;
+    margin-left: 8px;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}

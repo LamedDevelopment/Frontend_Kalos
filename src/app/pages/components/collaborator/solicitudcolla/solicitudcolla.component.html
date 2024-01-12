@@ -1,0 +1,67 @@
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h5 class="mb-0">Solicitudes de Prestamos</h5>
+    </mat-card-header>
+    <div class="mb-2 me-3 text-end">
+        <button
+            type="button"
+            class="btn btn-primary"
+            (click)="openModal('300ms', '100ms')"
+        >
+            Generar Nuevo prestamo
+        </button>
+    </div>
+    <mat-card-content>
+        <div class="mat-elevation-z8 tagus-mat-table">
+            <table mat-table [dataSource]="dataSource">
+                <!-- Product Column -->
+                <ng-container matColumnDef="monto">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">
+                        Monto
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        {{
+                            element?.loanAmount
+                                | currency : "COP" : "symbol" : "0.0-0"
+                        }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="plazo">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">
+                        Plazo
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        {{ element?.paymentDeadline }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">
+                        Estado
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        {{ element?.loanStatus }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">
+                        Fecha de Solicitud
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        {{ element?.applicationDate }}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                    mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+            </table>
+            <mat-paginator
+                [pageSizeOptions]="[10, 15, 20]"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

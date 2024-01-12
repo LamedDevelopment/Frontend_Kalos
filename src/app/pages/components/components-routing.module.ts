@@ -10,9 +10,15 @@ import { ShowcaseModule } from './showcase/showcase.module';
 import { UserModule } from './user/user.module';
 
 import { ComponentsComponent } from './components.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 
 const routes: Routes = [
-    { path: '', component: ComponentsComponent },
+    {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({
@@ -26,6 +32,6 @@ const routes: Routes = [
         ShowcaseModule,
         UserModule,
     ],
-  exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class ComponentsRoutingModule { }
+export class ComponentsRoutingModule {}

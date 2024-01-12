@@ -1,0 +1,14 @@
+table {
+  width: 300px;
+  max-width: 80%;
+  overflow-x: auto;
+}
+
+.greenClass{
+    background-color:#84FFBF;
+}
+
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+  background-color: #f0fff3;
+}

@@ -15,7 +15,7 @@
                     </div>
                     <p>Crear Cuenta <a routerLink="/auth/register" class="main-color fw-medium">Registrarse</a></p>
                 </div>
-                <form>
+                <form [formGroup]="signInForm" #signInNgForm="ngForm">
                     <!-- <div class="login-with-socials d-md-flex align-items-center justify-content-space-between">
                         <button mat-flat-button class="gray fw-semibold d-block me-5"><img src="assets/img/icon/google.png" alt="google"> Ingreso con Google</button>
                         <button mat-flat-button class="tagus fw-semibold d-block ms-5"><img src="assets/img/icon/facebook.png" alt="facebook"> Ingreso con Facebook</button>
@@ -28,25 +28,46 @@
                             <label class="d-block mb-12 fw-semibold gray-color">Correo Electronico <span>*</span></label>
                             <mat-form-field appearance="fill">
                                 <mat-label>Ingrese su Correo Electronico</mat-label>
-                                <input matInput>
+                                <input matInput [formControlName]="'email'">
+                                <mat-error *ngIf="signInForm.get('email')?.hasError('required')">
+                                    El correo es requerido
+                                </mat-error>
+                                <mat-error *ngIf="signInForm.get('email')?.hasError('email')">
+                                    Correo inválido
+                                </mat-error>
                             </mat-form-field>
                         </div>
                         <div class="tagus-form-group without-icon">
                             <label class="d-block mb-12 fw-semibold gray-color">Contraseña <span>*</span></label>
                             <mat-form-field appearance="fill">
                                 <mat-label>Ingrese su contraseña </mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'">
+                                <input matInput [type]="hide ? 'password' : 'text'" [formControlName]="'pass'" #passwordField>
                                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>
+                                <mat-error>
+                                    Contraseña es requerida
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="d-flex info align-items-center justify-content-space-between">
-                        <mat-checkbox class="gray-color">Recordar Sesion</mat-checkbox>
-                        <a routerLink="/authentication/forgot-password" class="d-inline-block main-color fw-medium">¿Olvido su contraseña?</a>
+                        <mat-checkbox class="gray-color" formControlName="rememberMe">Recordar Sesion</mat-checkbox>
+                        <a routerLink="/auth/forgot-password" class="d-inline-block main-color fw-medium">¿Olvido su contraseña?</a>
                     </div>
-                    <button mat-flat-button class="tagus d-block fw-semibold">Ingresar</button>
+                    <div class="d-flex info align-items-center justify-content-space-between">
+                        <div></div>
+                        <a routerLink="/auth/login-fun" class="d-inline-block main-color fw-medium">Iniciar sesión en Negocio</a>
+                    </div>
+                    <button mat-flat-button class="tagus d-block fw-semibold" [disabled]="signInForm.invalid" (click)="signIn()">
+                        <span *ngIf="!signInForm.disabled">
+                            Ingresar
+                        </span>
+                        <mat-progress-spinner
+                            *ngIf="signInForm.disabled"
+                            [diameter]="24"
+                            [mode]="'indeterminate'"></mat-progress-spinner>
+                    </button>
                 </form>
             </div>
         </div>
