@@ -50,6 +50,7 @@ export class PaymentComponent implements AfterViewInit, OnInit {
             .afterClosed()
             .subscribe((data) => {
                 // una vez cerrado el modal se refresca la data
+                this.getHist();
             });
     }
 
