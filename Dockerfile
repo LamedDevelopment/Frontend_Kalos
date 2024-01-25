@@ -1,25 +1,28 @@
-# Usa la imagen base de Node.js
-FROM node:14
+# Stage 1: Build
+FROM node:20-alpine AS build
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copia solo el archivo package.json necesario para instalar las dependencias
-COPY package.json .
+COPY package*.json ./
 
-# Instala las dependencias utilizando PNPM
-RUN npm install -g pnpm && pnpm install
+# Instala las dependencias locales, incluido Angular CLI
+RUN npm install --legacy-peer-deps
+RUN npm i --legacy-peer-deps -g @angular/cli
 
-# Copia el resto del código
-COPY . .
+COPY . /app/
 
-# Construye tu aplicación
-RUN npm run build
+# Ejecuta el comando de construcción de Angular CLI
+RUN ng build --configuration production
 
-# Etapa de producción
-FROM nginx:alpine
+# Stage 2: Nginx para producción
+FROM node:21-alpine
+## From 'builder' copy published folder
+COPY --from=builder /app /app
 
-# Copia los archivos estáticos generados por la aplicación a NGINX
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+WORKDIR /app
+# Expose the port the app runs in
+EXPOSE 4000
 
-# Configura el comando de inicio para NGINX
-CMD ["nginx", "-g", "daemon off;"]
+USER node
+
+CMD ["node", "dist/Kalos/server/main.js"]

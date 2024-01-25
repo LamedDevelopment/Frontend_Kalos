@@ -147,6 +147,55 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/Kalos/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "sourceMap": true,
+            "optimization": false,
+            "buildOptimizer": false
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "options": {
+            "browserTarget": "Kalos:build",
+            "serverTarget": "Kalos:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "Kalos:build:production",
+              "serverTarget": "Kalos:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "browserTarget": "Kalos:build:production",
+            "serverTarget": "Kalos:server:production",
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {}
+          }
         }
       }
     }
