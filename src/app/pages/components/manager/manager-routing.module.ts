@@ -22,7 +22,7 @@ import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.gu
 
 const routes: Routes = [
     {
-        path: 'man',
+        path: '',
         component: ManagerComponent, canActivate: [AuthGuard],
         children: [
             { path: 'dash', component: DashComponent, canActivate: [AuthGuard] },
@@ -35,7 +35,7 @@ const routes: Routes = [
             { path: 'collas', component: CollaboratorsComponent, canActivate: [AuthGuard] },
             { path: 'cusr', component: CustomerratingComponent, canActivate: [AuthGuard] },
             { path: 'cust', component: CustomersComponent, canActivate: [AuthGuard] },
-            { path: 'pay', component: PaymentComponent, canActivate: [AuthGuard] },
+            { path: 'mahisap', component: PaymentComponent, canActivate: [AuthGuard] },
             { path: 'pays', component: PaymentsComponent, canActivate: [AuthGuard] },
             { path: 'payr', component: PayrollComponent, canActivate: [AuthGuard] },
             { path: 'payrl', component: PayrollsComponent, canActivate: [AuthGuard] },
