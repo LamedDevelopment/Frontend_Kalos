@@ -41,7 +41,7 @@ const routes: Routes = [
             { path: 'payrl', component: PayrollsComponent, canActivate: [AuthGuard] },
             { path: 'raser', component: RatingserviceComponent, canActivate: [AuthGuard] },
             { path: 'ticket', component: TicketComponent, canActivate: [AuthGuard] },
-            { path: 'tickets', component: TicketsComponent, canActivate: [AuthGuard] },
+            { path: 'solicitudes', component: TicketsComponent, canActivate: [AuthGuard] },
             { path: '', redirectTo: '/man/dash', pathMatch: 'full' },
         ]
     }
