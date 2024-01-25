@@ -88,15 +88,25 @@ export class PaymentsModalComponent {
     }
 
     RealizarPagoBill(){
+        console.log(this.PayBill)
         this.appointmentsService
-            .processPayBillingMan('bill', this.PayBill)
+            .processPayBillingMan('bill/pay', this.PayBill)
             .subscribe((bill: any) => {
-                this._snackBar.open('Factura registrada exitosamente!!!', '', {
-                    horizontalPosition: this.horizontalPosition,
-                    verticalPosition: this.verticalPosition,
-                    duration: this.durationInSeconds * 1000,
-                });
-                this.dialogRef.close();
+                if(bill.ok) {
+                    this._snackBar.open('Factura registrada exitosamente!!!', '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                    this.dialogRef.close();
+                } else {
+                    this._snackBar.open('Error al registrar la factura!!!', '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                    this.dialogRef.close();
+                }
             });
     }
 
