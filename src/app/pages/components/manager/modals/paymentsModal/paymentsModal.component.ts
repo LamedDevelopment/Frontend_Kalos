@@ -105,7 +105,6 @@ export class PaymentsModalComponent {
                         verticalPosition: this.verticalPosition,
                         duration: this.durationInSeconds * 1000,
                     });
-                    this.dialogRef.close();
                 }
             });
     }
