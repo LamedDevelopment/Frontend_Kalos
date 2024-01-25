@@ -22,7 +22,7 @@ import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.gu
 
 const routes: Routes = [
     {
-        path: '',
+path: 'mana',
         component: ManagerComponent, canActivate: [AuthGuard],
         children: [
             { path: 'dash', component: DashComponent, canActivate: [AuthGuard] },
@@ -42,7 +42,7 @@ const routes: Routes = [
             { path: 'raser', component: RatingserviceComponent, canActivate: [AuthGuard] },
             { path: 'ticket', component: TicketComponent, canActivate: [AuthGuard] },
             { path: 'solicitudes', component: TicketsComponent, canActivate: [AuthGuard] },
-            { path: '', redirectTo: '/man/dash', pathMatch: 'full' },
+            { path: '', redirectTo: '/mana/dash', pathMatch: 'full' },
         ]
     }
 ];
