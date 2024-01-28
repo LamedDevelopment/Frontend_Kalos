@@ -1,7 +1,11 @@
-<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+<div
+    class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between"
+>
     <h5 class="mb-0">Citas</h5>
     <div class="btn-box">
-        <a mat-flat-button routerLink="/user/lounges" class="tagus">Agendar nueva cita</a>
+        <a mat-flat-button routerLink="/user/lounges" class="tagus"
+            >Agendar nueva cita</a
+        >
     </div>
     <ol class="breadcrumb mb-0 ps-0">
         <li class="breadcrumb-item">
@@ -14,41 +18,38 @@
     </ol>
 </div>
 
-
-<div class="row justify-content-center" [class.component-dark-theme]="themeService.isDark()"
-    [class.component-rtl-enabled]="themeService.isRTLEnabled()">
-    <!--  <div class="col-lg-4 col-xl-3 col-md-12">
-        <mat-card class="mb-25 tacking-box tagus-card">
-            <mat-card-header class="border-bottom">
-                <h5 class="mb-0">Historico de citas</h5>
-            </mat-card-header>
-            <mat-card-content class="" style="overflow-y:auto; height: 400px !important;">
-                <ul class="track-list ps-0 mb-0">
-                    <li class="position-relative" *ngFor="let hist of hists;  let i = index;">
-                        <h5 class="mb-10 fw-semibold">{{hist.services[0].nameService}}</h5>
-                        <h6 class="mb-10 fw-semibold">Colaborador: {{hist.services[0].staffServices[0].nameCollaborator}} - {{hist.business.nameBusiness}}</h6>
-                        <span class="d-block gray-color mb-10">{{hist.appointmentDate[0].dateService}}</span>
-                        <p>{{hist.services[0].nameTypeService}}</p>
-                        <hr>
-                    </li>
-                </ul>
-            </mat-card-content>
-        </mat-card>
-    </div> -->
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
     <div class="col-lg-12 col-xl-12 col-md-12">
         <mat-card class="mb-25 tagus-card">
             <mat-card-header>
                 <h5 class="mb-0">Próximas citas</h5>
                 <div class="d-flex align-items-center">
-                    <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
-                        <mat-button-toggle value="1" (click)="GetCitas(1)">Citas semana</mat-button-toggle>
-                        <mat-button-toggle value="2" (click)="GetCitas(2)">Citas dia</mat-button-toggle>
+                    <mat-button-toggle-group
+                        name="favoriteColor"
+                        aria-label="Favorite Color"
+                    >
+                        <mat-button-toggle value="1" (click)="GetCitas(1)"
+                            >Citas semana</mat-button-toggle
+                        >
+                        <mat-button-toggle value="2" (click)="GetCitas(2)"
+                            >Citas dia</mat-button-toggle
+                        >
                     </mat-button-toggle-group>
                 </div>
                 <div class="d-flex align-items-center">
-                    <form class="search-box position-relative d-none d-md-block">
-                        <input type="text" class="input-search d-block" (keyup)="applyFilter($event)"
-                            placeholder="Buscar..." />
+                    <form
+                        class="search-box position-relative d-none d-md-block"
+                    >
+                        <input
+                            type="text"
+                            class="input-search d-block"
+                            (keyup)="applyFilter($event)"
+                            placeholder="Buscar..."
+                        />
                         <button type="submit">
                             <i class="ri-search-line"></i>
                         </button>
@@ -57,108 +58,174 @@
             </mat-card-header>
             <mat-card-content>
                 <div class="mat-elevation-z8 tagus-mat-table">
-                    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons>
+                    <mat-paginator
+                        [pageSizeOptions]="[5, 10, 15, 20]"
+                        showFirstLastButtons
+                    >
                     </mat-paginator>
 
-                    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-                        <ng-container matColumnDef="{{ column }}" *ngFor="let column of displayedColumnsExpan">
+                    <table
+                        mat-table
+                        [dataSource]="dataSource"
+                        multiTemplateDataRows
+                        class="mat-elevation-z8"
+                    >
+                        <ng-container
+                            matColumnDef="{{ column }}"
+                            *ngFor="let column of displayedColumnsExpan"
+                        >
                             <th mat-header-cell *matHeaderCellDef>
                                 {{ column }}
                             </th>
                             <td mat-cell *matCellDef="let element">
                                 {{ column === "Estado" ? "" : element[column] }}
-                                <span class="badge" *ngIf="element[column] === 'true'">Pendiente</span>
-                                <span class="badge outOfStock" *ngIf="element[column] === 'false'">Cancelado</span>
+                                <span
+                                    class="badge"
+                                    *ngIf="element[column] === 'true'"
+                                    >Pendiente</span
+                                >
+                                <span
+                                    class="badge outOfStock"
+                                    *ngIf="element[column] === 'false'"
+                                    >Cancelado</span
+                                >
                             </td>
                         </ng-container>
                         <ng-container matColumnDef="delete">
-                            <th mat-header-cell *matHeaderCellDef aria-label="row actions">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                aria-label="row actions"
+                            >
                                 &nbsp;
                             </th>
                             <td mat-cell *matCellDef="let element">
-                                <button mat-icon-button matTooltip="Cancelar cita" aria-label="expand row"
-                                    (click)="closeAppoinment(element)">
+                                <button
+                                    mat-icon-button
+                                    matTooltip="Cancelar cita"
+                                    aria-label="expand row"
+                                    (click)="closeAppoinment(element)"
+                                >
                                     <mat-icon>delete_outline</mat-icon>
                                 </button>
                             </td>
                         </ng-container>
 
-
                         <ng-container matColumnDef="add">
-                            <th mat-header-cell *matHeaderCellDef aria-label="row actions">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                aria-label="row actions"
+                            >
                                 &nbsp;
                             </th>
                             <td mat-cell *matCellDef="let element">
-                                <button mat-icon-button matTooltip="Añadir Servicio" aria-label="expand row" (click)="
+                                <button
+                                    mat-icon-button
+                                    matTooltip="Añadir Servicio"
+                                    aria-label="expand row"
+                                    (click)="
                                         openCreateUserDialog(
                                             '300ms',
                                             '100ms',
                                             element
                                         )
-                                    ">
+                                    "
+                                >
                                     <mat-icon>library_add</mat-icon>
                                 </button>
                             </td>
                         </ng-container>
                         <ng-container matColumnDef="expand">
-                            <th mat-header-cell *matHeaderCellDef aria-label="row actions">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                aria-label="row actions"
+                            >
                                 &nbsp;
                             </th>
                             <td mat-cell *matCellDef="let element">
-                                <button mat-icon-button aria-label="expand row" (click)="
+                                <button
+                                    mat-icon-button
+                                    aria-label="expand row"
+                                    (click)="
                                         expandedElement =
                                             expandedElement === element
                                                 ? null
                                                 : element;
                                         $event.stopPropagation()
-                                    ">
-                                    <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
-                                    <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+                                    "
+                                >
+                                    <mat-icon
+                                        *ngIf="expandedElement !== element"
+                                        >keyboard_arrow_down</mat-icon
+                                    >
+                                    <mat-icon
+                                        *ngIf="expandedElement === element"
+                                        >keyboard_arrow_up</mat-icon
+                                    >
                                 </button>
                             </td>
                         </ng-container>
 
                         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
                         <ng-container matColumnDef="expandedDetail">
-                            <td mat-cell *matCellDef="let element; index as i" [attr.colspan]="
+                            <td
+                                mat-cell
+                                *matCellDef="let element; index as i"
+                                [attr.colspan]="
                                     columnsToDisplayWithExpand.length
-                                ">
-                                <div class="example-element-detail-1" *ngIf="element == expandedElement">
+                                "
+                            >
+                                <div
+                                    class="example-element-detail-1"
+                                    *ngIf="element == expandedElement"
+                                >
                                     <!-- [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" -->
-                                    <div class="example-element-detail" *ngFor="
+                                    <div
+                                        class="example-element-detail"
+                                        *ngFor="
                                             let service of element.services;
                                             index as i
-                                        ">
+                                        "
+                                    >
                                         <div class="example-element-service">
                                             {{ service?.nameService }}
                                         </div>
                                         <div class="example-element-service">
                                             {{
-                                            service?.servicePrice
-                                            | currency
-                                            : "COP"
-                                            : "symbol"
-                                            : "4.2-2"
+                                                service?.servicePrice
+                                                    | currency
+                                                        : "COP"
+                                                        : "symbol"
+                                                        : "4.2-2"
                                             }}
                                         </div>
                                         <div class="example-element-service">
                                             {{
-                                            element.appointmentDate[i]
-                                            ?.dateService
+                                                element.appointmentDate[i]
+                                                    ?.dateService
                                             }}
                                             {{
-                                            element.appointmentDate[i]
-                                            ?.endTimeService
+                                                element.appointmentDate[i]
+                                                    ?.endTimeService
                                             }}
                                         </div>
                                         <div class="deleteButon">
-                                            <button mat-mini-fab matTooltip="Cancelar servicio" color="warn" (click)="
+                                            <button
+                                                mat-mini-fab
+                                                matTooltip="Cancelar servicio"
+                                                color="warn"
+                                                (click)="
                                                     CloseAppointment(
                                                         service,
                                                         element._id
                                                     )
-                                                ">
-                                                <mat-icon>delete_outline</mat-icon>
+                                                "
+                                            >
+                                                <mat-icon
+                                                    >delete_outline</mat-icon
+                                                >
                                             </button>
                                         </div>
                                     </div>
@@ -166,17 +233,28 @@
                             </td>
                         </ng-container>
 
-                        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-                        <tr mat-row *matRowDef="
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="columnsToDisplayWithExpand"
+                        ></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="
                                 let element;
                                 columns: columnsToDisplayWithExpand
-                            " [class.example-expanded-row]="
+                            "
+                            [class.example-expanded-row]="
                                 expandedElement == element
-                            " (click)="
+                            "
+                            (click)="
                                 expandedElement =
                                     expandedElement == element ? null : element
-                            "></tr>
-                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"></tr>
+                            "
+                        ></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="let row; columns: ['expandedDetail']"
+                        ></tr>
                     </table>
                 </div>
             </mat-card-content>
@@ -187,17 +265,27 @@
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+        ></button>
     </div>
     <div class="modal-body">
         <form>
             <div class="mb-3">
                 <label for="dateOfBirth">Date of birth</label>
-
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="modal.close('Save click')"
+        >
+            Save
+        </button>
     </div>
 </ng-template>

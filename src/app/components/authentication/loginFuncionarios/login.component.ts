@@ -128,7 +128,7 @@ export class LoginComponentFun {
             if (role == 'CLLTR_ROLE') {
                 redirectURL = '/colla/dash';
             } else if (role == 'MANAGER_ROLE') {
-                redirectURL = '/bus/dash';
+                redirectURL = '/man/dash';
             } else if (role == 'ADMIN_ROLE') {
                 redirectURL = '/bus/dash';
             }

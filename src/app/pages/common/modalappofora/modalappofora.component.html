@@ -1,0 +1,55 @@
+<div class="row justify-content-center" [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()">
+    <mat-card class="example-card">
+        <div class="container-fluid">
+            <h3 class="text-center mt-3">Agendar Servicio</h3>
+
+            <mat-card-content>
+                <form [formGroup]="startServiceform">
+
+                    <div class="row">
+                        <div class="col-4">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Nombres</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Apellidos</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Télefono</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Documento</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <!-- <button mat-button (click)="startService()">
+                    Iniciar Servicio
+                </button> -->
+                <button mat-button (click)="closeDialog()">Cerrar</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>
