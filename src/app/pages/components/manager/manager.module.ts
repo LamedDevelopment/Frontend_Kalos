@@ -73,7 +73,6 @@ import { HelpermoduleModule } from '../../helpers/helpermodule.module';
 import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.component';
 import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.component';
 
-
 @NgModule({
   declarations: [
     AgendadayComponent,
@@ -154,4 +153,4 @@ import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.compon
     HelpermoduleModule,
   ]
 })
-export class ManagerModule { }
+export class ManagerModule {}
