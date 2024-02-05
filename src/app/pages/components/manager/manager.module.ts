@@ -71,6 +71,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { HelpermoduleModule } from '../../helpers/helpermodule.module';
 import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.component';
+import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.component';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.com
     TicketsComponent,
     ManagerComponent,
     AppointmentComponent,
-    PaymentsModalComponent
+    PaymentsModalComponent,
+    ticketsModalComponent
   ],
   imports: [
     CommonModule,
