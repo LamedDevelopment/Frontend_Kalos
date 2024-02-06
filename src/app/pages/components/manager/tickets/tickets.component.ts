@@ -16,7 +16,7 @@ import { ticketsModalComponent } from '../modals/ticketsModal/ticketsModal.compo
 })
 export class TicketsComponent implements AfterViewInit, OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    displayedColumns: string[] = ['usuario', 'colaborador', 'servicio', 'fecha', 'pay'];
+    displayedColumns: string[] = ['nombre',  'monto', 'fecha', 'pay'];
     dataSource: any;
 
     constructor(

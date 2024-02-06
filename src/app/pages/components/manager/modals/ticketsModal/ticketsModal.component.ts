@@ -5,8 +5,6 @@ import { ModalservicesService } from 'src/app/pages/services/modalservices.servi
 import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { ModalserviceComponent } from '../../../collaborator/modals/modalservice/modalservice.component';
-import Swal from 'sweetalert2';
-import { MatStepper, MatStepperIntl } from '@angular/material/stepper';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
@@ -15,7 +13,6 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
     styleUrls: ['./ticketsModal.component.scss'],
 })
 export class ticketsModalComponent {
-    @ViewChild(MatStepper) stepper!: MatStepper;
     preFactura: FormGroup;
     businessData: any;
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -30,7 +27,12 @@ export class ticketsModalComponent {
       });
     dataFactura: any;
     PayBill: any;
-
+    selectSolicitudes = [
+        { id:1, name:'Autorizado'},
+        { id:1, name:'Negado'},
+        { id:1, name:'Desembolsado'},
+        { id:1, name:'Cancelado'}
+    ]
 
     constructor(
         public themeService: CustomizerSettingsService,
@@ -48,23 +50,15 @@ export class ticketsModalComponent {
         console.log(this.dataFactura)
         this.businessData = this.modalservice.getBusinessData();
         this.preFactura = this._formBuilder.group({
-            appointmentID: [''],
-            docuUser: ['', Validators.required],
-            managerDiscount: [0],
-            tax: [0],
-            paymentMethod: [
-                {
-                    PaymentType: "Efectivo",
-                    walletPayment: {
-                        nameWallet: "",
-                        codRefPay: ""
-                    }
-                }
-            ],
-            electronicBilling: [true],
-            observationBilling: ['']
+            loadID: [''],
+            loanAmount: [''],
+            loanStatus: ['', Validators.required],
+            paymentObservation: ['']
         });
-
+         if (this.dataFactura) {
+            this.preFactura.controls["loanAmount"].setValue(this.dataFactura.loanAmount);
+            this.preFactura.controls["loadID"].setValue(this.dataFactura._id);
+         }
     }
 
     closeDialog() {
@@ -73,35 +67,28 @@ export class ticketsModalComponent {
 
 
 
-    ProcessSol(stepper:MatStepper) {
+    ProcessSol() {
 
         const valueBody =this.preFactura.getRawValue();
-        valueBody.appointmentID = this.dataFactura._id
-        valueBody.tax = [{"description": "IVA", "value": valueBody.tax}]
-        /* {
-            "loadID": "657cc3774c5ee4d39bacd363",
-            "loanAmount": 150000,
-            "loanStatus": "Negado",
-            "paymentObservation": "Texto de Prueba que indica el Staff que Procesa el Anticipo"
-        } */
-        /* this.appointmentsService
+        console.log(valueBody)
+        this.appointmentsService
             .processPayBillingMan('lose/prolo', valueBody)
             .subscribe((bill: any) => {
                 if(bill.ok) {
-                    this._snackBar.open('Factura registrada exitosamente!!!', '', {
+                    this._snackBar.open('Solicitud procesada exitosamente!!!', '', {
                         horizontalPosition: this.horizontalPosition,
                         verticalPosition: this.verticalPosition,
                         duration: this.durationInSeconds * 1000,
                     });
                     this.dialogRef.close();
                 } else {
-                    this._snackBar.open('Error al registrar la factura!!!', '', {
+                    this._snackBar.open('Error al procesar la solicitud!!!', '', {
                         horizontalPosition: this.horizontalPosition,
                         verticalPosition: this.verticalPosition,
                         duration: this.durationInSeconds * 1000,
                     });
                 }
-            }); */
+            });
     }
 
 

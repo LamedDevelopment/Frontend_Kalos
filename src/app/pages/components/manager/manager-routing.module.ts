@@ -97,7 +97,7 @@ const routes: Routes = [
                 canActivate: [AuthGuard],
             },
             {
-                path: 'ticket',
+                path: 'hist-solicitudes',
                 component: TicketComponent,
                 canActivate: [AuthGuard],
             },

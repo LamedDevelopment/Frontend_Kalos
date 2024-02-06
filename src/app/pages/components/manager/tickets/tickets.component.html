@@ -8,33 +8,23 @@
             <table mat-table [dataSource]="dataSource">
                 >
                 <!-- User Column -->
-                <ng-container matColumnDef="usuario">
+                <ng-container matColumnDef="nombre">
                     <th mat-header-cell *matHeaderCellDef class="text-start">
-                        Usuario
+                        Nombres
                     </th>
                     <td mat-cell *matCellDef="let element" class="text-start">
-                        {{ element.user.nomUser }}
-                        {{ element.user.apeUser}}
+                        {{ element.Collaborator.nomColla }}
+                        {{ element.Collaborator.apeColla}}
                     </td>
                 </ng-container>
 
-                <!-- Collaborator Column -->
-                <ng-container matColumnDef="colaborador">
-                    <th mat-header-cell *matHeaderCellDef class="text-start">
-                        Colaborador
-                    </th>
-                    <td mat-cell *matCellDef="let element" class="text-start">
-                        {{ element.appointmentDate[0].collaboratorAppointment.nameCollaborator }}
-                    </td>
-                </ng-container>
                 <!-- Product Column -->
-                <ng-container matColumnDef="servicio">
+                <ng-container matColumnDef="monto">
                     <th mat-header-cell *matHeaderCellDef class="text-start">
-                        Servicio
+                        Monto adelanto
                     </th>
                     <td mat-cell *matCellDef="let element" class="text-start">
-                        {{ element.services[0].nameService }} -
-                        {{ element.services[0].nameTypeService }}
+                        ${{ element.loanAmount | currency:'COP':false:'4.2-2'}}
                     </td>
                 </ng-container>
 
@@ -44,7 +34,7 @@
                         Fecha
                     </th>
                     <td mat-cell *matCellDef="let element" class="text-start">
-                        {{ element.appointmentDate[0].dateService }} {{ element.appointmentDate[0].timeService }}
+                        {{ element.applicationDate }}
                     </td>
                 </ng-container>
 

@@ -95,7 +95,7 @@ import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.compon
     ManagerComponent,
     AppointmentComponent,
     PaymentsModalComponent,
-    ticketsModalComponent
+    ticketsModalComponent,
   ],
   imports: [
     CommonModule,
