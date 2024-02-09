@@ -164,7 +164,7 @@ export class ModalappoforaComponent {
         };
 
         this.managerservice
-            .createAppoFora('apu/fore', body)
+            .createAppoFora('apu', body)
             .subscribe((response: any) => {
                 this.days = response.msg.branchoffices;
             });
