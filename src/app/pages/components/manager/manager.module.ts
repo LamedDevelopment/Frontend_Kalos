@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ManagerRoutingModule } from './manager-routing.module';
 import { AgendadayComponent } from './agendaday/agendaday.component';
 import { AgendamonthComponent } from './agendamonth/agendamonth.component';
-import { AgendaweekComponent } from './agendaweek/agendaweek.component';
+import { WalletComponent } from './wallet/wallet.component';
 import { BillingComponent } from './billing/billing.component';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { CollaboratorsComponent } from './collaborators/collaborators.component';
@@ -77,7 +77,7 @@ import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.compon
   declarations: [
     AgendadayComponent,
     AgendamonthComponent,
-    AgendaweekComponent,
+    WalletComponent,
     BillingComponent,
     CollaboratorComponent,
     CollaboratorsComponent,

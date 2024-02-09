@@ -4,7 +4,7 @@ import { ManagerComponent } from './manager.component';
 import { DashComponent } from './dash/dash.component';
 import { AgendadayComponent } from './agendaday/agendaday.component';
 import { AgendamonthComponent } from './agendamonth/agendamonth.component';
-import { AgendaweekComponent } from './agendaweek/agendaweek.component';
+import { WalletComponent } from './wallet/wallet.component';
 import { BillingComponent } from './billing/billing.component';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { CollaboratorsComponent } from './collaborators/collaborators.component';
@@ -47,8 +47,8 @@ const routes: Routes = [
                 canActivate: [AuthGuard],
             },
             {
-                path: 'agenw',
-                component: AgendaweekComponent,
+                path: 'wallet',
+                component: WalletComponent,
                 canActivate: [AuthGuard],
             },
             {
