@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import {
@@ -17,6 +17,8 @@ import { ModalserviceComponent } from '../../collaborator/modals/modalservice/mo
 import { CloseserviceComponent } from '../../collaborator/modals/closeservice/closeservice.component';
 import { ModalservicesService } from 'src/app/pages/services/modalservices.service';
 import { ModalappoforaComponent } from 'src/app/pages/common/modalappofora/modalappofora.component';
+import { ManagerService } from 'src/app/pages/services/manager.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-appointment',
@@ -27,7 +29,6 @@ export class AppointmentComponent {
     displayedColumns: string[] = [
         'product',
         'namecolla',
-
         'delete',
         //'add',
         'expand',
@@ -54,13 +55,16 @@ export class AppointmentComponent {
 
     startStop: boolean = true;
     Business: any;
+    branchoffices: any = [];
+    id_: any;
 
     constructor(
         public themeService: CustomizerSettingsService,
         private _getAppointment: AppointmentsService,
         public dialog: MatDialog,
         private _snackBar: MatSnackBar,
-        private modalservice: ModalservicesService
+        private modalservice: ModalservicesService,
+        private managerservice: ManagerService
     ) {}
 
     /**
@@ -70,6 +74,7 @@ export class AppointmentComponent {
         this.columsview = this.displayedColumns;
         this.GetCitas(1);
         this.GetHistoricoCitas();
+        this.getBusiness();
     }
 
     ngAfterViewInit() {
@@ -304,17 +309,36 @@ export class AppointmentComponent {
         enterAnimationDuration: string,
         exitAnimationDuration: string
     ) {
-        this.dialog
-            .open(ModalappoforaComponent, {
+        setTimeout(() => {
+            const dialogRef = this.dialog.open(ModalappoforaComponent, {
                 width: '1000px',
                 enterAnimationDuration,
                 exitAnimationDuration,
-            })
-            .afterClosed()
-            .subscribe((data) => {
-                // una vez cerrado el modal se refresca la data
-                this.GetCitas(2);
+                data: {
+                    _id: this.id_,
+                    branchoffices: this.branchoffices, // enviar sedes al modal
+                },
+            });
+
+            dialogRef.afterClosed().subscribe((data) => {
+                // Una vez cerrado el modal, puedes acceder a los datos devueltos
+                if (data) {
+                    console.log('Datos del modal cerrado:', data);
+                }
+
+                // Una vez cerrado el modal se refresca la data
+                this.GetCitas(1);
                 this.GetHistoricoCitas();
             });
+        }, 1000);
+    }
+
+    /** Metodo que obtiene las sedes del manager */
+    getBusiness() {
+        this.managerservice.getBusiness().subscribe((response: any) => {
+            console.log('res', response);
+            this.id_ = response.msg._id;
+            this.branchoffices = response.msg.branchoffices;
+        });
     }
 }

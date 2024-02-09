@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill" class="w-100">
+    <mat-label>Seleccione Hora Servicio</mat-label>
+    <mat-select [formControl]="ctr" (selectionChange)="onHourChange()">
+        <mat-option *ngFor="let item of hours" [value]="item">
+            {{item}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

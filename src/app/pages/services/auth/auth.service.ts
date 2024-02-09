@@ -165,13 +165,23 @@ export class AuthService {
         return this._apiServiceHttp.post('login/token', {}).pipe(
             map(
                 (response: any) => {
+                    console.log(response);
+
+                    if (response.msg.business) {
+                        sessionStorage.setItem(
+                            'dataUser',
+                            JSON.stringify(response.msg.business)
+                        );
+                    } else {
+                        sessionStorage.setItem(
+                            'dataUser',
+                            response.msg.user
+                                ? JSON.stringify(response.msg.user)
+                                : JSON.stringify(response.msg[0])
+                        );
+                    }
+
                     // Store the user on the user service
-                    sessionStorage.setItem(
-                        'dataUser',
-                        response.msg.user
-                            ? JSON.stringify(response.msg.user)
-                            : JSON.stringify(response.msg[0])
-                    );
                     this._userService.user = response.msg;
                     return of(response);
                 },
