@@ -76,6 +76,7 @@ export class ModalappoforaComponent {
 
     /** Evento que obtiene la sede seleccionada */
     businessSelected(event: any) {
+        console.log(this.startServiceform.value);
         this.startServiceform.patchValue({ business: this.data._id });
         this.getServices(); // traer servicios
         this.getDays(); // traer dias disponibles de acuerdo a la sede
@@ -152,7 +153,7 @@ export class ModalappoforaComponent {
                 userDocu: this.startServiceform.get('userDocu')?.value,
             },
             business: this.startServiceform.get('business')?.value,
-            tradename: this.startServiceform.get('tradename')?.value,
+            tradename: this.startServiceform.get('businessName')?.value,
             manager: this.startServiceform.get('manager')?.value,
             observationManager:
                 this.startServiceform.get('observationManager')?.value,
