@@ -106,7 +106,7 @@ const routes: Routes = [
                 component: TicketsComponent,
                 canActivate: [AuthGuard],
             },
-            { path: '', redirectTo: '/mana/dash', pathMatch: 'full' },
+            { path: '', redirectTo: '/man/dash', pathMatch: 'full' },
         ],
     },
 ];
