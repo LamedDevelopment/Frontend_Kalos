@@ -56,7 +56,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
-import { ModalappoforaComponent } from './common/modalappofora/modalappofora.component';
+import { commonComponentsModule } from './common/commonComponents.module';
 
 @NgModule({
     declarations: [
@@ -64,7 +64,6 @@ import { ModalappoforaComponent } from './common/modalappofora/modalappofora.com
         HomeComponent,
         BarFiltersComponent,
         PagesComponent,
-        ModalappoforaComponent,
     ],
     imports: [
         CommonModule,
@@ -124,6 +123,7 @@ import { ModalappoforaComponent } from './common/modalappofora/modalappofora.com
         DragDropModule,
         HttpClientModule,
         CdkAccordionModule,
+        commonComponentsModule,
     ],
     exports: [
         ModelsComponent,

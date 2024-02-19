@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ManagerRoutingModule } from './manager-routing.module';
 import { AgendadayComponent } from './agendaday/agendaday.component';
 import { AgendamonthComponent } from './agendamonth/agendamonth.component';
-import { AgendaweekComponent } from './agendaweek/agendaweek.component';
+import { WalletComponent } from './wallet/wallet.component';
 import { BillingComponent } from './billing/billing.component';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { CollaboratorsComponent } from './collaborators/collaborators.component';
@@ -71,12 +71,14 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { HelpermoduleModule } from '../../helpers/helpermodule.module';
 import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.component';
+import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.component';
+import { commonComponentsModule } from '../../common/commonComponents.module';
 
 @NgModule({
     declarations: [
         AgendadayComponent,
         AgendamonthComponent,
-        AgendaweekComponent,
+        WalletComponent,
         BillingComponent,
         CollaboratorComponent,
         CollaboratorsComponent,
@@ -94,6 +96,7 @@ import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.com
         ManagerComponent,
         AppointmentComponent,
         PaymentsModalComponent,
+        ticketsModalComponent,
     ],
     imports: [
         CommonModule,
@@ -149,6 +152,7 @@ import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.com
         CdkAccordionModule,
         NgxMaterialTimepickerModule,
         HelpermoduleModule,
+        commonComponentsModule,
     ],
 })
 export class ManagerModule {}
