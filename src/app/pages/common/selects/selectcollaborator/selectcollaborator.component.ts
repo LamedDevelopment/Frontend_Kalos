@@ -20,7 +20,7 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
 })
 export class SelectcollaboratorComponent {
     dataCollaborators: any = [];
-    @Input() ctr: FormControl<any>;
+    @Input() ctr: FormControl;
     @Input() idbusiness: any = '';
     @Input() services: any = '';
     @Input() tradename: any = '';
@@ -34,6 +34,8 @@ export class SelectcollaboratorComponent {
     }
 
     getColla() {
+        console.log('get colla');
+
         if (
             this.idbusiness == '' ||
             this.services == '' ||

@@ -14,7 +14,7 @@ import { ManagerService } from 'src/app/pages/services/manager.service';
     styleUrls: ['./select-hours-service.component.scss'],
 })
 export class SelectHoursServiceComponent {
-    @Input() ctr: FormControl<any>;
+    @Input() ctr: FormControl<any> = new FormControl();
     hours: any = [];
     @Input() user: any = '';
     @Input() business: any = '';

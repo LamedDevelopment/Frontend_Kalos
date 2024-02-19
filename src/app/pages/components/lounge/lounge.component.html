@@ -1,12 +1,12 @@
-
-
 <div
     class="row justify-content-center"
     [class.component-dark-theme]="themeService.isDark()"
     [class.component-rtl-enabled]="themeService.isRTLEnabled()"
     *ngIf="!loungeSelected"
 >
-    <div class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between">
+    <div
+        class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between"
+    >
         <h5 class="mb-0">Establecimientos</h5>
         <ol class="breadcrumb mb-0 ps-0">
             <li class="breadcrumb-item">
@@ -21,23 +21,46 @@
     <div class="col-lg-4 col-md-6" *ngFor="let bus of Business">
         <mat-card
             class="mb-25 tagus-card"
-            style="background: url(assets/img/salon/barber1.jpg); background-position: center center; filter:  grayscale(30%); background-color: rgba(255, 255, 255, 0.5);  background-repeat: no-repeat; background-size: cover;"
-
+            style="
+                background: url(assets/img/salon/barber1.jpg);
+                background-position: center center;
+                filter: grayscale(30%);
+                background-color: rgba(255, 255, 255, 0.5);
+                background-repeat: no-repeat;
+                background-size: cover;
+            "
         >
-            <mat-card-content style="z-index:99999;">
-                <span class="badge text-bg-info" style="cursor:pointer; z-index:99999;" (click)="SelectLounge(bus)">Agendar cita</span>
-                <div style="height: 200px;"></div>
-                <h5 class="mb-12 mt-20 text-white text-center" style="z-index:99999;">{{bus.branchoffices[0].businessName}}</h5>
-                <p class="text-white text-center" style="z-index:99999;">{{bus.branchoffices[0].address}} {{bus.branchoffices[0].city}}</p>
-                <p class="text-white text-center" style="z-index:99999;">{{bus.branchoffices[0].email}}</p>
+            <mat-card-content style="z-index: 99999">
+                <span
+                    class="badge text-bg-info"
+                    style="cursor: pointer; z-index: 99999"
+                    (click)="SelectLounge(bus)"
+                    >Agendar cita</span
+                >
+                <div style="height: 200px"></div>
+                <h5
+                    class="mb-12 mt-20 text-white text-center"
+                    style="z-index: 99999"
+                >
+                    {{ bus.branchoffices[0].businessName }}
+                </h5>
+                <p class="text-white text-center" style="z-index: 99999">
+                    {{ bus.branchoffices[0].address }}
+                    {{ bus.branchoffices[0].city }}
+                </p>
+                <p class="text-white text-center" style="z-index: 99999">
+                    {{ bus.branchoffices[0].email }}
+                </p>
             </mat-card-content>
         </mat-card>
     </div>
 </div>
 
 <div *ngIf="loungeSelected">
-    <div class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between">
-        <h5 class="mb-0">{{nameLoung}}</h5>
+    <div
+        class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between"
+    >
+        <h5 class="mb-0">{{ nameLoung }}</h5>
         <ol class="breadcrumb mb-0 ps-0">
             <li class="breadcrumb-item">
                 <a routerLink="/user/appo">
@@ -54,27 +77,102 @@
             Volver
         </button>
     </div>
-    <app-lng-stats [services]="Servicios"></app-lng-stats>
-    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
-
-        <div fxFlex="40%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
-
+    <app-lng-stats
+        [services]="Servicios"
+        (serviceSelected)="onServiceSelected($event)"
+    ></app-lng-stats>
+    <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayout.sm="column"
+        fxLayout.md="column"
+        fxLayoutGap="25px"
+        fxLayoutGap.xs="0"
+        fxLayoutGap.sm="0"
+        fxLayoutGap.md="0"
+    >
+        <div
+            fxFlex="40%"
+            fxFlex.xs="100%"
+            fxFlex.sm="100%"
+            fxFlex.md="100%"
+            class="col"
+        >
             <!-- <app-lms-progress></app-lms-progress> -->
 
-            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0">
+            <div
+                fxLayout="row"
+                fxLayout.xs="column"
+                fxLayout.sm="column"
+                fxLayoutGap="25px"
+                fxLayoutGap.xs="0"
+                fxLayoutGap.sm="0"
+            >
+                <mat-card
+                    class="mb-25 tagus-card top-instructors-box"
+                    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+                >
+                    <mat-card-header class="border-bottom">
+                        <h5 class="mb-0">Colaboradores</h5>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="instructors-list d-flex flex-wrap">
+                            <div class="row">
+                                <div class="col-6">
+                                    <app-selectcollaborator
+                                        [ctr]="getStaffCtr()"
+                                        [idbusiness]="businessSelected._id"
+                                        [tradename]="tradename"
+                                        [services]="ServiceSelected"
+                                        (collaSelected)="collaSelected($event)"
+                                    ></app-selectcollaborator>
+                                </div>
+                                <div class="col-6">
+                                    <app-select-type-services
+                                        [typeServices]="TypeServicios"
+                                        [ctr]="getTypeserviceCtr()"
+                                        (typeServiceSelected)="
+                                            typeServiceSelected($event)
+                                        "
+                                    ></app-select-type-services>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
 
-                    <app-lng-collaborators [colaboradores]="colaboradores" [servicios]="Servicios" (setColaboratorSelected)="ColaboratorSeledted($event)" (setServicioSelected)="setServicioSelected($event)"></app-lng-collaborators>
+                <!--  <app-lng-collaborators
+                    [idbusiness]="businessSelected._id"
+                    [tradename]="tradename"
+                    [servicios]="ServiceSelected"
+                    (setColaboratorSelected)="ColaboratorSeledted($event)"
+                    (setServicioSelected)="setServicioSelected($event)"
+                ></app-lng-collaborators> -->
             </div>
 
             <!-- <app-lms-current-courses></app-lms-current-courses>
 
             <app-lms-enrolled-created></app-lms-enrolled-created> -->
-
         </div>
 
-        <div fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
-
-            <app-lng-services-completation [colaborador]="collSelected" [ServicesSelected]="ServiceSelected" [Business]="businessSelected" [TypeServices]="TypeServicios" *ngIf="collSelected?.user"></app-lng-services-completation>
+        <div
+            fxFlex="60%"
+            fxFlex.xs="100%"
+            fxFlex.sm="100%"
+            fxFlex.md="100%"
+            class="col"
+        >
+            <app-lng-services-completation
+                [businessID]="businessSelected._id"
+                [tradename]="tradename"
+                [formGroup]="startServiceform"
+                [staff]="this.startServiceform.get('staff')?.value"
+                [hourctr]="getHourCtr()"
+                [dateService]="getdateService()"
+                (dateSelected)="dateSelected($event)"
+                (agendarCita)="AgendarCita($event)"
+                *ngIf="this.startServiceform?.get('typeservice')?.value"
+            ></app-lng-services-completation>
 
             <!-- <app-lms-experience></app-lms-experience>
 
@@ -85,8 +183,6 @@
             <app-lms-messages></app-lms-messages>
 
             <app-lms-students></app-lms-students> -->
-
         </div>
-
     </div>
 </div>

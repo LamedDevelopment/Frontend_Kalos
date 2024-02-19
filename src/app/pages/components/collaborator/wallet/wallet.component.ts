@@ -38,31 +38,24 @@ export class WalletComponent {
         this.appointmentsService
             .getWallet('paycom/colla')
             .subscribe((bill: any) => {
-                //console.log(bill);
-                bill.msg.forEach((element: any) => {
-                    console.log('element', element);
-                    const fecha = new Date(
-                        parseInt(
-                            element.commissionPayment[0]
-                                .collaboratorCommission[0].serviceDate
-                        )
-                    );
+                // console.log(bill);
+                bill.msg.collaboratorCommission.forEach((element: any) => {
+                    // console.log('element', element);
+                    const fecha = new Date(parseInt(element.serviceDate));
                     const año = fecha.getFullYear();
                     const mes = ('0' + (fecha.getMonth() + 1)).slice(-2); // Se suma 1 ya que en JavaScript los meses van de 0 a 11
                     const dia = ('0' + fecha.getDate()).slice(-2);
                     const fechaFormateada = `${año}-${mes}-${dia}`;
                     console.log(fechaFormateada);
-                    element.commissionPayment[0].collaboratorCommission[0].serviceDate =
-                        fechaFormateada;
-                    this.total += Number(
-                        element.commissionPayment[0].collaboratorCommission[0]
-                            .commissionValue
-                    );
+                    element.serviceDate = fechaFormateada;
+                    this.total += Number(element.commissionValue);
                 });
                 console.log('total', this.total);
-                this.total_servicios = bill.msg.length;
+                this.total_servicios = bill.msg.collaboratorCommission.length;
 
-                this.dataSource = new MatTableDataSource<any>(bill.msg);
+                this.dataSource = new MatTableDataSource<any>(
+                    bill.msg.collaboratorCommission
+                );
                 this.dataSource.paginator = this.paginator;
             });
     }

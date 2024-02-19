@@ -44,6 +44,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         SelectservicesComponent,
         SelectcollaboratorComponent,
         SelectTypeServicesComponent,
+        SelectDateServiceComponent,
+        SelectHoursServiceComponent,
     ],
 })
 export class commonComponentsModule {}

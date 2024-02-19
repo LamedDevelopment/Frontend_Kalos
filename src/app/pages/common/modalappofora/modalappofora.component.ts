@@ -10,6 +10,11 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
 import { ModalserviceComponent } from '../../components/collaborator/modals/modalservice/modalservice.component';
 import { ManagerService } from '../../services/manager.service';
 import { jwtDecode } from 'jwt-decode';
+import {
+    MatSnackBar,
+    MatSnackBarHorizontalPosition,
+    MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-modalappofora',
@@ -22,11 +27,15 @@ export class ModalappoforaComponent {
     days = [];
     startServiceform: FormGroup;
     typeServices: any;
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
+    durationInSeconds = 5;
     constructor(
         public themeService: CustomizerSettingsService,
         private dialogRef: MatDialogRef<ModalserviceComponent>,
         private fb: FormBuilder,
         private managerservice: ManagerService,
+        private _snackBar: MatSnackBar,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         this.branchoffices = data.branchoffices;
@@ -164,11 +173,35 @@ export class ModalappoforaComponent {
             timeService: this.startServiceform.get('timeService')?.value,
         };
 
-        this.managerservice
-            .createAppoFora('apu', body)
-            .subscribe((response: any) => {
-                this.days = response.msg.branchoffices;
-            });
+        this.managerservice.createAppoFora('apu', body).subscribe(
+            (response: any) => {
+                console.log('====================================');
+                console.log(response);
+                console.log('====================================');
+                if (response.ok == true) {
+                    this._snackBar.open(response.msg, '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                } else {
+                    this._snackBar.open(response.msg, '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                }
+            },
+            (error) => {
+                console.log(error);
+
+                this._snackBar.open(error.error.msg, '', {
+                    horizontalPosition: this.horizontalPosition,
+                    verticalPosition: this.verticalPosition,
+                    duration: this.durationInSeconds * 1000,
+                });
+            }
+        );
     }
 
     closeDialog() {

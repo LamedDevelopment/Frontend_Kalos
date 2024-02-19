@@ -3,34 +3,40 @@
     [class.component-rtl-enabled]="themeService.isRTLEnabled()"
 >
     <mat-card-header class="grid border-bottom">
-        <!-- <h5 class="mb-0">Programar cita</h5> -->
-            <div class="col-span-3 form-group">
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Fecha</mat-label>
-                    <input matInput name="date" [matDatepickerFilter]="myFilter" [(ngModel)]="DateSelected" [matDatepicker]="picker" (dateChange)="valueChanged($event)">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
-
-            <button type="button" mat-button class="col-span-3 btn bg-transparent border-none" [matMenuTriggerFor]="monthMenuHour">
-                Horario
-            </button>
-            <mat-menu #monthMenuHour="matMenu" class="monthMenuHour" xPosition="before">
-                <button mat-menu-item type="button" class="bg-transparent border-none"  *ngFor="let hour of Hours" (click)="SelectedHour(hour)">{{hour}}</button>
-            </mat-menu>
-            <button type="button" mat-button class="col-span-3 btn bg-transparent border-none" [matMenuTriggerFor]="monthMenu">
-                Servicios
-            </button>
-            <mat-menu #monthMenu="matMenu" class="monthMenu" xPosition="before">
-                <button mat-menu-item type="button" class="bg-transparent border-none" *ngFor="let serv of TypeServices" (click)="SelectedServ(serv)">{{serv.typeService}}</button>
-            </mat-menu>
-            <button mat-raised-button class="mt-4 mb-4 col-span-3" color="primary" [disabled]="disabledButton()" (click)="AgendarCita()"> Agendar </button>
-
+        <h5 class="mb-0">Programar cita</h5>
+        <button
+            mat-raised-button
+            class="mt-4 mb-4 col-span-3"
+            color="primary"
+            (click)="AgendarCita()"
+            [disabled]="formGroup.invalid"
+        >
+            Agendar
+        </button>
     </mat-card-header>
     <mat-card-content>
         <div class="instructors-list d-flex flex-wrap">
-                <div class="row w-full mb-3">
+            <div class="row">
+                <div class="col-6">
+                    <app-select-date-service
+                        (dateSelected)="daySelected($event)"
+                        [days]="days"
+                    ></app-select-date-service>
+                </div>
+                <div class="col-4">
+                    <app-select-hours-service
+                        [ctr]="hourctr"
+                        [business]="businessID"
+                        [tradename]="tradename"
+                        [staff]="staff"
+                        [dateService]="dateService.value"
+                        (hourSelected)="hourSelected($event)"
+                    >
+                    </app-select-hours-service>
+                </div>
+            </div>
+
+            <!-- <div class="row w-full mb-3">
                     <mat-card class="mb-3" *ngFor="let app of appoimentAdd">
                         <tr class="w-full">
                             <td WIDTH="200" HEIGHT="20">
@@ -52,7 +58,7 @@
                             </td>
                         </tr>
                     </mat-card>
-                </div>
+                </div> -->
         </div>
     </mat-card-content>
 </mat-card>
