@@ -25,6 +25,7 @@ export class ModalliquidacionComponent {
     displayedColumns: string[] = ['item', 'VlSolicitado', 'cuotas'];
     total_pagar: number = 0;
     payLoans: any = [];
+    dataTosend: any;
     constructor(
         public themeService: CustomizerSettingsService,
         private dialogRef: MatDialogRef<ModalserviceComponent>,
@@ -108,6 +109,7 @@ export class ModalliquidacionComponent {
             (response: any) => {
                 if (response.ok == true) {
                     this.total_pagar = response.msg.commissionPayment;
+                    this.dataTosend = response.msg;
                 } else {
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
@@ -126,6 +128,53 @@ export class ModalliquidacionComponent {
                 });
             }
         );
+    }
+
+    sendData() {
+        if (this.total_pagar < 0) {
+            this._snackBar.open(
+                'No se puede procesar Prenómina con valores negativos',
+                '',
+                {
+                    horizontalPosition: this.horizontalPosition,
+                    verticalPosition: this.verticalPosition,
+                    duration: this.durationInSeconds * 1000,
+                }
+            );
+        }
+
+        this.dataTosend.commissionDateRange = {
+            datastart: this.data.datastart,
+            dateEnd: this.data.dateEnd,
+        };
+
+        console.log(this.dataTosend);
+
+        this.managerservice
+            .preRoll('payroll/paypayroll', this.dataTosend)
+            .subscribe(
+                (response: any) => {
+                    if (response.ok == true) {
+                        console.log('====================================');
+                        console.log(response);
+                        console.log('====================================');
+                    } else {
+                        this._snackBar.open(response.msg, '', {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        });
+                    }
+                },
+                (error) => {
+                    console.log(error);
+                    this._snackBar.open(error.error.msg, '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                }
+            );
     }
 
     closeDialog() {

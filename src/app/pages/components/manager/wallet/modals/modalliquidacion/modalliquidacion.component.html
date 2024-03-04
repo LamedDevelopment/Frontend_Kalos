@@ -63,7 +63,13 @@
             </mat-card-content>
             <mat-card-actions class="mb-3">
                 <button mat-button (click)="closeDialog()">Cerrar</button>
-                <button mat-raised-button class="tagus ms-3">Liquidar</button>
+                <button
+                    mat-raised-button
+                    class="tagus ms-3"
+                    (click)="sendData()"
+                >
+                    Liquidar
+                </button>
             </mat-card-actions>
         </div>
     </mat-card>

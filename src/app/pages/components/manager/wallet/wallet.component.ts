@@ -81,6 +81,12 @@ export class WalletComponent implements AfterViewInit, OnInit {
                 exitAnimationDuration,
                 data: {
                     element,
+                    datastart: new Date(
+                        this.range.getRawValue().start
+                    ).toLocaleDateString(),
+                    dateEnd: new Date(
+                        this.range.getRawValue().end
+                    ).toLocaleDateString(),
                 },
             });
 
