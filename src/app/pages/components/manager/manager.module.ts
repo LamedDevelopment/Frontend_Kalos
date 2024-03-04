@@ -73,6 +73,8 @@ import { HelpermoduleModule } from '../../helpers/helpermodule.module';
 import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.component';
 import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.component';
 import { commonComponentsModule } from '../../common/commonComponents.module';
+import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/modalliquidacion.component';
+import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
 
 @NgModule({
     declarations: [
@@ -97,6 +99,8 @@ import { commonComponentsModule } from '../../common/commonComponents.module';
         AppointmentComponent,
         PaymentsModalComponent,
         ticketsModalComponent,
+        ModalliquidacionComponent,
+        ChecksloansComponent,
     ],
     imports: [
         CommonModule,

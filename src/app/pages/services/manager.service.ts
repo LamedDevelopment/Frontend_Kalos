@@ -16,7 +16,6 @@ export class ManagerService {
             })
         );
     }
-
     getDays(url: any, data: any): Observable<any> {
         return this._apiServiceHttp.post(url, data).pipe(
             map((response: any) => {
@@ -58,6 +57,22 @@ export class ManagerService {
     }
 
     createAppoFora(url: any, data: any): Observable<any> {
+        return this._apiServiceHttp.post(url, data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getpayloans(url: any, data: any): Observable<any> {
+        return this._apiServiceHttp.post(url, data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    preRoll(url: any, data: any): Observable<any> {
         return this._apiServiceHttp.post(url, data).pipe(
             map((response: any) => {
                 return response;
