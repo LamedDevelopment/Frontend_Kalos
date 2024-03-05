@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { ModalliquidacionComponent } from './modals/modalliquidacion/modalliquidacion.component';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-wallet',
@@ -32,10 +33,10 @@ export class WalletComponent implements AfterViewInit, OnInit {
 
     ngOnInit() {
         this.range.controls.start.setValue(
-            new Date(new Date().setDate(new Date().getDate() - 15))
+            new Date(new Date().setDate(new Date().getDate()))
         );
         this.range.controls.end.setValue(
-            new Date(new Date().setDate(new Date().getDate()))
+            new Date(new Date().setDate(new Date().getDate() + 5))
         );
     }
 
@@ -46,13 +47,15 @@ export class WalletComponent implements AfterViewInit, OnInit {
     getHist() {
         this.dataSource1 = new MatTableDataSource<any>([]);
         this.dataSource2 = new MatTableDataSource<any>([]);
+        const dateini = moment(this.range.get('start')?.value).format(
+            'DD/MM/YYYY'
+        );
+        const datefin = moment(this.range.get('end')?.value).format(
+            'DD/MM/YYYY'
+        );
         const body = {
-            dateStart: new Date(
-                this.range.getRawValue().start
-            ).toLocaleDateString(),
-            dateEnd: new Date(
-                this.range.getRawValue().end
-            ).toLocaleDateString(),
+            dateStart: dateini,
+            dateEnd: datefin,
         };
         this.appointmentsService
             .gethoursCollaborator('paycom/manaaccum', body)
