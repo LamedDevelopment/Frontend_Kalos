@@ -8,6 +8,11 @@ import { AppointmentsService } from 'src/app/pages/services/user/appointments.se
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { ModalliquidacionComponent } from './modals/modalliquidacion/modalliquidacion.component';
 import * as moment from 'moment';
+import {
+    MatSnackBar,
+    MatSnackBarHorizontalPosition,
+    MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-wallet',
@@ -19,6 +24,9 @@ export class WalletComponent implements AfterViewInit, OnInit {
     displayedColumns: string[] = ['nombre', 'monto', 'liq'];
     dataSource1: any;
     dataSource2: any;
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
+    durationInSeconds = 5;
     range = new FormGroup({
         start: new FormControl<any | null>(null),
         end: new FormControl<any | null>(null),
@@ -28,7 +36,8 @@ export class WalletComponent implements AfterViewInit, OnInit {
         public themeService: CustomizerSettingsService,
         private _router: Router,
         private appointmentsService: AppointmentsService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private _snackBar: MatSnackBar
     ) {}
 
     ngOnInit() {
@@ -57,19 +66,29 @@ export class WalletComponent implements AfterViewInit, OnInit {
             dateStart: dateini,
             dateEnd: datefin,
         };
+
         this.appointmentsService
             .gethoursCollaborator('paycom/manaaccum', body)
-            .subscribe((bill: any) => {
-                console.log(bill);
-                this.dataSource1 = new MatTableDataSource<any>(
-                    bill?.msg?.CommColla
-                );
-                this.dataSource2 = new MatTableDataSource<any>(
-                    bill?.msg?.CommBusi
-                );
-                this.dataSource1.paginator = this.paginator;
-                this.dataSource2.paginator = this.paginator;
-            });
+            .subscribe(
+                (bill: any) => {
+                    console.log(bill);
+                    this.dataSource1 = new MatTableDataSource<any>(
+                        bill?.msg?.CommColla
+                    );
+                    this.dataSource2 = new MatTableDataSource<any>(
+                        bill?.msg?.CommBusi
+                    );
+                    this.dataSource1.paginator = this.paginator;
+                    this.dataSource2.paginator = this.paginator;
+                },
+                (error) => {
+                    this._snackBar.open(error.error.msg, '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                }
+            );
     }
 
     openModalLiquidacion(

@@ -1,27 +1,55 @@
-<div class="row justify-content-center" [class.component-dark-theme]="themeService.isDark()"
-    [class.component-rtl-enabled]="themeService.isRTLEnabled()">
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
     <mat-card class="example-card">
         <div class="container-fluid">
             <h3 class="text-center mt-3">Procesar solicitud</h3>
 
             <mat-card-content>
                 <form [formGroup]="preFactura">
-                    <div class="row mt-3 ">
-                        <div class="col-xs-6 col-sm-12">
+                    <div class="row mt-3">
+                        <div class="col-6">
                             <div>
                                 <mat-form-field class="w-100 mt-2">
                                     <mat-label>Monto Solicitado</mat-label>
-                                    <input type="number" matInput formControlName="loanAmount"
-                                        readonly />
+                                    <input
+                                        type="number"
+                                        matInput
+                                        formControlName="loanAmount"
+                                        readonly
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <mat-form-field class="w-100 mt-2">
+                                    <mat-label>Cuotas</mat-label>
+                                    <input
+                                        type="number"
+                                        matInput
+                                        formControlName="paymentDeadline"
+                                        readonly
+                                    />
                                 </mat-form-field>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-12 mt-2">
                             <mat-form-field appearance="fill" class="w-100">
-                                <mat-label class="d-block fw-semibold">Estado de la solicitud</mat-label>
-                                <mat-select name="staff" [formControlName]="'loanStatus'">
-                                    <mat-option *ngFor="let coll of selectSolicitudes" [value]="coll.name" >
-                                        {{coll.name}}
+                                <mat-label class="d-block fw-semibold"
+                                    >Estado de la solicitud</mat-label
+                                >
+                                <mat-select
+                                    name="staff"
+                                    [formControlName]="'loanStatus'"
+                                >
+                                    <mat-option
+                                        *ngFor="let coll of selectSolicitudes"
+                                        [value]="coll.name"
+                                    >
+                                        {{ coll.name }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -29,18 +57,21 @@
                         <div class="col-12">
                             <mat-form-field class="w-100">
                                 <mat-label>Observaciones</mat-label>
-                                <textarea matInput placeholder="" formControlName="paymentObservation"></textarea>
+                                <textarea
+                                    matInput
+                                    placeholder=""
+                                    formControlName="paymentObservation"
+                                ></textarea>
                             </mat-form-field>
                         </div>
                     </div>
-
                 </form>
             </mat-card-content>
             <mat-card-actions class="mb-3">
-                <button mat-button  (click)="ProcessSol()">
+                <button mat-button (click)="ProcessSol()">
                     Procesar solicitud
                 </button>
-                <button mat-button  (click)="closeDialog()">Cerrar</button>
+                <button mat-button (click)="closeDialog()">Cerrar</button>
             </mat-card-actions>
         </div>
     </mat-card>
