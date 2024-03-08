@@ -12,7 +12,9 @@ export class SelectservicesComponent {
     @Output() serviceSelected = new EventEmitter<any>();
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log(this.Servicios)
+    }
 
     onServiceChange(event: any) {
         console.log(this.ctr.value);

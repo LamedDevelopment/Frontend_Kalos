@@ -15,6 +15,7 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-lounge',
@@ -38,6 +39,9 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     tradename: any;
 
     startServiceform: FormGroup;
+    days = [];
+    servicesManager = [];
+    typeServices: any;
     constructor(
         public themeService: CustomizerSettingsService,
         private _getAppointment: AppointmentsService,
@@ -45,7 +49,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         public _loungService: LoungService,
         private _snackBar: MatSnackBar,
         private managerservice: ManagerService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router:Router
     ) {}
 
     /**
@@ -53,7 +58,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
      */
     ngOnInit(): void {
         this.startServiceform = this.fb.group({
-            typeservice: [''],
+            services: ['', [Validators.required]],
+            typeServices: [''],
             staff: ['', [Validators.required]],
             dateService: ['', [Validators.required]],
             timeService: ['', [Validators.required]],
@@ -72,7 +78,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         this.tradename = el.branchoffices[0].tradename;
 
         // this.colaboradores = el.branchoffices[0].collaborators;
-        this.getServices();
+        this.getServices(); // traer servicios
+        this.getDays();
     }
 
     ColaboratorSeledted(e: any) {
@@ -97,6 +104,25 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     }
 
     getServices() {
+        console.log(this.businessSelected.nit)
+        let body = {
+            nit: this.businessSelected.nit,
+            tradename: this.tradename,
+        };
+        this.managerservice
+            .getServices('bus/viewsebu', body)
+            .subscribe((response: any) => {
+                console.log(response)
+                this.servicesManager = response.msg.branchoffices[0].services;
+            });
+    }
+
+
+
+    /** Evento que obtiene el colaborador seleccionado */
+    hourSelected(event: any) {}
+
+    /* getServices() {
         this._loungService.getServices('sv/allse').subscribe(
             (response) => {
                 this.Servicios = response.msg;
@@ -105,7 +131,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
                 this.showAlert = true;
             }
         );
-    }
+    } */
 
     onServiceSelected(event: any) {
         this.ServiceSelected = event._id;
@@ -113,23 +139,32 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         this.TypeServicios = [];
     }
 
-    getStaffCtr() {
-        return this.startServiceform?.get('staff') as FormControl;
-    }
-
-    getTypeserviceCtr() {
-        return this.startServiceform?.get('typeservice') as FormControl;
-    }
 
     getdateService() {
         return this.startServiceform?.get('dateService') as FormControl;
     }
+    getServicesCtr() {
+        return this.startServiceform.get('services') as FormControl;
+    }
 
-    getHourCtr() {
-        return this.startServiceform?.get('timeService') as FormControl;
+    getTypeServicesCtr() {
+        return this.startServiceform.get('typeServices') as FormControl;
+    }
+
+    getStaffCtr() {
+        return this.startServiceform.get('staff') as FormControl;
+    }
+
+    getTimeService() {
+        return this.startServiceform.get('timeService') as FormControl;
     }
 
     typeServiceSelected(event: any) {}
+
+    /** Evento que obtiene el dia seleccionado */
+    public daySelected(event: any) {
+        this.startServiceform.patchValue({ dateService: event.valor });
+    }
 
     collaSelected(event: any) {
         this.getTypeServices();
@@ -139,7 +174,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         this.startServiceform.patchValue({ dateService: event });
     }
 
-    getTypeServices() {
+    /* getTypeServices() {
         let body = {
             serviceID: this.ServiceSelected,
         };
@@ -148,18 +183,47 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             .subscribe((response: any) => {
                 this.TypeServicios = response.msg;
             });
+    }; */
+
+    getTypeServices() {
+        let body = {
+            serviceID: this.startServiceform.get('services')?.value,
+        };
+        this.managerservice
+            .getTypesServices('tsv/tsxserid', body)
+            .subscribe((response: any) => {
+                this.typeServices = response.msg;
+            });
+    }
+
+    /** Evento que obtiene el servicio seleccionado */
+    serviceSelected(event: any) {
+        this.getTypeServices();
+    }
+
+    getDays() {
+        let body = {
+            businessID: this.businessSelected._id,
+            tradename: this.tradename,
+        };
+        this.managerservice
+            .getDays('apu/busdaycal', body)
+            .subscribe((response: any) => {
+                this.days = response.msg.branchoffices;
+            });
     }
 
     goBack() {
         this.loungeSelected = false;
         this.collSelected = [];
+        this.startServiceform.reset();
     }
 
     toggleTheme() {
         this.themeService.toggleTheme();
     }
 
-    AgendarCita(event: any) {
+    AgendarCita() {
         console.log('agendar cita', this.startServiceform.value);
 
         let dataUser = this.getDataUser();
@@ -178,8 +242,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             manager: '',
             observationManager: '',
             staff: this.startServiceform.get('staff')?.value,
-            services: this.ServiceSelected,
-            typeServices: this.startServiceform.get('typeservice')?.value,
+            services: this.startServiceform.get('services')?.value,
+            typeServices: this.startServiceform.get('typeServices')?.value,
             dateService: this.startServiceform.get('dateService')?.value,
             timeService: this.startServiceform.get('timeService')?.value,
         };
@@ -197,6 +261,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
                         verticalPosition: this.verticalPosition,
                         duration: this.durationInSeconds * 1000,
                     });
+                    this.router.navigate(['/', 'user', 'appo'])
                 } else {
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,

@@ -77,112 +77,61 @@
             Volver
         </button>
     </div>
-    <app-lng-stats
-        [services]="Servicios"
-        (serviceSelected)="onServiceSelected($event)"
-    ></app-lng-stats>
-    <div
-        fxLayout="row"
-        fxLayout.xs="column"
-        fxLayout.sm="column"
-        fxLayout.md="column"
-        fxLayoutGap="25px"
-        fxLayoutGap.xs="0"
-        fxLayoutGap.sm="0"
-        fxLayoutGap.md="0"
-    >
-        <div
-            fxFlex="40%"
-            fxFlex.xs="100%"
-            fxFlex.sm="100%"
-            fxFlex.md="100%"
-            class="col"
-        >
-            <!-- <app-lms-progress></app-lms-progress> -->
 
-            <div
-                fxLayout="row"
-                fxLayout.xs="column"
-                fxLayout.sm="column"
-                fxLayoutGap="25px"
-                fxLayoutGap.xs="0"
-                fxLayoutGap.sm="0"
-            >
-                <mat-card
-                    class="mb-25 tagus-card top-instructors-box"
-                    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
-                >
-                    <mat-card-header class="border-bottom">
-                        <h5 class="mb-0">Colaboradores</h5>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <div class="instructors-list d-flex flex-wrap">
-                            <div class="row">
-                                <div class="col-6">
-                                    <app-selectcollaborator
-                                        [ctr]="getStaffCtr()"
-                                        [idbusiness]="businessSelected._id"
-                                        [tradename]="tradename"
-                                        [services]="ServiceSelected"
-                                        (collaSelected)="collaSelected($event)"
-                                    ></app-selectcollaborator>
+    <div>
+        <mat-card
+            class="mb-25 "
+            [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+        >
+            <mat-card-header class="border-bottom">
+                <h5 class="mb-5">Crear agendamiento</h5>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="instructors-list d-flex flex-wrap">
+                        <div class="mt-10 col-12">
+                            <form [formGroup]="startServiceform">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <app-selectservices [Servicios]="servicesManager" [ctr]="getServicesCtr()"
+                                            (serviceSelected)="serviceSelected($event)"></app-selectservices>
+                                    </div>
+                                    <div class="col-4">
+                                        <app-select-type-services [typeServices]="typeServices" [ctr]="getTypeServicesCtr()"
+                                            (typeServiceSelected)="typeServiceSelected($event)"></app-select-type-services>
+                                    </div>
+                                    <div class="col-4">
+                                        <app-selectcollaborator [idbusiness]="businessSelected._id"
+                                            [tradename]="tradename"
+                                            [services]="startServiceform.get('services')?.value" [ctr]="getStaffCtr()"
+                                            (collaSelected)="collaSelected($event)"></app-selectcollaborator>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <app-select-type-services
-                                        [typeServices]="TypeServicios"
-                                        [ctr]="getTypeserviceCtr()"
-                                        (typeServiceSelected)="
-                                            typeServiceSelected($event)
-                                        "
-                                    ></app-select-type-services>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <app-select-date-service (dateSelected)="daySelected($event)"
+                                            [days]="days"></app-select-date-service>
+                                    </div>
+                                    <div class="col-4">
+                                        <app-select-hours-service [ctr]="getTimeService()"
+                                            [business]="businessSelected._id"
+                                            [tradename]="tradename"
+                                            [staff]="startServiceform.get('staff')?.value"
+                                            [dateService]="startServiceform.get('dateService')?.value"
+                                            (hourSelected)="hourSelected($event)">
+                                        </app-select-hours-service>
+                                    </div>
                                 </div>
-                            </div>
+
+                            </form>
                         </div>
-                    </mat-card-content>
-                </mat-card>
+                </div>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <button mat-raised-button class="tagus" [disabled]="startServiceform.invalid"
+                    (click)="AgendarCita()">Crear Servicio</button>
 
-                <!--  <app-lng-collaborators
-                    [idbusiness]="businessSelected._id"
-                    [tradename]="tradename"
-                    [servicios]="ServiceSelected"
-                    (setColaboratorSelected)="ColaboratorSeledted($event)"
-                    (setServicioSelected)="setServicioSelected($event)"
-                ></app-lng-collaborators> -->
-            </div>
-
-            <!-- <app-lms-current-courses></app-lms-current-courses>
-
-            <app-lms-enrolled-created></app-lms-enrolled-created> -->
-        </div>
-
-        <div
-            fxFlex="60%"
-            fxFlex.xs="100%"
-            fxFlex.sm="100%"
-            fxFlex.md="100%"
-            class="col"
-        >
-            <app-lng-services-completation
-                [businessID]="businessSelected._id"
-                [tradename]="tradename"
-                [formGroup]="startServiceform"
-                [staff]="this.startServiceform.get('staff')?.value"
-                [hourctr]="getHourCtr()"
-                [dateService]="getdateService()"
-                (dateSelected)="dateSelected($event)"
-                (agendarCita)="AgendarCita($event)"
-                *ngIf="this.startServiceform?.get('typeservice')?.value"
-            ></app-lng-services-completation>
-
-            <!-- <app-lms-experience></app-lms-experience>
-
-            <app-lms-active-course></app-lms-active-course>
-
-            <app-lms-course-completion></app-lms-course-completion>
-
-            <app-lms-messages></app-lms-messages>
-
-            <app-lms-students></app-lms-students> -->
-        </div>
+            </mat-card-actions>
+        </mat-card>
     </div>
+
 </div>
