@@ -19,6 +19,7 @@ import { TicketComponent } from './ticket/ticket.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
+import { QrComponent } from 'src/app/shared/pages/qr/qr.component';
 
 const routes: Routes = [
     {
@@ -104,6 +105,11 @@ const routes: Routes = [
             {
                 path: 'solicitudes',
                 component: TicketsComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'qr',
+                component: QrComponent,
                 canActivate: [AuthGuard],
             },
             { path: '', redirectTo: '/man/dash', pathMatch: 'full' },

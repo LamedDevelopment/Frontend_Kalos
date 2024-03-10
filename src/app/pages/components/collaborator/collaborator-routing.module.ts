@@ -19,6 +19,7 @@ import { TermsConditionsComponentColl } from './terms-conditions/terms-condition
 import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 import { WalletComponent } from './wallet/wallet.component';
 import { SolicitudcollaComponent } from './solicitudcolla/solicitudcolla.component';
+import { QrComponent } from 'src/app/shared/pages/qr/qr.component';
 
 const routes: Routes = [
     {
@@ -89,6 +90,11 @@ const routes: Routes = [
             {
                 path: 'solicitud',
                 component: SolicitudcollaComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'qr',
+                component: QrComponent,
                 canActivate: [AuthGuard],
             },
             { path: '', redirectTo: '/colla/dash', pathMatch: 'full' },

@@ -16,11 +16,13 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegisterqrComponent } from './components/authentication/registerqr/registerqr.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
     { path: 'home', redirectTo: 'auth/login', pathMatch: 'full' },
     { path: 'auth/login', component: LoginComponent },
+    { path: 'usr/qr', component: RegisterqrComponent },
     { path: 'auth/login-fun', component: LoginComponentFun },
     { path: 'auth/forgot-password', component: ForgotPasswordComponent },
     { path: 'auth/reset-password', component: ResetPasswordComponent },

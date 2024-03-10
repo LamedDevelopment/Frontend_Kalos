@@ -9,6 +9,10 @@ import { PipesComponent } from './pipes/pipes.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CreateUserDialogBox } from './componentsShared/modal-dialog/modal-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { QrComponent } from './pages/qr/qr.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -16,12 +20,16 @@ import { MatButtonModule } from '@angular/material/button';
         ModelsComponent,
         PipesComponent,
         CreateUserDialogBox,
+        QrComponent,
     ],
     imports: [
         CommonModule,
         SharedRoutingModule,
         MatDialogModule,
         MatButtonModule,
+        MatCardModule,
+        MatInputModule,
+        ReactiveFormsModule,
     ],
     exports: [
         ClassComponent,

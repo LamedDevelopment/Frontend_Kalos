@@ -97,6 +97,7 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { ApiServiceHttp } from './pages/services/api.service';
 import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
+import { RegisterqrComponent } from './components/authentication/registerqr/registerqr.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -112,6 +113,7 @@ registerLocaleData(localeEs, 'es');
         ConfirmMailComponent,
         LockScreenComponent,
         LoginComponentFun,
+        RegisterqrComponent,
     ],
     imports: [
         BrowserModule,
