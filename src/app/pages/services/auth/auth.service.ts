@@ -99,6 +99,17 @@ export class AuthService {
     }
 
     /**
+     * activate user endpoint
+     *
+     * @param token
+     */
+    ActiveUser(token: string): Observable<any> {
+        return this._apiServiceHttp.get(
+            `emailverification/${token}`
+        );
+    }
+
+    /**
      * Sign in
      *
      * @param credentials

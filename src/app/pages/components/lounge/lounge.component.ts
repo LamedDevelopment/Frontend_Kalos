@@ -93,11 +93,17 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     }
 
     getBusiness() {
-        this._loungService.getBusiness('bus/allbus').subscribe(
-            (response) => {
+        this.Business =[];
+        let dataUser = this.getDataUser();
+        const body = {
+            membership: dataUser.membership
+        }
+        this._loungService.getBusinessPost('bus/bususer', body).subscribe(
+            (response:any) => {
+                console.log(response)
                 this.Business = response.msg;
             },
-            (response) => {
+            (response:any) => {
                 this.showAlert = true;
             }
         );

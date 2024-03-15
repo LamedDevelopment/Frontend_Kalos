@@ -29,7 +29,7 @@ const routes: Routes = [
     { path: 'auth/register', component: RegisterComponent },
     { path: 'auth/signin-signup', component: SigninSignupComponent },
     { path: 'auth/logout', component: LogoutComponent },
-    { path: 'auth/confirm-mail', component: ConfirmMailComponent },
+    { path: 'auth/verification-email', component: ConfirmMailComponent },
     { path: 'auth/lock-screen', component: LockScreenComponent },
     { path: '**', component: NotFoundComponent },
 ];

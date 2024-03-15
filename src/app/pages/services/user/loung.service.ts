@@ -75,6 +75,20 @@ constructor(
   }
 
   /**
+   * Get Bussiness post
+   *@url
+   */
+  getBusinessPost(url:any, data:any): Observable<any> {
+    return this._apiServiceHttp.post(url, data).pipe(
+      map((response: any) => {
+        // Return a new observable with the response
+        return response;
+
+      }),
+    );
+  }
+
+  /**
    * Get Services
    *@url
    */
