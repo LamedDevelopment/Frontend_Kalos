@@ -142,8 +142,27 @@
                                         Nombres usuario
                                     </th>
                                     <td mat-cell *matCellDef="let element">
-                                        {{ element.user.nomUser }} {{ " " }}
-                                        {{ element.user.apeUser }}
+                                        <p
+                                            *ngIf="
+                                                element?.userForeing?.nomUser !=
+                                                ''
+                                            "
+                                        >
+                                            {{ element?.userForeing?.nomUser }}
+                                            {{ " "
+                                            }}{{
+                                                element?.userForeing?.apeUser
+                                            }}
+                                        </p>
+                                        <p
+                                            *ngIf="
+                                                element?.userForeing?.nomUser ==
+                                                ''
+                                            "
+                                        >
+                                            {{ element?.user?.nomUser }} {{ " "
+                                            }}{{ element?.user?.apeUser }}
+                                        </p>
                                     </td>
                                 </div>
                             </ng-container>

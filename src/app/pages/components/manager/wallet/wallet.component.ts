@@ -114,9 +114,8 @@ export class WalletComponent implements AfterViewInit, OnInit {
 
             dialogRef.afterClosed().subscribe((data) => {
                 // Una vez cerrado el modal, puedes acceder a los datos devueltos
-                if (data) {
-                    console.log('Datos del modal cerrado:', data);
-                }
+                console.log('Datos del modal cerrado:', data);
+                this.getHist();
             });
         }, 1000);
     }

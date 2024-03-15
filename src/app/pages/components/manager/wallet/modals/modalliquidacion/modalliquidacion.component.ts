@@ -40,9 +40,6 @@ export class ModalliquidacionComponent {
     }
 
     getData() {
-        console.log('====================================');
-        console.log(this.data);
-        console.log('====================================');
         let body = {
             collaID: this.data.element.collaID,
         };
@@ -143,6 +140,8 @@ export class ModalliquidacionComponent {
             );
         }
 
+        console.log(this.dataTosend);
+
         this.dataTosend.commissionDateRange = {
             datastart: this.data.datastart,
             dateEnd: this.data.dateEnd,
@@ -155,9 +154,12 @@ export class ModalliquidacionComponent {
             .subscribe(
                 (response: any) => {
                     if (response.ok == true) {
-                        console.log('====================================');
-                        console.log(response);
-                        console.log('====================================');
+                        this.closeDialog();
+                        this._snackBar.open(response.msg, '', {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        });
                     } else {
                         this._snackBar.open(response.msg, '', {
                             horizontalPosition: this.horizontalPosition,

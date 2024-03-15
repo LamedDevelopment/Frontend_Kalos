@@ -175,15 +175,13 @@ export class ModalappoforaComponent {
 
         this.managerservice.createAppoFora('apu', body).subscribe(
             (response: any) => {
-                console.log('====================================');
-                console.log(response);
-                console.log('====================================');
                 if (response.ok == true) {
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
                         verticalPosition: this.verticalPosition,
                         duration: this.durationInSeconds * 1000,
                     });
+                    this.closeDialog();
                 } else {
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
@@ -194,7 +192,6 @@ export class ModalappoforaComponent {
             },
             (error) => {
                 console.log(error);
-
                 this._snackBar.open(error.error.msg, '', {
                     horizontalPosition: this.horizontalPosition,
                     verticalPosition: this.verticalPosition,

@@ -278,7 +278,7 @@ export class AppointmentComponent {
             .afterClosed()
             .subscribe((data) => {
                 // una vez cerrado el modal se refresca la data
-                this.GetCitas(2);
+                this.GetCitas(1);
                 this.GetHistoricoCitas();
             });
     }
@@ -300,7 +300,7 @@ export class AppointmentComponent {
             .afterClosed()
             .subscribe((data) => {
                 // una vez cerrado el modal se refresca la data
-                this.GetCitas(2);
+                this.GetCitas(1);
                 this.GetHistoricoCitas();
             });
     }
