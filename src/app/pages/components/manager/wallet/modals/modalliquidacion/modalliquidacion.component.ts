@@ -141,42 +141,46 @@ export class ModalliquidacionComponent {
         }
 
         console.log(this.dataTosend);
+        if (this.dataTosend) {
+            this.dataTosend.commissionDateRange = {
+                datastart: this.data.datastart,
+                dateEnd: this.data.dateEnd,
+            };
+            console.log(this.dataTosend);
 
-        this.dataTosend.commissionDateRange = {
-            datastart: this.data.datastart,
-            dateEnd: this.data.dateEnd,
-        };
+            this.postData(this.dataTosend);
+        } else {
+            this.postData(this.dataLoans);
+        }
+    }
 
-        console.log(this.dataTosend);
-
-        this.managerservice
-            .preRoll('payroll/paypayroll', this.dataTosend)
-            .subscribe(
-                (response: any) => {
-                    if (response.ok == true) {
-                        this.closeDialog();
-                        this._snackBar.open(response.msg, '', {
-                            horizontalPosition: this.horizontalPosition,
-                            verticalPosition: this.verticalPosition,
-                            duration: this.durationInSeconds * 1000,
-                        });
-                    } else {
-                        this._snackBar.open(response.msg, '', {
-                            horizontalPosition: this.horizontalPosition,
-                            verticalPosition: this.verticalPosition,
-                            duration: this.durationInSeconds * 1000,
-                        });
-                    }
-                },
-                (error) => {
-                    console.log(error);
-                    this._snackBar.open(error.error.msg, '', {
+    postData(body: any) {
+        this.managerservice.preRoll('payroll/paypayroll', body).subscribe(
+            (response: any) => {
+                if (response.ok == true) {
+                    this.closeDialog();
+                    this._snackBar.open(response.msg, '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                } else {
+                    this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
                         verticalPosition: this.verticalPosition,
                         duration: this.durationInSeconds * 1000,
                     });
                 }
-            );
+            },
+            (error) => {
+                console.log(error);
+                this._snackBar.open(error.error.msg, '', {
+                    horizontalPosition: this.horizontalPosition,
+                    verticalPosition: this.verticalPosition,
+                    duration: this.durationInSeconds * 1000,
+                });
+            }
+        );
     }
 
     closeDialog() {

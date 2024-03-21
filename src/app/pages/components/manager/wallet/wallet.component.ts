@@ -42,10 +42,10 @@ export class WalletComponent implements AfterViewInit, OnInit {
 
     ngOnInit() {
         this.range.controls.start.setValue(
-            new Date(new Date().setDate(new Date().getDate()))
+            new Date(new Date().setDate(new Date().getDate() - 5))
         );
         this.range.controls.end.setValue(
-            new Date(new Date().setDate(new Date().getDate() + 5))
+            new Date(new Date().setDate(new Date().getDate() + 6))
         );
     }
 
