@@ -21,18 +21,21 @@ export class EmailuserComponent {
     @Output() userSelected = new EventEmitter<any>();
     filteredAliados: Observable<any>;
     data_aliados: any[] = [];
+
+    typingTimer: any;
+    typingInterval: number = 2000; //
     constructor(private appointmentsService: AppointmentsService) {}
 
     ngOnInit(): void {
         this.filteredAliados = this.emailctr.valueChanges.pipe(
-            debounceTime(500), // Espera 500ms después de que el usuario deja de escribir
+            debounceTime(2000), // Espera 500ms después de que el usuario deja de escribir
             distinctUntilChanged(),
             switchMap((value) => this.filterAliados(value))
         );
     }
 
     filterAliados(value: string): Observable<any[]> {
-        if (value.length > 10) {
+        if (value.length > 5) {
             const body = { emailUser: value };
             return this.appointmentsService.getUserByEmail(body).pipe(
                 switchMap((res: any) => {
