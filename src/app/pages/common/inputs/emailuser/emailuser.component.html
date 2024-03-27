@@ -1,0 +1,20 @@
+<form class="">
+    <mat-form-field class="w-100">
+        <mat-label>{{ label }}</mat-label>
+        <input
+            matInput
+            aria-label="Envio"
+            [matAutocomplete]="auto"
+            [formControl]="emailctr"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+                *ngFor="let item of filteredAliados | async"
+                [value]="item.name"
+                (click)="AliadoSelect(item)"
+            >
+                <span class="ml-3">{{ item.name }}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>

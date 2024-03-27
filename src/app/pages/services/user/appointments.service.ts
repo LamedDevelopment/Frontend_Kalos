@@ -159,7 +159,7 @@ export class AppointmentsService {
      * @param url
      * @param data
      */
-    processPayBillingMan(url:any , data: any): Observable<any> {
+    processPayBillingMan(url: any, data: any): Observable<any> {
         return this._apiServiceHttp.post(url, data).pipe(
             map((response: any) => {
                 // Return a new observable with the response
@@ -273,6 +273,15 @@ export class AppointmentsService {
     loadService(data: any): Observable<any> {
         return this._apiServiceHttp.post(`lose/solcolla`, data).pipe(
             map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getUserByEmail(data: any): Observable<any> {
+        return this._apiServiceHttp.post(`usr/usem`, data).pipe(
+            map((response: any) => {
+                // Return a new observable with the response
                 return response;
             })
         );

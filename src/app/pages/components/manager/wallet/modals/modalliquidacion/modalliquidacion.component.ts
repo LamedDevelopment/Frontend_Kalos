@@ -26,6 +26,7 @@ export class ModalliquidacionComponent {
     total_pagar: number = 0;
     payLoans: any = [];
     dataTosend: any;
+    dataTosendnoLoans: any;
     constructor(
         public themeService: CustomizerSettingsService,
         private dialogRef: MatDialogRef<ModalserviceComponent>,
@@ -48,8 +49,14 @@ export class ModalliquidacionComponent {
 
         this.managerservice.getpayloans('lose/payloans', body).subscribe(
             (response: any) => {
+                console.log(response);
+
                 if (response.ok == true) {
-                    this.dataLoans = response.msg;
+                    if ('payloans' in response.msg) {
+                        this.dataLoans = response.msg;
+                    } else {
+                        this.dataTosendnoLoans = response.msg;
+                    }
                 } else {
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
@@ -150,7 +157,7 @@ export class ModalliquidacionComponent {
 
             this.postData(this.dataTosend);
         } else {
-            this.postData(this.dataLoans);
+            this.PostSinPrestamos();
         }
     }
 
@@ -181,6 +188,44 @@ export class ModalliquidacionComponent {
                 });
             }
         );
+    }
+
+    PostSinPrestamos() {
+        this.dataTosendnoLoans.BusinessCommissionValue = this.total_pagar;
+        this.dataTosendnoLoans.payloans = [];
+        this.dataTosendnoLoans.commissionPayment = this.total_pagar;
+        this.dataTosendnoLoans.commissionDateRange = {
+            datastart: this.data.datastart,
+            dateEnd: this.data.dateEnd,
+        };
+        this.managerservice
+            .preRoll('payroll/paynoloans', this.dataTosendnoLoans)
+            .subscribe(
+                (response: any) => {
+                    if (response.ok == true) {
+                        this.closeDialog();
+                        this._snackBar.open(response.msg, '', {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        });
+                    } else {
+                        this._snackBar.open(response.msg, '', {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        });
+                    }
+                },
+                (error) => {
+                    console.log(error);
+                    this._snackBar.open(error.error.msg, '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                }
+            );
     }
 
     closeDialog() {

@@ -19,6 +19,7 @@ import { ModalservicesService } from 'src/app/pages/services/modalservices.servi
 import { ModalappoforaComponent } from 'src/app/pages/common/modalappofora/modalappofora.component';
 import { ManagerService } from 'src/app/pages/services/manager.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ModalappomanagerComponent } from 'src/app/pages/common/modalappomanager/modalappomanager.component';
 
 @Component({
     selector: 'app-appointment',
@@ -311,6 +312,34 @@ export class AppointmentComponent {
     ) {
         setTimeout(() => {
             const dialogRef = this.dialog.open(ModalappoforaComponent, {
+                width: '1000px',
+                enterAnimationDuration,
+                exitAnimationDuration,
+                data: {
+                    _id: this.id_,
+                    branchoffices: this.branchoffices, // enviar sedes al modal
+                },
+            });
+
+            dialogRef.afterClosed().subscribe((data) => {
+                // Una vez cerrado el modal, puedes acceder a los datos devueltos
+                if (data) {
+                    console.log('Datos del modal cerrado:', data);
+                }
+
+                // Una vez cerrado el modal se refresca la data
+                this.GetCitas(1);
+                this.GetHistoricoCitas();
+            });
+        }, 1000);
+    }
+
+    createAppoByEmail(
+        enterAnimationDuration: string,
+        exitAnimationDuration: string
+    ) {
+        setTimeout(() => {
+            const dialogRef = this.dialog.open(ModalappomanagerComponent, {
                 width: '1000px',
                 enterAnimationDuration,
                 exitAnimationDuration,

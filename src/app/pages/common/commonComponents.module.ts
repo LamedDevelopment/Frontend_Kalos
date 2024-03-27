@@ -15,6 +15,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SelectDateServiceComponent } from './selects/select-date-service/select-date-service.component';
 import { SelectHoursServiceComponent } from './selects/select-hours-service/select-hours-service.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ModalappomanagerComponent } from './modalappomanager/modalappomanager.component';
+import { EmailuserComponent } from './inputs/emailuser/emailuser.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
     declarations: [
@@ -25,6 +28,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         SelectTypeServicesComponent,
         SelectDateServiceComponent,
         SelectHoursServiceComponent,
+        ModalappomanagerComponent,
+        EmailuserComponent,
     ],
     imports: [
         CommonModule,
@@ -37,6 +42,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         ReactiveFormsModule,
         MatDialogModule,
         MatDatepickerModule,
+        MatAutocompleteModule,
     ],
     exports: [
         SelectbussinesComponent,

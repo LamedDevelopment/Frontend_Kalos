@@ -3,9 +3,13 @@
     <div class="row align-items-center mb-5">
         <div class="col-5 p-5">
             <div class="btn-box text-center">
-                <a mat-flat-button routerLink="/user/lounges" class="tagus"
-                    >Agendar nueva cita</a
+                <button
+                    class="button tagus"
+                    mat-flat-button
+                    (click)="createAppoByEmail('300ms', '100ms')"
                 >
+                    Agendar nueva cita
+                </button>
             </div>
         </div>
         <div class="col-5 p-5">
