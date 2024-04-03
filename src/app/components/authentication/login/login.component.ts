@@ -71,7 +71,7 @@ export class LoginComponent {
             async (res) => {
                 if(res.ok){
                     const redirectURL =
-                    this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/user/dash';
+                    this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/user/lounges';
 
                     // Navigate to the redirect url
                     this._router.navigateByUrl(redirectURL);

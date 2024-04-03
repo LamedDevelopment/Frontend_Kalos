@@ -64,7 +64,10 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             dateService: ['', [Validators.required]],
             timeService: ['', [Validators.required]],
         });
-        this.getBusiness();
+
+        setTimeout(() => {
+            this.getBusiness();
+        }, 500);
     }
 
     ngAfterViewInit() {}
@@ -294,6 +297,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
     getDataUser() {
         let datauser = JSON.parse(sessionStorage.getItem('dataUser')!);
+        console.log(datauser)
         return datauser;
     }
 }
