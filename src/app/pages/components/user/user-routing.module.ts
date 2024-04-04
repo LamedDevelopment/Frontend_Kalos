@@ -28,14 +28,14 @@ const routes: Routes = [
             {path: 'dash', component: DashComponent, canActivate: [AuthGuard] },
             {path: 'hisuap', component: HistoricoListComponent, canActivate: [AuthGuard] },
             {path: 'billetera', component: InvoiceListComponent, canActivate: [AuthGuard] },
-            {path: 'lounges', component: LoungeComponent, canActivate: [AuthGuard] },
+            {path: 'home', component: LoungeComponent, canActivate: [AuthGuard] },
             /* {path: 'pay', component: PaymentComponent },
             {path: 'pays', component: PaymentsComponent }, */
             {path: 'privacy', component: PrivacyPolicyComponent, canActivate: [AuthGuard] },
             {path: 'security', component: SecurityComponent, canActivate: [AuthGuard] },
             /* {path: 'services', component: ServicesComponent }, */
             { path: 'terms', component: TermsConditionsComponent, canActivate: [AuthGuard] },
-            { path: '', redirectTo: '/user/appo', pathMatch: 'full' },
+            { path: '', redirectTo: '/user/home', pathMatch: 'full' },
         ]
     }
 ];

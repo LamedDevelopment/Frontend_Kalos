@@ -101,7 +101,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         const body = {
             membership: dataUser.membership
         }
-        this._loungService.getBusinessPost('bus/bususer', body).subscribe(
+        this._loungService.getBusinessPost('bus/appo', body).subscribe(
             (response:any) => {
                 console.log(response)
                 this.Business = response.msg;
