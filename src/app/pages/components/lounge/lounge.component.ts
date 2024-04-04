@@ -67,7 +67,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
         setTimeout(() => {
             this.getBusiness();
-        }, 500);
+        }, 1000);
     }
 
     ngAfterViewInit() {}
