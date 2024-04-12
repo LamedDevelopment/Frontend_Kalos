@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
     signUpForm: FormGroup;
     showAlert: boolean = false;
     validar: boolean = false;
+    progress3: number;
 
     constructor(
         public themeService: CustomizerSettingsService,
@@ -148,6 +149,29 @@ export class RegisterComponent implements OnInit {
         return false;
       }
     }
+  }
+
+  validarNumber(){
+    const regex =  /\d/
+    return regex.test(this.signUpForm.get('pass')?.value.trim())
+  }
+
+  validarMayus(){
+    const regex =  /[A-Z]/
+    return regex.test(this.signUpForm.get('pass')?.value.trim())
+  }
+
+  validarChar(){
+    const regex =  /\W/
+    return regex.test(this.signUpForm.get('pass')?.value.trim())
+  }
+
+  MatchPassword(){
+    if(this.signUpForm.get('pass')?.value == '' && this.signUpForm.get('confirmPassword')?.value == ''){
+      return null
+    }
+    this.progress3 = 100;
+   return this.signUpForm.get('pass')?.value ==this.signUpForm.get('confirmPassword')?.value
   }
 
   fireToast(msg:any) {
