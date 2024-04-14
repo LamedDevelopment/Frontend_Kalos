@@ -6,6 +6,7 @@ import { AppointmentsService } from 'src/app/pages/services/user/appointments.se
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { ModalserviceComponent } from '../modalservice/modalservice.component';
 import Swal from 'sweetalert2';
+import { ManagerService } from 'src/app/pages/services/manager.service';
 
 @Component({
     selector: 'app-closeservice',
@@ -21,10 +22,14 @@ export class CloseserviceComponent {
         private dialogRef: MatDialogRef<ModalserviceComponent>,
         private _formBuilder: FormBuilder,
         private modalservice: ModalservicesService,
-        private _getAppointment: AppointmentsService
+        private _getAppointment: AppointmentsService,
+        private managerservice: ManagerService
     ) {}
 
     ngOnInit(): void {
+        console.log('====================================');
+        console.log('get');
+        console.log('====================================');
         this.businessData = this.modalservice.getBusinessData();
         this.endServiceform = this._formBuilder.group({
             observacion: [''],

@@ -1,0 +1,20 @@
+<form class="">
+    <mat-form-field class="w-100 mt-2">
+        <mat-label>Referencia</mat-label>
+        <input
+            matInput
+            aria-label="Envio"
+            [matAutocomplete]="auto"
+            [formControl]="ctr"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+                *ngFor="let item of filteredAliados | async"
+                [value]="item.reference"
+                (click)="onSelectionChange(item)"
+            >
+                <span class="ml-3">{{ item?.reference }}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>

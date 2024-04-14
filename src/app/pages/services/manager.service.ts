@@ -95,4 +95,28 @@ export class ManagerService {
             })
         );
     }
+
+    getProducts(): Observable<any> {
+        return this._apiServiceHttp.get('bp').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getBrand(body: any): Observable<any> {
+        return this._apiServiceHttp.post('bp/consbrand', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getReference(body: any): Observable<any> {
+        return this._apiServiceHttp.post('bp/consref', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
 }

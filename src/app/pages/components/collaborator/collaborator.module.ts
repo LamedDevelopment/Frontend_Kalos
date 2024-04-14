@@ -72,6 +72,7 @@ import { CloseserviceComponent } from './modals/closeservice/closeservice.compon
 import { SolicitudcollaComponent } from './solicitudcolla/solicitudcolla.component';
 import { LoanmodalComponent } from './modals/loanmodal/loanmodal.component';
 import { HelpermoduleModule } from '../../helpers/helpermodule.module';
+import { commonComponentsModule } from '../../common/commonComponents.module';
 
 @NgModule({
     declarations: [
@@ -151,6 +152,7 @@ import { HelpermoduleModule } from '../../helpers/helpermodule.module';
         CdkAccordionModule,
         NgxMaterialTimepickerModule,
         HelpermoduleModule,
+        commonComponentsModule,
     ],
 })
 export class CollaboratorModule {}
