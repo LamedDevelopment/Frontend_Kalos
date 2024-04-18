@@ -7,6 +7,11 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
 import { ModalserviceComponent } from '../modalservice/modalservice.component';
 import Swal from 'sweetalert2';
 import { ManagerService } from 'src/app/pages/services/manager.service';
+import {
+    MatSnackBar,
+    MatSnackBarHorizontalPosition,
+    MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-closeservice',
@@ -17,19 +22,20 @@ export class CloseserviceComponent {
     endServiceform: FormGroup;
     businessData: any;
 
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
+    durationInSeconds = 5;
     constructor(
         public themeService: CustomizerSettingsService,
         private dialogRef: MatDialogRef<ModalserviceComponent>,
         private _formBuilder: FormBuilder,
         private modalservice: ModalservicesService,
         private _getAppointment: AppointmentsService,
-        private managerservice: ManagerService
+        private managerservice: ManagerService,
+        private _snackBar: MatSnackBar
     ) {}
 
     ngOnInit(): void {
-        console.log('====================================');
-        console.log('get');
-        console.log('====================================');
         this.businessData = this.modalservice.getBusinessData();
         this.endServiceform = this._formBuilder.group({
             observacion: [''],
@@ -77,7 +83,19 @@ export class CloseserviceComponent {
                     });
                 }
             },
-            (error) => {}
+            (error) => {
+                this._snackBar.open(
+                    error.error?.msg
+                        ? error.error.msg
+                        : 'Error al finalizar Servicio',
+                    '',
+                    {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    }
+                );
+            }
         );
     }
 
