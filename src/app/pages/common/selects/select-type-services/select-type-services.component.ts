@@ -10,6 +10,7 @@ export class SelectTypeServicesComponent {
     @Input() ctr: FormControl<any>;
     @Input() typeServices: any = [];
     @Output() typeServiceSelected = new EventEmitter<any>();
+    valueInput:any;
     constructor() {}
 
     ngOnInit(): void {}
@@ -19,5 +20,6 @@ export class SelectTypeServicesComponent {
             propiedad: 'typeService_selected',
             valor: this.ctr.value,
         });
+        this.valueInput = this.ctr.value;
     }
 }

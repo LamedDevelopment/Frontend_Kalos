@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
     selector: 'app-selectservices',
@@ -10,17 +11,18 @@ export class SelectservicesComponent {
     @Input() ctr: FormControl<any>;
     @Input() Servicios: any = [];
     @Output() serviceSelected = new EventEmitter<any>();
+    valueInput:any;
     constructor() {}
 
     ngOnInit(): void {
         console.log(this.Servicios)
     }
 
-    onServiceChange(event: any) {
-        console.log(this.ctr.value);
+    onServiceChange(event: MatSelectChange ) {
         this.serviceSelected.emit({
             propiedad: 'service_selected',
             valor: this.ctr.value,
         });
+         this.valueInput = this.ctr.value;
     }
 }

@@ -25,6 +25,7 @@ export class SelectcollaboratorComponent {
     @Input() services: any = '';
     @Input() tradename: any = '';
     @Output() collaSelected = new EventEmitter<any>();
+    valueInput: any;
     constructor(private managerservice: ManagerService) {}
 
     ngOnChanges(changes: SimpleChanges) {
@@ -34,7 +35,6 @@ export class SelectcollaboratorComponent {
     }
 
     getColla() {
-        console.log('get colla');
 
         if (
             this.idbusiness == '' ||
@@ -43,10 +43,10 @@ export class SelectcollaboratorComponent {
         ) {
             return;
         }
-
+        console.log(this.idbusiness, this.services, this.tradename, 'get colla');
         let body = {
             business: this.idbusiness,
-            services: this.services,
+            services: this.services.services,
             tradename: this.tradename,
         };
         this.managerservice
@@ -61,5 +61,6 @@ export class SelectcollaboratorComponent {
             propiedad: 'business_selected',
             valor: this.ctr.value,
         });
+        this.valueInput =  this.ctr.value;
     }
 }

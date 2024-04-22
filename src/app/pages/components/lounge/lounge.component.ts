@@ -42,6 +42,11 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     days = [];
     servicesManager = [];
     typeServices: any;
+    priceService: any;
+    timeService: any;
+    typeServiceNameSelected: any;
+    ServiceNameSelected: any;
+    nameCollaborator: string;
     constructor(
         public themeService: CustomizerSettingsService,
         private _getAppointment: AppointmentsService,
@@ -73,8 +78,6 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     ngAfterViewInit() {}
 
     SelectLounge(el: any) {
-        console.log('buss selected', el);
-
         this.loungeSelected = true;
         this.businessSelected = el;
         this.nameLoung = el.branchoffices[0].businessName;
@@ -88,7 +91,6 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     ColaboratorSeledted(e: any) {
         this.collSelected = e;
         this.TypeServicios = e.typeService;
-        console.log(this.collSelected);
     }
 
     setServicioSelected(e: any) {
@@ -103,7 +105,6 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         }
         this._loungService.getBusinessPost('bus/bususer', body).subscribe(
             (response:any) => {
-                console.log(response)
                 this.Business = response.msg;
             },
             (response:any) => {
@@ -113,7 +114,6 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     }
 
     getServices() {
-        console.log(this.businessSelected.nit)
         let body = {
             nit: this.businessSelected.nit,
             tradename: this.tradename,
@@ -121,7 +121,6 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         this.managerservice
             .getServices('bus/viewsebu', body)
             .subscribe((response: any) => {
-                console.log(response)
                 this.servicesManager = response.msg.branchoffices[0].services;
             });
     }
@@ -168,7 +167,25 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         return this.startServiceform.get('timeService') as FormControl;
     }
 
-    typeServiceSelected(event: any) {}
+    typeServiceSelected(event: any) {
+        this.typeServiceNameSelected = event.valor.typeService;
+        this.getpriceService();
+
+    }
+
+    getpriceService(){
+        let body = {
+            business: this.businessSelected._id,
+            services: this.startServiceform.get('services')?.value.services,
+            typeServices:this.startServiceform.get('typeServices')?.value._id
+        }
+        this.managerservice
+            .getTypesServices('sp/bussviewallts', body)
+            .subscribe((response: any) => {
+                this.priceService = response?.msg?.[0].servicePrice;
+                this.timeService = response?.msg?.[0].serviceTime;
+            });
+    }
 
     /** Evento que obtiene el dia seleccionado */
     public daySelected(event: any) {
@@ -176,6 +193,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     }
 
     collaSelected(event: any) {
+        console.log(event)
+        this.nameCollaborator = `${event.valor.branchoffices.collaborators.name} ${event.valor.branchoffices.collaborators.lastname}`
         this.getTypeServices();
     }
 
@@ -196,7 +215,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
     getTypeServices() {
         let body = {
-            serviceID: this.startServiceform.get('services')?.value,
+            serviceID: this.startServiceform.get('services')?.value.services,
         };
         this.managerservice
             .getTypesServices('tsv/tsxserid', body)
@@ -207,6 +226,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
     /** Evento que obtiene el servicio seleccionado */
     serviceSelected(event: any) {
+        this.ServiceNameSelected = event.valor.name;
         this.getTypeServices();
     }
 
@@ -250,9 +270,9 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             tradename: this.tradename,
             manager: '',
             observationManager: '',
-            staff: this.startServiceform.get('staff')?.value,
+            staff: this.startServiceform.get('staff')?.value?.branchoffices?.collaborators?.user,
             services: this.startServiceform.get('services')?.value,
-            typeServices: this.startServiceform.get('typeServices')?.value,
+            typeServices: this.startServiceform.get('typeServices')?.value._id,
             dateService: this.startServiceform.get('dateService')?.value,
             timeService: this.startServiceform.get('timeService')?.value,
         };

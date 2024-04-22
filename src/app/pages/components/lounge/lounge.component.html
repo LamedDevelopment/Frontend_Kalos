@@ -132,6 +132,22 @@
 
             </mat-card-actions>
         </mat-card>
+        <div class="row">
+            <div class="col-12">
+                <mat-card *ngIf="nameCollaborator">
+                    <mat-card-header>
+                        <mat-card-title class="mr-10">{{nameCollaborator}} </mat-card-title>
+                        <mat-card-subtitle class="mr-10">Costo del servicio: {{priceService | currency:'COP':'symbol':'4.2'}}
+                            <p>tiempo: {{timeService}} min</p>
+                            <!-- <p>{{startServiceform.get('timeService')?.value}}</p>
+                            <p>{{startServiceform.get('dateService')?.value}}</p> -->
+                        </mat-card-subtitle>
+                        <p class="ml-10"> {{ServiceNameSelected}} {{typeServiceNameSelected}}</p>
+
+                    </mat-card-header>
+                </mat-card>
+            </div>
+        </div>
     </div>
 
 </div>
