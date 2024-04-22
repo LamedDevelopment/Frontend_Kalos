@@ -18,6 +18,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ModalappomanagerComponent } from './modalappomanager/modalappomanager.component';
 import { EmailuserComponent } from './inputs/emailuser/emailuser.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ProductComponent } from './selects/product/product.component';
+import { MarcaComponent } from './selects/marca/marca.component';
+import { ReferenceComponent } from './selects/reference/reference.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +33,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         SelectHoursServiceComponent,
         ModalappomanagerComponent,
         EmailuserComponent,
+        ProductComponent,
+        MarcaComponent,
+        ReferenceComponent,
     ],
     imports: [
         CommonModule,
@@ -52,6 +58,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         SelectTypeServicesComponent,
         SelectDateServiceComponent,
         SelectHoursServiceComponent,
+        EmailuserComponent,
+        ProductComponent,
+        MarcaComponent,
+        ReferenceComponent,
     ],
 })
 export class commonComponentsModule {}

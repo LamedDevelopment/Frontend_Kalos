@@ -7,6 +7,11 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
 import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
 import { ModalservicesService } from 'src/app/pages/services/modalservices.service';
 import Swal from 'sweetalert2';
+import {
+    MatSnackBarHorizontalPosition,
+    MatSnackBarVerticalPosition,
+    MatSnackBar,
+} from '@angular/material/snack-bar';
 @Component({
     selector: 'app-modalservice',
     templateUrl: './modalservice.component.html',
@@ -15,12 +20,16 @@ import Swal from 'sweetalert2';
 export class ModalserviceComponent {
     startServiceform: FormGroup;
     businessData: any;
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
+    durationInSeconds = 5;
     constructor(
         public themeService: CustomizerSettingsService,
         private dialogRef: MatDialogRef<ModalserviceComponent>,
         private _formBuilder: FormBuilder,
         private modalservice: ModalservicesService,
-        private _getAppointment: AppointmentsService
+        private _getAppointment: AppointmentsService,
+        private _snackBar: MatSnackBar
     ) {}
 
     ngOnInit(): void {
@@ -70,7 +79,20 @@ export class ModalserviceComponent {
                     });
                 }
             },
-            (error) => {}
+            (error) => {
+                console.log(error);
+                this._snackBar.open(
+                    error.error?.msg
+                        ? error.error.msg
+                        : 'Error al finalizar Servicio',
+                    '',
+                    {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    }
+                );
+            }
         );
     }
 
