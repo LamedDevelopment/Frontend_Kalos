@@ -119,4 +119,12 @@ export class ManagerService {
             })
         );
     }
+
+    getSalesofDay(): Observable<any> {
+        return this._apiServiceHttp.get('bill/checkout').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
 }

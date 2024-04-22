@@ -20,6 +20,7 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 import { QrComponent } from 'src/app/shared/pages/qr/qr.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
     {
@@ -110,6 +111,11 @@ const routes: Routes = [
             {
                 path: 'qr',
                 component: QrComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'checkout',
+                component: CheckoutComponent,
                 canActivate: [AuthGuard],
             },
             { path: '', redirectTo: '/man/dash', pathMatch: 'full' },

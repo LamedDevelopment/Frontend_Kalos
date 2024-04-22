@@ -75,6 +75,7 @@ import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.compon
 import { commonComponentsModule } from '../../common/commonComponents.module';
 import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/modalliquidacion.component';
 import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
     declarations: [
@@ -101,6 +102,7 @@ import { ChecksloansComponent } from './wallet/components/checksloans/checksloan
         ticketsModalComponent,
         ModalliquidacionComponent,
         ChecksloansComponent,
+        CheckoutComponent,
     ],
     imports: [
         CommonModule,
