@@ -15,7 +15,6 @@ export class SelectservicesComponent {
     constructor() {}
 
     ngOnInit(): void {
-        console.log(this.Servicios)
     }
 
     onServiceChange(event: MatSelectChange ) {

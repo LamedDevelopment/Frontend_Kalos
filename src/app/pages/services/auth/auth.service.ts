@@ -72,31 +72,21 @@ export class AuthService {
      *
      * @param password
      */
-    resetPassword(password: string): Observable<any> {
+    resetPassword(body: string): Observable<any> {
         return this._apiServiceHttp
-            .post('authenticate/reset-password', password)
+            .post('forpass/rpuspass', body)
             .pipe(
                 switchMap((response: any) => {
-                    if (!response.status) {
-                        return this.resetPasswordStudent(password);
-                    }
+                    console.log(response)
+                    // if (!response.status) {
+
+                    // }
 
                     return of(response);
                 })
             );
     }
 
-    /**
-     * Reset password
-     *
-     * @param password
-     */
-    resetPasswordStudent(password: string): Observable<any> {
-        return this._apiServiceHttp.post(
-            'authenticate_student/reset-password',
-            password
-        );
-    }
 
     /**
      * activate user endpoint

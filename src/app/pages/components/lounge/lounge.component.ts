@@ -195,7 +195,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     collaSelected(event: any) {
         console.log(event)
         this.nameCollaborator = `${event.valor.branchoffices.collaborators.name} ${event.valor.branchoffices.collaborators.lastname}`
-        this.getTypeServices();
+        // this.getTypeServices();
     }
 
     dateSelected(event: any) {
@@ -271,7 +271,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             manager: '',
             observationManager: '',
             staff: this.startServiceform.get('staff')?.value?.branchoffices?.collaborators?.user,
-            services: this.startServiceform.get('services')?.value,
+            services: this.startServiceform.get('services')?.value.services,
             typeServices: this.startServiceform.get('typeServices')?.value._id,
             dateService: this.startServiceform.get('dateService')?.value,
             timeService: this.startServiceform.get('timeService')?.value,
