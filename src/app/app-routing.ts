@@ -17,6 +17,7 @@ import { PagesModule } from './pages/pages.module';
 import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterqrComponent } from './components/authentication/registerqr/registerqr.component';
+import { CancelarCitaComponent } from './components/authentication/cancelar-cita/cancelar-cita.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
     { path: 'auth/logout', component: LogoutComponent },
     { path: 'auth/verification-email', component: ConfirmMailComponent },
     { path: 'auth/lock-screen', component: LockScreenComponent },
+    { path: 'cancel-appointment', component: CancelarCitaComponent },
     { path: '**', component: NotFoundComponent },
 ];
 

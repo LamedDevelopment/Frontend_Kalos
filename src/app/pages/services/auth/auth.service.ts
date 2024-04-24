@@ -100,6 +100,21 @@ export class AuthService {
     }
 
     /**
+     * Cancelar cita
+     *
+     * @param token
+     */
+    cancelAppointment(token: any): Observable<any> {
+        return this._apiServiceHttp.post(
+            'apu/emailcanapp', token
+        ).pipe(
+            map((response: any) => {
+                return response
+            })
+        );;
+    }
+
+    /**
      * Sign in
      *
      * @param credentials

@@ -98,6 +98,8 @@ import { registerLocaleData } from '@angular/common';
 import { ApiServiceHttp } from './pages/services/api.service';
 import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
 import { RegisterqrComponent } from './components/authentication/registerqr/registerqr.component';
+import { CancelarCitaComponent } from './components/authentication/cancelar-cita/cancelar-cita.component';
+
 
 registerLocaleData(localeEs, 'es');
 
@@ -114,6 +116,7 @@ registerLocaleData(localeEs, 'es');
         LockScreenComponent,
         LoginComponentFun,
         RegisterqrComponent,
+        CancelarCitaComponent,
     ],
     imports: [
         BrowserModule,
