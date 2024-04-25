@@ -47,6 +47,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     typeServiceNameSelected: any;
     ServiceNameSelected: any;
     nameCollaborator: string;
+    processAgendamiento: boolean = false;
     constructor(
         public themeService: CustomizerSettingsService,
         private _getAppointment: AppointmentsService,
@@ -253,8 +254,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     }
 
     AgendarCita() {
-        console.log('agendar cita', this.startServiceform.value);
-
+        this.processAgendamiento = true;
         let dataUser = this.getDataUser();
         let body = {
             user: dataUser.id,
@@ -277,36 +277,44 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             timeService: this.startServiceform.get('timeService')?.value,
         };
 
-        console.log('body', body);
-
         this.managerservice.createAppoFora('apu', body).subscribe(
             (response: any) => {
                 console.log('====================================');
                 console.log(response);
                 console.log('====================================');
                 if (response.ok == true) {
-                    this._snackBar.open(response.msg, '', {
-                        horizontalPosition: this.horizontalPosition,
-                        verticalPosition: this.verticalPosition,
-                        duration: this.durationInSeconds * 1000,
-                    });
-                    this.router.navigate(['/', 'user', 'appo'])
+                    setTimeout(() => {
+                        this.processAgendamiento = false;
+                        this._snackBar.open(response.msg, '', {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        });
+                        this.router.navigate(['/', 'user', 'appo'])
+                    }, 1000);
+
                 } else {
-                    this._snackBar.open(response.msg, '', {
-                        horizontalPosition: this.horizontalPosition,
-                        verticalPosition: this.verticalPosition,
-                        duration: this.durationInSeconds * 1000,
-                    });
+                    setTimeout(() => {
+                        this.processAgendamiento = false;
+                        this._snackBar.open(response.msg, '', {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        });
+                    }, 1000);
+
                 }
             },
             (error) => {
-                console.log(error);
+                setTimeout(() => {
+                        this.processAgendamiento = false;
+                        this._snackBar.open(error.error.msg, '', {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        });
+                    }, 1000);
 
-                this._snackBar.open(error.error.msg, '', {
-                    horizontalPosition: this.horizontalPosition,
-                    verticalPosition: this.verticalPosition,
-                    duration: this.durationInSeconds * 1000,
-                });
             }
         );
     }

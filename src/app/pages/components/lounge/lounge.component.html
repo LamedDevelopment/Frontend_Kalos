@@ -128,8 +128,8 @@
             </mat-card-content>
             <mat-card-actions class="mb-3">
                 <button mat-raised-button class="tagus" [disabled]="startServiceform.invalid"
-                    (click)="AgendarCita()">Crear Servicio</button>
-
+                    (click)="AgendarCita()" *ngIf="!processAgendamiento">Crear Servicio</button>
+                <mat-spinner diameter="50" style="margin-left: 80px;" *ngIf="processAgendamiento"></mat-spinner>
             </mat-card-actions>
         </mat-card>
         <div class="row">

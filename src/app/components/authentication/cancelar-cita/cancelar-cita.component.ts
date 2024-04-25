@@ -31,21 +31,28 @@ export class CancelarCitaComponent implements OnInit {
                 this._authService.cancelAppointment(body)
                 .subscribe((response:any) => {
                     if(response.ok){
-                        this.msg = response.msg
-                        this.activeView = false;
+                        setTimeout(() => {
+                            this.msg = response.msg
+                            this.activeView = false;
+                        }, 1000);
                     } else {
-                        this.msg = response.msg
-                        this.activeView = false;
+                        setTimeout(() => {
+                            this.msg = response.msg
+                            this.activeView = false;
+                        }, 1000);
                     }
                 }, (err: any) =>{
 
                     if(!err.ok){
-                        console.log(err);
-                        this.msg = err.error.msg
-                        this.activeView = false;
+                        setTimeout(() => {
+                            this.msg = err.error.msg
+                            this.activeView = false;
+                        }, 1000);
                     } else {
-                        this.msg = err.error.msg
-                        this.activeView = false;
+                        setTimeout(() => {
+                            this.msg = err.error.msg
+                            this.activeView = false;
+                        }, 1000);
                     }
                 })
             }
