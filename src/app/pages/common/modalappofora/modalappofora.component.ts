@@ -93,6 +93,7 @@ export class ModalappoforaComponent {
 
     /** Evento que obtiene el servicio seleccionado */
     serviceSelected(event: any) {
+        this.startServiceform.patchValue({ services: event.valor.services });
         this.getTypeServices();
     }
 

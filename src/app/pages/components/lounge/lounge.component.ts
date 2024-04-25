@@ -56,7 +56,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         private _snackBar: MatSnackBar,
         private managerservice: ManagerService,
         private fb: FormBuilder,
-        private router:Router
+        private router: Router
     ) {}
 
     /**
@@ -99,16 +99,16 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     }
 
     getBusiness() {
-        this.Business =[];
+        this.Business = [];
         let dataUser = this.getDataUser();
         const body = {
-            membership: dataUser.membership
-        }
+            membership: dataUser.membership,
+        };
         this._loungService.getBusinessPost('bus/bususer', body).subscribe(
-            (response:any) => {
+            (response: any) => {
                 this.Business = response.msg;
             },
-            (response:any) => {
+            (response: any) => {
                 this.showAlert = true;
             }
         );
@@ -125,8 +125,6 @@ export class LoungeComponent implements AfterViewInit, OnInit {
                 this.servicesManager = response.msg.branchoffices[0].services;
             });
     }
-
-
 
     /** Evento que obtiene el colaborador seleccionado */
     hourSelected(event: any) {}
@@ -147,7 +145,6 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         this.startServiceform.patchValue({ staff: '' });
         this.TypeServicios = [];
     }
-
 
     getdateService() {
         return this.startServiceform?.get('dateService') as FormControl;
@@ -171,15 +168,14 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     typeServiceSelected(event: any) {
         this.typeServiceNameSelected = event.valor.typeService;
         this.getpriceService();
-
     }
 
-    getpriceService(){
+    getpriceService() {
         let body = {
             business: this.businessSelected._id,
-            services: this.startServiceform.get('services')?.value.services,
-            typeServices:this.startServiceform.get('typeServices')?.value._id
-        }
+            services: this.startServiceform.get('services')?.value,
+            typeServices: this.startServiceform.get('typeServices')?.value._id,
+        };
         this.managerservice
             .getTypesServices('sp/bussviewallts', body)
             .subscribe((response: any) => {
@@ -194,8 +190,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     }
 
     collaSelected(event: any) {
-        console.log(event)
-        this.nameCollaborator = `${event.valor.branchoffices.collaborators.name} ${event.valor.branchoffices.collaborators.lastname}`
+        console.log(event);
+        this.nameCollaborator = `${event.valor.branchoffices.collaborators.name} ${event.valor.branchoffices.collaborators.lastname}`;
         // this.getTypeServices();
     }
 
@@ -216,7 +212,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
     getTypeServices() {
         let body = {
-            serviceID: this.startServiceform.get('services')?.value.services,
+            serviceID: this.startServiceform.get('services')?.value,
         };
         this.managerservice
             .getTypesServices('tsv/tsxserid', body)
@@ -227,7 +223,11 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
     /** Evento que obtiene el servicio seleccionado */
     serviceSelected(event: any) {
+        console.log('====================================');
+        console.log(event);
+        console.log('====================================');
         this.ServiceNameSelected = event.valor.name;
+        this.startServiceform.patchValue({ services: event.valor.services });
         this.getTypeServices();
     }
 
@@ -270,8 +270,9 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             tradename: this.tradename,
             manager: '',
             observationManager: '',
-            staff: this.startServiceform.get('staff')?.value?.branchoffices?.collaborators?.user,
-            services: this.startServiceform.get('services')?.value.services,
+            staff: this.startServiceform.get('staff')?.value?.branchoffices
+                ?.collaborators?.user,
+            services: this.startServiceform.get('services')?.value,
             typeServices: this.startServiceform.get('typeServices')?.value._id,
             dateService: this.startServiceform.get('dateService')?.value,
             timeService: this.startServiceform.get('timeService')?.value,
@@ -290,9 +291,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
                             verticalPosition: this.verticalPosition,
                             duration: this.durationInSeconds * 1000,
                         });
-                        this.router.navigate(['/', 'user', 'appo'])
+                        this.router.navigate(['/', 'user', 'appo']);
                     }, 1000);
-
                 } else {
                     setTimeout(() => {
                         this.processAgendamiento = false;
@@ -302,19 +302,17 @@ export class LoungeComponent implements AfterViewInit, OnInit {
                             duration: this.durationInSeconds * 1000,
                         });
                     }, 1000);
-
                 }
             },
             (error) => {
                 setTimeout(() => {
-                        this.processAgendamiento = false;
-                        this._snackBar.open(error.error.msg, '', {
-                            horizontalPosition: this.horizontalPosition,
-                            verticalPosition: this.verticalPosition,
-                            duration: this.durationInSeconds * 1000,
-                        });
-                    }, 1000);
-
+                    this.processAgendamiento = false;
+                    this._snackBar.open(error.error.msg, '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                }, 1000);
             }
         );
     }
@@ -325,7 +323,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
     getDataUser() {
         let datauser = JSON.parse(sessionStorage.getItem('dataUser')!);
-        console.log(datauser)
+        console.log(datauser);
         return datauser;
     }
 }

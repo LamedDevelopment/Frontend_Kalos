@@ -8,20 +8,17 @@ import { MatSelectChange } from '@angular/material/select';
     styleUrls: ['./selectservices.component.scss'],
 })
 export class SelectservicesComponent {
-    @Input() ctr: FormControl<any>;
     @Input() Servicios: any = [];
     @Output() serviceSelected = new EventEmitter<any>();
-    valueInput:any;
+    valueInput: any;
     constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
-    onServiceChange(event: MatSelectChange ) {
+    onServiceChange(event: any) {
         this.serviceSelected.emit({
             propiedad: 'service_selected',
-            valor: this.ctr.value,
+            valor: this.valueInput,
         });
-         this.valueInput = this.ctr.value;
     }
 }
