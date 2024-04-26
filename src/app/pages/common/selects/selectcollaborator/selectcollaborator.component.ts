@@ -35,7 +35,6 @@ export class SelectcollaboratorComponent {
     }
 
     getColla() {
-
         if (
             this.idbusiness == '' ||
             this.services == '' ||
@@ -43,10 +42,15 @@ export class SelectcollaboratorComponent {
         ) {
             return;
         }
-        console.log(this.idbusiness, this.services, this.tradename, 'get colla');
+        console.log(
+            this.idbusiness,
+            this.services,
+            this.tradename,
+            'get colla'
+        );
         let body = {
             business: this.idbusiness,
-            services: this.services.services,
+            services: this.services,
             tradename: this.tradename,
         };
         this.managerservice
@@ -61,6 +65,6 @@ export class SelectcollaboratorComponent {
             propiedad: 'business_selected',
             valor: this.ctr.value,
         });
-        this.valueInput =  this.ctr.value;
+        this.valueInput = this.ctr.value;
     }
 }
