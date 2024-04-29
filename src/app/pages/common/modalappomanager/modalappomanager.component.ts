@@ -130,6 +130,7 @@ export class ModalappomanagerComponent {
 
     getTypeServices() {
         let body = {
+            business: this.startServiceform.get('business')?.value,
             serviceID: this.startServiceform.get('services')?.value,
         };
         this.managerservice

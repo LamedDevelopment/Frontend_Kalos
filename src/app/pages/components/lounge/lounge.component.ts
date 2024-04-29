@@ -212,6 +212,7 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
     getTypeServices() {
         let body = {
+            business: this.businessSelected._id,
             serviceID: this.startServiceform.get('services')?.value,
         };
         this.managerservice
