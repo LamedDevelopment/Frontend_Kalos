@@ -40,7 +40,7 @@
                             Valor Solicitado
                         </th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.loanAmount }}
+                            {{ element?.loanAmount }}
                         </td>
                     </ng-container>
 
@@ -50,8 +50,8 @@
                             Cuotas Solicitadas
                         </th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.paymentFees }} /
-                            {{ element.paymentDeadline }}
+                            {{ element?.paymentFees }} /
+                            {{ element?.paymentDeadline }}
                         </td>
                     </ng-container>
 

@@ -96,6 +96,12 @@ export class WalletComponent implements AfterViewInit, OnInit {
         exitAnimationDuration: string,
         element: any
     ) {
+        const dateini = moment(this.range.get('start')?.value).format(
+            'DD/MM/YYYY'
+        );
+        const datefin = moment(this.range.get('end')?.value).format(
+            'DD/MM/YYYY'
+        );
         setTimeout(() => {
             const dialogRef = this.dialog.open(ModalliquidacionComponent, {
                 width: '1000px',
@@ -103,12 +109,8 @@ export class WalletComponent implements AfterViewInit, OnInit {
                 exitAnimationDuration,
                 data: {
                     element,
-                    datastart: new Date(
-                        this.range.getRawValue().start
-                    ).toLocaleDateString(),
-                    dateEnd: new Date(
-                        this.range.getRawValue().end
-                    ).toLocaleDateString(),
+                    datastart: dateini,
+                    dateEnd: datefin,
                 },
             });
 
