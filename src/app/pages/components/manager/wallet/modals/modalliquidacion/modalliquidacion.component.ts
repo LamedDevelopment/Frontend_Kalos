@@ -8,6 +8,7 @@ import {
 } from '@angular/material/snack-bar';
 import { ModalserviceComponent } from 'src/app/pages/components/collaborator/modals/modalservice/modalservice.component';
 import { ManagerService } from 'src/app/pages/services/manager.service';
+import { SwalServiceService } from 'src/app/pages/services/swal-service.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class ModalliquidacionComponent {
     durationInSeconds = 5;
     displayedColumns: string[] = ['item', 'VlSolicitado', 'cuotas'];
     total_pagar: number = 0;
-    payLoans: any = [];
+    payLoans: Array<any> = [];
     dataTosend: any;
     dataTosendnoLoans: any;
     constructor(
@@ -33,10 +34,13 @@ export class ModalliquidacionComponent {
         private fb: FormBuilder,
         private managerservice: ManagerService,
         private _snackBar: MatSnackBar,
-        @Inject(MAT_DIALOG_DATA) public data: any
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private alert: SwalServiceService
     ) {}
 
     ngOnInit(): void {
+        console.log(this.data);
+
         this.getData();
     }
 
@@ -52,7 +56,7 @@ export class ModalliquidacionComponent {
                 console.log(response);
 
                 if (response.ok == true) {
-                    if ('payloans' in response.msg) {
+                    if ('loanAmount' in response.msg[0]) {
                         this.dataLoans = response.msg;
                     } else {
                         this.dataTosendnoLoans = response.msg;
@@ -78,7 +82,7 @@ export class ModalliquidacionComponent {
     }
 
     onSelected(event: any, index: number, item: any) {
-        console.log(index, item);
+        console.log(item);
         let check = event.target.checked;
         this.business = item.business;
         this.Collaborator = item.Collaborator;
@@ -94,15 +98,22 @@ export class ModalliquidacionComponent {
                 paymentFees: item.paymentFees,
                 loansID: item.loansID,
             };
+            console.log(obj);
+
             this.payLoans.splice(index, 0, obj);
         } else {
-            this.payLoans.splice(index, 1); // eliminar del array
+            if (this.payLoans.length == 1) {
+                this.payLoans = [];
+            } else {
+                this.payLoans.splice(index, 1); // eliminar del array
+            }
         }
 
         this.preRoll();
     }
 
     preRoll() {
+        const loading = this.alert.getLoading('Recalculando');
         let body = {
             business: this.business,
             Collaborator: this.Collaborator,
@@ -111,6 +122,7 @@ export class ModalliquidacionComponent {
         };
         this.managerservice.preRoll('payroll/prepayroll', body).subscribe(
             (response: any) => {
+                loading.close();
                 if (response.ok == true) {
                     this.total_pagar = response.msg.commissionPayment;
                     this.dataTosend = response.msg;
@@ -123,6 +135,7 @@ export class ModalliquidacionComponent {
                 }
             },
             (error) => {
+                loading.close();
                 console.log(error);
 
                 this._snackBar.open(error.error.msg, '', {
@@ -148,9 +161,11 @@ export class ModalliquidacionComponent {
         }
 
         console.log(this.dataTosend);
+
         if (this.dataTosend) {
+            // se tiene prestamos
             this.dataTosend.commissionDateRange = {
-                datastart: this.data.datastart,
+                dataStart: this.data.datastart,
                 dateEnd: this.data.dateEnd,
             };
             console.log(this.dataTosend);
@@ -191,11 +206,13 @@ export class ModalliquidacionComponent {
     }
 
     PostSinPrestamos() {
+        console.log('sin prestamos');
+
         this.dataTosendnoLoans.BusinessCommissionValue = this.total_pagar;
         this.dataTosendnoLoans.payloans = [];
         this.dataTosendnoLoans.commissionPayment = this.total_pagar;
         this.dataTosendnoLoans.commissionDateRange = {
-            datastart: this.data.datastart,
+            dataStart: this.data.datastart,
             dateEnd: this.data.dateEnd,
         };
         this.managerservice

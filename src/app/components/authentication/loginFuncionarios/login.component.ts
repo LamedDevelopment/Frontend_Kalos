@@ -126,11 +126,11 @@ export class LoginComponentFun {
             console.log('decoded', decoded);
             let role = decoded?.role?.code;
             if (role == 'CLLTR_ROLE') {
-                redirectURL = '/colla/dash';
+                redirectURL = '/colla/appoinments';
             } else if (role == 'MANAGER_ROLE') {
-                redirectURL = '/man/dash';
+                redirectURL = '/man/appo';
             } else if (role == 'ADMIN_ROLE') {
-                redirectURL = '/bus/dash';
+                redirectURL = '/bus/appoinments';
             }
         } else {
             redirectURL = 'auth/login-fun';
