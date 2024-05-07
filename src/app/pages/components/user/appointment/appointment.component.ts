@@ -154,6 +154,9 @@ export class AppointmentComponent implements AfterViewInit {
             this._getAppointment
                 .getAppointmentDayOrWeek('apu/wuap')
                 .subscribe((appo: any) => {
+                    console.log('====================================');
+                    console.log(appo.msg);
+                    console.log('====================================');
                     this.ELEMENT_DATA = appo.msg;
                     this.ELEMENT_DATA.map((el: any) => {
                         el.Peluqueria = el.business.nameBusiness;

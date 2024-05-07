@@ -11,6 +11,7 @@ import { Validators } from 'ngx-editor';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { ModalserviceComponent } from '../../components/collaborator/modals/modalservice/modalservice.component';
 import { ManagerService } from '../../services/manager.service';
+import { SwalServiceService } from '../../services/swal-service.service';
 
 @Component({
     selector: 'app-modalappomanager',
@@ -32,6 +33,7 @@ export class ModalappomanagerComponent {
         private fb: FormBuilder,
         private managerservice: ManagerService,
         private _snackBar: MatSnackBar,
+        private swalservice: SwalServiceService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         this.branchoffices = data.branchoffices;
@@ -99,7 +101,11 @@ export class ModalappomanagerComponent {
     typeServiceSelected(event: any) {}
 
     /** Evento que obtiene el colaborador seleccionado */
-    collaSelected(event: any) {}
+    collaSelected(event: any) {
+        this.startServiceform.patchValue({
+            staff: event.valor.branchoffices.collaborators.user,
+        });
+    }
 
     /** Evento que obtiene el dia seleccionado */
     public daySelected(event: any) {
@@ -157,6 +163,7 @@ export class ModalappomanagerComponent {
     }
 
     createService() {
+        const loading = this.swalservice.getLoading();
         let body = {
             user: this.startServiceform.get('iduser')?.value,
             discount: '',
@@ -181,6 +188,7 @@ export class ModalappomanagerComponent {
 
         this.managerservice.createAppoFora('apu', body).subscribe(
             (response: any) => {
+                loading.close();
                 if (response.ok == true) {
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
@@ -189,6 +197,7 @@ export class ModalappomanagerComponent {
                     });
                     this.closeDialog();
                 } else {
+                    loading.close();
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
                         verticalPosition: this.verticalPosition,
@@ -197,6 +206,7 @@ export class ModalappomanagerComponent {
                 }
             },
             (error) => {
+                loading.close();
                 console.log(error);
                 this._snackBar.open(error.error.msg, '', {
                     horizontalPosition: this.horizontalPosition,

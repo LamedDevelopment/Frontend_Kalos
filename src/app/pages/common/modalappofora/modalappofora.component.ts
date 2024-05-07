@@ -15,6 +15,7 @@ import {
     MatSnackBarHorizontalPosition,
     MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { SwalServiceService } from '../../services/swal-service.service';
 
 @Component({
     selector: 'app-modalappofora',
@@ -36,6 +37,7 @@ export class ModalappoforaComponent {
         private fb: FormBuilder,
         private managerservice: ManagerService,
         private _snackBar: MatSnackBar,
+        private swalservice: SwalServiceService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         this.branchoffices = data.branchoffices;
@@ -101,7 +103,11 @@ export class ModalappoforaComponent {
     typeServiceSelected(event: any) {}
 
     /** Evento que obtiene el colaborador seleccionado */
-    collaSelected(event: any) {}
+    collaSelected(event: any) {
+        this.startServiceform.patchValue({
+            staff: event.valor.branchoffices.collaborators.user,
+        });
+    }
 
     /** Evento que obtiene el dia seleccionado */
     public daySelected(event: any) {
@@ -153,6 +159,7 @@ export class ModalappoforaComponent {
     }
 
     createService() {
+        const loading = this.swalservice.getLoading();
         let body = {
             user: '',
             discount: '',
@@ -177,6 +184,7 @@ export class ModalappoforaComponent {
 
         this.managerservice.createAppoFora('apu', body).subscribe(
             (response: any) => {
+                loading.close();
                 if (response.ok == true) {
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
@@ -185,6 +193,7 @@ export class ModalappoforaComponent {
                     });
                     this.closeDialog();
                 } else {
+                    loading.close();
                     this._snackBar.open(response.msg, '', {
                         horizontalPosition: this.horizontalPosition,
                         verticalPosition: this.verticalPosition,
@@ -193,6 +202,7 @@ export class ModalappoforaComponent {
                 }
             },
             (error) => {
+                loading.close();
                 console.log(error);
                 this._snackBar.open(error.error.msg, '', {
                     horizontalPosition: this.horizontalPosition,

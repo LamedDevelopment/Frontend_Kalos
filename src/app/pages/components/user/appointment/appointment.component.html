@@ -18,7 +18,6 @@
     </ol>
 </div>
 
-
 <div
     class="row justify-content-center"
     [class.component-dark-theme]="themeService.isDark()"
@@ -182,7 +181,6 @@
                                     class="example-element-detail-1"
                                     *ngIf="element == expandedElement"
                                 >
-                                    <!-- [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" -->
                                     <div
                                         class="example-element-detail"
                                         *ngFor="
@@ -191,10 +189,16 @@
                                         "
                                     >
                                         <div class="example-element-service">
-                                            {{ service?.nameService }}
+                                            {{ service?.nameService }}-{{
+                                                service?.nameTypeService
+                                            }}
                                         </div>
                                         <div class="example-element-service">
-                                            {{ service?.nameTypeService }}
+                                            {{
+                                                element.appointmentDate[i]
+                                                    ?.collaboratorAppointment
+                                                    ?.nameCollaborator
+                                            }}
                                         </div>
                                         <div class="example-element-service">
                                             {{

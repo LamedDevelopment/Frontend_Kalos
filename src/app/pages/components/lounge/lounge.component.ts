@@ -174,13 +174,14 @@ export class LoungeComponent implements AfterViewInit, OnInit {
         let body = {
             business: this.businessSelected._id,
             services: this.startServiceform.get('services')?.value,
-            typeServices: this.startServiceform.get('typeServices')?.value._id,
+            typeServices: this.startServiceform.get('typeServices')?.value,
         };
+
         this.managerservice
             .getTypesServices('sp/bussviewallts', body)
             .subscribe((response: any) => {
-                this.priceService = response?.msg?.[0].servicePrice;
-                this.timeService = response?.msg?.[0].serviceTime;
+                this.priceService = response?.msg?.[0]?.servicePrice;
+                this.timeService = response?.msg?.[0]?.serviceTime;
             });
     }
 
@@ -191,8 +192,11 @@ export class LoungeComponent implements AfterViewInit, OnInit {
 
     collaSelected(event: any) {
         console.log(event);
+        this.startServiceform.patchValue({
+            staff: event.valor.branchoffices.collaborators.user,
+        });
         this.nameCollaborator = `${event.valor.branchoffices.collaborators.name} ${event.valor.branchoffices.collaborators.lastname}`;
-        // this.getTypeServices();
+        this.getpriceService();
     }
 
     dateSelected(event: any) {
@@ -271,10 +275,9 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             tradename: this.tradename,
             manager: '',
             observationManager: '',
-            staff: this.startServiceform.get('staff')?.value?.branchoffices
-                ?.collaborators?.user,
+            staff: this.startServiceform.get('staff')?.value,
             services: this.startServiceform.get('services')?.value,
-            typeServices: this.startServiceform.get('typeServices')?.value._id,
+            typeServices: this.startServiceform.get('typeServices')?.value,
             dateService: this.startServiceform.get('dateService')?.value,
             timeService: this.startServiceform.get('timeService')?.value,
         };
