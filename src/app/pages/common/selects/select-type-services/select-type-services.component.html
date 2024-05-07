@@ -1,8 +1,11 @@
 <mat-form-field appearance="fill" class="w-100">
     <mat-label>Seleccione Tipo Servicio</mat-label>
-    <mat-select [formControl]="ctr" [(value)]="valueInput" (selectionChange)="onTypeServiceChange()">
+    <mat-select
+        [(value)]="valueInput"
+        (selectionChange)="onTypeServiceChange()"
+    >
         <mat-option *ngFor="let item of typeServices" [value]="item">
-            {{item.typeService}}
+            {{ item.typeService }}
         </mat-option>
     </mat-select>
 </mat-form-field>

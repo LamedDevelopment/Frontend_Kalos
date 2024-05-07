@@ -1,14 +1,14 @@
 <mat-form-field appearance="fill" class="w-100">
     <mat-label>Seleccione Colaborador</mat-label>
-    <mat-select [formControl]="ctr" [(value)]="valueInput" (selectionChange)="onCollaChange($event)">
+    <mat-select
+        [(value)]="valueInput"
+        (selectionChange)="onCollaChange($event)"
+    >
         <mat-option *ngIf="dataCollaborators.length === 0" disabled
             >No Hay colaboradores</mat-option
         >
 
-        <mat-option
-            *ngFor="let item of dataCollaborators"
-            [value]="item"
-        >
+        <mat-option *ngFor="let item of dataCollaborators" [value]="item">
             {{ item?.branchoffices?.collaborators?.name }} -
             {{ item?.branchoffices?.collaborators?.lastname }}
         </mat-option>

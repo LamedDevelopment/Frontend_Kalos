@@ -25,6 +25,7 @@ export class SelectcollaboratorComponent {
     @Input() services: any = '';
     @Input() tradename: any = '';
     @Output() collaSelected = new EventEmitter<any>();
+    optionselected = '';
     valueInput: any;
     constructor(private managerservice: ManagerService) {}
 
@@ -61,10 +62,10 @@ export class SelectcollaboratorComponent {
     }
 
     onCollaChange(event: any) {
-        this.collaSelected.emit({
+        this.valueInput = this.collaSelected.emit({
             propiedad: 'business_selected',
-            valor: this.ctr.value,
+            valor: this.valueInput,
         });
-        this.valueInput = this.ctr.value;
+        this.valueInput = this.valueInput;
     }
 }

@@ -54,11 +54,11 @@ export class ModalliquidacionComponent {
         this.managerservice.getpayloans('lose/payloans', body).subscribe(
             (response: any) => {
                 console.log(response);
-
                 if (response.ok == true) {
-                    if ('loanAmount' in response.msg[0]) {
+                    if (response?.msg[0]?.hasOwnProperty('loanAmount')) {
                         this.dataLoans = response.msg;
                     } else {
+                        console.log('sin prestamos');
                         this.dataTosendnoLoans = response.msg;
                     }
                 } else {
@@ -206,8 +206,6 @@ export class ModalliquidacionComponent {
     }
 
     PostSinPrestamos() {
-        console.log('sin prestamos');
-
         this.dataTosendnoLoans.BusinessCommissionValue = this.total_pagar;
         this.dataTosendnoLoans.payloans = [];
         this.dataTosendnoLoans.commissionPayment = this.total_pagar;
