@@ -7,7 +7,7 @@ import { DashComponent } from './dash/dash.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { LoungesComponent } from './lounges/lounges.component';
-import { PaymentComponent } from './payment/payment.component';
+import { RateServicesComponent } from './rate-services/rate-services.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SecurityComponent } from './security/security.component';
@@ -75,7 +75,7 @@ import { HistoricoListComponent } from './history/history.component';
         InvoiceDetailsComponent,
         InvoiceListComponent,
         LoungesComponent,
-        PaymentComponent,
+        RateServicesComponent,
         PaymentsComponent,
         ProfileComponent,
         SecurityComponent,

@@ -6,7 +6,7 @@ import { DashComponent } from './dash/dash.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { LoungeComponent } from '../lounge/lounge.component';
-import { PaymentComponent } from './payment/payment.component';
+import { RateServicesComponent } from './rate-services/rate-services.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ServicesComponent } from './services/services.component';
@@ -29,6 +29,7 @@ const routes: Routes = [
             {path: 'hisuap', component: HistoricoListComponent, canActivate: [AuthGuard] },
             {path: 'billetera', component: InvoiceListComponent, canActivate: [AuthGuard] },
             {path: 'lounges', component: LoungeComponent, canActivate: [AuthGuard] },
+            {path: 'rate-services', component: RateServicesComponent },
             /* {path: 'pay', component: PaymentComponent },
             {path: 'pays', component: PaymentsComponent }, */
             {path: 'privacy', component: PrivacyPolicyComponent, canActivate: [AuthGuard] },

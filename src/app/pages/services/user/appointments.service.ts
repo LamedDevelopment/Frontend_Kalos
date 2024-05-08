@@ -285,5 +285,14 @@ export class AppointmentsService {
                 return response;
             })
         );
+    };
+
+    ratingServices(data: any): Observable<any> {
+        return this._apiServiceHttp.post(`qs/rating`, data).pipe(
+            map((response: any) => {
+                // Return a new observable with the response
+                return response;
+            })
+        );
     }
 }
