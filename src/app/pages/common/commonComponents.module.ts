@@ -21,6 +21,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProductComponent } from './selects/product/product.component';
 import { MarcaComponent } from './selects/marca/marca.component';
 import { ReferenceComponent } from './selects/reference/reference.component';
+import { SelectpaymethodComponent } from './selects/selectpaymethod/selectpaymethod.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { ReferenceComponent } from './selects/reference/reference.component';
         ProductComponent,
         MarcaComponent,
         ReferenceComponent,
+        SelectpaymethodComponent,
     ],
     imports: [
         CommonModule,
@@ -62,6 +64,7 @@ import { ReferenceComponent } from './selects/reference/reference.component';
         ProductComponent,
         MarcaComponent,
         ReferenceComponent,
+        SelectpaymethodComponent,
     ],
 })
 export class commonComponentsModule {}

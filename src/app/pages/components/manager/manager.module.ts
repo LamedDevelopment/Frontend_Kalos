@@ -76,6 +76,7 @@ import { commonComponentsModule } from '../../common/commonComponents.module';
 import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/modalliquidacion.component';
 import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ModalegresoComponent } from './checkout/modals/modalegreso/modalegreso.component';
 
 @NgModule({
     declarations: [
@@ -103,6 +104,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
         ModalliquidacionComponent,
         ChecksloansComponent,
         CheckoutComponent,
+        ModalegresoComponent,
     ],
     imports: [
         CommonModule,

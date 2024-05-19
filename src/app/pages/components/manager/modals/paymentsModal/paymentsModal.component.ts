@@ -13,6 +13,7 @@ import {
     MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { SwalServiceService } from 'src/app/pages/services/swal-service.service';
+import { select } from 'src/app/pages/common/Interfaces/select.interface';
 
 @Component({
     selector: 'app-paymentsModal',
@@ -49,6 +50,14 @@ export class PaymentsModalComponent {
         this.dataFactura = data;
     }
 
+    obj = {
+        PaymentType: '',
+        walletPayment: {
+            nameWallet: '',
+            codRefPay: '',
+        },
+    };
+
     ngOnInit(): void {
         console.log(this.dataFactura);
         this.businessData = this.modalservice.getBusinessData();
@@ -57,15 +66,9 @@ export class PaymentsModalComponent {
             docuUser: ['', Validators.required],
             managerDiscount: [0],
             tax: [0],
-            paymentMethod: [
-                {
-                    PaymentType: 'Efectivo',
-                    walletPayment: {
-                        nameWallet: '',
-                        codRefPay: '',
-                    },
-                },
-            ],
+            paymentMethod: [this.obj],
+
+            code: [''],
             electronicBilling: [true],
             observationBilling: [''],
         });
@@ -75,12 +78,26 @@ export class PaymentsModalComponent {
         this.dialogRef.close();
     }
 
+    methodSelected(event: select) {
+        console.log(event);
+        this.obj.PaymentType = event.valor.paymentMethod;
+        this.obj.walletPayment.nameWallet = event.valor.paymentMethod;
+    }
+
+    validateReference() {
+        return this.obj?.PaymentType != 'Efectivo';
+    }
+
     createPreBillingMan(stepper: MatStepper) {
+        let code: string = this.preFactura.get('code')?.value;
+        this.obj.walletPayment.codRefPay = code.toUpperCase();
         const loading = this.swalservice.getLoading();
 
         const valueBody = this.preFactura.getRawValue();
         valueBody.appointmentID = this.dataFactura._id;
         valueBody.tax = [{ description: 'IVA', value: valueBody.tax }];
+        valueBody.paymentMethod = [this.obj];
+        console.log(valueBody);
 
         this.appointmentsService
             .processPayBillingMan('bill', valueBody)
@@ -94,13 +111,43 @@ export class PaymentsModalComponent {
     RealizarPagoBill() {
         console.log(this.PayBill);
         const loading = this.swalservice.getLoading();
+
         this.appointmentsService
             .processPayBillingMan('bill/pay', this.PayBill)
-            .subscribe((bill: any) => {
-                loading.close();
-                if (bill.ok) {
+            .subscribe(
+                (bill) => {
+                    loading.close();
+                    if (bill.ok) {
+                        this._snackBar.open(
+                            'Factura registrada exitosamente!!!',
+                            '',
+                            {
+                                horizontalPosition: this.horizontalPosition,
+                                verticalPosition: this.verticalPosition,
+                                duration: this.durationInSeconds * 1000,
+                            }
+                        );
+                        this.dialogRef.close();
+                    } else {
+                        this._snackBar.open(
+                            'Error al registrar la factura!!!',
+                            '',
+                            {
+                                horizontalPosition: this.horizontalPosition,
+                                verticalPosition: this.verticalPosition,
+                                duration: this.durationInSeconds * 1000,
+                            }
+                        );
+                    }
+                },
+                (error) => {
+                    console.log('====================================');
+                    console.log(error);
+                    console.log('====================================');
                     this._snackBar.open(
-                        'Factura registrada exitosamente!!!',
+                        error.error.msg
+                            ? error.error.msg
+                            : 'Error Al consultar información',
                         '',
                         {
                             horizontalPosition: this.horizontalPosition,
@@ -108,18 +155,8 @@ export class PaymentsModalComponent {
                             duration: this.durationInSeconds * 1000,
                         }
                     );
-                    this.dialogRef.close();
-                } else {
-                    this._snackBar.open(
-                        'Error al registrar la factura!!!',
-                        '',
-                        {
-                            horizontalPosition: this.horizontalPosition,
-                            verticalPosition: this.verticalPosition,
-                            duration: this.durationInSeconds * 1000,
-                        }
-                    );
+                    loading.close();
                 }
-            });
+            );
     }
 }

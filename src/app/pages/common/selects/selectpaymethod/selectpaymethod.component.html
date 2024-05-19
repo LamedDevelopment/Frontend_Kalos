@@ -1,0 +1,15 @@
+<mat-form-field appearance="fill" class="w-100">
+    <mat-label>Seleccione Metodó de pago</mat-label>
+    <mat-select
+        [(value)]="valueInput"
+        (selectionChange)="onCollaChange($event)"
+    >
+        <mat-option *ngIf="data.length === 0" disabled
+            >No Hay metódos de pagos disponibles</mat-option
+        >
+
+        <mat-option *ngFor="let item of data" [value]="item">
+            {{ item?.paymentMethod }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

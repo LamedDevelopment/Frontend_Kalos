@@ -1,0 +1,83 @@
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card class="example-card">
+        <div class="container-fluid">
+            <h3 class="text-center mt-3">Crear Egreso</h3>
+
+            <mat-card-content>
+                <form [formGroup]="startServiceform">
+                    <div class="row">
+                        <div class="col-4">
+                            <app-selectpaymethod
+                                (methodSelected)="methodSelected($event)"
+                            ></app-selectpaymethod>
+                        </div>
+                        <div class="col-4">
+                            <app-inputnumeric
+                                [label]="'Valor a Pagar'"
+                                [control]="amountPaidControl"
+                            ></app-inputnumeric>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Nombre Beneficiario</mat-label>
+                                <input matInput formControlName="payees" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Descripción</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="descriptionExpenditure"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Fecha</mat-label>
+                                <input
+                                    matInput
+                                    [matDatepicker]="picker"
+                                    (dateChange)="onDateChange($event)"
+                                />
+
+                                <mat-datepicker-toggle
+                                    matIconSuffix
+                                    [for]="picker"
+                                ></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="w-100" appearance="fill">
+                                <mat-label>Categoria</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="categorizationExpenditures"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <button mat-button (click)="closeDialog()">Cerrar</button>
+                <button
+                    mat-raised-button
+                    class="tagus"
+                    (click)="createEgreso()"
+                    [disabled]="startServiceform.invalid"
+                >
+                    Crear Egreso
+                </button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

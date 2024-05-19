@@ -104,6 +104,14 @@ export class ManagerService {
         );
     }
 
+    getPaymentsMethods(): Observable<any> {
+        return this._apiServiceHttp.get('bill/allpatmeth').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
     getBrand(body: any): Observable<any> {
         return this._apiServiceHttp.post('bp/consbrand', body).pipe(
             map((response: any) => {
@@ -122,6 +130,14 @@ export class ManagerService {
 
     getSalesofDay(): Observable<any> {
         return this._apiServiceHttp.get('bill/checkout').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    createEgreso(body: any): Observable<any> {
+        return this._apiServiceHttp.post('outf/outflow', body).pipe(
             map((response: any) => {
                 return response;
             })
