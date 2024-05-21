@@ -21,6 +21,14 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 import { QrComponent } from 'src/app/shared/pages/qr/qr.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { FileManagerComponent } from './file-manager/file-manager.component';
+import { FmAssetsComponent } from './file-manager/fm-assets/fm-assets.component';
+import { FmDocumentsComponent } from './file-manager/fm-documents/fm-documents.component';
+import { FmMediaComponent } from './file-manager/fm-media/fm-media.component';
+import { FmPersonalComponent } from './file-manager/fm-personal/fm-personal.component';
+import { FmProjectsComponent } from './file-manager/fm-projects/fm-projects.component';
+import { FmRecentFilesComponent } from './file-manager/fm-recent-files/fm-recent-files.component';
+import { FmTemplatesComponent } from './file-manager/fm-templates/fm-templates.component';
 
 const routes: Routes = [
     {
@@ -118,7 +126,47 @@ const routes: Routes = [
                 component: CheckoutComponent,
                 canActivate: [AuthGuard],
             },
-            { path: '', redirectTo: '/man/dash', pathMatch: 'full' },
+            {
+                path: 'file-manager',
+                component: FileManagerComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'file-manager/cv',
+                component: FmAssetsComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'file-manager/salud',
+                component: FmProjectsComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'file-manager/general',
+                component: FmPersonalComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'file-manager/templates',
+                component: FmTemplatesComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'file-manager/documents',
+                component: FmDocumentsComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'file-manager/media',
+                component: FmMediaComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'file-manager/recent-files',
+                component: FmRecentFilesComponent,
+                canActivate: [AuthGuard],
+            },
+            { path: '', redirectTo: '/man/appo', pathMatch: 'full' },
         ],
     },
 ];

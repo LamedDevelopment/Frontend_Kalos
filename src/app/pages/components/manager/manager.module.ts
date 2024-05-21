@@ -77,7 +77,17 @@ import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/moda
 import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ModalegresoComponent } from './checkout/modals/modalegreso/modalegreso.component';
-
+import { FileManagerComponent } from './file-manager/file-manager.component';
+import { FmAssetsComponent } from './file-manager/fm-assets/fm-assets.component';
+import { FmDocumentsComponent } from './file-manager/fm-documents/fm-documents.component';
+import { FmMediaComponent } from './file-manager/fm-media/fm-media.component';
+import { FmPersonalComponent } from './file-manager/fm-personal/fm-personal.component';
+import { FmProjectsComponent } from './file-manager/fm-projects/fm-projects.component';
+import { FmRecentFilesComponent } from './file-manager/fm-recent-files/fm-recent-files.component';
+import { FmSidebarComponent } from './file-manager/fm-sidebar/fm-sidebar.component';
+import { FmTemplatesComponent } from './file-manager/fm-templates/fm-templates.component';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
     declarations: [
         AgendadayComponent,
@@ -105,6 +115,15 @@ import { ModalegresoComponent } from './checkout/modals/modalegreso/modalegreso.
         ChecksloansComponent,
         CheckoutComponent,
         ModalegresoComponent,
+        FileManagerComponent,
+        FmProjectsComponent,
+        FmPersonalComponent,
+        FmTemplatesComponent,
+        FmAssetsComponent,
+        FmSidebarComponent,
+        FmDocumentsComponent,
+        FmMediaComponent,
+        FmRecentFilesComponent,
     ],
     imports: [
         CommonModule,
@@ -161,6 +180,8 @@ import { ModalegresoComponent } from './checkout/modals/modalegreso/modalegreso.
         NgxMaterialTimepickerModule,
         HelpermoduleModule,
         commonComponentsModule,
+        NgxDocViewerModule,
+        PdfViewerModule
     ],
 })
 export class ManagerModule {}
