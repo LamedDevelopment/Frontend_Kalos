@@ -13,6 +13,23 @@ import { QrComponent } from './pages/qr/qr.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateDocumentDialogBoxComponent } from './create-document-dialog-box/create-document-dialog-box.component';
+import { MatSelectModule } from '@angular/material/select';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+ // Change this to your upload POST address:
+  url: 'https://httpbin.org/post',
+  maxFilesize: 50,
+  maxFiles: 1,
+  acceptedFiles: 'application/pdf',
+  createImageThumbnails: true,
+  uploadMultiple: false,
+    addRemoveLinks: true
+};
 
 @NgModule({
     declarations: [
@@ -21,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         PipesComponent,
         CreateUserDialogBox,
         QrComponent,
+        CreateDocumentDialogBoxComponent,
     ],
     imports: [
         CommonModule,
@@ -30,6 +48,9 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatCardModule,
         MatInputModule,
         ReactiveFormsModule,
+        MatSelectModule,
+        DropzoneModule,
+        NgxDropzoneModule,
     ],
     exports: [
         ClassComponent,
@@ -37,5 +58,11 @@ import { ReactiveFormsModule } from '@angular/forms';
         PipesComponent,
         CreateUserDialogBox,
     ],
+    providers: [
+        {
+          provide: DROPZONE_CONFIG,
+          useValue: DEFAULT_DROPZONE_CONFIG
+        },
+    ]
 })
 export class SharedModule {}

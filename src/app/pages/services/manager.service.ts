@@ -32,6 +32,23 @@ export class ManagerService {
         );
     }
 
+    generalPostApiFiles(url: any, data: FormData): Observable<any> {
+        return this._apiServiceHttp.postFiles(url, data).pipe(
+            map((response: any) => {
+                console.log(response)
+                return response;
+            })
+        );
+    }
+
+    getBuss(): Observable<any> {
+        return this._apiServiceHttp.get('doc').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
     getServices(url: any, data: any): Observable<any> {
         return this._apiServiceHttp.post(url, data).pipe(
             map((response: any) => {
@@ -106,6 +123,14 @@ export class ManagerService {
 
     getPaymentsMethods(): Observable<any> {
         return this._apiServiceHttp.get('bill/allpatmeth').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getNameDocuments(): Observable<any> {
+        return this._apiServiceHttp.get('bus/viewdocuall').pipe(
             map((response: any) => {
                 return response;
             })

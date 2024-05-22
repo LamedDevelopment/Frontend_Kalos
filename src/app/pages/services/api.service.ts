@@ -20,6 +20,19 @@ export class ApiServiceHttp {
         return this.http.post<any>(`${environment.url_api}${path}`, data).pipe(
             map(
                 (d) => d,
+                (err: any) => {
+                    console.log(err);
+                    return throwError(err);
+                }
+            )
+        );
+    }
+
+
+    postFiles(path: string, data: FormData): Observable<any> {
+        return this.http.post<any>(`${environment.url_api}${path}`, data).pipe(
+            map(
+                (d) => d,
                 (err: any) => console.log(err)
             )
         );

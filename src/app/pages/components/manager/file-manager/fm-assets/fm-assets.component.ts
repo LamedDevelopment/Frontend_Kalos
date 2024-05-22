@@ -9,7 +9,7 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
   templateUrl: './fm-assets.component.html',
   styleUrls: ['./fm-assets.component.scss']
 })
-export class FmAssetsComponent implements  OnInit{
+export class FmAssetsComponent implements  OnInit {
 
     @ViewChild('pdfViewer') pdfViewer: TemplateRef<any>;
     cv:boolean =  false;

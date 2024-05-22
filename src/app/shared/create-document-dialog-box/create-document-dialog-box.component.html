@@ -1,0 +1,57 @@
+<div class="create-dialog-box">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Añadir Documento</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="form">
+        <div class="row mt-3">
+            <div class="col-12">
+                <div>
+                    <mat-form-field class="w-100">
+                        <mat-label
+                            >Documento de identidad colaborador
+                        </mat-label>
+                        <input
+                            type="text"
+                            matInput
+                            formControlName="collaDocu"
+                            placeholder=""
+                        />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-12">
+                <div>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Seleccione el nombre del archivo</mat-label>
+                        <mat-select
+                            [(value)]="valueInput"
+                            (selectionChange)="onNameChange($event)"
+                        >
+                            <mat-option *ngIf="dataSelect.length === 0" disabled
+                                >No Hay metódos de pagos disponibles</mat-option
+                            >
+
+                            <mat-option *ngFor="let item of dataSelect" [value]="item">
+                                {{ item?.documentName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-12">
+                <!-- <dropzone [message]="'Click o arrastre el ducumento pdf'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone> -->
+
+                <ngx-dropzone (change)="onSelect($event)" [multiple]="false" [accept]="'application/pdf'">
+                    <ngx-dropzone-label>Click o arrastre el ducumento pdf</ngx-dropzone-label>
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                </ngx-dropzone>
+            </div>
+        </div>
+    </form>
+    <div class="my-3 mx-4 d-flex justify-content-end">
+        <button mat-flat-button class="tagus" (click)="uploadDocument()"><i class="ri-add-fill"></i> Subir documento</button>
+    </div>
+</div>
