@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateDocumentDialogBoxComponent } from 'src/app/shared/create-document-dialog-box/create-document-dialog-box.component';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
 @Component({
@@ -45,11 +46,24 @@ export class FmProjectsComponent implements  OnInit {
     }
 
     openCreateDocumentDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-        this.dialog.open(CreateDocumentDialogBox, {
-            width: '510px',
-            enterAnimationDuration,
-            exitAnimationDuration
-        });
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.width = '510px';
+        dialogConfig.enterAnimationDuration = enterAnimationDuration;
+        dialogConfig.exitAnimationDuration =  exitAnimationDuration;
+
+
+        dialogConfig.data = {
+            name: "Documentacion Ente de Salud",
+        };
+
+        this.dialog
+            .open(CreateDocumentDialogBoxComponent, dialogConfig)
+            .afterClosed()
+            .subscribe((data) => {
+                console.log(data)
+            });
+
     }
 
     getDocuments(){
@@ -74,20 +88,3 @@ export class FmProjectsComponent implements  OnInit {
     }
 
 }
-
-@Component({
-    selector: 'create-document-dialog-box',
-    templateUrl: '../create-document-dialog-box.html',
-})
-export class CreateDocumentDialogBox {
-
-    constructor(
-        public dialogRef: MatDialogRef<CreateDocumentDialogBox>
-    ) {}
-
-    close(){
-        this.dialogRef.close(true);
-    }
-
-}
-
