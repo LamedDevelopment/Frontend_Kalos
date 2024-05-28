@@ -36,7 +36,7 @@
                                 </mat-form-field>
                             </div>
                         </div>
-                        <div class="col-xs-6 col-sm-12 mt-2">
+                        <div class="col-xs-6 col-sm-12 col-md-6 mt-2">
                             <mat-form-field appearance="fill" class="w-100">
                                 <mat-label class="d-block fw-semibold"
                                     >Estado de la solicitud</mat-label
@@ -52,6 +52,17 @@
                                         {{ coll.name }}
                                     </mat-option>
                                 </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6 mt-2">
+                            <mat-form-field class="w-100">
+                                <mat-label>Medio de Pago</mat-label>
+                                <input
+                                    type="text"
+                                    matInput
+                                    formControlName="meansOfLoan"
+                                    readonly
+                                />
                             </mat-form-field>
                         </div>
                         <div class="col-12">

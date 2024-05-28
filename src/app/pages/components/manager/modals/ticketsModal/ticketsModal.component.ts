@@ -59,6 +59,7 @@ export class ticketsModalComponent {
             paymentDeadline: [''],
             loanStatus: ['', Validators.required],
             paymentObservation: [''],
+            meansOfLoan: [''],
         });
         if (this.dataFactura) {
             this.preFactura.controls['loanAmount'].setValue(
@@ -67,6 +68,9 @@ export class ticketsModalComponent {
             this.preFactura.controls['loadID'].setValue(this.dataFactura._id);
             this.preFactura.controls['paymentDeadline'].setValue(
                 this.dataFactura.paymentDeadline
+            );
+            this.preFactura.controls['meansOfLoan'].setValue(
+                this.dataFactura.meansOfLoan
             );
         }
     }
