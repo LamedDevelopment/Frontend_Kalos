@@ -15,6 +15,7 @@ import {
     MatSnackBarHorizontalPosition,
     MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { select } from 'src/app/pages/common/Interfaces/select.interface';
 
 @Component({
     selector: 'app-loanmodal',
@@ -39,6 +40,7 @@ export class LoanmodalComponent {
         this.loanServiceform = this._formBuilder.group({
             loanAmount: [''],
             paymentDeadline: [''],
+            meansOfLoan: [''],
             loanDetail: [''],
         });
     }
@@ -49,6 +51,12 @@ export class LoanmodalComponent {
 
     closeDialog() {
         this.dialogRef.close();
+    }
+
+    methodSelected(event: select) {
+        this.loanServiceform.patchValue({
+            meansOfLoan: event.valor.paymentMethod,
+        });
     }
 
     startLoan() {
