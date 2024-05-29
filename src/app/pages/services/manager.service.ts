@@ -16,6 +16,15 @@ export class ManagerService {
             })
         );
     }
+
+    getDocumentsGeneral(data:any): Observable<any> {
+        return this._apiServiceHttp.post('doc/viewdoc', data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
     getDays(url: any, data: any): Observable<any> {
         return this._apiServiceHttp.post(url, data).pipe(
             map((response: any) => {
