@@ -10,121 +10,139 @@
             <h3 class="text-center mt-3">Agendar Servicio</h3>
 
             <mat-card-content *ngIf="startServiceform">
-                <form [formGroup]="startServiceform">
-                    <div class="row">
-                        <div class="col-4">
-                            <app-selectbussines
-                                [branchoffices]="branchoffices"
-                                [ctr]="getBussinesNameCtr()"
-                                (businessSelected)="businessSelected($event)"
-                            ></app-selectbussines>
+                <mat-dialog-content class="mat-typography">
+                    <form [formGroup]="startServiceform">
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <app-selectbussines
+                                    [branchoffices]="branchoffices"
+                                    [ctr]="getBussinesNameCtr()"
+                                    (businessSelected)="
+                                        businessSelected($event)
+                                    "
+                                ></app-selectbussines>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <app-selectservices
+                                    [Servicios]="servicesManager"
+                                    (serviceSelected)="serviceSelected($event)"
+                                ></app-selectservices>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <app-select-type-services
+                                    [typeServices]="typeServices"
+                                    [ctr]="getTypeServicesCtr()"
+                                    (typeServiceSelected)="
+                                        typeServiceSelected($event)
+                                    "
+                                ></app-select-type-services>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <app-selectservices
-                                [Servicios]="servicesManager"
-                                (serviceSelected)="serviceSelected($event)"
-                            ></app-selectservices>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <app-selectcollaborator
+                                    [idbusiness]="
+                                        startServiceform.get('business')?.value
+                                    "
+                                    [tradename]="
+                                        startServiceform.get('businessName')
+                                            ?.value
+                                    "
+                                    [services]="
+                                        startServiceform.get('services')?.value
+                                    "
+                                    [ctr]="getStaffCtr()"
+                                    (collaSelected)="collaSelected($event)"
+                                ></app-selectcollaborator>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <app-select-date-service
+                                    (dateSelected)="daySelected($event)"
+                                    [days]="days"
+                                ></app-select-date-service>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <app-select-hours-service
+                                    [ctr]="getTimeService()"
+                                    [business]="
+                                        startServiceform.get('business')?.value
+                                    "
+                                    [tradename]="
+                                        startServiceform.get('businessName')
+                                            ?.value
+                                    "
+                                    [staff]="
+                                        startServiceform.get('staff')?.value
+                                    "
+                                    [dateService]="
+                                        startServiceform.get('dateService')
+                                            ?.value
+                                    "
+                                    (hourSelected)="hourSelected($event)"
+                                >
+                                </app-select-hours-service>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <app-select-type-services
-                                [typeServices]="typeServices"
-                                [ctr]="getTypeServicesCtr()"
-                                (typeServiceSelected)="
-                                    typeServiceSelected($event)
-                                "
-                            ></app-select-type-services>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <app-selectcollaborator
-                                [idbusiness]="
-                                    startServiceform.get('business')?.value
-                                "
-                                [tradename]="
-                                    startServiceform.get('businessName')?.value
-                                "
-                                [services]="
-                                    startServiceform.get('services')?.value
-                                "
-                                [ctr]="getStaffCtr()"
-                                (collaSelected)="collaSelected($event)"
-                            ></app-selectcollaborator>
-                        </div>
-                        <div class="col-4">
-                            <app-select-date-service
-                                (dateSelected)="daySelected($event)"
-                                [days]="days"
-                            ></app-select-date-service>
-                        </div>
-                        <div class="col-4">
-                            <app-select-hours-service
-                                [ctr]="getTimeService()"
-                                [business]="
-                                    startServiceform.get('business')?.value
-                                "
-                                [tradename]="
-                                    startServiceform.get('businessName')?.value
-                                "
-                                [staff]="startServiceform.get('staff')?.value"
-                                [dateService]="
-                                    startServiceform.get('dateService')?.value
-                                "
-                                (hourSelected)="hourSelected($event)"
-                            >
-                            </app-select-hours-service>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-4">
-                            <mat-form-field class="w-100" appearance="fill">
-                                <mat-label>Nombres</mat-label>
+                        <hr />
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <mat-form-field class="w-100" appearance="fill">
+                                    <mat-label>Nombres</mat-label>
 
-                                <input
-                                    matInput
-                                    formControlName="nomUser"
-                                    placeholder="Nombre"
-                                />
-                            </mat-form-field>
+                                    <input
+                                        matInput
+                                        formControlName="nomUser"
+                                        placeholder="Nombre"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <mat-form-field class="w-100" appearance="fill">
+                                    <mat-label>Apellidos</mat-label>
+                                    <input matInput formControlName="apeUser" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <mat-form-field class="w-100" appearance="fill">
+                                    <mat-label>Email</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="emailUser"
+                                    />
+                                </mat-form-field>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <mat-form-field class="w-100" appearance="fill">
-                                <mat-label>Apellidos</mat-label>
-                                <input matInput formControlName="apeUser" />
-                            </mat-form-field>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <mat-form-field class="w-100" appearance="fill">
+                                    <mat-label>Télefono</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="movilUser"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <mat-form-field class="w-100" appearance="fill">
+                                    <mat-label>Documento</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="userDocu"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <mat-form-field class="w-100" appearance="fill">
+                                    <mat-label>Observación</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="observationManager"
+                                    />
+                                </mat-form-field>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <mat-form-field class="w-100" appearance="fill">
-                                <mat-label>Email</mat-label>
-                                <input matInput formControlName="emailUser" />
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <mat-form-field class="w-100" appearance="fill">
-                                <mat-label>Télefono</mat-label>
-                                <input matInput formControlName="movilUser" />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-4">
-                            <mat-form-field class="w-100" appearance="fill">
-                                <mat-label>Documento</mat-label>
-                                <input matInput formControlName="userDocu" />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-4">
-                            <mat-form-field class="w-100" appearance="fill">
-                                <mat-label>Observación</mat-label>
-                                <input
-                                    matInput
-                                    formControlName="observationManager"
-                                />
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </mat-dialog-content>
             </mat-card-content>
             <mat-card-actions class="mb-3">
                 <button mat-button (click)="closeDialog()">Cerrar</button>
