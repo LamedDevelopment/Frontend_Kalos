@@ -22,6 +22,26 @@ import { ProductComponent } from './selects/product/product.component';
 import { MarcaComponent } from './selects/marca/marca.component';
 import { ReferenceComponent } from './selects/reference/reference.component';
 import { SelectpaymethodComponent } from './selects/selectpaymethod/selectpaymethod.component';
+import { WelcomeDashboardComponent } from './analytics/welcome-dashboard/welcome-dashboard.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { AnalyticsStatusComponent } from './analytics/analytics-status/analytics-status.component';
+import { AnalyticsStatsComponent } from './analytics/analytics-stats/analytics-stats.component';
+import { AnalyticsAudienceOverviewComponent } from './analytics/analytics-audience-overview/analytics-audience-overview.component';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { SalesAnalyticsComponent } from './analytics/sales-analytics/sales-analytics.component';
+import { RevenueReportComponent } from './analytics/revenue-report/revenue-report.component';
+import { AnalyticsTotalRevenueComponent } from './analytics/analytics-total-revenue/analytics-total-revenue.component';
+import { AnalyticsActivityComponent } from './analytics/analytics-activity/analytics-activity.component';
+import { BrowserUsedTrafficReportsComponent } from './analytics/browser-used-traffic-reports/browser-used-traffic-reports.component';
+import { SessionsByCountriesComponent } from './analytics/sessions-by-countries/sessions-by-countries.component';
+import { TotalTransactionsComponent } from './analytics/total-transactions/total-transactions.component';
+import { TerminalsComponent } from './analytics/terminals/terminals.component';
+import { NewVsReturingComponent } from './analytics/new-vs-returing/new-vs-returing.component';
+import { AnalyticsGenderComponent } from './analytics/analytics-gender/analytics-gender.component';
+import { VisitorsAgeComponent } from './analytics/visitors-age/visitors-age.component';
+import { AnalyticsLanguageComponent } from './analytics/analytics-language/analytics-language.component';
+import { SessionsDeviceComponent } from './analytics/sessions-device/sessions-device.component';
 
 @NgModule({
     declarations: [
@@ -38,6 +58,24 @@ import { SelectpaymethodComponent } from './selects/selectpaymethod/selectpaymet
         MarcaComponent,
         ReferenceComponent,
         SelectpaymethodComponent,
+        WelcomeDashboardComponent,
+        AnalyticsComponent,
+        AnalyticsStatusComponent,
+        AnalyticsStatsComponent,
+        AnalyticsAudienceOverviewComponent,
+        SalesAnalyticsComponent,
+        RevenueReportComponent,
+        AnalyticsTotalRevenueComponent,
+        AnalyticsActivityComponent,
+        BrowserUsedTrafficReportsComponent,
+        SessionsByCountriesComponent,
+        TotalTransactionsComponent,
+        TerminalsComponent,
+        NewVsReturingComponent,
+        AnalyticsGenderComponent,
+        VisitorsAgeComponent,
+        AnalyticsLanguageComponent,
+        SessionsDeviceComponent,
     ],
     imports: [
         CommonModule,
@@ -51,6 +89,8 @@ import { SelectpaymethodComponent } from './selects/selectpaymethod/selectpaymet
         MatDialogModule,
         MatDatepickerModule,
         MatAutocompleteModule,
+        MatMenuModule,
+        NgApexchartsModule,
     ],
     exports: [
         SelectbussinesComponent,
@@ -65,6 +105,22 @@ import { SelectpaymethodComponent } from './selects/selectpaymethod/selectpaymet
         MarcaComponent,
         ReferenceComponent,
         SelectpaymethodComponent,
+        AnalyticsComponent,
+        AnalyticsStatusComponent,
+        AnalyticsStatsComponent,
+        AnalyticsAudienceOverviewComponent,
+        SalesAnalyticsComponent,
+        RevenueReportComponent,
+        AnalyticsTotalRevenueComponent,
+        AnalyticsActivityComponent,
+        BrowserUsedTrafficReportsComponent,
+        SessionsByCountriesComponent,
+        TotalTransactionsComponent,
+        TerminalsComponent,
+        NewVsReturingComponent,
+        AnalyticsGenderComponent,
+        VisitorsAgeComponent,
+        AnalyticsLanguageComponent,
     ],
 })
 export class commonComponentsModule {}

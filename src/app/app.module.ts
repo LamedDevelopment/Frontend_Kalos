@@ -102,8 +102,6 @@ import { CancelarCitaComponent } from './components/authentication/cancelar-cita
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 
-
-
 registerLocaleData(localeEs, 'es');
 
 @NgModule({

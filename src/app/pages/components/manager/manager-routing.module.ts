@@ -29,6 +29,7 @@ import { FmPersonalComponent } from './file-manager/fm-personal/fm-personal.comp
 import { FmProjectsComponent } from './file-manager/fm-projects/fm-projects.component';
 import { FmRecentFilesComponent } from './file-manager/fm-recent-files/fm-recent-files.component';
 import { FmTemplatesComponent } from './file-manager/fm-templates/fm-templates.component';
+import { AnalyticsComponent } from '../../common/analytics/analytics.component';
 
 const routes: Routes = [
     {
@@ -38,9 +39,10 @@ const routes: Routes = [
         children: [
             {
                 path: 'dash',
-                component: DashComponent,
+                component: AnalyticsComponent,
                 canActivate: [AuthGuard],
             },
+
             {
                 path: 'appo',
                 component: AppointmentComponent,
