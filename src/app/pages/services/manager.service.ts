@@ -7,7 +7,7 @@ import { map } from 'rxjs';
     providedIn: 'root',
 })
 export class ManagerService {
-    constructor(private _apiServiceHttp: ApiServiceHttp) {}
+    constructor(private _apiServiceHttp: ApiServiceHttp) { }
 
     getBusiness(): Observable<any> {
         return this._apiServiceHttp.get('bus/manbus').pipe(
@@ -17,7 +17,7 @@ export class ManagerService {
         );
     }
 
-    getDocumentsGeneral(data:any): Observable<any> {
+    getDocumentsGeneral(data: any): Observable<any> {
         return this._apiServiceHttp.post('doc/viewdoc', data).pipe(
             map((response: any) => {
                 return response;
@@ -177,4 +177,22 @@ export class ManagerService {
             })
         );
     }
+
+    getHistoricoByUser(body: any): Observable<any> {
+        return this._apiServiceHttp.post('apu/usehisappo', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getTiposPagosCheckout(): Observable<any> {
+        return this._apiServiceHttp.get('bill/tppaycas').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+
 }

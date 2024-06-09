@@ -1,0 +1,63 @@
+<!-- Modal -->
+
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card class="example-card">
+        <div class="container-fluid">
+            <h3 class="text-center mt-3">Descripción Servicios</h3>
+
+            <mat-card-content>
+                <mat-dialog-content class="mat-typography">
+                    <div class="mat-elevation-z8 tagus-mat-table">
+                        <table
+                            mat-table
+                            [dataSource]="dataSource"
+                            multiTemplateDataRows
+                            class="mat-elevation-z8"
+                        >
+                            <ng-container matColumnDef="Nombre Servicio">
+                                <th
+                                    mat-header-cell
+                                    *matHeaderCellDef
+                                    aria-label="row actions"
+                                >
+                                    Nombre Servicio
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element?.serviceName }}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Costo">
+                                <th
+                                    mat-header-cell
+                                    *matHeaderCellDef
+                                    aria-label="row actions"
+                                >
+                                    Costo
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element?.CostService }}
+                                </td>
+                            </ng-container>
+
+                            <tr
+                                mat-header-row
+                                *matHeaderRowDef="displayedColumns"
+                            ></tr>
+                            <tr
+                                mat-row
+                                *matRowDef="let row; columns: displayedColumns"
+                            ></tr>
+                        </table>
+                    </div>
+                </mat-dialog-content>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <button mat-button (click)="closeDialog()">Cerrar</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

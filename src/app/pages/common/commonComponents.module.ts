@@ -42,6 +42,11 @@ import { AnalyticsGenderComponent } from './analytics/analytics-gender/analytics
 import { VisitorsAgeComponent } from './analytics/visitors-age/visitors-age.component';
 import { AnalyticsLanguageComponent } from './analytics/analytics-language/analytics-language.component';
 import { SessionsDeviceComponent } from './analytics/sessions-device/sessions-device.component';
+import { ModalHistoricoServiciosComponent } from './modals/modal-historico-servicios/modal-historico-servicios.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { ModalDescripcionServicioComponent } from './modals/modal-descripcion-servicio/modal-descripcion-servicio.component';
+import { ModalSuministrosComponent } from './modals/modal-suministros/modal-suministros.component';
 
 @NgModule({
     declarations: [
@@ -76,6 +81,9 @@ import { SessionsDeviceComponent } from './analytics/sessions-device/sessions-de
         VisitorsAgeComponent,
         AnalyticsLanguageComponent,
         SessionsDeviceComponent,
+        ModalHistoricoServiciosComponent,
+        ModalDescripcionServicioComponent,
+        ModalSuministrosComponent,
     ],
     imports: [
         CommonModule,
@@ -91,6 +99,8 @@ import { SessionsDeviceComponent } from './analytics/sessions-device/sessions-de
         MatAutocompleteModule,
         MatMenuModule,
         NgApexchartsModule,
+        MatPaginatorModule,
+        MatTableModule
     ],
     exports: [
         SelectbussinesComponent,
@@ -121,6 +131,7 @@ import { SessionsDeviceComponent } from './analytics/sessions-device/sessions-de
         AnalyticsGenderComponent,
         VisitorsAgeComponent,
         AnalyticsLanguageComponent,
+        ModalHistoricoServiciosComponent
     ],
 })
-export class commonComponentsModule {}
+export class commonComponentsModule { }

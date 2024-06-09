@@ -12,6 +12,8 @@ import { ModalservicesService } from 'src/app/pages/services/modalservices.servi
 import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { ModalegresoComponent } from './modals/modalegreso/modalegreso.component';
+import { dataHistorico } from 'src/app/pages/common/Interfaces/dataHistorico.interface';
+import { ResponseApi } from 'src/app/pages/common/Interfaces/Response';
 
 @Component({
     selector: 'app-checkout',
@@ -36,6 +38,8 @@ export class CheckoutComponent implements OnInit {
     dataSource = new MatTableDataSource<any>(this.data);
     totalVentas: any;
 
+    dataPagos: any = []
+
     constructor(
         public themeService: CustomizerSettingsService,
         private _getAppointment: AppointmentsService,
@@ -43,10 +47,43 @@ export class CheckoutComponent implements OnInit {
         private _snackBar: MatSnackBar,
         private modalservice: ModalservicesService,
         private managerservice: ManagerService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.getOrdenes();
+        this.getTiposPagos();
+    }
+
+    getTiposPagos() {
+        this.managerservice.getTiposPagosCheckout().subscribe(
+            (response: ResponseApi) => {
+                console.log('====================================');
+                console.log(response);
+                console.log('====================================');
+
+                /* {
+                    totalAmount: 18000,
+                        paymentType: 'Nequi'
+                } */
+                this.dataPagos = response.msg
+            },
+            (error) => {
+                console.log('====================================');
+                console.log(error);
+                console.log('====================================');
+                this._snackBar.open(
+                    error.error.msg
+                        ? error.error.msg
+                        : 'Error Al consultar información',
+                    '',
+                    {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    }
+                );
+            }
+        );
     }
 
     getOrdenes() {

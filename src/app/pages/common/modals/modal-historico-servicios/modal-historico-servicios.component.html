@@ -1,0 +1,111 @@
+<!-- Modal -->
+
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card class="example-card">
+        <div class="container-fluid">
+            <h3 class="text-center mt-3">Historico Servicios</h3>
+
+            <mat-card-content>
+                <mat-dialog-content class="mat-typography">
+                    <div class="mat-elevation-z8 tagus-mat-table">
+                        <mat-paginator
+                            [pageSizeOptions]="[5, 10, 15, 20]"
+                            showFirstLastButtons
+                        >
+                        </mat-paginator>
+
+                        <table
+                            mat-table
+                            [dataSource]="dataSource"
+                            multiTemplateDataRows
+                            class="mat-elevation-z8"
+                        >
+                            <ng-container matColumnDef="position">
+                                <th
+                                    mat-header-cell
+                                    *matHeaderCellDef
+                                    aria-label="row actions"
+                                >
+                                    Servicio
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.services[0]?.nameService }}-
+                                    {{ element.services[0]?.nameTypeService }}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Descripcion">
+                                <th
+                                    mat-header-cell
+                                    *matHeaderCellDef
+                                    aria-label="row actions"
+                                >
+                                    Descripcion
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button
+                                        mat-mini-fab
+                                        matTooltip="Ver Descripción"
+                                        (click)="
+                                            openModalDescripcion(
+                                                '300ms',
+                                                '100ms',
+                                                element?.services[0]
+                                                    .AddServiceDescription
+                                            )
+                                        "
+                                    >
+                                        <span class="material-symbols-outlined">
+                                            visibility
+                                        </span>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Suministros">
+                                <th
+                                    mat-header-cell
+                                    *matHeaderCellDef
+                                    aria-label="row actions"
+                                >
+                                    Suministros
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button
+                                        mat-mini-fab
+                                        matTooltip="Ver Descripción"
+                                        (click)="
+                                            openModalSuministros(
+                                                '300ms',
+                                                '100ms',
+                                                element?.services[0].supplies
+                                            )
+                                        "
+                                    >
+                                        <span class="material-symbols-outlined">
+                                            visibility
+                                        </span>
+                                    </button>
+                                </td>
+                            </ng-container>
+
+                            <tr
+                                mat-header-row
+                                *matHeaderRowDef="displayedColumns"
+                            ></tr>
+                            <tr
+                                mat-row
+                                *matRowDef="let row; columns: displayedColumns"
+                            ></tr>
+                        </table>
+                    </div>
+                </mat-dialog-content>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <button mat-button (click)="closeDialog()">Cerrar</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>
