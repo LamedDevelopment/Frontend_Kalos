@@ -52,6 +52,12 @@ $tagus-theme: mat.define-light-theme((
 *, ::after, ::before {
     box-sizing: border-box;
 }
+
+pdf-viewer {
+    display: block;
+    height: 100vh;
+}
+
 body {
     margin: 0;
     padding: 0;

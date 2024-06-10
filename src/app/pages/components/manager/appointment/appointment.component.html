@@ -309,18 +309,19 @@
                                                             <td>
                                                                 <button
                                                                     mat-mini-fab
-                                                                    matTooltip="Cancelar servicio"
-                                                                    color="warn"
+                                                                    matTooltip="Ver Historico"
+                                                                    color="primary"
                                                                     (click)="
-                                                                        CloseAppointment(
-                                                                            service,
-                                                                            element._id
+                                                                        viewHistorico(
+                                                                            '300ms',
+                                                                            '100ms',
+                                                                            element
+                                                                                ?.user
+                                                                                ?.userID
                                                                         )
                                                                     "
                                                                 >
-                                                                    <mat-icon
-                                                                        >delete_outline</mat-icon
-                                                                    >
+                                                                    Ver
                                                                 </button>
                                                             </td>
                                                         </tr>

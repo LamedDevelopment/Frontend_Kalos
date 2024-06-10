@@ -7,7 +7,7 @@ import { map } from 'rxjs';
     providedIn: 'root',
 })
 export class ManagerService {
-    constructor(private _apiServiceHttp: ApiServiceHttp) {}
+    constructor(private _apiServiceHttp: ApiServiceHttp) { }
 
     getBusiness(): Observable<any> {
         return this._apiServiceHttp.get('bus/manbus').pipe(
@@ -16,6 +16,15 @@ export class ManagerService {
             })
         );
     }
+
+    getDocumentsGeneral(data: any): Observable<any> {
+        return this._apiServiceHttp.post('doc/viewdoc', data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
     getDays(url: any, data: any): Observable<any> {
         return this._apiServiceHttp.post(url, data).pipe(
             map((response: any) => {
@@ -26,6 +35,23 @@ export class ManagerService {
 
     getHours(url: any, data: any): Observable<any> {
         return this._apiServiceHttp.post(url, data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    generalPostApiFiles(url: any, data: FormData): Observable<any> {
+        return this._apiServiceHttp.postFiles(url, data).pipe(
+            map((response: any) => {
+                console.log(response)
+                return response;
+            })
+        );
+    }
+
+    getBuss(): Observable<any> {
+        return this._apiServiceHttp.get('doc').pipe(
             map((response: any) => {
                 return response;
             })
@@ -112,6 +138,14 @@ export class ManagerService {
         );
     }
 
+    getNameDocuments(): Observable<any> {
+        return this._apiServiceHttp.get('bus/viewdocuall').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
     getBrand(body: any): Observable<any> {
         return this._apiServiceHttp.post('bp/consbrand', body).pipe(
             map((response: any) => {
@@ -143,4 +177,22 @@ export class ManagerService {
             })
         );
     }
+
+    getHistoricoByUser(body: any): Observable<any> {
+        return this._apiServiceHttp.post('apu/usehisappo', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getTiposPagosCheckout(): Observable<any> {
+        return this._apiServiceHttp.get('bill/tppaycas').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+
 }

@@ -21,7 +21,6 @@ export class JwtInterceptor implements HttpInterceptor {
         next: HttpHandler
     ): Observable<HttpEvent<unknown>> {
         let token = sessionStorage.getItem('accessToken');
-        console.log('Interceptor', token);
         let modifiedRequest;
 
         if (token && !AuthUtils.isTokenExpired(token)) {

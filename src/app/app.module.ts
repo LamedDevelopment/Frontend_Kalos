@@ -99,7 +99,8 @@ import { ApiServiceHttp } from './pages/services/api.service';
 import { LoginComponentFun } from './components/authentication/loginFuncionarios/login.component';
 import { RegisterqrComponent } from './components/authentication/registerqr/registerqr.component';
 import { CancelarCitaComponent } from './components/authentication/cancelar-cita/cancelar-cita.component';
-
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 
 registerLocaleData(localeEs, 'es');
 

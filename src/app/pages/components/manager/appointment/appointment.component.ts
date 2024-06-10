@@ -20,6 +20,7 @@ import { ModalappoforaComponent } from 'src/app/pages/common/modalappofora/modal
 import { ManagerService } from 'src/app/pages/services/manager.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalappomanagerComponent } from 'src/app/pages/common/modalappomanager/modalappomanager.component';
+import { ModalHistoricoServiciosComponent } from 'src/app/pages/common/modals/modal-historico-servicios/modal-historico-servicios.component';
 
 @Component({
     selector: 'app-appointment',
@@ -66,7 +67,7 @@ export class AppointmentComponent {
         private _snackBar: MatSnackBar,
         private modalservice: ModalservicesService,
         private managerservice: ManagerService
-    ) {}
+    ) { }
 
     /**
      * On init
@@ -346,6 +347,40 @@ export class AppointmentComponent {
                 data: {
                     _id: this.id_,
                     branchoffices: this.branchoffices, // enviar sedes al modal
+                },
+            });
+
+            dialogRef.afterClosed().subscribe((data) => {
+                // Una vez cerrado el modal, puedes acceder a los datos devueltos
+                if (data) {
+                    console.log('Datos del modal cerrado:', data);
+                }
+
+                // Una vez cerrado el modal se refresca la data
+                this.GetCitas(1);
+                this.GetHistoricoCitas();
+            });
+        }, 1000);
+    }
+
+
+    viewHistorico(
+        enterAnimationDuration: string,
+        exitAnimationDuration: string,
+        user_id: string
+    ) {
+        setTimeout(() => {
+
+            console.log('====================================');
+            console.log(user_id);
+            console.log('====================================');
+            const dialogRef = this.dialog.open(ModalHistoricoServiciosComponent, {
+                width: '1000px',
+                enterAnimationDuration,
+                exitAnimationDuration,
+
+                data: {
+                    user_id
                 },
             });
 
