@@ -1,0 +1,32 @@
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card class="example-card">
+        <div class="container-fluid">
+            <h3 class="text-center mt-3">Editar Turno</h3>
+
+            <mat-card-content>
+                <mat-dialog-content class="mat-typography">
+                    <div class="mat-elevation-z8 tagus-mat-table">
+                        <app-select-turnos
+                            (turnosSelected)="turnosSelected($event)"
+                        ></app-select-turnos>
+                    </div>
+                </mat-dialog-content>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <button mat-button (click)="closeDialog()">Cerrar</button>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="update()"
+                    [disabled]="!hourSelected.nameHours"
+                >
+                    Actualizar
+                </button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

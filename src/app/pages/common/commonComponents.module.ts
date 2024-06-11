@@ -47,6 +47,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { ModalDescripcionServicioComponent } from './modals/modal-descripcion-servicio/modal-descripcion-servicio.component';
 import { ModalSuministrosComponent } from './modals/modal-suministros/modal-suministros.component';
+import { SelectTurnosComponent } from './selects/select-turnos/select-turnos.component';
+import { SelectPermisosComponent } from './selects/select-permisos/select-permisos.component';
 
 @NgModule({
     declarations: [
@@ -84,6 +86,8 @@ import { ModalSuministrosComponent } from './modals/modal-suministros/modal-sumi
         ModalHistoricoServiciosComponent,
         ModalDescripcionServicioComponent,
         ModalSuministrosComponent,
+        SelectTurnosComponent,
+        SelectPermisosComponent,
     ],
     imports: [
         CommonModule,
@@ -100,7 +104,7 @@ import { ModalSuministrosComponent } from './modals/modal-suministros/modal-sumi
         MatMenuModule,
         NgApexchartsModule,
         MatPaginatorModule,
-        MatTableModule
+        MatTableModule,
     ],
     exports: [
         SelectbussinesComponent,
@@ -131,7 +135,9 @@ import { ModalSuministrosComponent } from './modals/modal-suministros/modal-sumi
         AnalyticsGenderComponent,
         VisitorsAgeComponent,
         AnalyticsLanguageComponent,
-        ModalHistoricoServiciosComponent
+        ModalHistoricoServiciosComponent,
+        SelectTurnosComponent,
+        SelectPermisosComponent,
     ],
 })
-export class commonComponentsModule { }
+export class commonComponentsModule {}

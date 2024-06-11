@@ -1,0 +1,22 @@
+<!-- Modal -->
+
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card class="example-card">
+        <div class="container-fluid">
+            <h3 class="text-center mt-3">Generar Permisos</h3>
+
+            <mat-card-content>
+                <mat-dialog-content class="mat-typography">
+                    <app-select-permisos></app-select-permisos>
+                </mat-dialog-content>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <button mat-button (click)="closeDialog()">Cerrar</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

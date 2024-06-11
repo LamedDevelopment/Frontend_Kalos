@@ -1,0 +1,171 @@
+<div
+    class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between"
+>
+    <h5 class="mb-0">Turnos</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item fw-semibold">User</li>
+        <li class="breadcrumb-item fw-semibold">Turnos</li>
+    </ol>
+</div>
+
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <div class="col-lg-12 col-xl-12 col-md-12">
+        <mat-card class="mb-25 tagus-card">
+            <mat-card-header>
+                <h5 class="mb-0">Turnos Personal</h5>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="mat-elevation-z8 tagus-mat-table">
+                    <table mat-table [dataSource]="dataSource">
+                        <!-- Order ID Column -->
+                        <ng-container matColumnDef="item">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-start"
+                            >
+                                Item
+                            </th>
+                            <td
+                                mat-cell
+                                *matCellDef="let element; let index = index"
+                                class="fw-semibold text-start"
+                            >
+                                {{ index + 1 }}
+                            </td>
+                        </ng-container>
+
+                        <!-- Product Column -->
+                        <ng-container matColumnDef="Colaborador">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-start"
+                            >
+                                Colaborador
+                            </th>
+                            <td
+                                mat-cell
+                                *matCellDef="let element"
+                                class="text-start"
+                            >
+                                {{ element.user?.name }}-{{
+                                    element.user?.lastName
+                                }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Dias">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-start small-column"
+                            >
+                                Dias Hábiles
+                            </th>
+                            <td
+                                mat-cell
+                                *matCellDef="let element"
+                                class="text-start small-column"
+                            >
+                                <mat-accordion>
+                                    <mat-expansion-panel
+                                        (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false"
+                                    >
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Ver
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+
+                                        <div class="row">
+                                            <div
+                                                class="col-12 col-lg-6"
+                                                *ngFor="
+                                                    let item of element?.daysServices
+                                                "
+                                            >
+                                                <p>
+                                                    {{ item.dayWeek }}
+                                                    {{ item.startTime }}-{{
+                                                        item.endTime
+                                                    }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Editar">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-start"
+                            ></th>
+                            <td
+                                mat-cell
+                                *matCellDef="let element"
+                                class="text-start"
+                            >
+                                <button
+                                    mat-icon-button
+                                    matTooltip="Editar Turnos"
+                                    aria-label="expand row"
+                                    (click)="
+                                        openModalConfigTurnos(
+                                            '300ms',
+                                            '100ms',
+                                            element?.business,
+                                            element?.user,
+                                            element
+                                        )
+                                    "
+                                    [disabled]="buttonEdit"
+                                >
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+
+                                <button
+                                    mat-icon-button
+                                    matTooltip="Generar Permisos"
+                                    aria-label="expand row"
+                                    (click)="
+                                        openModalPermisos(
+                                            '300ms',
+                                            '100ms',
+                                            element
+                                        )
+                                    "
+                                    [disabled]="buttonAdd"
+                                >
+                                    <mat-icon>note_add</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumns"
+                        ></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="let row; columns: displayedColumns"
+                        ></tr>
+                    </table>
+                    <mat-paginator
+                        [pageSizeOptions]="[10, 15, 20]"
+                        showFirstLastButtons
+                    >
+                    </mat-paginator>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -30,6 +30,7 @@ import { FmProjectsComponent } from './file-manager/fm-projects/fm-projects.comp
 import { FmRecentFilesComponent } from './file-manager/fm-recent-files/fm-recent-files.component';
 import { FmTemplatesComponent } from './file-manager/fm-templates/fm-templates.component';
 import { AnalyticsComponent } from '../../common/analytics/analytics.component';
+import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component';
 
 const routes: Routes = [
     {
@@ -166,6 +167,11 @@ const routes: Routes = [
             {
                 path: 'file-manager/recent-files',
                 component: FmRecentFilesComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'viewall-colla',
+                component: ViewAllCollaComponent,
                 canActivate: [AuthGuard],
             },
             { path: '', redirectTo: '/man/appo', pathMatch: 'full' },

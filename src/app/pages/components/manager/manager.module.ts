@@ -88,6 +88,9 @@ import { FmSidebarComponent } from './file-manager/fm-sidebar/fm-sidebar.compone
 import { FmTemplatesComponent } from './file-manager/fm-templates/fm-templates.component';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ConfigTurnosComponent } from './modals/config-turnos/config-turnos.component';
+import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component';
+import { GeneratePermisosComponent } from './modals/generate-permisos/generate-permisos.component';
 @NgModule({
     declarations: [
         AgendadayComponent,
@@ -124,6 +127,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
         FmDocumentsComponent,
         FmMediaComponent,
         FmRecentFilesComponent,
+        ConfigTurnosComponent,
+        ViewAllCollaComponent,
+        GeneratePermisosComponent,
     ],
     imports: [
         CommonModule,
@@ -181,7 +187,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
         HelpermoduleModule,
         commonComponentsModule,
         NgxDocViewerModule,
-        PdfViewerModule
+        PdfViewerModule,
     ],
 })
 export class ManagerModule {}

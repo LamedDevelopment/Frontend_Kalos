@@ -1,0 +1,11 @@
+<mat-form-field appearance="fill" class="w-100">
+    <mat-label>Seleccione Permiso</mat-label>
+    <mat-select
+        [(value)]="valueInput"
+        (selectionChange)="onServiceChange($event)"
+    >
+        <mat-option *ngFor="let item of data" [value]="item">
+            {{ item.name }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

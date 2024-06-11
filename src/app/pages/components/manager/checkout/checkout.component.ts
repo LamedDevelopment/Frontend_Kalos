@@ -32,13 +32,13 @@ export class CheckoutComponent implements OnInit {
     showAlert: boolean = false;
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
-    durationInSeconds = 5;
+    durationInSeconds = 3;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     data = [];
     dataSource = new MatTableDataSource<any>(this.data);
     totalVentas: any;
 
-    dataPagos: any = []
+    dataPagos: any = [];
 
     constructor(
         public themeService: CustomizerSettingsService,
@@ -47,7 +47,7 @@ export class CheckoutComponent implements OnInit {
         private _snackBar: MatSnackBar,
         private modalservice: ModalservicesService,
         private managerservice: ManagerService
-    ) { }
+    ) {}
 
     ngOnInit(): void {
         this.getOrdenes();
@@ -57,15 +57,7 @@ export class CheckoutComponent implements OnInit {
     getTiposPagos() {
         this.managerservice.getTiposPagosCheckout().subscribe(
             (response: ResponseApi) => {
-                console.log('====================================');
-                console.log(response);
-                console.log('====================================');
-
-                /* {
-                    totalAmount: 18000,
-                        paymentType: 'Nequi'
-                } */
-                this.dataPagos = response.msg
+                this.dataPagos = response.msg;
             },
             (error) => {
                 console.log('====================================');
@@ -89,19 +81,12 @@ export class CheckoutComponent implements OnInit {
     getOrdenes() {
         this.managerservice.getSalesofDay().subscribe(
             (response) => {
-                console.log('====================================');
-                console.log(response);
-                console.log('====================================');
                 this.data = response.msg.DetallesVentas;
                 this.dataSource = new MatTableDataSource<any>(this.data);
                 this.dataSource.paginator = this.paginator;
-
                 this.totalVentas = response.msg.TotalVentas;
             },
             (error) => {
-                console.log('====================================');
-                console.log(error);
-                console.log('====================================');
                 this._snackBar.open(
                     error.error.msg
                         ? error.error.msg

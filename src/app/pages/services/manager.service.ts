@@ -7,7 +7,7 @@ import { map } from 'rxjs';
     providedIn: 'root',
 })
 export class ManagerService {
-    constructor(private _apiServiceHttp: ApiServiceHttp) { }
+    constructor(private _apiServiceHttp: ApiServiceHttp) {}
 
     getBusiness(): Observable<any> {
         return this._apiServiceHttp.get('bus/manbus').pipe(
@@ -44,7 +44,7 @@ export class ManagerService {
     generalPostApiFiles(url: any, data: FormData): Observable<any> {
         return this._apiServiceHttp.postFiles(url, data).pipe(
             map((response: any) => {
-                console.log(response)
+                console.log(response);
                 return response;
             })
         );
@@ -194,5 +194,27 @@ export class ManagerService {
         );
     }
 
+    getAllColla(): Observable<any> {
+        return this._apiServiceHttp.get('sf/vieworktime').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
 
+    getTurnos(): Observable<any> {
+        return this._apiServiceHttp.get('sf/viewtimework').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    updateTurnosColla(body: any) {
+        return this._apiServiceHttp.post('sf/changehours', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
 }

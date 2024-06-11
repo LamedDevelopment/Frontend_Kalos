@@ -71,6 +71,11 @@ export class PaymentsModalComponent {
             code: [''],
             electronicBilling: [true],
             observationBilling: [''],
+
+            document: ['', Validators.required],
+            fullName: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            movil: [''],
         });
     }
 
@@ -97,6 +102,14 @@ export class PaymentsModalComponent {
         valueBody.appointmentID = this.dataFactura._id;
         valueBody.tax = [{ description: 'IVA', value: valueBody.tax }];
         valueBody.paymentMethod = [this.obj];
+
+        let data_factura = {
+            document: this.preFactura.get('document')?.value,
+            fullName: this.preFactura.get('fullName')?.value,
+            email: this.preFactura.get('email')?.value,
+            movil: this.preFactura.get('movil')?.value,
+        };
+        valueBody.electronicInvoiceUser = data_factura;
         console.log(valueBody);
 
         this.appointmentsService

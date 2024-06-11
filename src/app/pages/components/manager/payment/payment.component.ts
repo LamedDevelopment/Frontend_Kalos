@@ -47,7 +47,8 @@ export class PaymentComponent implements AfterViewInit, OnInit {
 
         // Evitar que se cierre al hacer clic fuera del modal
         dialogConfig.disableClose = true;
-        dialogConfig.width = '1000px';
+        dialogConfig.width = '1500px';
+        dialogConfig.height = '450px';
         dialogConfig.enterAnimationDuration = enterAnimationDuration;
         dialogConfig.exitAnimationDuration = exitAnimationDuration;
 
