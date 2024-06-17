@@ -67,7 +67,7 @@ export class AppointmentComponent {
         private _snackBar: MatSnackBar,
         private modalservice: ModalservicesService,
         private managerservice: ManagerService
-    ) { }
+    ) {}
 
     /**
      * On init
@@ -363,26 +363,27 @@ export class AppointmentComponent {
         }, 1000);
     }
 
-
     viewHistorico(
         enterAnimationDuration: string,
         exitAnimationDuration: string,
         user_id: string
     ) {
         setTimeout(() => {
-
             console.log('====================================');
             console.log(user_id);
             console.log('====================================');
-            const dialogRef = this.dialog.open(ModalHistoricoServiciosComponent, {
-                width: '1000px',
-                enterAnimationDuration,
-                exitAnimationDuration,
+            const dialogRef = this.dialog.open(
+                ModalHistoricoServiciosComponent,
+                {
+                    width: '1000px',
+                    enterAnimationDuration,
+                    exitAnimationDuration,
 
-                data: {
-                    user_id
-                },
-            });
+                    data: {
+                        user_id,
+                    },
+                }
+            );
 
             dialogRef.afterClosed().subscribe((data) => {
                 // Una vez cerrado el modal, puedes acceder a los datos devueltos

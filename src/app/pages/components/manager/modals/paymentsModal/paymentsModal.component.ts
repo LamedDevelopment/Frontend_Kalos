@@ -1,5 +1,11 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import {
+    FormGroup,
+    FormBuilder,
+    FormArray,
+    Validators,
+    FormControl,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ModalservicesService } from 'src/app/pages/services/modalservices.service';
 import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
@@ -47,6 +53,8 @@ export class PaymentsModalComponent {
         @Inject(MAT_DIALOG_DATA) data: any,
         private swalservice: SwalServiceService
     ) {
+        console.log(data);
+
         this.dataFactura = data;
     }
 
@@ -76,6 +84,7 @@ export class PaymentsModalComponent {
             fullName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             movil: [''],
+            checked: new FormControl(false),
         });
     }
 
@@ -119,6 +128,38 @@ export class PaymentsModalComponent {
                 this.PayBill = bill.msg;
                 stepper.next();
             });
+    }
+
+    setDataCliente(event: any) {
+        console.log('====================================');
+        console.log(this.preFactura.value, this.dataFactura);
+        console.log('====================================');
+
+        if (this.preFactura.get('checked')?.value == true) {
+            let full_name =
+                this.dataFactura.user.nomUser +
+                ' ' +
+                this.dataFactura.user.apeUser;
+            this.preFactura.patchValue({
+                fullName: full_name,
+            });
+            this.preFactura.patchValue({
+                email: this.dataFactura.user.emailUser,
+            });
+            this.preFactura.patchValue({
+                movil: this.dataFactura.user.movilUser,
+            });
+        } else {
+            this.preFactura.patchValue({
+                fullName: '',
+            });
+            this.preFactura.patchValue({
+                email: '',
+            });
+            this.preFactura.patchValue({
+                movil: '',
+            });
+        }
     }
 
     RealizarPagoBill() {
