@@ -1,0 +1,28 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Configuraciones generales</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/man/appo">
+                <i class="ri-home-8-line"></i>
+                Citas
+            </a>
+        </li>
+        <li class="breadcrumb-item fw-semibold">Configuraciones</li>
+    </ol>
+</div>
+
+<div class="row" [class.component-rtl-enabled]="themeService.isRTLEnabled()">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" *ngFor="let card of cards; let i = index">
+        <mat-card class="mb-25 text-center tagus-card">
+            <mat-card-header class="border-bottom">
+                <!-- <div mat-card-avatar class="example-header-image"></div> -->
+                <i mat-card-avatar class="flaticon-credit-cards example-header-image" stile=""></i>
+                <!-- <mat-card-title>{{card.nameItem}}</mat-card-title> -->
+                <h5 class="mb-0 text-center">{{card.nameItem}}</h5>
+            </mat-card-header>
+            <mat-card-content>
+                <span class="d-block gray-color fw-medium">{{card.description}}</span>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

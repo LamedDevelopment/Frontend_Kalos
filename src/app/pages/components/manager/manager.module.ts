@@ -1,26 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { ManagerRoutingModule } from './manager-routing.module';
-import { AgendadayComponent } from './agendaday/agendaday.component';
-import { AgendamonthComponent } from './agendamonth/agendamonth.component';
-import { WalletComponent } from './wallet/wallet.component';
-import { BillingComponent } from './billing/billing.component';
-import { CollaboratorComponent } from './collaborator/collaborator.component';
-import { CollaboratorsComponent } from './collaborators/collaborators.component';
-import { CustomerratingComponent } from './customerrating/customerrating.component';
-import { CustomersComponent } from './customers/customers.component';
-import { DashComponent } from './dash/dash.component';
-import { PaymentComponent } from './payment/payment.component';
-import { PaymentsComponent } from './payments/payments.component';
-import { PayrollComponent } from './payroll/payroll.component';
-import { PayrollsComponent } from './payrolls/payrolls.component';
-import { RatingserviceComponent } from './ratingservice/ratingservice.component';
-import { ServicesComponent } from './services/services.component';
-import { TicketComponent } from './ticket/ticket.component';
-import { TicketsComponent } from './tickets/tickets.component';
-import { ManagerComponent } from './manager.component';
-import { AppointmentComponent } from './appointment/appointment.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,7 +14,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -65,18 +45,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { NgxEditorModule } from 'ngx-editor';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { HelpermoduleModule } from '../../helpers/helpermodule.module';
-import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.component';
-import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.component';
 import { commonComponentsModule } from '../../common/commonComponents.module';
-import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/modalliquidacion.component';
-import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
+import { HelpermoduleModule } from '../../helpers/helpermodule.module';
+import { AgendadayComponent } from './agendaday/agendaday.component';
+import { AgendamonthComponent } from './agendamonth/agendamonth.component';
+import { AppointmentComponent } from './appointment/appointment.component';
+import { BillingComponent } from './billing/billing.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ModalegresoComponent } from './checkout/modals/modalegreso/modalegreso.component';
+import { CollaboratorComponent } from './collaborator/collaborator.component';
+import { CollaboratorsComponent } from './collaborators/collaborators.component';
+import { CustomerratingComponent } from './customerrating/customerrating.component';
+import { DashComponent } from './dash/dash.component';
 import { FileManagerComponent } from './file-manager/file-manager.component';
 import { FmAssetsComponent } from './file-manager/fm-assets/fm-assets.component';
 import { FmDocumentsComponent } from './file-manager/fm-documents/fm-documents.component';
@@ -86,11 +72,25 @@ import { FmProjectsComponent } from './file-manager/fm-projects/fm-projects.comp
 import { FmRecentFilesComponent } from './file-manager/fm-recent-files/fm-recent-files.component';
 import { FmSidebarComponent } from './file-manager/fm-sidebar/fm-sidebar.component';
 import { FmTemplatesComponent } from './file-manager/fm-templates/fm-templates.component';
-import { NgxDocViewerModule } from 'ngx-doc-viewer';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { GeneralConfComponent } from './general-conf/general-conf.component';
+import { ManagerRoutingModule } from './manager-routing.module';
+import { ManagerComponent } from './manager.component';
 import { ConfigTurnosComponent } from './modals/config-turnos/config-turnos.component';
-import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component';
 import { GeneratePermisosComponent } from './modals/generate-permisos/generate-permisos.component';
+import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.component';
+import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { PayrollComponent } from './payroll/payroll.component';
+import { PayrollsComponent } from './payrolls/payrolls.component';
+import { RatingserviceComponent } from './ratingservice/ratingservice.component';
+import { ServicesComponent } from './services/services.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { TicketsComponent } from './tickets/tickets.component';
+import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component';
+import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
+import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/modalliquidacion.component';
+import { WalletComponent } from './wallet/wallet.component';
 @NgModule({
     declarations: [
         AgendadayComponent,
@@ -100,7 +100,7 @@ import { GeneratePermisosComponent } from './modals/generate-permisos/generate-p
         CollaboratorComponent,
         CollaboratorsComponent,
         CustomerratingComponent,
-        CustomersComponent,
+        GeneralConfComponent,
         DashComponent,
         PaymentComponent,
         PaymentsComponent,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiServiceHttp } from './api.service';
-import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { ApiServiceHttp } from './api.service';
 
 @Injectable({
     providedIn: 'root',
@@ -17,8 +17,17 @@ export class ManagerService {
         );
     }
 
+
     getDocumentsGeneral(data: any): Observable<any> {
         return this._apiServiceHttp.post('doc/viewdoc', data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getConfigs(): Observable<any> {
+        return this._apiServiceHttp.get('vwconfgen').pipe(
             map((response: any) => {
                 return response;
             })

@@ -1,26 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ManagerComponent } from './manager.component';
-import { DashComponent } from './dash/dash.component';
+import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
+import { QrComponent } from 'src/app/shared/pages/qr/qr.component';
+import { AnalyticsComponent } from '../../common/analytics/analytics.component';
 import { AgendadayComponent } from './agendaday/agendaday.component';
 import { AgendamonthComponent } from './agendamonth/agendamonth.component';
-import { WalletComponent } from './wallet/wallet.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 import { BillingComponent } from './billing/billing.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { CollaboratorComponent } from './collaborator/collaborator.component';
 import { CollaboratorsComponent } from './collaborators/collaborators.component';
 import { CustomerratingComponent } from './customerrating/customerrating.component';
-import { CustomersComponent } from './customers/customers.component';
-import { PaymentComponent } from './payment/payment.component';
-import { PaymentsComponent } from './payments/payments.component';
-import { PayrollComponent } from './payroll/payroll.component';
-import { PayrollsComponent } from './payrolls/payrolls.component';
-import { RatingserviceComponent } from './ratingservice/ratingservice.component';
-import { TicketComponent } from './ticket/ticket.component';
-import { TicketsComponent } from './tickets/tickets.component';
-import { AppointmentComponent } from './appointment/appointment.component';
-import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
-import { QrComponent } from 'src/app/shared/pages/qr/qr.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { FileManagerComponent } from './file-manager/file-manager.component';
 import { FmAssetsComponent } from './file-manager/fm-assets/fm-assets.component';
 import { FmDocumentsComponent } from './file-manager/fm-documents/fm-documents.component';
@@ -29,8 +19,16 @@ import { FmPersonalComponent } from './file-manager/fm-personal/fm-personal.comp
 import { FmProjectsComponent } from './file-manager/fm-projects/fm-projects.component';
 import { FmRecentFilesComponent } from './file-manager/fm-recent-files/fm-recent-files.component';
 import { FmTemplatesComponent } from './file-manager/fm-templates/fm-templates.component';
-import { AnalyticsComponent } from '../../common/analytics/analytics.component';
+import { GeneralConfComponent } from './general-conf/general-conf.component';
+import { ManagerComponent } from './manager.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PayrollComponent } from './payroll/payroll.component';
+import { PayrollsComponent } from './payrolls/payrolls.component';
+import { RatingserviceComponent } from './ratingservice/ratingservice.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { TicketsComponent } from './tickets/tickets.component';
 import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 const routes: Routes = [
     {
@@ -85,8 +83,8 @@ const routes: Routes = [
                 canActivate: [AuthGuard],
             },
             {
-                path: 'cust',
-                component: CustomersComponent,
+                path: 'general-conf',
+                component: GeneralConfComponent,
                 canActivate: [AuthGuard],
             },
             {
