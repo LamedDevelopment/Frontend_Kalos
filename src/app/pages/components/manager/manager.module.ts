@@ -76,6 +76,7 @@ import { GeneralConfComponent } from './general-conf/general-conf.component';
 import { ManagerRoutingModule } from './manager-routing.module';
 import { ManagerComponent } from './manager.component';
 import { ConfigTurnosComponent } from './modals/config-turnos/config-turnos.component';
+import { configModalComponent } from './modals/configModal/configModal.component';
 import { GeneratePermisosComponent } from './modals/generate-permisos/generate-permisos.component';
 import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.component';
 import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.component';
@@ -130,6 +131,7 @@ import { WalletComponent } from './wallet/wallet.component';
         ConfigTurnosComponent,
         ViewAllCollaComponent,
         GeneratePermisosComponent,
+        configModalComponent
     ],
     imports: [
         CommonModule,

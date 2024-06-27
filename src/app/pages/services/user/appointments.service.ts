@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { ApiServiceHttp } from '../api.service';
-import { Observable, map, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -201,6 +201,20 @@ export class AppointmentsService {
      *
      */
     getWallet(url: any): Observable<any> {
+        return this._apiServiceHttp.get(url).pipe(
+            map((response: any) => {
+                // Return a new observable with the response
+                return response;
+            })
+        );
+    }
+
+
+    /**
+     * Get info banco
+     *
+     */
+    getInfoBanco(url: any): Observable<any> {
         return this._apiServiceHttp.get(url).pipe(
             map((response: any) => {
                 // Return a new observable with the response

@@ -1,0 +1,148 @@
+<div
+    class="row justify-content-center p-10"
+    style="overflow-y:scroll"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+
+    <ng-container *ngIf="selectedTemplate" [ngTemplateOutlet]="selectedTemplate"></ng-container>
+</div>
+
+
+
+<ng-template #Bancos>
+  <mat-card class="p-10 h-100 h-max-90" style="max-height: 90vh; overflow-y: auto;">
+    <mat-card-title class="h4 mb-3">Información bancaria</mat-card-title>
+    <form [formGroup]="businessForm" (ngSubmit)="onSubmit()"  class="needs-validation" novalidate >
+
+        <div formArrayName="bank_info" *ngFor="let bank of bankInfo.controls; let i = index" class="mb-3">
+            <div [formGroupName]="i" class="p-3 bg-light border rounded">
+            <mat-checkbox formControlName="increases_fee" class="mb-2">Incrementar tarifa</mat-checkbox>
+
+            <div class="mb-3">
+                <mat-form-field class="w-100">
+                <mat-label>nombre del banco</mat-label>
+                <input matInput formControlName="bank_name" >
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                    <mat-label>Número de la cuenta</mat-label>
+                    <input matInput formControlName="bank_account_number" >
+                </mat-form-field>
+                </div>
+                <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                    <mat-label>Porcentaje tarifa de tarjeta de crédito</mat-label>
+                    <input matInput type="number"  formControlName="bank_fee_percentage_credit_card" >
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                    <mat-label>Porcentaje tarifa tarjeta débito</mat-label>
+                    <input matInput type="number" formControlName="bank_fee_percentage_debit_card" >
+                </mat-form-field>
+                </div>
+                <div class="col-md-6 mb-3">
+                <mat-form-field class="w-100">
+                    <mat-label>Porcentaje de tarifa de transacción</mat-label>
+                    <input matInput type="number" formControlName="bank_fee_percentage_transaction" >
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <mat-form-field class="w-100">
+                <mat-label>Tarifa en efectivo</mat-label>
+                <input matInput type="number"  formControlName="bank_fee_cash" >
+                </mat-form-field>
+            </div>
+
+            <!-- <div class="mb-3">
+                <mat-form-field class="w-100">
+                <mat-label>Note</mat-label>
+                <textarea matInput formControlName="note" ></textarea>
+                </mat-form-field>
+            </div> -->
+
+            <!-- <button mat-raised-button color="warn" (click)="removeBankInfo(i)" class="btn btn-danger w-100">Remove Bank Info</button> -->
+
+            </div>
+        </div>
+
+        <!-- <button mat-raised-button (click)="addBankInfo()">Add Bank Info</button> -->
+
+        <div formGroupName="electronicBill" class="p-3 bg-light border rounded mb-3">
+            <mat-card-title class="h5 mb-3">Factura electrónica</mat-card-title>
+
+            <div class="mb-3">
+            <mat-form-field class="w-100">
+                <mat-label>Email Alegra</mat-label>
+                <input matInput formControlName="emailAuth" >
+            </mat-form-field>
+            </div>
+
+            <div class="mb-3">
+            <mat-form-field class="w-100">
+                <mat-label>Password Alegra</mat-label>
+                <input matInput formControlName="datoAuth" >
+            </mat-form-field>
+            </div>
+
+            <div class="mb-3">
+            <mat-form-field class="w-100">
+                <mat-label>Autorización Alegra</mat-label>
+                <input matInput formControlName="authorization" >
+            </mat-form-field>
+            </div>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!businessForm.valid" >Guardar Información</button>
+    </form>
+    </mat-card>
+</ng-template>
+<ng-template #Turnos>
+  <div>
+    Turnos.
+  </div>
+</ng-template>
+<ng-template #Colaboradores>
+  <div>
+    Colaboradores.
+  </div>
+</ng-template>
+<ng-template #Almacen>
+  <div>
+    Almacen
+  </div>
+</ng-template>
+<ng-template #Cargue_de_Inventarios>
+  <div>
+    Cargue de inventarios
+  </div>
+</ng-template>
+<ng-template #Cargue_de_Servicios>
+  <div>
+    Cargue de servicios.
+  </div>
+</ng-template>
+<ng-template #Promociones>
+  <div>
+    Promociones
+  </div>
+</ng-template>
+<ng-template #Tipos_de_Descuentos>
+  <div>
+    Tipos de descuentos
+  </div>
+</ng-template>
+<ng-template #Card_VIP>
+  <div>
+    card VIP.
+  </div>
+</ng-template>

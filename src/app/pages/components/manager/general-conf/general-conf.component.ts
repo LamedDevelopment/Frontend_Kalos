@@ -4,8 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, takeUntil } from 'rxjs';
 import { ManagerService } from 'src/app/pages/services/manager.service';
 import { UserService } from 'src/app/pages/services/user/user.service';
-import { CreateDocumentDialogBoxComponent } from 'src/app/shared/create-document-dialog-box/create-document-dialog-box.component';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
+import { configModalComponent } from '../modals/configModal/configModal.component';
 
 @Component({
   selector: 'app-general-conf',
@@ -52,20 +52,20 @@ export class GeneralConfComponent implements  OnInit {
     }
 
 
-    openCreateDocumentDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    openCreateDocumentDialog(selectedTemplate: string, enterAnimationDuration: string, exitAnimationDuration: string): void {
         const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '510px';
+        // dialogConfig.disableClose = true;
+        dialogConfig.width = '700px';
         dialogConfig.enterAnimationDuration = enterAnimationDuration;
         dialogConfig.exitAnimationDuration =  exitAnimationDuration;
-
+        console.log(selectedTemplate)
 
         dialogConfig.data = {
-            name: "Documentacion Ente de Salud",
+            selectedTemplate: selectedTemplate.split(' ').join('_'),
         };
 
         this.dialog
-            .open(CreateDocumentDialogBoxComponent, dialogConfig)
+            .open(configModalComponent, dialogConfig)
             .afterClosed()
             .subscribe((data) => {
                 console.log(data)
