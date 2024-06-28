@@ -43,6 +43,10 @@ export class PaymentsModalComponent {
     dataFactura: any;
     PayBill: any;
 
+    showCheckNombre = true;
+
+    dataProductos: any = [];
+
     constructor(
         public themeService: CustomizerSettingsService,
         private dialogRef: MatDialogRef<ModalserviceComponent>,
@@ -55,6 +59,9 @@ export class PaymentsModalComponent {
     ) {
         console.log(data);
 
+        if (data.showcheck == false) {
+            this.showCheckNombre = data.showcheck;
+        }
         this.dataFactura = data;
     }
 
@@ -74,7 +81,7 @@ export class PaymentsModalComponent {
             docuUser: ['', Validators.required],
             managerDiscount: [0],
             tax: [0],
-            paymentMethod: [this.obj],
+            paymentMethod: [this.obj, Validators.required],
 
             code: [''],
             electronicBilling: [true],
@@ -85,6 +92,7 @@ export class PaymentsModalComponent {
             email: ['', [Validators.required, Validators.email]],
             movil: [''],
             checked: new FormControl(false),
+            product_sales: this._formBuilder.array([]),
         });
     }
 
@@ -108,7 +116,9 @@ export class PaymentsModalComponent {
         const loading = this.swalservice.getLoading();
 
         const valueBody = this.preFactura.getRawValue();
-        valueBody.appointmentID = this.dataFactura._id;
+        valueBody.appointmentID = this.dataFactura._id
+            ? this.dataFactura._id
+            : '';
         valueBody.tax = [{ description: 'IVA', value: valueBody.tax }];
         valueBody.paymentMethod = [this.obj];
 
@@ -123,11 +133,28 @@ export class PaymentsModalComponent {
 
         this.appointmentsService
             .processPayBillingMan('bill', valueBody)
-            .subscribe((bill: any) => {
-                loading.close();
-                this.PayBill = bill.msg;
-                stepper.next();
-            });
+            .subscribe(
+                (bill: any) => {
+                    loading.close();
+                    this.PayBill = bill.msg;
+                    stepper.next();
+                },
+                (error: any) => {
+                    console.error('Error en la llamada al API:', error);
+                    loading.close();
+                    this._snackBar.open(
+                        error.error.msg
+                            ? error.error.msg
+                            : 'Error Al consultar información',
+                        '',
+                        {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        }
+                    );
+                }
+            );
     }
 
     setDataCliente(event: any) {
@@ -212,5 +239,35 @@ export class PaymentsModalComponent {
                     loading.close();
                 }
             );
+    }
+
+    get getProduct(): any {
+        return this.preFactura.get('product_sales') as FormArray;
+    }
+
+    addProduct() {
+        const productoForm = this._formBuilder.group({
+            producto: [''],
+        });
+        this.getProduct.push(productoForm);
+    }
+
+    borrarProducto(indice: number) {
+        this.getProduct.removeAt(indice);
+    }
+
+    patchValueCantidad(indice: number, event: any) {
+        let value = Number(event.target.value);
+        let control = this.getProduct.at(indice);
+        let obj_anterior = control.value.producto;
+        obj_anterior.amount = value;
+        control.patchValue(obj_anterior);
+    }
+
+    validateButton() {
+        return (
+            this.preFactura.invalid ||
+            this.preFactura.get('paymentMethod')?.value.PaymentType == ''
+        );
     }
 }

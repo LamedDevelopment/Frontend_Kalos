@@ -49,6 +49,7 @@ import { ModalDescripcionServicioComponent } from './modals/modal-descripcion-se
 import { ModalSuministrosComponent } from './modals/modal-suministros/modal-suministros.component';
 import { SelectTurnosComponent } from './selects/select-turnos/select-turnos.component';
 import { SelectPermisosComponent } from './selects/select-permisos/select-permisos.component';
+import { AutocompleteProductosComponent } from './inputs/autocomplete-productos/autocomplete-productos.component';
 
 @NgModule({
     declarations: [
@@ -88,6 +89,7 @@ import { SelectPermisosComponent } from './selects/select-permisos/select-permis
         ModalSuministrosComponent,
         SelectTurnosComponent,
         SelectPermisosComponent,
+        AutocompleteProductosComponent,
     ],
     imports: [
         CommonModule,
@@ -138,6 +140,7 @@ import { SelectPermisosComponent } from './selects/select-permisos/select-permis
         ModalHistoricoServiciosComponent,
         SelectTurnosComponent,
         SelectPermisosComponent,
+        AutocompleteProductosComponent,
     ],
 })
 export class commonComponentsModule {}

@@ -17,7 +17,6 @@ export class ManagerService {
         );
     }
 
-
     getDocumentsGeneral(data: any): Observable<any> {
         return this._apiServiceHttp.post('doc/viewdoc', data).pipe(
             map((response: any) => {
@@ -221,6 +220,14 @@ export class ManagerService {
 
     updateTurnosColla(body: any) {
         return this._apiServiceHttp.post('sf/changehours', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getProductByAutocomplete(data: any): Observable<any> {
+        return this._apiServiceHttp.post('inven/viewprod', data).pipe(
             map((response: any) => {
                 return response;
             })

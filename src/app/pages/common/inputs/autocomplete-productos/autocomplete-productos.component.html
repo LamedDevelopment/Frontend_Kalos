@@ -1,0 +1,24 @@
+<div [formGroup]="formGroup">
+    <mat-form-field class="w-100">
+        <mat-label>{{ label }}</mat-label>
+        <input
+            matInput
+            aria-label="Envio"
+            [matAutocomplete]="auto"
+            (input)="onKeyUp()"
+            [formControl]="productoControl"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+                *ngFor="let item of filteredStates | async"
+                [value]="item.product_name"
+                (click)="productSelect(item)"
+            >
+                <span class="ml-3"
+                    >{{ item.product_name }} -
+                    {{ item.selling_price_public }}</span
+                >
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>

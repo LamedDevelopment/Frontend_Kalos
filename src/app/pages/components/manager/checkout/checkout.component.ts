@@ -14,6 +14,7 @@ import { CustomizerSettingsService } from 'src/app/shared/services/customizer-se
 import { ModalegresoComponent } from './modals/modalegreso/modalegreso.component';
 import { dataHistorico } from 'src/app/pages/common/Interfaces/dataHistorico.interface';
 import { ResponseApi } from 'src/app/pages/common/Interfaces/Response';
+import { PaymentsModalComponent } from '../modals/paymentsModal/paymentsModal.component';
 
 @Component({
     selector: 'app-checkout',
@@ -117,6 +118,24 @@ export class CheckoutComponent implements OnInit {
             dialogRef.afterClosed().subscribe((data) => {
                 // Una vez cerrado el modal, puedes acceder a los datos devueltos
                 console.log('Datos del modal cerrado:', data);
+            });
+        }, 1000);
+    }
+
+    openModalPrefactura(
+        enterAnimationDuration: string,
+        exitAnimationDuration: string
+    ) {
+        setTimeout(() => {
+            const dialogRef = this.dialog.open(PaymentsModalComponent, {
+                width: '1000px',
+                enterAnimationDuration,
+                exitAnimationDuration,
+                data: { showcheck: false },
+            });
+
+            dialogRef.afterClosed().subscribe((data) => {
+                // Una vez cerrado el modal, puedes acceder a los datos devueltos
             });
         }, 1000);
     }
