@@ -261,6 +261,9 @@ export class PaymentsModalComponent {
         let control = this.getProduct.at(indice);
         let obj_anterior = control.value.producto;
         obj_anterior.amount = value;
+        obj_anterior.payTax = false;
+        obj_anterior.discount = 0;
+        obj_anterior.inventories_items = obj_anterior._id;
         control.patchValue(obj_anterior);
     }
 

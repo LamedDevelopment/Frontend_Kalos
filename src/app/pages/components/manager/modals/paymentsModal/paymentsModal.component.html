@@ -372,18 +372,15 @@
                                             "
                                         >
                                             <td class="main-color fw-semibold">
-                                                {{
-                                                    item?.producto.product_name
-                                                }}
+                                                {{ item?.product_name }}
                                             </td>
                                             <td class="text-center fw-semibold">
-                                                {{ item?.producto?.amount }}
+                                                {{ item?.amount }}
                                             </td>
                                             <td class="text-center fw-semibold">
                                                 {{
-                                                    item?.producto?.subTotal
-                                                        ? item?.producto
-                                                              ?.subTotal
+                                                    item?.subTotal
+                                                        ? item?.subTotal
                                                         : "Sin Información"
                                                 }}
                                             </td>
