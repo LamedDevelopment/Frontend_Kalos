@@ -92,6 +92,8 @@ import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component
 import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
 import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/modalliquidacion.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { SeesupliesComponent } from './seesuplies/seesuplies.component';
+import { ModalSuppliesComponent } from './modals/modal-supplies/modal-supplies.component';
 @NgModule({
     declarations: [
         AgendadayComponent,
@@ -131,7 +133,9 @@ import { WalletComponent } from './wallet/wallet.component';
         ConfigTurnosComponent,
         ViewAllCollaComponent,
         GeneratePermisosComponent,
-        configModalComponent
+        configModalComponent,
+        SeesupliesComponent,
+        ModalSuppliesComponent
     ],
     imports: [
         CommonModule,

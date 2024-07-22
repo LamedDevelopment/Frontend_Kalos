@@ -29,6 +29,7 @@ import { TicketComponent } from './ticket/ticket.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { SeesupliesComponent } from './seesuplies/seesuplies.component';
 
 const routes: Routes = [
     {
@@ -170,6 +171,11 @@ const routes: Routes = [
             {
                 path: 'viewall-colla',
                 component: ViewAllCollaComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'see-supplies',
+                component: SeesupliesComponent,
                 canActivate: [AuthGuard],
             },
             { path: '', redirectTo: '/man/appo', pathMatch: 'full' },

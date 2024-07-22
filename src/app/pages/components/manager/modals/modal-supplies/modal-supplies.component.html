@@ -1,0 +1,119 @@
+<!-- Modal -->
+
+<div
+    class="row justify-content-center"
+    [class.component-dark-theme]="themeService.isDark()"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card class="">
+        <div class="">
+            <h3 class="text-center mt-3">Suministros</h3>
+
+            <mat-card-content>
+                <mat-dialog-content class="mat-typography">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <button
+                                mat-raised-button
+                                class="tagus"
+                                (click)="aproveAll()"
+                            >
+                                Aprobar Todos
+                            </button>
+                        </div>
+                    </div>
+
+                    <table mat-table [dataSource]="dataSource">
+                        <!-- Order ID Column -->
+                        <ng-container matColumnDef="item">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-start"
+                            >
+                                Item
+                            </th>
+                            <td
+                                mat-cell
+                                *matCellDef="let element; let index = index"
+                                class="fw-semibold text-start"
+                            >
+                                {{ index + 1 }}
+                            </td>
+                        </ng-container>
+
+                        <!-- Product Column -->
+                        <ng-container matColumnDef="Colaborador">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-start"
+                            >
+                                Nombre Producto
+                            </th>
+                            <td
+                                mat-cell
+                                *matCellDef="let element"
+                                class="text-start"
+                            >
+                                {{ element?.product }} -
+                                {{ element?.reference }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Descripcion">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-start"
+                            >
+                                Descripción
+                            </th>
+                            <td
+                                mat-cell
+                                *matCellDef="let element"
+                                class="text-start"
+                            >
+                                {{ element?.description }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Editar">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                class="text-start"
+                            ></th>
+                            <td
+                                mat-cell
+                                *matCellDef="let element"
+                                class="text-start"
+                            >
+                                <mat-checkbox
+                                    [checked]="element.deliverSupplies"
+                                    [(ngModel)]="element.deliverSupplies"
+                                    (change)="updateDeliveryStatus(element)"
+                                >
+                                </mat-checkbox>
+                            </td>
+                        </ng-container>
+
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumns"
+                        ></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="let row; columns: displayedColumns"
+                        ></tr>
+                    </table>
+                </mat-dialog-content>
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+                <button mat-button (click)="closeDialog()">Cerrar</button>
+                <button mat-raised-button class="tagus" (click)="saveData()">
+                    Guardar
+                </button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

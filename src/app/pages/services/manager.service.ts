@@ -233,4 +233,20 @@ export class ManagerService {
             })
         );
     }
+
+    getSupplies(): Observable<any> {
+        return this._apiServiceHttp.get('apu/viewsup').pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    updateAllSupplies(data: any): Observable<any> {
+        return this._apiServiceHttp.post('apu/upsup', data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
 }
