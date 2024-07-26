@@ -53,6 +53,14 @@ $tagus-theme: mat.define-light-theme((
     box-sizing: border-box;
 }
 
+ngx-material-timepicker-container {
+  z-index: 2000 !important;
+}
+
+.timepicker-overlay {
+  z-index: 2000 !important;
+}
+
 pdf-viewer {
     display: block;
     height: 100vh;

@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { switchMap } from 'rxjs/operators';
-import { AuthUtils } from '../../../components/authentication/auth/auth.utils';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of, throwError } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { AuthUtils } from '../../../components/authentication/auth/auth.utils';
 import { ApiServiceHttp } from '../api.service';
 import { UserService } from '../user/user.service';
-import jwt_decode from 'jwt-decode';
 @Injectable()
 export class AuthService {
     private _authenticated: boolean = false;
@@ -77,7 +75,7 @@ export class AuthService {
             .post('forpass/rpuspass', body)
             .pipe(
                 switchMap((response: any) => {
-                    console.log(response)
+                    // console.log(response)
                     // if (!response.status) {
 
                     // }
@@ -159,7 +157,7 @@ export class AuthService {
 
         return this._apiServiceHttp.post('login/bx', credentials).pipe(
             map((response: any) => {
-                console.log(response);
+                // console.log(response);
                 if (response.ok) {
                     // Store the access token in the local storage
                     this.accessToken = response.msg;
@@ -181,7 +179,6 @@ export class AuthService {
         return this._apiServiceHttp.post('login/token', {}).pipe(
             map(
                 (response: any) => {
-                    console.log(response);
 
                     if (response.msg.business) {
                         sessionStorage.setItem(
@@ -213,7 +210,7 @@ export class AuthService {
         return this._apiServiceHttp.get('bus', {}).pipe(
             map(
                 (response: any) => {
-                    console.log(response);
+                    // console.log(response);
 
                     // Store the user on the user service
                     //   sessionStorage.setItem('bussines', JSON.stringify(response.msg.user));

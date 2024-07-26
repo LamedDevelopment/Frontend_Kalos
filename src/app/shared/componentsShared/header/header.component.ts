@@ -1,12 +1,12 @@
-import { Component, HostListener } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { ApiServiceHttp } from 'src/app/pages/services/api.service';
+import { AuthService } from 'src/app/pages/services/auth/auth.service';
+import { UserService } from 'src/app/pages/services/user/user.service';
 import { CustomizerSettingsService } from '../../services/customizer-settings.service';
 import { ToggleService } from '../../services/toggle.service';
-import { UserService } from 'src/app/pages/services/user/user.service';
-import { Subject, takeUntil } from 'rxjs';
-import { AuthService } from 'src/app/pages/services/auth/auth.service';
-import { ApiServiceHttp } from 'src/app/pages/services/api.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -52,7 +52,6 @@ export class HeaderComponent {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((user: any) => {
                 this.user = user.user ? user.user : user;
-                console.log(this.user);
             });
     }
 
@@ -97,7 +96,6 @@ export class HeaderComponent {
     logOut() {
         this.apiservice.get('login/close', {}).subscribe(
             (res: any) => {
-                console.log('res logout ', res);
                 localStorage.clear();
                 sessionStorage.clear();
                 this.router.navigate(['auth/login']);

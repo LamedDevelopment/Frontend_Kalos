@@ -4,15 +4,17 @@
     [class.component-dark-theme]="themeService.isDark()"
     [class.component-rtl-enabled]="themeService.isRTLEnabled()"
 >
-
     <ng-container *ngIf="selectedTemplate" [ngTemplateOutlet]="selectedTemplate"></ng-container>
 </div>
 
-
-
 <ng-template #Bancos>
   <mat-card class="p-10 h-100 h-max-90" style="max-height: 90vh; overflow-y: auto;">
-    <mat-card-title class="h4 mb-3">Información bancaria</mat-card-title>
+    <mat-card-header class="d-flex justify-content-between align-items-center mb-5">
+        <mat-card-title class="h4 mb-3">Información bancaria</mat-card-title>
+        <button mat-mini-fab  aria-label="Salir del modal de turnos" (click)="closeDialog()">
+          <mat-icon class="cursor-pointer" >clear</mat-icon>
+        </button>
+    </mat-card-header>
     <form [formGroup]="businessForm" (ngSubmit)="onSubmit()"  class="needs-validation" novalidate >
 
         <div formArrayName="bank_info" *ngFor="let bank of bankInfo.controls; let i = index" class="mb-3">
@@ -106,41 +108,195 @@
     </form>
     </mat-card>
 </ng-template>
+
 <ng-template #Turnos>
-  <div>
-    Turnos.
-  </div>
+  <mat-card class="p-10 h-100 h-max-90" style="max-height: 90vh; overflow-y: auto;">
+    <mat-card-header class="d-flex justify-content-between align-items-center mb-5">
+        <mat-card-title class="h4 mb-3">Información Turnos</mat-card-title>
+        <button mat-mini-fab  aria-label="Salir del modal de turnos" (click)="closeDialog()">
+          <mat-icon class="cursor-pointer" >clear</mat-icon>
+        </button>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+            <div formArrayName="TypeOfWorkingHours">
+                <div  *ngFor="let workHour of TypeOfWorkingHours.controls; let i = index" class="mb-3">
+                    <div [formGroupName]="i" class="container p-3 bg-light border rounded">
+                        <div class="row">
+                            <div class="col-10  w-full mb-3">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Nombre del Turno</mat-label>
+                                    <input matInput formControlName="nameHours">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Hora de inicio</mat-label>
+                                    <div class="grid grid-cols-5 w-full">
+                                        <input matInput class="col-span-4" name="horaIni" formControlName="startTime" placeholder="06:00 am" [ngxTimepicker]="pickerHour" (change)="onTimeChangeStart($event)">
+                                        <ngx-material-timepicker  [defaultTime]="'06:00 am'" #pickerHour></ngx-material-timepicker>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <mat-form-field appearance="fill" class="w-100">
+                                        <mat-label>Hora de fin</mat-label>
+                                        <div class="grid grid-cols-5 w-full">
+                                            <input matInput class="col-span-4" name="horaFin" formControlName="endTime"  placeholder="06:00 am" [ngxTimepicker]="pickerHourFin"  (change)="onTimeChangeEnd($event)">
+                                            <!-- <ngx-material-timepicker-toggle class="col-span-1 justify-self-end" [for]="pickerHourFin">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px" ngxMaterialTimepickerToggleIcon>
+                                                    <path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,16H7.995 C7.445,16,7,15.555,7,15.005v-0.011C7,14.445,7.445,14,7.995,14H14V5.995C14,5.445,14.445,5,14.995,5h0.011 C15.555,5,16,5.445,16,5.995V16z"/>
+                                                </svg>
+                                            </ngx-material-timepicker-toggle> -->
+                                            <ngx-material-timepicker  [defaultTime]="'06:00 am'" #pickerHourFin></ngx-material-timepicker>
+                                        </div>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <div class="submit-button mt-3 mb-10">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!businessForm.valid" >Añadir horario</button>
+          </div>
+        </form>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <div class="mt-4">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="Horario">
+                    <th mat-header-cell *matHeaderCellDef> Horario </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nameHours}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="HoraInicio">
+                    <th mat-header-cell *matHeaderCellDef> Hora inicio </th>
+                    <td mat-cell *matCellDef="let element"> {{element.startTime}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="HoraFinal">
+                    <th mat-header-cell *matHeaderCellDef> Hora final </th>
+                    <td mat-cell *matCellDef="let element"> {{element.endTime}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>  </th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                    <button mat-icon-button color="warn" (click)="removeRecord(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+    </div>
+  </mat-card>
 </ng-template>
+
+
 <ng-template #Colaboradores>
   <div>
-    Colaboradores.
+    <mat-card class="p-10 h-100 h-max-90" style="max-height: 90vh; overflow-y: auto;">
+        <mat-card-header class="d-flex justify-content-between align-items-center mb-5">
+            <mat-card-title class="h4 mb-3">Información Turnos</mat-card-title>
+            <button mat-mini-fab  aria-label="Salir del modal de turnos" (click)="closeDialog()">
+            <mat-icon class="cursor-pointer" >clear</mat-icon>
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="mt-4">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="Nombres">
+                        <th mat-header-cell *matHeaderCellDef> Nombres </th>
+                        <td mat-cell *matCellDef="let element"> {{element.user.name}} {{element.user.lastName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Cedula">
+                        <th mat-header-cell *matHeaderCellDef> Cédula </th>
+                        <td mat-cell *matCellDef="let element"> {{element.user.document}}  </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Negocio">
+                        <th mat-header-cell *matHeaderCellDef> Negocio </th>
+                        <td mat-cell *matCellDef="let element"> {{element.business[0].businessName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Sucursal">
+                        <th mat-header-cell *matHeaderCellDef> Sucursal </th>
+                        <td mat-cell *matCellDef="let element"> {{element.business[0].tradename}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="TipoServicio">
+                        <th mat-header-cell *matHeaderCellDef> Tipo Servicio </th>
+                        <td mat-cell *matCellDef="let element">
+                            <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+                                <mat-chip *ngFor="let chip of element.StaffType" selected color="accent">
+                                    {{chip.name}}
+                                </mat-chip>
+                            </mat-chip-listbox>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>  </th>
+                        <td mat-cell *matCellDef="let element; let i = index">
+                        <mat-slide-toggle
+                            class="example-margin"
+                            color="{{element.status ? 'accent' : 'warn'}}"
+                            (change)="statusColaborador(element)"
+                            [checked]="element.status">
+                            {{element.status ? 'Activo' : 'Inactivo'}}
+                        </mat-slide-toggle>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsCola"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsCola;"></tr>
+                </table>
+            </div>
+        </mat-card-content>
+
+    </mat-card>
   </div>
 </ng-template>
+
 <ng-template #Almacen>
   <div>
     Almacen
   </div>
 </ng-template>
+
 <ng-template #Cargue_de_Inventarios>
   <div>
     Cargue de inventarios
   </div>
 </ng-template>
+
 <ng-template #Cargue_de_Servicios>
   <div>
     Cargue de servicios.
   </div>
 </ng-template>
+
 <ng-template #Promociones>
   <div>
     Promociones
   </div>
 </ng-template>
+
 <ng-template #Tipos_de_Descuentos>
   <div>
     Tipos de descuentos
   </div>
 </ng-template>
+
 <ng-template #Card_VIP>
   <div>
     card VIP.
