@@ -37,7 +37,6 @@ export class GeneralConfComponent implements  OnInit {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((user: any) => {
                 this.user = user;
-                console.log(this.user)
             });
         this.getConfigs();
     }
@@ -54,11 +53,10 @@ export class GeneralConfComponent implements  OnInit {
 
     openCreateDocumentDialog(selectedTemplate: string, enterAnimationDuration: string, exitAnimationDuration: string): void {
         const dialogConfig = new MatDialogConfig();
-        // dialogConfig.disableClose = true;
-        dialogConfig.width = '700px';
+        dialogConfig.disableClose = true;
+        dialogConfig.width = '1000px';
         dialogConfig.enterAnimationDuration = enterAnimationDuration;
         dialogConfig.exitAnimationDuration =  exitAnimationDuration;
-        console.log(selectedTemplate)
 
         dialogConfig.data = {
             selectedTemplate: selectedTemplate.split(' ').join('_'),
@@ -68,7 +66,6 @@ export class GeneralConfComponent implements  OnInit {
             .open(configModalComponent, dialogConfig)
             .afterClosed()
             .subscribe((data) => {
-                console.log(data)
             });
 
     }
@@ -90,7 +87,6 @@ export class GeneralConfComponent implements  OnInit {
         ];
         // this.UrlFile.push(this.pdfSrc)
         this.managerservice.getConfigs().subscribe((conf:any) => {
-            console.log(conf.msg.generalConfig);
             this.cards = conf.msg.generalConfig;
 
         });

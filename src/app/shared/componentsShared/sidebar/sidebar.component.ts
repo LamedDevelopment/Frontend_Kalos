@@ -1,12 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ToggleService } from '../../services/toggle.service';
-import { CustomizerSettingsService } from '../../services/customizer-settings.service';
-import { UTILITIES_CONSTANTS } from 'src/app/utilities';
-import { menu } from 'src/app/pages/models/user';
-import { UserService } from 'src/app/pages/services/user/user.service';
-import { AuthService } from 'src/app/pages/services/auth/auth.service';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiServiceHttp } from 'src/app/pages/services/api.service';
+import { AuthService } from 'src/app/pages/services/auth/auth.service';
+import { UserService } from 'src/app/pages/services/user/user.service';
+import { CustomizerSettingsService } from '../../services/customizer-settings.service';
+import { ToggleService } from '../../services/toggle.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -41,7 +39,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         const fun = this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((user: any) => {
-                console.log(user);
 
                 this.user = user.user ? user.user : user;
                 const role = this.user.role
@@ -76,7 +73,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         try {
             this.apiservice.get('mn', {}).subscribe(
                 (res: any) => {
-                    console.log('res menu ', res);
                     this.menuItems = res.msg.menu;
                 },
                 (error: any) => {

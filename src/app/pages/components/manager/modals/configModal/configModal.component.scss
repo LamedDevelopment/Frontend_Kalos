@@ -6,3 +6,23 @@ mat-card {
 .form-check-label {
   margin-left: 0.25rem; /* Ajuste opcional para el label del checkbox */
 }
+
+
+.time-input .mat-input-element {
+    height: calc(1.5em + 2.75rem + 5px); /* Bootstrap's default input height */
+    padding: 0.175rem 0.45rem; /* Adjust padding as needed */
+    font-size: 1rem; /* Adjust font size as needed */
+    line-height: 1.5; /* Adjust line height as needed */
+}
+
+:host ::ng-deep ngx-material-timepicker-container {
+  z-index: 2000 !important;
+}
+
+:host ::ng-deep .timepicker-overlay {
+  z-index: 2000 !important;
+}
+
+.example-margin {
+  margin: 10px;
+}
