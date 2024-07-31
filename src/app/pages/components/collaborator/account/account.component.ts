@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/pages/services/auth/auth.service';
 import { AccountService } from 'src/app/pages/services/user/account.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
-import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-account',
@@ -14,16 +13,21 @@ import Swal from 'sweetalert2';
 export class AccountComponentColl {
 
     @ViewChild('accountNgForm') accountNgForm: NgForm;
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
+    durationInSeconds = 5;
     accountForm: FormGroup;
     validar: boolean = false;
     showAlert: boolean = false;
     user: any;
+    datosUpdates: boolean = true;
 
     constructor(
         public themeService: CustomizerSettingsService,
         private _accountService: AccountService,
         private _formBuilder: FormBuilder,
-        private _router: Router
+        private _router: Router,
+        private _snackBar: MatSnackBar
     ) {}
 
     /**
@@ -58,7 +62,7 @@ export class AccountComponentColl {
                 this.accountForm.controls["birthdate"].setValue(this.user?.birthdate);
                 this.accountForm.controls["gender"].setValue(this.user?.gender);
             }
-        })
+        });
     }
 
 
@@ -77,14 +81,21 @@ export class AccountComponentColl {
         this.accountForm.disable();
 
         // Hide the alert
+        this.datosUpdates = false;
         this.showAlert = false;
         let body = this.accountForm.value;
         // Sign up
-        this._accountService.updateAccountFun(body, this.user.uid)
+        this._accountService.updateAccountFun(body, 'bususu/upcolla')
             .subscribe(
                 (response) => {
 
                     // Navigate to the confirmation required page
+                    this.datosUpdates = true;
+                    this._snackBar.open('Datos actualizados', '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
                     this.ngOnInit();
                     this.accountForm.enable();
                 },
@@ -92,7 +103,12 @@ export class AccountComponentColl {
 
                     // Re-enable the form
                     this.accountForm.enable();
-
+                    this._snackBar.open('Error al actualizar los datos', '', {
+                        horizontalPosition: this.horizontalPosition,
+                        verticalPosition: this.verticalPosition,
+                        duration: this.durationInSeconds * 1000,
+                    });
+                    this.datosUpdates = true;
 
                     // Set the alert
 

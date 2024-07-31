@@ -61,7 +61,7 @@ export class SecurityComponentColl {
         this.showAlert = false;
         let body = this.accountForm.value;
         // Sign up
-        this._accountService.updatePass(body)
+        this._accountService.updatePass(body, 'bususu/chcollapass')
             .subscribe(
                 (response) => {
                     console.log(response)

@@ -33,8 +33,8 @@ constructor(
    * @param data
    * @param id
    */
-  updateAccountFun(data:any, id:number): Observable<any> {
-    return this._apiServiceHttp.put(`bususu/${id}`, data).pipe(
+  updateAccountFun(data:any, url:string): Observable<any> {
+    return this._apiServiceHttp.post(url, data).pipe(
       map((response: any) => {
         // Return a new observable with the response
         return of(response);
@@ -48,8 +48,8 @@ constructor(
    *
    * @param data
    */
-  updatePass(data:any): Observable<any> {
-    return this._apiServiceHttp.post(`usr/chuspass`, data).pipe(
+  updatePass(data:any, url:string): Observable<any> {
+    return this._apiServiceHttp.post(url, data).pipe(
       map((response: any) => {
         // Return a new observable with the response
         return of(response);
