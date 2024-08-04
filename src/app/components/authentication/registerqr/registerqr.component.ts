@@ -56,7 +56,7 @@ export class RegisterqrComponent {
         this.route.queryParams.subscribe((params) => {
             // 'd' es el nombre del parámetro en tu URL
             this.dataqr = params['d'];
-            console.log(this.dataqr);
+            console.log("log registerqr", this.dataqr);
         });
     }
 
@@ -92,7 +92,7 @@ export class RegisterqrComponent {
         };
         // Sign up
         this._authService
-            .signUpQR(`usr/register?d=${this.dataqr}`, data)
+            .signUpQR(`usr/qr?d=${this.dataqr}`, data)
             .subscribe(
                 (res: any) => {
                     console.log('====================================');
