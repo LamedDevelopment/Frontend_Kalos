@@ -178,36 +178,12 @@ export class PaymentsModalComponent {
             this.preFactura.patchValue({
                 movil: this.dataFactura.user.movilUser,
             });
-        } else {
             this.preFactura.patchValue({
-                fullName: '',
+                docuUser: this.dataFactura.user.userDocu,
             });
             this.preFactura.patchValue({
-                email: '',
+                document: this.dataFactura.user.userDocu,
             });
-            this.preFactura.patchValue({
-                movil: '',
-            });
-        }
-    }
-
-    setInfoNoNombrePropio(event:any){
-
-        if (this.preFactura.get('checkedNombrepropio')?.value == true) {
-
-            this.preFactura.patchValue({
-                fullName: 'Consumidor Final',
-            });
-            this.preFactura.patchValue({
-                docuUser: '222222222222',
-            });
-            this.preFactura.patchValue({
-                document: '222222222222',
-            });
-            this.preFactura.patchValue({
-                email: 'consumidor@final.com',
-            });
-            
         } else {
             this.preFactura.patchValue({
                 fullName: '',
@@ -225,7 +201,39 @@ export class PaymentsModalComponent {
                 document: '',
             });
         }
+    }
 
+    setInfoNoNombrePropio(event: any) {
+        if (this.preFactura.get('checkedNombrepropio')?.value == true) {
+            this.preFactura.patchValue({
+                fullName: 'Consumidor Final',
+            });
+            this.preFactura.patchValue({
+                docuUser: '222222222222',
+            });
+            this.preFactura.patchValue({
+                document: '222222222222',
+            });
+            this.preFactura.patchValue({
+                email: 'consumidor@final.com',
+            });
+        } else {
+            this.preFactura.patchValue({
+                fullName: '',
+            });
+            this.preFactura.patchValue({
+                email: '',
+            });
+            this.preFactura.patchValue({
+                movil: '',
+            });
+            this.preFactura.patchValue({
+                docuUser: '',
+            });
+            this.preFactura.patchValue({
+                document: '',
+            });
+        }
     }
 
     RealizarPagoBill() {
