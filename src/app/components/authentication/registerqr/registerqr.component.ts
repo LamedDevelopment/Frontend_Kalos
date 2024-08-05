@@ -184,7 +184,7 @@ export class RegisterqrComponent {
         return (
             regex.test(this.signUpForm.get('pass')?.value.trim()) &&
             regex1.test(this.signUpForm.get('pass')?.value.trim()) &&
-            regex2.test(this.signUpForm?.get('pass')?.value.trim()) &&
+            // regex2.test(this.signUpForm?.get('pass')?.value.trim()) &&
             this.signUpForm.get('pass')?.value.trim().length >= 8
         );
     }
