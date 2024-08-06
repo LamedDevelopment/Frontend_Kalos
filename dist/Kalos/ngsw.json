@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1722962423551,
+  "timestamp": 1722963117162,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -523,18 +523,18 @@
     {
       "name": "data-api",
       "patterns": [
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/mn",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/login\\/token",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/apu\\/wuapma",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/apu\\/hisuap",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/bus\\/manbus",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/apu\\/payma",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/bill\\/tppaycas",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/lose\\/sola",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/apu\\/viewsup",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/doc\\/viewdoc",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/vwconfgen",
-        "https:\\/\\/devback\\.bellezaap\\.com\\/api\\/v1\\/bus\\/qr"
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/mn",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/login\\/token",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/apu\\/wuapma",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/apu\\/hisuap",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/bus\\/manbus",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/apu\\/payma",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/bill\\/tppaycas",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/lose\\/sola",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/apu\\/viewsup",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/doc\\/viewdoc",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/vwconfgen",
+        "https:\\/\\/backalos\\.kalos\\.icu\\/api\\/v1\\/bus\\/qr"
       ],
       "strategy": "freshness",
       "maxSize": 5,
