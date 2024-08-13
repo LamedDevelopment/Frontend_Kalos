@@ -91,58 +91,45 @@
                     <div class="mt-10 col-12">
                         <form [formGroup]="startServiceform">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-12 col-md-4 mt-3">
                                     <app-selectservices
                                         [Servicios]="servicesManager"
-                                        (serviceSelected)="
-                                            serviceSelected($event)
-                                        "
+                                        (serviceSelected)="serviceSelected($event)"
                                     ></app-selectservices>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-md-4 mt-3">
                                     <app-select-type-services
                                         [typeServices]="typeServices"
                                         [ctr]="getTypeServicesCtr()"
-                                        (typeServiceSelected)="
-                                            typeServiceSelected($event)
-                                        "
+                                        (typeServiceSelected)="typeServiceSelected($event)"
                                     ></app-select-type-services>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-md-4 mt-3">
                                     <app-selectcollaborator
                                         [idbusiness]="businessSelected._id"
                                         [tradename]="tradename"
-                                        [services]="
-                                            startServiceform.get('services')
-                                                ?.value
-                                        "
+                                        [services]="startServiceform.get('services')?.value"
                                         [ctr]="getStaffCtr()"
                                         (collaSelected)="collaSelected($event)"
                                     ></app-selectcollaborator>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-12 col-md-4 mt-3">
                                     <app-select-date-service
                                         (dateSelected)="daySelected($event)"
                                         [days]="days"
                                     ></app-select-date-service>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-md-4 mt-3">
                                     <app-select-hours-service
                                         [ctr]="getTimeService()"
                                         [business]="businessSelected._id"
                                         [tradename]="tradename"
-                                        [staff]="
-                                            startServiceform.get('staff')?.value
-                                        "
-                                        [dateService]="
-                                            startServiceform.get('dateService')
-                                                ?.value
-                                        "
+                                        [staff]="startServiceform.get('staff')?.value"
+                                        [dateService]="startServiceform.get('dateService')?.value"
                                         (hourSelected)="hourSelected($event)"
-                                    >
-                                    </app-select-hours-service>
+                                    ></app-select-hours-service>
                                 </div>
                             </div>
                         </form>
@@ -170,26 +157,18 @@
             <div class="col-12">
                 <mat-card *ngIf="nameCollaborator">
                     <mat-card-header>
-                        <mat-card-title class="mr-10"
-                            >{{ nameCollaborator }}
-                        </mat-card-title>
-                        <mat-card-subtitle class="mr-10"
-                            >Costo del servicio:
-                            {{
-                                priceService
-                                    | currency : "COP" : "symbol" : "4.2"
-                            }}
+                        <mat-card-title class="mr-10">{{ nameCollaborator }}</mat-card-title>
+                        <mat-card-subtitle class="mr-10">
+                            Costo del servicio: {{ priceService | currency: "COP" : "symbol" : "4.2" }}
                             <p>tiempo: {{ timeService }} min</p>
-                            <!-- <p>{{startServiceform.get('timeService')?.value}}</p>
-                            <p>{{startServiceform.get('dateService')?.value}}</p> -->
                         </mat-card-subtitle>
                         <p class="ml-10">
-                            {{ ServiceNameSelected }}
-                            {{ typeServiceNameSelected }}
+                            {{ ServiceNameSelected }} {{ typeServiceNameSelected }}
                         </p>
                     </mat-card-header>
                 </mat-card>
             </div>
         </div>
     </div>
+    
 </div>
