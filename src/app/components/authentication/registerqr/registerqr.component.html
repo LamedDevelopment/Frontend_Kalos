@@ -152,6 +152,41 @@
                                     }}</mat-icon>
                                 </button>
                             </mat-form-field>
+                            <div class="row">
+
+                                <div class="progress col-md-2 ml-3" style="height: 5px;">
+                                    <div class="progress-bar bg-success" role="progressbar" aria-label="Example 1px high" [style.width.%]="signUpForm.get('pass')?.value == '' ? 0 : validarMayus() == true  ? 100 : 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="progress col-md-2 ml-3" style="height: 5px;">
+                                    <div class="progress-bar bg-success" role="progressbar" aria-label="Example 1px high" [style.width.%]="signUpForm.get('pass')?.value == '' ? 0 : validarNumber() == true ? 100 : 0" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <!-- <div class="progress col-md-2 ml-3" style="height: 5px;">
+                                    <div class="progress-bar bg-success" role="progressbar" aria-label="Example1 1px high" [style.width.%]="signUpForm.get('pass')?.value == '' ? 0 : validarChar() == true ? 100 : 0" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div> -->
+                                <div class="progress col-md-2 ml-3" style="height: 5px;">
+                                    <div class="progress-bar bg-success" role="progressbar" aria-label="Example2 1px high" [style.width.%]="signUpForm.get('pass')?.value == '' ? 0 : MatchPassword() == true ? 100 : 0" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+                                <p *ngIf="!validarMayus()" class="infoOk text-end" style="margin-top: 10px !important">
+                                    Debe tener al menos una mayúscula
+                                </p>
+                                <p *ngIf="!validarNumber()" class="infoOk text-end" style="margin-top: 10px !important">
+                                    Debe tener al menos un número
+                                <!-- <p *ngIf="!validarChar()" class="infoOk text-end" style="margin-top: 10px !important">
+                                    Debe tener al menos un caracter especial
+                                </p> -->
+                                <p *ngIf="!MatchPassword()" class="infoOk text-end" style="margin-top: 10px !important">
+                                    Contraseñas no coinciden
+                                </p>
+
+                                <p *ngIf="signUpForm.get('pass')?.value.length == 0 || signUpForm.get('pass')?.value.length < 8" class="infoError text-end" style="margin-top: 10px !important">
+                                El campo es requerido y debe tener al menos 8 caracteres
+                                </p>
+
+                                <p *ngIf="PasswordOk() && MatchPassword()" class="infoOk text-end" style="margin-top: 10px !important">
+                                La contraseñas es segura
+                                </p>
                         </div>
                         <div class="tagus-form-group without-icon">
                             <mat-checkbox

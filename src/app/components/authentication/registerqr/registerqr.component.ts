@@ -24,6 +24,7 @@ export class RegisterqrComponent {
     showAlert: boolean = false;
     validar: boolean = false;
     dataqr: string = '';
+    progress3: number;
 
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -171,6 +172,29 @@ export class RegisterqrComponent {
             }
         }
     }
+
+    validarNumber(){
+        const regex =  /\d/
+        return regex.test(this.signUpForm.get('pass')?.value.trim())
+      }
+
+      validarMayus(){
+        const regex =  /[A-Z]/
+        return regex.test(this.signUpForm.get('pass')?.value.trim())
+      }
+
+      validarChar(){
+        const regex =  /\W/
+        return regex.test(this.signUpForm.get('pass')?.value.trim())
+      }
+
+      MatchPassword(){
+        if(this.signUpForm.get('pass')?.value == '' && this.signUpForm.get('confirmPassword')?.value == ''){
+          return null
+        }
+        this.progress3 = 100;
+       return this.signUpForm.get('pass')?.value ==this.signUpForm.get('confirmPassword')?.value
+      }
 
     fireToast(msg: any) {
         Swal.fire('Información', msg, 'info');

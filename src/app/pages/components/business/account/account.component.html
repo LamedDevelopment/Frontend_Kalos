@@ -121,6 +121,18 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 mb-10">
+                    <upload-file class="flex justify-start w-full mt-4 mb-5"
+                        [typeDoc]="'image/jpeg,image/jpg'"
+                        [edit]="edit"
+                        [SeeDocs]="true"
+                        [number]="number"
+                        [dataStyle]="'height: 100px !important; width: 728pxx !important; border: 1px dashed #BDD7EF !important;'"
+                        [archivos]="agendamiento"
+                        (buttonEvent)="uploadFileLong($event)">
+                    </upload-file>
+                </div>
+
             </div>
             <button mat-raised-button class="tagus fw-semibold" [disabled]="accountForm.invalid" (click)="updateAccount()">Actualizar</button>
         </form>
