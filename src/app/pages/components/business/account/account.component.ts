@@ -179,10 +179,11 @@ export class AccountComponentBis {
 
             axios.request(config)
             .then((response) => {
-              console.log(JSON.stringify(response.data));
+              console.log(JSON.stringify(response));
+              this.ngOnInit();
             })
             .catch((error) => {
-              console.log(error);
+              console.log(error.response.data.msg);
             });
 
         }
