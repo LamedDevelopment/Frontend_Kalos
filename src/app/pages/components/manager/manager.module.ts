@@ -53,6 +53,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { commonComponentsModule } from '../../common/commonComponents.module';
 import { HelpermoduleModule } from '../../helpers/helpermodule.module';
+import { UploadFileModule } from '../business/views-shared/upload-file/upload-file.module';
 import { AgendadayComponent } from './agendaday/agendaday.component';
 import { AgendamonthComponent } from './agendamonth/agendamonth.component';
 import { AppointmentComponent } from './appointment/appointment.component';
@@ -78,6 +79,7 @@ import { ManagerComponent } from './manager.component';
 import { ConfigTurnosComponent } from './modals/config-turnos/config-turnos.component';
 import { configModalComponent } from './modals/configModal/configModal.component';
 import { GeneratePermisosComponent } from './modals/generate-permisos/generate-permisos.component';
+import { ModalSuppliesComponent } from './modals/modal-supplies/modal-supplies.component';
 import { PaymentsModalComponent } from './modals/paymentsModal/paymentsModal.component';
 import { ticketsModalComponent } from './modals/ticketsModal/ticketsModal.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -85,6 +87,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import { PayrollComponent } from './payroll/payroll.component';
 import { PayrollsComponent } from './payrolls/payrolls.component';
 import { RatingserviceComponent } from './ratingservice/ratingservice.component';
+import { SeesupliesComponent } from './seesuplies/seesuplies.component';
 import { ServicesComponent } from './services/services.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketsComponent } from './tickets/tickets.component';
@@ -92,8 +95,6 @@ import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component
 import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
 import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/modalliquidacion.component';
 import { WalletComponent } from './wallet/wallet.component';
-import { SeesupliesComponent } from './seesuplies/seesuplies.component';
-import { ModalSuppliesComponent } from './modals/modal-supplies/modal-supplies.component';
 @NgModule({
     declarations: [
         AgendadayComponent,
@@ -194,6 +195,7 @@ import { ModalSuppliesComponent } from './modals/modal-supplies/modal-supplies.c
         commonComponentsModule,
         NgxDocViewerModule,
         PdfViewerModule,
+        UploadFileModule
     ],
 })
 export class ManagerModule {}
