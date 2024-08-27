@@ -1,0 +1,75 @@
+
+<div class="grid w-full">
+
+    <!-- <div class="contenedor-viewer mb-3" >
+        <ngx-doc-viewer
+          *ngFor="let file of UrlFile"
+          class="rounded-md"
+          [url]="file.file"
+          viewer="google"
+          style="width:50%;height:89%; border-radius: 0.375rem !important; margin-right: 3px !important;"
+        >
+        </ngx-doc-viewer>
+        <br />
+        <div *ngIf="UrlFileImage?.length > 0">
+            <img  *ngFor="let fileImage of UrlFileImage" class="ml-2 rounded-md" style="width:45% !important" [src]="fileImage.file" >
+        </div>
+
+    </div> -->
+    <!-- <mat-card class="h-fit">
+        <mat-selection-list #archivo [multiple]="false" >
+            <mat-list-option *ngFor="let archivo of archivosView" [value]="archivo" (click)="DownloadFile(archivo)">
+                <div class="grid grid-cols-5">
+                    <p matLine class="col-span-4"> {{archivo.name}} </p>
+                    <a [href]="archivo.file"
+                        class="col-span-1"
+                        mat-button
+                        href="https://www.google.com/"
+                        target="_blank"
+                    ><mat-icon svgIcon="mat_outline:cloud_download"></mat-icon></a>
+                </div>
+            </mat-list-option>
+          </mat-selection-list>
+    </mat-card> -->
+
+    <ngx-dropzone (change)="onSelect($event)" [accept]="typeDoc" [multiple]="false"  class="flex flex-wrap justify-center w-full h-fit" [style]="dataStyle" >
+        <ngx-dropzone-label *ngIf="files?.length === 0; else noFilesTemplate"><span
+            ><span class="font-bold"
+                >Suelta los archivos</span
+            >
+            aquí o
+            <span class="font-bold">haz clic</span>
+            para adjuntar</span
+        ></ngx-dropzone-label>
+        <ng-template #noFilesTemplate>
+            <div  class="grid justify-center ml-5" >
+                <ngx-dropzone-label *ngFor="let f of files" style="height:25px" class=" w-full">
+                    <div
+                        class="text-blue bg-blue-light p-2 flex justify-center mt-2 mb-2 rounded"
+                        >
+                        <span class="font-bold text-blue ">{{
+                            f?.name
+                        }}</span>
+                        <i
+                            class="ri-delete-bin-line ml-2 text-blue"
+                            (mouseup)="onRemove(f)"
+                        ></i>
+                    </div>
+                </ngx-dropzone-label>
+                <span class="text-secondary mt-4" >
+                    <span class="ml-10"
+                    ><span class="ml-15"
+                        >para reemplazar el archivo elimine el que tiene actualmente</span
+                    >
+                    <!-- <span class="font-bold"> &nbsp;haz clic aquí</span> -->
+                    </span>
+                </span>
+            </div>
+        </ng-template>
+
+        <!-- <ngx-dropzone-preview *ngFor="let f of files" [removable]="false" (removed)="onRemove(f)">
+
+        </ngx-dropzone-preview> -->
+    </ngx-dropzone>
+</div>
+

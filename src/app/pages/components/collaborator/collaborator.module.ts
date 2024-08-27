@@ -1,24 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { CollaboratorRoutingModule } from './collaborator-routing.module';
-import { DashComponent } from './dash/dash.component';
-import { HistoricalComponent } from './historical/historical.component';
-import { PaymentComponent } from './payment/payment.component';
-import { PaymentsComponent } from './payments/payments.component';
-import { PayrollComponent } from './payroll/payroll.component';
-import { PayrollsComponent } from './payrolls/payrolls.component';
-import { ServiceComponent } from './service/service.component';
-import { ServicesComponent } from './services/services.component';
-import { TicketsComponent } from './tickets/tickets.component';
-import { TicketComponent } from './ticket/ticket.component';
-import { WalletComponent } from './wallet/wallet.component';
-import { CollaboratorComponent } from './collaborator.component';
-import { AppointmentComponentColl } from './appo/appo.component';
-import { PrivacyPolicyComponentColl } from './privacy-policy/privacy-policy.component';
-import { SecurityComponentColl } from './security/security.component';
-import { TermsConditionsComponentColl } from './terms-conditions/terms-conditions.component';
-import { AccountComponentColl } from './account/account.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,7 +14,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -67,12 +49,31 @@ import { NgxEditorModule } from 'ngx-editor';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { ModalserviceComponent } from './modals/modalservice/modalservice.component';
-import { CloseserviceComponent } from './modals/closeservice/closeservice.component';
-import { SolicitudcollaComponent } from './solicitudcolla/solicitudcolla.component';
-import { LoanmodalComponent } from './modals/loanmodal/loanmodal.component';
-import { HelpermoduleModule } from '../../helpers/helpermodule.module';
 import { commonComponentsModule } from '../../common/commonComponents.module';
+import { HelpermoduleModule } from '../../helpers/helpermodule.module';
+import { UploadFileModule } from '../business/views-shared/upload-file/upload-file.module';
+import { AccountComponentColl } from './account/account.component';
+import { AppointmentComponentColl } from './appo/appo.component';
+import { CollaboratorRoutingModule } from './collaborator-routing.module';
+import { CollaboratorComponent } from './collaborator.component';
+import { DashComponent } from './dash/dash.component';
+import { HistoricalComponent } from './historical/historical.component';
+import { CloseserviceComponent } from './modals/closeservice/closeservice.component';
+import { LoanmodalComponent } from './modals/loanmodal/loanmodal.component';
+import { ModalserviceComponent } from './modals/modalservice/modalservice.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { PayrollComponent } from './payroll/payroll.component';
+import { PayrollsComponent } from './payrolls/payrolls.component';
+import { PrivacyPolicyComponentColl } from './privacy-policy/privacy-policy.component';
+import { SecurityComponentColl } from './security/security.component';
+import { ServiceComponent } from './service/service.component';
+import { ServicesComponent } from './services/services.component';
+import { SolicitudcollaComponent } from './solicitudcolla/solicitudcolla.component';
+import { TermsConditionsComponentColl } from './terms-conditions/terms-conditions.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { TicketsComponent } from './tickets/tickets.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
     declarations: [
@@ -153,6 +154,7 @@ import { commonComponentsModule } from '../../common/commonComponents.module';
         NgxMaterialTimepickerModule,
         HelpermoduleModule,
         commonComponentsModule,
+        UploadFileModule
     ],
 })
 export class CollaboratorModule {}
