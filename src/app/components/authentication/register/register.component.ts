@@ -121,12 +121,12 @@ export class RegisterComponent implements OnInit {
         "Los emails no coinciden",
         "confirmEmail"
       );
-      this.validate(
+      /* this.validate(
         this.validar,
         this.PasswordOk(),
         "La contraseña no es segura",
         "confirmPassword"
-      );
+      ); */
       this.validate(
         this.validar,
         this.signUpForm.controls["pass"].value === confirmPassword,

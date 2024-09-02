@@ -2,9 +2,9 @@ import { Component, ViewChild } from "@angular/core";
 
 import { FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
 import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
+    MatSnackBar,
+    MatSnackBarHorizontalPosition,
+    MatSnackBarVerticalPosition,
 } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -145,12 +145,12 @@ export class RegisterqrComponent {
                 'Los emails no coinciden',
                 'confirmEmail'
             ); */
-      this.validate(
+      /* this.validate(
         this.validar,
         this.PasswordOk(),
         "La contraseña no es segura",
         "confirmPassword"
-      );
+      ); */
       this.validate(
         this.validar,
         this.signUpForm.get("pass")?.value === confirmPassword,
