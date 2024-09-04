@@ -1,174 +1,174 @@
 <div
-    class="row justify-content-center"
-    [class.component-dark-theme]="themeService.isDark()"
-    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
-    *ngIf="!loungeSelected"
+  class="row justify-content-center"
+  [class.component-dark-theme]="themeService.isDark()"
+  [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+  *ngIf="!loungeSelected"
 >
-    <div
-        class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between"
+  <div
+    class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between"
+  >
+    <h5 class="mb-0">Establecimientos</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+      <li class="breadcrumb-item">
+        <a routerLink="/user/appo">
+          <i class="ri-home-8-line"></i>
+          User
+        </a>
+      </li>
+      <li class="breadcrumb-item fw-semibold">Establecimientos</li>
+    </ol>
+  </div>
+  <div class="col-lg-4 col-md-6" *ngFor="let bus of Business">
+    <mat-card
+      class="mb-25 tagus-card"
+      style="
+        background: url(assets/img/salon/barber1.jpg);
+        background-position: center center;
+        filter: grayscale(30%);
+        background-color: rgba(255, 255, 255, 0.5);
+        background-repeat: no-repeat;
+        background-size: cover;
+      "
     >
-        <h5 class="mb-0">Establecimientos</h5>
-        <ol class="breadcrumb mb-0 ps-0">
-            <li class="breadcrumb-item">
-                <a routerLink="/user/appo">
-                    <i class="ri-home-8-line"></i>
-                    User
-                </a>
-            </li>
-            <li class="breadcrumb-item fw-semibold">Establecimientos</li>
-        </ol>
-    </div>
-    <div class="col-lg-4 col-md-6" *ngFor="let bus of Business">
-        <mat-card
-            class="mb-25 tagus-card"
-            style="
-                background: url(assets/img/salon/barber1.jpg);
-                background-position: center center;
-                filter: grayscale(30%);
-                background-color: rgba(255, 255, 255, 0.5);
-                background-repeat: no-repeat;
-                background-size: cover;
-            "
+      <mat-card-content style="z-index: 99999">
+        <span
+          class="badge text-bg-info"
+          style="cursor: pointer; z-index: 99999"
+          (click)="SelectLounge(bus)"
+          >Agendar cita</span
         >
-            <mat-card-content style="z-index: 99999">
-                <span
-                    class="badge text-bg-info"
-                    style="cursor: pointer; z-index: 99999"
-                    (click)="SelectLounge(bus)"
-                    >Agendar cita</span
-                >
-                <div style="height: 200px"></div>
-                <h5
-                    class="mb-12 mt-20 text-white text-center"
-                    style="z-index: 99999"
-                >
-                    {{ bus.branchoffices[0].businessname }}
-                </h5>
-                <p class="text-white text-center" style="z-index: 99999">
-                    {{ bus.branchoffices[0].address }}
-                    {{ bus.branchoffices[0].city }}
-                </p>
-                <p class="text-white text-center" style="z-index: 99999">
-                    {{ bus.branchoffices[0].email }}
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </div>
+        <div style="height: 200px"></div>
+        <h5 class="mb-12 mt-20 text-white text-center" style="z-index: 99999">
+          {{ bus.branchoffices[0].businessname }}
+        </h5>
+        <p class="text-white text-center" style="z-index: 99999">
+          {{ bus.branchoffices[0].address }}
+          {{ bus.branchoffices[0].city }}
+        </p>
+        <p class="text-white text-center" style="z-index: 99999">
+          {{ bus.branchoffices[0].email }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
 <div *ngIf="loungeSelected">
-    <div
-        class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between"
-    >
-        <h5 class="mb-0">{{ nameLoung }}</h5>
-        <ol class="breadcrumb mb-0 ps-0">
-            <li class="breadcrumb-item">
-                <a routerLink="/user/appo">
-                    <i class="ri-home-8-line"></i>
-                    User
-                </a>
-            </li>
-            <li class="breadcrumb-item fw-semibold">Establecimientos</li>
-        </ol>
-    </div>
-    <div class="flex items-center mt-3 mb-8">
-        <button class="px-3" mat-button [color]="'primary'" (click)="goBack()">
-            <mat-icon>arrow_back_ios</mat-icon>
-            Volver
-        </button>
-    </div>
+  <div
+    class="breadcrumb-card mb-25 mt-2 d-md-flex align-items-center justify-content-space-between"
+  >
+    <h5 class="mb-0">{{ nameLoung }}</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+      <li class="breadcrumb-item">
+        <a routerLink="/user/appo">
+          <i class="ri-home-8-line"></i>
+          User
+        </a>
+      </li>
+      <li class="breadcrumb-item fw-semibold">Establecimientos</li>
+    </ol>
+  </div>
+  <div class="flex items-center mt-3 mb-8">
+    <button class="px-3" mat-button [color]="'primary'" (click)="goBack()">
+      <mat-icon>arrow_back_ios</mat-icon>
+      Volver
+    </button>
+  </div>
 
-    <div>
-        <mat-card
-            class="mb-25"
-            [class.component-rtl-enabled]="themeService.isRTLEnabled()"
-        >
-            <mat-card-header class="border-bottom">
-                <h5 class="mb-5">Crear agendamiento</h5>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="instructors-list d-flex flex-wrap">
-                    <div class="mt-10 col-12">
-                        <form [formGroup]="startServiceform">
-                            <div class="row">
-                                <div class="col-12 col-md-4 mt-3">
-                                    <app-selectservices
-                                        [Servicios]="servicesManager"
-                                        (serviceSelected)="serviceSelected($event)"
-                                    ></app-selectservices>
-                                </div>
-                                <div class="col-12 col-md-4 mt-3">
-                                    <app-select-type-services
-                                        [typeServices]="typeServices"
-                                        [ctr]="getTypeServicesCtr()"
-                                        (typeServiceSelected)="typeServiceSelected($event)"
-                                    ></app-select-type-services>
-                                </div>
-                                <div class="col-12 col-md-4 mt-3">
-                                    <app-selectcollaborator
-                                        [idbusiness]="businessSelected._id"
-                                        [tradename]="tradename"
-                                        [services]="startServiceform.get('services')?.value"
-                                        [ctr]="getStaffCtr()"
-                                        (collaSelected)="collaSelected($event)"
-                                    ></app-selectcollaborator>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-md-4 mt-3">
-                                    <app-select-date-service
-                                        (dateSelected)="daySelected($event)"
-                                        [days]="days"
-                                    ></app-select-date-service>
-                                </div>
-                                <div class="col-12 col-md-4 mt-3">
-                                    <app-select-hours-service
-                                        [ctr]="getTimeService()"
-                                        [business]="businessSelected._id"
-                                        [tradename]="tradename"
-                                        [staff]="startServiceform.get('staff')?.value"
-                                        [dateService]="startServiceform.get('dateService')?.value"
-                                        (hourSelected)="hourSelected($event)"
-                                    ></app-select-hours-service>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+  <div>
+    <mat-card
+      class="mb-25"
+      [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+    >
+      <mat-card-header class="border-bottom">
+        <h5 class="mb-5">Crear agendamiento</h5>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="instructors-list d-flex flex-wrap">
+          <div class="mt-10 col-12">
+            <form [formGroup]="startServiceform">
+              <div class="row">
+                <div class="col-12 col-md-4 mt-3">
+                  <app-selectservices
+                    [Servicios]="servicesManager"
+                    (serviceSelected)="serviceSelected($event)"
+                  ></app-selectservices>
                 </div>
-            </mat-card-content>
-            <mat-card-actions class="mb-3">
-                <button
-                    mat-raised-button
-                    class="tagus"
-                    [disabled]="startServiceform.invalid"
-                    (click)="AgendarCita()"
-                    *ngIf="!processAgendamiento"
-                >
-                    Crear Servicio
-                </button>
-                <mat-spinner
-                    diameter="50"
-                    style="margin-left: 80px"
-                    *ngIf="processAgendamiento"
-                ></mat-spinner>
-            </mat-card-actions>
-        </mat-card>
-        <div class="row">
-            <div class="col-12">
-                <mat-card *ngIf="nameCollaborator">
-                    <mat-card-header>
-                        <mat-card-title class="mr-10">{{ nameCollaborator }}</mat-card-title>
-                        <mat-card-subtitle class="mr-10">
-                            Costo del servicio: {{ priceService | currency: "COP" : "symbol" : "4.2" }}
-                            <p>tiempo: {{ timeService }} min</p>
-                        </mat-card-subtitle>
-                        <p class="ml-10">
-                            {{ ServiceNameSelected }} {{ typeServiceNameSelected }}
-                        </p>
-                    </mat-card-header>
-                </mat-card>
-            </div>
+                <div class="col-12 col-md-4 mt-3">
+                  <app-select-type-services
+                    [typeServices]="typeServices"
+                    [ctr]="getTypeServicesCtr()"
+                    (typeServiceSelected)="typeServiceSelected($event)"
+                  ></app-select-type-services>
+                </div>
+                <div class="col-12 col-md-4 mt-3">
+                  <app-selectcollaborator
+                    [idbusiness]="businessSelected._id"
+                    [tradename]="tradename"
+                    [services]="startServiceform.get('services')?.value"
+                    [typeService]="startServiceform.get('typeServices')?.value"
+                    [ctr]="getStaffCtr()"
+                    (collaSelected)="collaSelected($event)"
+                  ></app-selectcollaborator>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-4 mt-3">
+                  <app-select-date-service
+                    (dateSelected)="daySelected($event)"
+                    [days]="days"
+                  ></app-select-date-service>
+                </div>
+                <div class="col-12 col-md-4 mt-3">
+                  <app-select-hours-service
+                    [ctr]="getTimeService()"
+                    [business]="businessSelected._id"
+                    [tradename]="tradename"
+                    [staff]="startServiceform.get('staff')?.value"
+                    [dateService]="startServiceform.get('dateService')?.value"
+                    (hourSelected)="hourSelected($event)"
+                  ></app-select-hours-service>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </mat-card-content>
+      <mat-card-actions class="mb-3">
+        <button
+          mat-raised-button
+          class="tagus"
+          [disabled]="startServiceform.invalid"
+          (click)="AgendarCita()"
+          *ngIf="!processAgendamiento"
+        >
+          Crear Servicio
+        </button>
+        <mat-spinner
+          diameter="50"
+          style="margin-left: 80px"
+          *ngIf="processAgendamiento"
+        ></mat-spinner>
+      </mat-card-actions>
+    </mat-card>
+    <div class="row">
+      <div class="col-12">
+        <mat-card *ngIf="nameCollaborator">
+          <mat-card-header>
+            <mat-card-title class="mr-10">{{
+              nameCollaborator
+            }}</mat-card-title>
+            <mat-card-subtitle class="mr-10">
+              Costo del servicio:
+              {{ priceService | currency : "COP" : "symbol" : "4.2" }}
+              <p>tiempo: {{ timeService }} min</p>
+            </mat-card-subtitle>
+            <p class="ml-10">
+              {{ ServiceNameSelected }} {{ typeServiceNameSelected }}
+            </p>
+          </mat-card-header>
+        </mat-card>
+      </div>
     </div>
-    
+  </div>
 </div>
