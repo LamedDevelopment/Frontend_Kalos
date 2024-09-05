@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { jwtDecode } from 'jwt-decode';
 import { Subject, takeUntil } from 'rxjs';
 import { ManagerService } from 'src/app/pages/services/manager.service';
 import { UserService } from 'src/app/pages/services/user/user.service';
@@ -39,6 +40,9 @@ export class GeneralConfComponent implements  OnInit {
                 this.user = user;
             });
         this.getConfigs();
+        let token: any = sessionStorage.getItem('accessToken');
+        const decoded: any = jwtDecode(token);
+        console.log('decod', decoded);
     }
 
 
@@ -80,14 +84,19 @@ export class GeneralConfComponent implements  OnInit {
             tradename: datauser.branchOffices[0].tradeName,
             documentType: "Documentacion Ente de Salud"
         } */
-        const res = [
-            {name: 'Bancos', value: 'Crear y editar'},
-            {name: 'Turnos', value: 'Crear y editar'},
-            {name: 'Almacen', value: 'Crear y editar'},
-        ];
+        const images =
+            {
+                "nameItem": "Imágenes",
+                "description": "Configuración para subir las imágenes de su negocio",
+                "iconItem": "flaticon-gallery",
+                "note": "Configuracion de imagenes de su negocio",
+                "status": true,
+                "_id": "668232bb88dda4a0ee01079ccc"
+            };
         // this.UrlFile.push(this.pdfSrc)
         this.managerservice.getConfigs().subscribe((conf:any) => {
             this.cards = conf.msg.generalConfig;
+            this.cards.push(images)
 
         });
     }

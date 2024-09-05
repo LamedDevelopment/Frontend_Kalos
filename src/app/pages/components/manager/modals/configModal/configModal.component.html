@@ -302,3 +302,33 @@
     card VIP.
   </div>
 </ng-template>
+<ng-template #Imagenes>
+  <div>
+    <mat-card class="p-10 h-100 h-max-90" style="max-height: 90vh; overflow-y: auto;">
+        <mat-card-header class="d-flex justify-content-between align-items-center mb-5">
+            <mat-card-title class="h4 mb-3">Imágenes del negocio</mat-card-title>
+            <button mat-mini-fab  aria-label="Salir del modal de turnos" (click)="closeDialog()">
+            <mat-icon class="cursor-pointer" >clear</mat-icon>
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="d-flex align-items-center mb-20">
+                <!-- <img src="assets/img/user/user15.jpg" class="rounded-circle" width="110" alt="user"> -->
+                <div class="tagus-form-group ms-20">
+                    <label class="d-block mb-12 fw-semibold gray-color">Cargar imagen</label>
+                    <upload-file class="flex justify-start w-full mt-4 mb-5"
+                        [typeDoc]="'image/jpeg,image/jpg'"
+                        [edit]="edit"
+                        [SeeDocs]="true"
+                        [number]="number"
+                        [dataStyle]="'height: 100px !important; width: 728pxx !important; border: 1px dashed #BDD7EF !important;'"
+                        [archivos]="agendamiento"
+                        (buttonEvent)="uploadFileLong($event)">
+                    </upload-file>
+                </div>
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+  </div>
+</ng-template>

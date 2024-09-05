@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import axios from 'axios';
 import FormDataAxios from 'form-data';
 import { Subject, takeUntil } from 'rxjs';
+import { ServicesService } from 'src/app/pages/services/services.service';
 import { AccountService } from 'src/app/pages/services/user/account.service';
 import { UserService } from 'src/app/pages/services/user/user.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
@@ -34,13 +35,15 @@ export class AccountComponentColl {
     datosUpdates: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     userData: any;
+    tokenUser: any;
     constructor(
         public themeService: CustomizerSettingsService,
         private _accountService: AccountService,
         private _formBuilder: FormBuilder,
         private _router: Router,
         private _snackBar: MatSnackBar,
-        private _userService: UserService
+        private _userService: UserService,
+        private _userToken: ServicesService
     ) {}
 
     /**
@@ -53,6 +56,10 @@ export class AccountComponentColl {
             .subscribe((user: any) => {
                 this.userData = user;
             });
+
+        this._userToken.InfoUserApi().subscribe((data:any) => {
+            this.tokenUser = data.msg.staff.img;
+        });
         // Create the form
         this.accountForm = this._formBuilder.group({
                 name:['', Validators.required],
@@ -68,7 +75,7 @@ export class AccountComponentColl {
 
         this._accountService.getAccountFun().subscribe((account:any) => {
             this.user = account.userDB ? account.userDB : account.msg;
-            console.log(this.user, account.msg)
+            // console.log(this.user, account.msg)
             if(this.user){
                 // Create the form
                 this.accountForm.controls["name"].setValue(this.user.name);
@@ -173,10 +180,11 @@ export class AccountComponentColl {
 
             axios.request(config)
             .then((response) => {
-              console.log(JSON.stringify(response.data));
+              console.log(response);
+              this.ngOnInit();
             })
             .catch((error) => {
-              console.log(error);
+              console.log(error.response.data.msg);
             });
 
         }

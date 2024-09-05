@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
@@ -7,7 +7,12 @@ import {
     MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import axios from 'axios';
+import FormDataAxios from 'form-data';
+import { Subject } from 'rxjs';
+import { ServicesService } from 'src/app/pages/services/services.service';
 import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
+import { UserService } from 'src/app/pages/services/user/user.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { ModalserviceComponent } from '../../../collaborator/modals/modalservice/modalservice.component';
 
@@ -17,6 +22,14 @@ import { ModalserviceComponent } from '../../../collaborator/modals/modalservice
     styleUrls: ['./configModal.component.scss'],
 })
 export class configModalComponent {
+    @Input()
+    agendamiento: any = [];
+    @Input()
+    edit: boolean;
+    @Input()
+    number:number;
+    @Output() setAgendamiento: EventEmitter<any> = new EventEmitter<any>();
+    private _unsubscribeAll: Subject<any> = new Subject<any>();
     businessForm: FormGroup;
     businessData: any;
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -39,6 +52,7 @@ export class configModalComponent {
     @ViewChild('Promociones') promocionesTemplate!: TemplateRef<any>;
     @ViewChild('Tipos_de_Descuentos') descuentosTemplate!: TemplateRef<any>;
     @ViewChild('Card_VIP') vipTemplate!: TemplateRef<any>;
+    @ViewChild('Imagenes') imagesTemplate!: TemplateRef<any>;
 
     selectedTemplate: TemplateRef<any> | null = null;
     url: string = '';
@@ -50,6 +64,7 @@ export class configModalComponent {
     horaF: string = '';
     startTimeValues: string[] = [];
     checked: boolean = true;
+    tokenUser: any;
 
     constructor(
         public themeService: CustomizerSettingsService,
@@ -59,14 +74,15 @@ export class configModalComponent {
         private _snackBar: MatSnackBar,
         private fb: FormBuilder,
         private cdr: ChangeDetectorRef,
-        @Inject(MAT_DIALOG_DATA) public data: any
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private _userService: UserService,
+        private _userToken: ServicesService
     ) {
 
     }
 
     ngOnInit(): void {
         this.datauser = JSON.parse(sessionStorage.getItem('dataUser')!);
-
         switch(this.data.selectedTemplate) {
           case "Bancos":
             this.inicializarBancos();
@@ -94,6 +110,9 @@ export class configModalComponent {
             break;
           case "Card_VIP":
             this.selectedTemplate = this.vipTemplate;
+            break;
+          case "Imágenes":
+            this.selectedTemplate = this.imagesTemplate;
             break;
           default:
             this.selectedTemplate = null;
@@ -130,6 +149,9 @@ export class configModalComponent {
             break;
           case "Card_VIP":
             this.selectedTemplate = this.vipTemplate;
+            break;
+        case "Imágenes":
+            this.selectedTemplate = this.imagesTemplate;
             break;
           default:
             this.selectedTemplate = null;
@@ -309,6 +331,38 @@ export class configModalComponent {
           });
     }
 
+    private inicializarImages() {
+        this.url = 'doc/upimgcolla';
+
+        /* this.appointmentsService
+          .getInfoBanco('sf/viewtimework')
+          .subscribe((tr: any) => {
+            if (tr.ok) {
+              const dataFromEndpoint = tr.msg[0].daysServices;
+              this.businessForm.patchValue({
+                business: {
+                  business: this.datauser.business,
+                  nit: this.datauser.nit,
+                  businessName: this.datauser.businessName,
+                  tradename: this.datauser.branchOffices[0].tradeName
+                }
+                // TypeOfWorkingHours: dataFromEndpoint.map((item: any) => this.createWorkingHourGroup(item))
+              });
+                this.dataSource.data = dataFromEndpoint;
+            } else {
+              this._snackBar.open(
+                'Error al procesar la solicitud!!!',
+                '',
+                {
+                  horizontalPosition: this.horizontalPosition,
+                  verticalPosition: this.verticalPosition,
+                  duration: this.durationInSeconds * 1000,
+                }
+              );
+            }
+          }); */
+    }
+
     get bankInfo(): FormArray {
         return this.businessForm.get('bank_info') as FormArray;
     }
@@ -467,6 +521,61 @@ export class configModalComponent {
                     );
                 }
             });
+    }
+
+    async uploadFileLong(event:any){
+
+
+
+        if(event.files.length === 0){
+            // this.data!.archivos = [];
+        } else {
+            // this.data!.archivos = [];
+            let token = sessionStorage.getItem('accessToken');
+            const formDataIm = new FormDataAxios();
+            console.log(this.datauser)
+            formDataIm.append('businessID', this.datauser.business);
+            formDataIm.append('nameBusiness', this.datauser.businessName);
+            formDataIm.append('businessNit', this.datauser?.nit);
+            formDataIm.append('tradename', this.datauser?.branchOffices?.[0]?.tradeName);
+
+            event.files.forEach((item:any) => {
+                formDataIm.append('file', item);
+                // this.data!.archivos.push(item);
+            })
+
+            let config = {
+              method: 'post',
+              maxBodyLength: Infinity,
+              url: 'https://devback.bellezaap.com/api/v1/doc/upimagebus',
+              headers: {
+                'x-token': token,
+                // ...formDataIm.getHeaders()
+              },
+              data : formDataIm
+            };
+
+            axios.request(config)
+            .then((response) => {
+              console.log(JSON.stringify(response));
+              this.ngOnInit();
+            })
+            .catch((error) => {
+              console.log(error.response.data.msg);
+
+              this._snackBar.open(
+                        error.response.data.msg,
+                        '',
+                        {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        }
+                    );
+            });
+
+        }
+
     }
 
 }

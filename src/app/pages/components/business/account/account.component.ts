@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import axios from 'axios';
 import FormDataAxios from 'form-data';
 import { Subject, takeUntil } from 'rxjs';
+import { ServicesService } from 'src/app/pages/services/services.service';
 import { AccountService } from 'src/app/pages/services/user/account.service';
 import { UserService } from 'src/app/pages/services/user/user.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
@@ -34,6 +35,7 @@ export class AccountComponentBis {
     userData: any;
     datosUpdates: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    tokenUser: any;
 
     constructor(
         public themeService: CustomizerSettingsService,
@@ -41,7 +43,8 @@ export class AccountComponentBis {
         private _formBuilder: FormBuilder,
         private _router: Router,
         private _snackBar: MatSnackBar,
-        private _userService: UserService
+        private _userService: UserService,
+        private _userToken: ServicesService
     ) {}
 
     /**
@@ -54,6 +57,9 @@ export class AccountComponentBis {
             .subscribe((user: any) => {
                 this.userData = user;
             });
+        this._userToken.InfoUserApi().subscribe((data:any) => {
+            this.tokenUser = data.msg.staff.img;
+        });
         // Create the form
         this.accountForm = this._formBuilder.group({
                 name:['', Validators.required],
@@ -138,7 +144,7 @@ export class AccountComponentBis {
     }
 
     async uploadFileLong(event:any){
-
+        console.log(event)
         if (!this.data) {
             this.data = { archivos: [] }; // Inicializa `data` si está `undefined`
         }
@@ -163,7 +169,7 @@ export class AccountComponentBis {
             let config = {
               method: 'post',
               maxBodyLength: Infinity,
-              url: 'https://devback.bellezaap.com/api/v1/doc/upimagebus',
+              url: 'https://devback.bellezaap.com/api/v1/doc/upimgcolla',
               headers: {
                 'x-token': token,
                 // ...formDataIm.getHeaders()
@@ -173,10 +179,11 @@ export class AccountComponentBis {
 
             axios.request(config)
             .then((response) => {
-              console.log(JSON.stringify(response.data));
+              console.log(JSON.stringify(response));
+              this.ngOnInit();
             })
             .catch((error) => {
-              console.log(error);
+              console.log(error.response.data.msg);
             });
 
         }

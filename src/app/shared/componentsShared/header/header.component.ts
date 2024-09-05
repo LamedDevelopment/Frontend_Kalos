@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiServiceHttp } from 'src/app/pages/services/api.service';
 import { AuthService } from 'src/app/pages/services/auth/auth.service';
+import { ServicesService } from 'src/app/pages/services/services.service';
 import { UserService } from 'src/app/pages/services/user/user.service';
 import { CustomizerSettingsService } from '../../services/customizer-settings.service';
 import { ToggleService } from '../../services/toggle.service';
@@ -17,6 +18,7 @@ export class HeaderComponent {
     isSticky: boolean = false;
     user: any;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    tokenUser: any;
     @HostListener('window:scroll', ['$event'])
     checkScroll() {
         const scrollPosition =
@@ -40,13 +42,17 @@ export class HeaderComponent {
         private _userService: UserService,
         private authService: AuthService,
         private apiservice: ApiServiceHttp,
-        private router: Router
+        private router: Router,
+        private _userToken: ServicesService
     ) {
         this.toggleService.isToggled$.subscribe((isToggled) => {
             this.isToggled = isToggled;
         });
     }
     ngOnInit(): void {
+        this._userToken.InfoUserApi().subscribe((data:any) => {
+            this.tokenUser = data.msg.staff.img;
+        });
         this.authService.InfoUserApi().subscribe((data: any) => {});
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))

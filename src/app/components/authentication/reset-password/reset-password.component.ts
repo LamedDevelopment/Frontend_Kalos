@@ -107,7 +107,7 @@ export class ResetPasswordComponent {
     const confirmPassword = this.resetPassForm.controls["validationPass"].value;
     if (!this.validar) {
       this.validar = true;
-      this.validate(this.validar, this.PasswordOk(), 'La contraseña no es segura', 'confirmPassword');
+    //   this.validate(this.validar, this.PasswordOk(), 'La contraseña no es segura', 'confirmPassword');
       this.validate(
         this.validar,
         this.resetPassForm.controls["pass"].value === confirmPassword,
