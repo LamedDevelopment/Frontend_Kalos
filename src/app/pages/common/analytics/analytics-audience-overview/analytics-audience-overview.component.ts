@@ -1,15 +1,15 @@
 import { Component, ViewChild } from "@angular/core";
 import {
-    ChartComponent,
     ApexAxisChartSeries,
     ApexChart,
-    ApexXAxis,
     ApexDataLabels,
-    ApexStroke,
-    ApexYAxis,
     ApexGrid,
+    ApexLegend,
+    ApexStroke,
     ApexTitleSubtitle,
-    ApexLegend
+    ApexXAxis,
+    ApexYAxis,
+    ChartComponent
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -40,15 +40,15 @@ export class AnalyticsAudienceOverviewComponent {
         this.chartOptions = {
             series: [
                 {
-                    name: "New Visitors",
+                    name: "Pedro Sanchez",
                     data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51]
                 },
                 {
-                    name: "Unique Visitors",
+                    name: "Juan Pablo",
                     data: [50, 57, 74, 99, 75, 38, 62, 47, 82, 56]
                 },
                 {
-                    name: "Previous Visitors",
+                    name: "Jaime Ramirez",
                     data: [87, 57, 62, 47, 82, 56, 74, 99, 75, 38]
                 }
             ],

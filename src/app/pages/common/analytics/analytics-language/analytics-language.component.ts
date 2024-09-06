@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 
 import {
-    ChartComponent,
+    ApexChart,
     ApexNonAxisChartSeries,
     ApexPlotOptions,
-    ApexChart,
+    ChartComponent,
 } from 'ng-apexcharts';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
@@ -27,7 +27,7 @@ export class AnalyticsLanguageComponent {
 
     constructor(public themeService: CustomizerSettingsService) {
         this.chartOptions = {
-            series: [36],
+            series: [5],
             chart: {
                 height: 230,
                 type: 'radialBar',

@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.scss']
 })
-export class AnalyticsComponent {
+export class AnalyticsComponentUno {
 
 }

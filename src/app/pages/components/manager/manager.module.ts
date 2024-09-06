@@ -136,7 +136,7 @@ import { WalletComponent } from './wallet/wallet.component';
         GeneratePermisosComponent,
         configModalComponent,
         SeesupliesComponent,
-        ModalSuppliesComponent
+        ModalSuppliesComponent,
     ],
     imports: [
         CommonModule,

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/components/authentication/auth/guards/auth.guard';
 import { QrComponent } from 'src/app/shared/pages/qr/qr.component';
-import { AnalyticsComponent } from '../../common/analytics/analytics.component';
+import { AnalyticsComponentUno } from '../../common/analytics/analytics.component';
 import { AgendadayComponent } from './agendaday/agendaday.component';
 import { AgendamonthComponent } from './agendamonth/agendamonth.component';
 import { AppointmentComponent } from './appointment/appointment.component';
@@ -25,11 +25,11 @@ import { PaymentComponent } from './payment/payment.component';
 import { PayrollComponent } from './payroll/payroll.component';
 import { PayrollsComponent } from './payrolls/payrolls.component';
 import { RatingserviceComponent } from './ratingservice/ratingservice.component';
+import { SeesupliesComponent } from './seesuplies/seesuplies.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component';
 import { WalletComponent } from './wallet/wallet.component';
-import { SeesupliesComponent } from './seesuplies/seesuplies.component';
 
 const routes: Routes = [
     {
@@ -39,7 +39,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'dash',
-                component: AnalyticsComponent,
+                component: AnalyticsComponentUno,
                 canActivate: [AuthGuard],
             },
 

@@ -1,50 +1,46 @@
 <div
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxLayoutGap="25px"
-    fxLayoutGap.xs="0"
+    class="col"
     [class.component-rtl-enabled]="themeService.isRTLEnabled()"
 >
-    <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
+    <div  >
+        <mat-card class="single-stats-box tagus-card mb-25">
+            <div class="d-flex align-items-stretch">
+                <div class="icon">
+                    <i class="flaticon-credit-card-1"></i>
+                </div>
+                <div class="title">
+                    <span class="d-block gray-color">Efectivo</span>
+                    <h3>50</h3>
+                </div>
+            </div>
+            <!-- <p class="position-relative up"><i class="flaticon-trend"></i> <span>9.5%</span> new session</p> -->
+        </mat-card>
+    </div>
+    <div >
         <mat-card class="single-stats-box tagus-card mb-25">
             <div class="d-flex align-items-center">
                 <div class="icon">
-                    <i class="flaticon-donut-chart"></i>
+                    <i class="flaticon-credit-card"></i>
                 </div>
                 <div class="title">
-                    <span class="d-block gray-color">Sessions</span>
-                    <h3>24K</h3>
+                    <span class="d-block gray-color">Tarjeta</span>
+                    <h3>60</h3>
                 </div>
             </div>
-            <p class="position-relative up"><i class="flaticon-trend"></i> <span>9.5%</span> new session</p>
         </mat-card>
     </div>
-    <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
+    <div>
         <mat-card class="single-stats-box tagus-card mb-25">
             <div class="d-flex align-items-center">
                 <div class="icon">
-                    <i class="flaticon-goal"></i>
+                    <i class="flaticon-credit-cards"></i>
                 </div>
                 <div class="title">
-                    <span class="d-block gray-color">Total Orders</span>
-                    <h3>155K</h3>
+                    <span class="d-block gray-color">Otros medios electrónicos</span>
+                    <h3>20</h3>
                 </div>
             </div>
-            <p class="position-relative up"><i class="flaticon-trend"></i> <span>7.5%</span> vs. previous month</p>
         </mat-card>
     </div>
-    <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
-        <mat-card class="single-stats-box tagus-card mb-25">
-            <div class="d-flex align-items-center">
-                <div class="icon">
-                    <i class="flaticon-award"></i>
-                </div>
-                <div class="title">
-                    <span class="d-block gray-color">Total Earning</span>
-                    <h3>$50.5M</h3>
-                </div>
-            </div>
-            <p class="position-relative down"><i class="flaticon-trend-1"></i> <span>3.5%</span> bounce rate</p>
-        </mat-card>
-    </div>
+
 </div>

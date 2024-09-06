@@ -2,16 +2,16 @@ import { Component, ViewChild } from "@angular/core";
 import {
     ApexAxisChartSeries,
     ApexChart,
-    ChartComponent,
     ApexDataLabels,
-    ApexPlotOptions,
-    ApexYAxis,
-    ApexLegend,
-    ApexStroke,
-    ApexGrid,
-    ApexXAxis,
     ApexFill,
-    ApexTooltip
+    ApexGrid,
+    ApexLegend,
+    ApexPlotOptions,
+    ApexStroke,
+    ApexTooltip,
+    ApexXAxis,
+    ApexYAxis,
+    ChartComponent
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -43,8 +43,8 @@ export class SessionsByCountriesComponent {
         this.chartOptions = {
             series: [
                 {
-                    name: "Total Sessions:",
-                    data: [1026, 1554, 497, 1126, 908, 1512, 604, 1047, 1354, 826],
+                    name: "Total de servicios:",
+                    data: [ 40, 30, 20, 10, 5],
                 }
             ],
             chart: {
@@ -72,16 +72,11 @@ export class SessionsByCountriesComponent {
             },
             xaxis: {
                 categories: [
-                    "United State",
-                    "China",
-                    "Canada",
-                    "Indonesia",
-                    "Russia",
-                    "Japan",
-                    "Brazil",
-                    "United Kingdom",
-                    "Vietnam",
-                    "France"
+                    "Finalizados",
+                    "Cancelados",
+                    "Reagendados",
+                    "En proceso",
+                    "No procesados"
                 ],
                 labels: {
                     show: true,
