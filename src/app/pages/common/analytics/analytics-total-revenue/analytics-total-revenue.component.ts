@@ -55,7 +55,7 @@ export class AnalyticsTotalRevenueComponent {
                 },
             },
             colors: ['#757FEF'],
-            labels: ['Revenue'],
+            labels: ['Calificaciones'],
         };
     }
 }
