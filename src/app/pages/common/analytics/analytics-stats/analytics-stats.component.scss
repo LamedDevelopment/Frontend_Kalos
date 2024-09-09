@@ -103,6 +103,47 @@
     }
 }
 
+.horizontal-cards {
+    display: flex;
+    flex-wrap: wrap;   // Permite que las tarjetas pasen a la siguiente fila si no hay espacio suficiente
+    justify-content: space-between;  // Distribuye el espacio entre las tarjetas de manera uniforme
+    gap: 20px;  // Espaciado entre las tarjetas, ajustable
+  
+    > div {
+      flex: 1 1 calc(20% - 20px);  // Cada tarjeta ocupará el 20% del ancho menos el espaciado
+      box-sizing: border-box;  // Asegura que el ancho de las tarjetas incluya padding y border
+    }
+  
+    // Adaptar a pantallas más pequeñas (4 tarjetas por fila)
+    @media (max-width: 1200px) {
+      > div {
+        flex: 1 1 calc(25% - 20px);  // Ajustar a 4 tarjetas por fila
+      }
+    }
+  
+    // Adaptar a pantallas medianas (3 tarjetas por fila)
+    @media (max-width: 992px) {
+      > div {
+        flex: 1 1 calc(33.33% - 20px);  // Ajustar a 3 tarjetas por fila
+      }
+    }
+  
+    // Adaptar a pantallas más pequeñas (2 tarjetas por fila)
+    @media (max-width: 768px) {
+      > div {
+        flex: 1 1 calc(50% - 20px);  // Ajustar a 2 tarjetas por fila
+      }
+    }
+  
+    // Adaptar a pantallas móviles (1 tarjeta por fila)
+    @media (max-width: 576px) {
+      > div {
+        flex: 1 1 calc(100% - 20px);  // 1 tarjeta por fila
+      }
+    }
+  }
+  
+  
 @media only screen and (max-width : 767px) {
 
     .single-stats-box {

@@ -41,24 +41,24 @@ export class SalesAnalyticsComponent {
         this.chartOptions = {
             series: [
                 {
-                    name: "Finalizados",
+                    name: "Peluqueria",
                     data: [30, 20, 40, 25, 18, 43, 15]
                 },
                 {
-                    name: "Cancelados",
+                    name: "Peinados",
                     data: [20, 10, 20, 20, 12, 27, 28]
                 },
                 {
-                    name: "Reagendados",
-                    data: [10, 10, 15, 15, 15, 14, 15]
+                    name: "Barberia",
+                    data: [50, 45, 60, 15, 15, 14, 15]
                 },
                 {
-                    name: "En proceso",
-                    data: [10, 10, 15, 15, 15, 14, 15]
+                    name: "Colorimetria",
+                    data: [10, 10, 35, 15, 15, 14, 15]
                 },
                 {
-                    name: "No presentados",
-                    data: [10, 10, 15, 15, 15, 14, 15]
+                    name: "Spa de Uñas",
+                    data: [10, 10, 36, 15, 15, 14, 15]
                 }
             ],
             chart: {

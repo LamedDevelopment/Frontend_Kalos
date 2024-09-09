@@ -49,7 +49,19 @@ export class AnalyticsAudienceOverviewComponent {
                 },
                 {
                     name: "Jaime Ramirez",
-                    data: [87, 57, 62, 47, 82, 56, 74, 99, 75, 38]
+                    data: [8, 57, 62, 47, 82, 56, 74, 99, 75, 38]
+                },
+                {
+                    name: "Roberto Benitez",
+                    data: [5, 11, 22, 32, 33, 48, 9, 17, 26, 15]
+                },
+                {
+                    name: "Luisa Botero",
+                    data: [15, 54, 79, 92, 68, 35, 64, 52, 87, 59]
+                },
+                {
+                    name: "Alejandro Rodriguez",
+                    data: [55, 63, 81, 98, 84, 50, 72, 57, 90, 64]
                 }
             ],
             chart: {
@@ -60,7 +72,7 @@ export class AnalyticsAudienceOverviewComponent {
                 }
             },
             colors: [
-                "#2DB6F5", "#F765A3", "#757FEF"
+                "#2DB6F5", "#F765A3", "#757FEF", "#FF9F43", "#2DB600", "#F76800", "#757B00",
             ],
             dataLabels: {
                 enabled: false

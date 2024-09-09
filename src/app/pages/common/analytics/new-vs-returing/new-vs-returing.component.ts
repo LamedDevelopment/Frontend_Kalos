@@ -27,7 +27,7 @@ export class NewVsReturingComponent {
 
     constructor(public themeService: CustomizerSettingsService) {
         this.chartOptions = {
-            series: [50],
+            series: [30],
             chart: {
                 height: 230,
                 type: 'radialBar',

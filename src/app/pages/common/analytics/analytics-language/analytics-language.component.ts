@@ -27,7 +27,7 @@ export class AnalyticsLanguageComponent {
 
     constructor(public themeService: CustomizerSettingsService) {
         this.chartOptions = {
-            series: [5],
+            series: [25],
             chart: {
                 height: 230,
                 type: 'radialBar',
