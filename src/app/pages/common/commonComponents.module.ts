@@ -37,6 +37,7 @@ import { ModalappoforaComponent } from './modalappofora/modalappofora.component'
 import { ModalappomanagerComponent } from './modalappomanager/modalappomanager.component';
 import { ModalDescripcionServicioComponent } from './modals/modal-descripcion-servicio/modal-descripcion-servicio.component';
 import { ModalHistoricoServiciosComponent } from './modals/modal-historico-servicios/modal-historico-servicios.component';
+import { ModalReasignacionComponent } from './modals/modal-reasignacion/modal-modal-reasignacion.component';
 import { ModalSuministrosComponent } from './modals/modal-suministros/modal-suministros.component';
 import { MarcaComponent } from './selects/marca/marca.component';
 import { ProductComponent } from './selects/product/product.component';
@@ -90,6 +91,7 @@ import { SelectservicesComponent } from './selects/selectservices/selectservices
         SelectTurnosComponent,
         SelectPermisosComponent,
         AutocompleteProductosComponent,
+        ModalReasignacionComponent
     ],
     imports: [
         CommonModule,

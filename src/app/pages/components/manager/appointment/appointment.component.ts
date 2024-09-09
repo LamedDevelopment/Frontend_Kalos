@@ -1,26 +1,26 @@
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import {
+    MatSnackBar,
     MatSnackBarHorizontalPosition,
     MatSnackBarVerticalPosition,
-    MatSnackBar,
 } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { ModalappoforaComponent } from 'src/app/pages/common/modalappofora/modalappofora.component';
+import { ModalappomanagerComponent } from 'src/app/pages/common/modalappomanager/modalappomanager.component';
+import { ModalHistoricoServiciosComponent } from 'src/app/pages/common/modals/modal-historico-servicios/modal-historico-servicios.component';
+import { ModalReasignacionComponent } from 'src/app/pages/common/modals/modal-reasignacion/modal-modal-reasignacion.component';
+import { ManagerService } from 'src/app/pages/services/manager.service';
+import { ModalservicesService } from 'src/app/pages/services/modalservices.service';
 import { AppointmentsService } from 'src/app/pages/services/user/appointments.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import {
     PeriodicElement,
     UpdateAppointmentDialogBox,
 } from '../../business/appo/appo.component';
-import { ModalserviceComponent } from '../../collaborator/modals/modalservice/modalservice.component';
 import { CloseserviceComponent } from '../../collaborator/modals/closeservice/closeservice.component';
-import { ModalservicesService } from 'src/app/pages/services/modalservices.service';
-import { ModalappoforaComponent } from 'src/app/pages/common/modalappofora/modalappofora.component';
-import { ManagerService } from 'src/app/pages/services/manager.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ModalappomanagerComponent } from 'src/app/pages/common/modalappomanager/modalappomanager.component';
-import { ModalHistoricoServiciosComponent } from 'src/app/pages/common/modals/modal-historico-servicios/modal-historico-servicios.component';
+import { ModalserviceComponent } from '../../collaborator/modals/modalservice/modalservice.component';
 
 @Component({
     selector: 'app-appointment',
@@ -396,6 +396,38 @@ export class AppointmentComponent {
                 this.GetHistoricoCitas();
             });
         }, 1000);
+    }
+
+    viewColaboradores(
+        enterAnimationDuration: string,
+        exitAnimationDuration: string,
+        element: any,
+        service: any
+    ){
+        const dialogRef = this.dialog.open(
+                ModalReasignacionComponent,
+                {
+                    width: '1000px',
+                    enterAnimationDuration,
+                    exitAnimationDuration,
+
+                    data: {
+                        element,
+                        service
+                    },
+                }
+            );
+
+            dialogRef.afterClosed().subscribe((data) => {
+                // Una vez cerrado el modal, puedes acceder a los datos devueltos
+                if (data) {
+                    console.log('Datos del modal cerrado:', data);
+                }
+
+                // Una vez cerrado el modal se refresca la data
+                this.GetCitas(1);
+                this.GetHistoricoCitas();
+            });
     }
 
     /** Metodo que obtiene las sedes del manager */
