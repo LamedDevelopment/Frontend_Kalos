@@ -6,18 +6,18 @@ import {
     Validators,
 } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
     MatSnackBar,
     MatSnackBarHorizontalPosition,
     MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import * as moment from 'moment';
 import { select } from 'src/app/pages/common/Interfaces/select.interface';
 import { ModalserviceComponent } from 'src/app/pages/components/collaborator/modals/modalservice/modalservice.component';
 import { ManagerService } from 'src/app/pages/services/manager.service';
 import { SwalServiceService } from 'src/app/pages/services/swal-service.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-modalegreso',
@@ -48,7 +48,7 @@ export class ModalegresoComponent {
             payees: [''],
             descriptionExpenditure: ['', [Validators.required]],
             expenditureDate: [''],
-            categorizationExpenditures: ['', [Validators.required]],
+            categorizationExpenditures: [''],
             approvalOfExpenditures: [''],
         });
 
@@ -57,9 +57,9 @@ export class ModalegresoComponent {
 
     patchBussines() {
         let datauser = JSON.parse(sessionStorage.getItem('dataUser')!);
-
+        console.log(datauser);
         this.startServiceform.patchValue({
-            businessID: datauser.branchOffices[0].id,
+            businessID: datauser.business,
         });
         this.startServiceform.patchValue({
             tradename: datauser.branchOffices[0].tradeName,
