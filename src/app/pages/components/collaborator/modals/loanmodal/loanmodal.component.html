@@ -10,13 +10,13 @@
             <mat-card-content>
                 <form [formGroup]="loanServiceform">
                     <div class="row mt-3">
-                        <div class="col-3">
+                        <div class="col-12 col-md-3 mb-3">
                             <app-inputnumeric
                                 [label]="'Valor'"
                                 [control]="loanAmountControl"
                             ></app-inputnumeric>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12 col-md-3 mb-3">
                             <mat-form-field class="w-100">
                                 <mat-label>Tiempo limite de Pago</mat-label>
                                 <input
@@ -25,12 +25,12 @@
                                 />
                             </mat-form-field>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12 col-md-3 mb-3">
                             <app-selectpaymethod
                                 (methodSelected)="methodSelected($event)"
                             ></app-selectpaymethod>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12 col-md-3 mb-3">
                             <mat-form-field class="w-100">
                                 <mat-label>Descripción</mat-label>
                                 <input matInput formControlName="loanDetail" />
