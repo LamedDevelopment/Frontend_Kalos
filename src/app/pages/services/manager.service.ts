@@ -90,6 +90,14 @@ export class ManagerService {
         );
     }
 
+    ReasignCollaborator(url: any, data: any): Observable<any> {
+        return this._apiServiceHttp.post(url, data).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
     createAppoFora(url: any, data: any): Observable<any> {
         return this._apiServiceHttp.post(url, data).pipe(
             map((response: any) => {

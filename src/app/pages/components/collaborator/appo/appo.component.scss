@@ -1,0 +1,54 @@
+/* Estilos generales para la tabla */
+.mat-table {
+    display: table;
+    width: 100%;
+}
+
+/* Estilos para columnas, para pantalla completa */
+.cell-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cell-title {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.cell-data {
+    flex-grow: 1;
+    text-align: right;
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .mat-table {
+        display: block; /* Permite que las filas se comporten como bloques */
+    }
+
+    .cell-content {
+        display: flex;
+        flex-direction: column; /* Coloca los elementos uno debajo del otro */
+        align-items: flex-start;
+    }
+
+    .cell-title {
+        margin-bottom: 5px;
+    }
+
+    .cell-data {
+        text-align: left; /* Alinea los datos a la izquierda para la vista móvil */
+    }
+
+    th.mat-header-cell {
+        display: none; /* Oculta los encabezados de la tabla en móvil */
+    }
+
+    td.mat-cell {
+        display: block;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+}

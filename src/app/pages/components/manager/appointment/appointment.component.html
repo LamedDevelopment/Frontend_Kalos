@@ -265,6 +265,9 @@
                                                             <th
                                                                 scope="col"
                                                             ></th>
+                                                            <th
+                                                                scope="col"
+                                                            ></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -322,6 +325,23 @@
                                                                     "
                                                                 >
                                                                     Ver
+                                                                </button>
+                                                            </td>
+                                                            <td>
+                                                                <button
+                                                                    mat-mini-fab
+                                                                    matTooltip="Reasignar colaborador"
+                                                                    color="primary"
+                                                                    (click)="
+                                                                        viewColaboradores(
+                                                                            '300ms',
+                                                                            '100ms',
+                                                                            element,
+                                                                            service
+                                                                        )
+                                                                    "
+                                                                >
+                                                                    <i class="ri-exchange-box-line" style="zoom:1.8"></i>
                                                                 </button>
                                                             </td>
                                                         </tr>

@@ -2,15 +2,15 @@ import { Component, ViewChild } from "@angular/core";
 import {
     ApexAxisChartSeries,
     ApexChart,
-    ChartComponent,
     ApexDataLabels,
+    ApexFill,
     ApexGrid,
+    ApexLegend,
     ApexPlotOptions,
     ApexResponsive,
     ApexXAxis,
     ApexYAxis,
-    ApexLegend,
-    ApexFill
+    ChartComponent
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -28,7 +28,7 @@ export type ChartOptions = {
 };
 
 @Component({
-    selector: 'app-sales-analytics',
+    selector: 'app-sales-analyticsUno',
     templateUrl: './sales-analytics.component.html',
     styleUrls: ['./sales-analytics.component.scss']
 })
@@ -36,21 +36,29 @@ export class SalesAnalyticsComponent {
 
     @ViewChild("chart") chart: ChartComponent;
     public chartOptions: Partial<ChartOptions>;
-  
+
     constructor() {
         this.chartOptions = {
             series: [
                 {
-                    name: "Cost",
+                    name: "Peluqueria",
                     data: [30, 20, 40, 25, 18, 43, 15]
                 },
                 {
-                    name: "Sales",
+                    name: "Peinados",
                     data: [20, 10, 20, 20, 12, 27, 28]
                 },
                 {
-                    name: "Revenue",
-                    data: [10, 10, 15, 15, 15, 14, 15]
+                    name: "Barberia",
+                    data: [50, 45, 60, 15, 15, 14, 15]
+                },
+                {
+                    name: "Colorimetria",
+                    data: [10, 10, 35, 15, 15, 14, 15]
+                },
+                {
+                    name: "Spa de Uñas",
+                    data: [10, 10, 36, 15, 15, 14, 15]
                 }
             ],
             chart: {
@@ -91,7 +99,7 @@ export class SalesAnalyticsComponent {
                 }
             },
             colors: [
-                "#165BAA", "#A155B9", "#F765A3"
+                "#165BAA", "#A155B9", "#F765A3", "#ffc8ff", "#a390eb", "#5a5e9c"
             ],
             legend: {
                 offsetY: 0,

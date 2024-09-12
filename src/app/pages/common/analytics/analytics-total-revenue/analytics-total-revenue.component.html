@@ -4,15 +4,15 @@
     [class.component-rtl-enabled]="themeService.isRTLEnabled()"
 >
     <mat-card-header class="border-bottom">
-        <h5 class="mb-0">Total Revenue</h5>
+        <h5 class="mb-0">Calificaciones de Servicios</h5>
         <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="monthMenu">
             <i class="ri-more-fill"></i>
         </button>
         <mat-menu #monthMenu="matMenu" class="monthMenu" xPosition="before">
-            <button mat-menu-item type="button" class="bg-transparent border-none">Today</button>
-            <button mat-menu-item type="button" class="bg-transparent border-none">Last Month</button>
-            <button mat-menu-item type="button" class="bg-transparent border-none">Last Year</button>
-            <button mat-menu-item type="button" class="bg-transparent border-none">All Time</button>
+            <button mat-menu-item type="button" class="bg-transparent border-none">Hoy</button>
+            <button mat-menu-item type="button" class="bg-transparent border-none">Mes Anterior</button>
+            <!-- <button mat-menu-item type="button" class="bg-transparent border-none">Año Pasado</button>
+            <button mat-menu-item type="button" class="bg-transparent border-none">Todas</button> -->
         </mat-menu>
     </mat-card-header>
     <mat-card-content>
@@ -27,30 +27,30 @@
         </div>
         <ul class="list mb-0 ps-0">
             <li class="d-flex align-items-center justify-content-space-between position-relative">
-                <span class="gray-color">Avg. Session</span>
+                <span class="gray-color">Calificacion de Instalaciones</span>
                 <div class="info d-flex align-items-center justify-content-center">
                     <span class="gray-color fw-semibold">972</span>
                     <span class="gray-color"><i class="flaticon-trend"></i> 49%</span>
                 </div>
             </li>
             <li class="d-flex align-items-center justify-content-space-between position-relative">
-                <span class="gray-color">Conversion Rate</span>
+                <span class="gray-color">Conocimiento del Profesional</span>
                 <div class="info d-flex align-items-center justify-content-center">
                     <span class="gray-color fw-semibold">1026</span>
-                    <span class="gray-color down"><i class="flaticon-trend-1"></i> 18%</span>
+                    <span class="gray-color down"><i class="flaticon-trend"></i> 45%</span>
                 </div>
             </li>
             <li class="d-flex align-items-center justify-content-space-between position-relative">
-                <span class="gray-color">Avg. Duration</span>
+                <span class="gray-color">Tiempo de espera</span>
                 <div class="info d-flex align-items-center justify-content-center">
-                    <span class="gray-color fw-semibold">3m</span>
-                    <span class="gray-color"><i class="flaticon-trend"></i> 42%</span>
+                    <span class="gray-color fw-semibold">286</span>
+                    <span class="gray-color down"><i class="flaticon-trend"></i> 42%</span>
                 </div>
             </li>
             <li class="d-flex align-items-center justify-content-space-between position-relative">
-                <span class="gray-color">Weekly Earning</span>
+                <span class="gray-color">Amabilidad del Profesional</span>
                 <div class="info d-flex align-items-center justify-content-center">
-                    <span class="gray-color fw-semibold">$972</span>
+                    <span class="gray-color fw-semibold">972</span>
                     <span class="gray-color"><i class="flaticon-trend"></i> 28%</span>
                 </div>
             </li>

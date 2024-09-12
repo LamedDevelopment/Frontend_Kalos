@@ -1,0 +1,51 @@
+/* Estilos generales para la tabla */
+.mat-card-content {
+    padding: 1rem;
+}
+
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mat-header-cell, .mat-cell {
+    padding: 0.5rem;
+    text-align: left;
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .mat-card-content {
+        padding: 0.5rem;
+    }
+
+    .responsive-table {
+        display: block;
+        width: 100%;
+    }
+
+    .mat-header-cell, .mat-cell {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .mat-header-cell::after {
+        content: ':';
+        font-weight: bold;
+        display: inline-block;
+        width: 30%;
+        text-align: left;
+    }
+
+    .mat-cell {
+        text-align: left;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Ocultar el encabezado en pantallas pequeñas */
+    th.mat-header-cell {
+        display: none;
+    }
+}
