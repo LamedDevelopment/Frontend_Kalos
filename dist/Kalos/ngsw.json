@@ -1,10 +1,6 @@
 {
   "configVersion": 1,
-<<<<<<< HEAD
-  "timestamp": 1725548938376,
-=======
-  "timestamp": 1725548527994,
->>>>>>> 9e5c48135de1d9dc351e6f69e196fd033d818bcb
+  "timestamp": 1726156782083,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -18,17 +14,13 @@
         "/707.63b0c1846ef8aaac.js",
         "/favicon.ico",
         "/index.html",
-<<<<<<< HEAD
-        "/main.2c3a7e7dcc89c106.js",
-=======
-        "/main.49ea0299ecddf87a.js",
->>>>>>> 9e5c48135de1d9dc351e6f69e196fd033d818bcb
+        "/main.5faf1c469b693811.js",
         "/manifest.webmanifest",
         "/polyfills.5863cf0503f1c646.js",
         "/quill.701d03c22985ddfc.js",
         "/runtime.30deb2d99af42726.js",
         "/scripts.b7765409369989ed.js",
-        "/styles.df5b34dba03d0e69.css"
+        "/styles.60f250c77980837a.css"
       ],
       "patterns": [
         "https:\\/\\/fonts\\.googleapis\\.com",
@@ -514,8 +506,8 @@
         "/assets/img/web-apps/youtube.png",
         "/assets/img/welcome.png",
         "/assets/img/white-logo.png",
+        "/flaticon_tagus.28ed918eecbbda7a.svg",
         "/flaticon_tagus.323041534a82d23f.ttf",
-        "/flaticon_tagus.6c4d542299c7fef8.svg",
         "/flaticon_tagus.e2b41719e51dd36d.woff2",
         "/flaticon_tagus.f7e8a42ad6fd5c19.woff",
         "/owl.video.play.e3b436436832b027.png",
@@ -558,11 +550,11 @@
     "/707.63b0c1846ef8aaac.js": "60a323b82aabdd9db85717ed0ca8c8c3b434bded",
     "/assets/assets/.gitkeep": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "/assets/assets/fonts/backup.txt": "b8a8f41a60c506fa826f766685a73fa179d78b6d",
-    "/assets/assets/fonts/flaticon_tagus.css": "0a7f36bdea4e04b6d2c197da20946be390adf685",
+    "/assets/assets/fonts/flaticon_tagus.css": "782d9449ec255735520ec5d29337cc361bacfcf1",
     "/assets/assets/fonts/flaticon_tagus.eot": "a615908ab26b11fa229dc1a65dddce2a4bfeba79",
-    "/assets/assets/fonts/flaticon_tagus.html": "78920389c8c184ad41124ba2df2e0cb758780099",
-    "/assets/assets/fonts/flaticon_tagus.scss": "78b2da8694fd1a80b14c00bda42cde44216fe776",
-    "/assets/assets/fonts/flaticon_tagus.svg": "bbefa59266cc5dba7580d13935ce22508566b270",
+    "/assets/assets/fonts/flaticon_tagus.html": "2259e001c720a321eb52e3dd1906855ffe649a86",
+    "/assets/assets/fonts/flaticon_tagus.scss": "fff40f324a047a134d26fa18e1ded8999068d8fe",
+    "/assets/assets/fonts/flaticon_tagus.svg": "eeefa67be72f6e097b2b184e3ab2802d67c5a8fa",
     "/assets/assets/fonts/flaticon_tagus.ttf": "a12252354b9b4fcb2e0bbf334e6686536a94fc38",
     "/assets/assets/fonts/flaticon_tagus.woff": "f55edefb70f73b9bb2a2598819ad0a5f7e11ce7a",
     "/assets/assets/fonts/flaticon_tagus.woff2": "ea03eecff6a961bc57ad975593dc1518d2c2d5d7",
@@ -729,11 +721,11 @@
     "/assets/cards/card7.jpg": "1bd5cc43ea9704245bdf8c73748a073706594f6a",
     "/assets/cards/card8.jpg": "c1ec0c2b38e6e5448b3a6185038990ce19379a2f",
     "/assets/fonts/backup.txt": "b8a8f41a60c506fa826f766685a73fa179d78b6d",
-    "/assets/fonts/flaticon_tagus.css": "0a7f36bdea4e04b6d2c197da20946be390adf685",
+    "/assets/fonts/flaticon_tagus.css": "782d9449ec255735520ec5d29337cc361bacfcf1",
     "/assets/fonts/flaticon_tagus.eot": "a615908ab26b11fa229dc1a65dddce2a4bfeba79",
-    "/assets/fonts/flaticon_tagus.html": "78920389c8c184ad41124ba2df2e0cb758780099",
-    "/assets/fonts/flaticon_tagus.scss": "78b2da8694fd1a80b14c00bda42cde44216fe776",
-    "/assets/fonts/flaticon_tagus.svg": "bbefa59266cc5dba7580d13935ce22508566b270",
+    "/assets/fonts/flaticon_tagus.html": "2259e001c720a321eb52e3dd1906855ffe649a86",
+    "/assets/fonts/flaticon_tagus.scss": "fff40f324a047a134d26fa18e1ded8999068d8fe",
+    "/assets/fonts/flaticon_tagus.svg": "eeefa67be72f6e097b2b184e3ab2802d67c5a8fa",
     "/assets/fonts/flaticon_tagus.ttf": "a12252354b9b4fcb2e0bbf334e6686536a94fc38",
     "/assets/fonts/flaticon_tagus.woff": "f55edefb70f73b9bb2a2598819ad0a5f7e11ce7a",
     "/assets/fonts/flaticon_tagus.woff2": "ea03eecff6a961bc57ad975593dc1518d2c2d5d7",
@@ -1023,19 +1015,13 @@
     "/assets/img/welcome.png": "7f17e58dbf437112f28b37b617cda0e532eb294c",
     "/assets/img/white-logo.png": "ffe7a9ffa840a15978fe03ab574b84cf56fbf693",
     "/favicon.ico": "76677727dce3b98926cc054b7496feb712b61f6c",
+    "/flaticon_tagus.28ed918eecbbda7a.svg": "eeefa67be72f6e097b2b184e3ab2802d67c5a8fa",
     "/flaticon_tagus.323041534a82d23f.ttf": "a12252354b9b4fcb2e0bbf334e6686536a94fc38",
-    "/flaticon_tagus.6c4d542299c7fef8.svg": "bbefa59266cc5dba7580d13935ce22508566b270",
     "/flaticon_tagus.e2b41719e51dd36d.woff2": "ea03eecff6a961bc57ad975593dc1518d2c2d5d7",
     "/flaticon_tagus.f7e8a42ad6fd5c19.woff": "f55edefb70f73b9bb2a2598819ad0a5f7e11ce7a",
-<<<<<<< HEAD
-    "/index.html": "7da136279253b4c4f9c44fd4b1a6d8edc1204fec",
-    "/main.2c3a7e7dcc89c106.js": "1f0d3785c3396d595d37c564d53b39de8c2a0155",
+    "/index.html": "46329885bebbc51eb3bcab51513dd01a51d3e436",
+    "/main.5faf1c469b693811.js": "cde11bdefc34219001b1411f5b2a832afb9dfc4e",
     "/manifest.webmanifest": "fa173df619077f8a6e6f88906230f78b1f5a929b",
-=======
-    "/index.html": "dc3b384e349facead9590e63406fdda1c82d7031",
-    "/main.49ea0299ecddf87a.js": "038169e56bd54b8c4e21f5eb4001d6d6098c8f4c",
-    "/manifest.webmanifest": "9ac52b0e462d9f5d0720bbccbdd86489530f8b7e",
->>>>>>> 9e5c48135de1d9dc351e6f69e196fd033d818bcb
     "/owl.video.play.e3b436436832b027.png": "c0d64356ec2758cb280d183b4829c923e5ff61e5",
     "/polyfills.5863cf0503f1c646.js": "881954c968f1c809289eebef64a6ba4887a658f6",
     "/quill.701d03c22985ddfc.js": "c9cd42d93d5f363cb6d177a6fe096d391e695398",
@@ -1045,7 +1031,7 @@
     "/remixicon.e0a546f7dfeb1afa.svg": "2efd0e9251fadd9c13251408c4ae756822bf7400",
     "/runtime.30deb2d99af42726.js": "53d138b3ef2a21f49f5cf1c7498b18b89800ad21",
     "/scripts.b7765409369989ed.js": "0e92fe7e8952fd92d3f32b4ee3c4a047b0a5ab75",
-    "/styles.df5b34dba03d0e69.css": "a07c76200aeb2a32216f717fc257c37a17fd2eda"
+    "/styles.60f250c77980837a.css": "57ad3b182e2b3a69d0c4311ed73a24907062e5da"
   },
   "navigationUrls": [
     {
