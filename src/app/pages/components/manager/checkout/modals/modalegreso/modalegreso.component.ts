@@ -94,7 +94,7 @@ export class ModalegresoComponent {
     public createEgreso() {
         this.managerservice.createEgreso(this.startServiceform.value).subscribe(
             (response) => {
-                if (response.msg == true) {
+                if (response.ok) {
                     this._snackBar.open(
                         response.msg ? response.msg : 'Éxito al generar egreso',
                         '',
@@ -105,6 +105,18 @@ export class ModalegresoComponent {
                         }
                     );
                     this.dialogRef.close();
+                } else {
+                    this._snackBar.open(
+                            response.msg
+                            ? response.msg
+                            : 'Error Al consultar información',
+                        '',
+                        {
+                            horizontalPosition: this.horizontalPosition,
+                            verticalPosition: this.verticalPosition,
+                            duration: this.durationInSeconds * 1000,
+                        }
+                    );
                 }
             },
             (error) => {
