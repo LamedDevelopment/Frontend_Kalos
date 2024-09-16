@@ -64,6 +64,7 @@ export class AccountComponentBis {
         this.accountForm = this._formBuilder.group({
                 name:['', Validators.required],
                 lastName:['', Validators.required],
+                document:['', Validators.required],
                 celusu:['', Validators.required],
                 email:['', [Validators.required, Validators.email]],
                 city:['', Validators.required],
@@ -80,8 +81,9 @@ export class AccountComponentBis {
                 // Create the form
                 this.accountForm.controls["name"].setValue(this.user.name);
                 this.accountForm.controls["lastName"].setValue(this.user.lastName);
+                this.accountForm.controls["document"].setValue(this.maskDocument(this.user.document));
                 this.accountForm.controls["celusu"].setValue(this.user.movil);
-                this.accountForm.controls["email"].setValue(this.user.email);
+                this.accountForm.controls["email"].setValue(this.maskEmail(this.user.email));
                 this.accountForm.controls["city"].setValue(this.user?.city);
                 this.accountForm.controls["address"].setValue(this.user?.address);
                 this.accountForm.controls["birthdate"].setValue(this.user?.birthdate);
@@ -90,6 +92,24 @@ export class AccountComponentBis {
         })
     }
 
+    maskDocument(value: number): string {
+        const valueStr = value.toString(); // Convertir el número a string
+        if (valueStr.length > 5) {
+            return `${valueStr.slice(0, 2)}******${valueStr.slice(-3)}`;
+        }
+        return valueStr; // Retorna el número como string
+    }
+
+    maskEmail(email: string): string {
+        const [localPart, domain] = email.split('@'); // Separar localPart y dominio
+    
+        if (localPart.length > 4) {
+            // Enmascarar dejando el primer carácter y los últimos tres de la parte local
+            return `${localPart.slice(0, 2)}******${localPart.slice(-3)}@${domain}`;
+        }
+        // Si la parte local es muy corta, solo devolver el email completo
+        return email;
+    }
 
     /**
      * Update Account

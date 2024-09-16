@@ -38,6 +38,7 @@ export class AccountComponent {
         this.accountForm = this._formBuilder.group({
                 name:['', Validators.required],
                 lastName:['', Validators.required],
+                document:['', Validators.required],
                 celusu:['', Validators.required],
                 email:['', [Validators.required, Validators.email]],
                 city:['', Validators.required],
@@ -49,11 +50,12 @@ export class AccountComponent {
 
         this._accountService.getAccount().subscribe((account:any) => {
             this.user = account.userDB;
-            console.log(this.user)
+            
             if(this.user){
                 // Create the form
                 this.accountForm.controls["name"].setValue(this.user.name);
                 this.accountForm.controls["lastName"].setValue(this.user.lastName);
+                this.accountForm.controls["document"].setValue(this.user?.document);
                 this.accountForm.controls["celusu"].setValue(this.user.movil);
                 this.accountForm.controls["email"].setValue(this.user.email);
                 this.accountForm.controls["city"].setValue(this.user?.city);
@@ -83,6 +85,8 @@ export class AccountComponent {
         this.datosUpdates = false;
         this.showAlert = false;
         let body = this.accountForm.value;
+        console.log('this.user.uid', this.user.uid);
+        console.log('body', body);
         // Sign up
         this._accountService.updateAccount(body, this.user.uid)
             .subscribe(
