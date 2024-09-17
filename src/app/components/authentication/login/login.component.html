@@ -25,10 +25,10 @@
                     </div> -->
                     <div class="bg-white border-radius pt-20 ps-20 pe-20">
                         <div class="tagus-form-group without-icon">
-                            <label class="d-block mb-12 fw-semibold gray-color">Correo Electronico <span>*</span></label>
+                            <label class="d-block mb-12 fw-semibold gray-color">Correo Electrónico <span>*</span></label>
                             <mat-form-field appearance="fill">
-                                <mat-label>Ingrese su Correo Electronico</mat-label>
-                                <input matInput [formControlName]="'email'">
+                                <mat-label>Ingrese su Correo Electrónico</mat-label>
+                                <input matInput [formControlName]="'email'" style="text-transform: lowercase;">
                                 <mat-error *ngIf="signInForm.get('email')?.hasError('required')">
                                     El correo es requerido
                                 </mat-error>
@@ -36,7 +36,7 @@
                                     Correo inválido
                                 </mat-error>
                             </mat-form-field>
-                        </div>
+                        </div>                        
                         <div class="tagus-form-group without-icon">
                             <label class="d-block mb-12 fw-semibold gray-color">Contraseña <span>*</span></label>
                             <mat-form-field appearance="fill">
