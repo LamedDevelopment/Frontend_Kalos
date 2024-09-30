@@ -69,7 +69,6 @@ constructor(
       map((response: any) => {
         // Return a new observable with the response
         return response;
-
       }),
     );
   }

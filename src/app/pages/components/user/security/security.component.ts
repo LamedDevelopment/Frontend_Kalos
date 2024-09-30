@@ -120,10 +120,10 @@ export class SecurityComponent {
     const regex2 = /\W/;
 
     return (
-      regex.test(this.accountForm.get('pass')?.value.trim()) &&
-      regex1.test(this.accountForm.get('pass')?.value.trim()) &&
-      regex2.test(this.accountForm?.get('pass')?.value.trim()) &&
-      this.accountForm.get('pass')?.value.trim().length >= 8
+      // regex.test(this.accountForm.get('pass')?.value.trim()) &&
+      // regex1.test(this.accountForm.get('pass')?.value.trim()) &&
+      // regex2.test(this.accountForm?.get('pass')?.value.trim()) &&
+      this.accountForm.get('pass')?.value.trim().length >= 4
     );
   }
 

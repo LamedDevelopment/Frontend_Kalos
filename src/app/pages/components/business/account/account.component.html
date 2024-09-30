@@ -28,7 +28,7 @@
             <h5 class="fw-semibold mb-8">Perfil</h5>
             <p>Actualice su información personal aquí.</p>
             <div class="row mt-20">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Nombres</label>
                         <mat-form-field appearance="fill">
@@ -40,7 +40,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Apellidos</label>
                         <mat-form-field appearance="fill">
@@ -52,7 +52,19 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Numero de Documento de Identidad</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-sketching"></i>
+                            <input matInput [formControlName]="'document'" readonly>
+                            <mat-error *ngIf="accountForm.get('document')?.hasError('required')">
+                                Numero de Documento requeridos
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Email</label>
                         <mat-form-field appearance="fill">
@@ -67,7 +79,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Teléfono</label>
                         <mat-form-field appearance="fill">
@@ -79,7 +91,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Ciudad</label>
                         <mat-form-field appearance="fill">
@@ -88,7 +100,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Dirección</label>
                         <mat-form-field appearance="fill">
@@ -97,7 +109,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Fecha de nacimiento</label>
                         <mat-form-field appearance="fill">
@@ -108,7 +120,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Genero</label>
                         <mat-form-field appearance="fill">

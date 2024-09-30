@@ -48,6 +48,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
     ServiceNameSelected: any;
     nameCollaborator: string;
     processAgendamiento: boolean = false;
+    note: any;
+    msg: any;
     constructor(
         public themeService: CustomizerSettingsService,
         private _getAppointment: AppointmentsService,
@@ -182,6 +184,8 @@ export class LoungeComponent implements AfterViewInit, OnInit {
             .subscribe((response: any) => {
                 this.priceService = response?.msg?.[0]?.servicePrice;
                 this.timeService = response?.msg?.[0]?.serviceTime;
+                this.note = response?.msg?.[0]?.priceNote;
+                this.msg = response?.msg?.[0]?.pathNote;
             });
     }
 
