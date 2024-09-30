@@ -1,113 +1,71 @@
 <div class="row">
+    <!-- CARD TOTAL DE VENTAS -->
     <div class="col-lg-4 col-md-4">
-        <mat-card class="mb-25 tagus-card">
-            <mat-card-content>
-                <div class="d-flex align-items-center">
-                    <div class="icon me-12 text-center rounded-circle">
-                        <i class="ri-money-dollar-circle-line"></i>
-                    </div>
-                    <h5 class="mb-0">Total Ventas</h5>
-                </div>
-
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <ul class="list ps-0 d-flex align-items-center justify-content-space-between mb-0">
-                            <li class="muted-color fw-medium">
-                                <span class="d-block">Todas las órdenes</span>
-                                <span class="gray-color d-inline-block position-relative fw-semibold">
-                                    {{ totalVentas?.totalSales | currency: "COP": "symbol": "1.0-0" }}
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
+        <app-card-total-checkout />
     </div> 
-
-    <!-- Aquí ajustamos el comportamiento para que se expanda correctamente -->
+    <!-- Card de Tipos de Pago para mostrar sus respectivos Valores -->
     <div class="col-lg-8 col-md-12">
-        <mat-card class="mb-25 tagus-card h-100"> <!-- Se asegura de ocupar todo el espacio -->
-            <mat-card-content>
-                <div class="d-flex align-items-center">
-                    <div class="icon me-12 text-center rounded-circle">
-                        <i class="ri-money-dollar-circle-line"></i>
-                    </div>
-                    <h5 class="mb-0">Medios de Pago</h5>
-                </div>
-
-                <div class="row mt-2">
-                    <!-- Las columnas de cada medio de pago se ajustan automáticamente -->
-                    <div class="col-12 col-md-6 mt-2" *ngFor="let item of dataPagos">
-                        <span class="d-block">{{ item.paymentType }}</span>
-                        <span class="gray-color d-inline-block position-relative fw-semibold">
-                            {{ item?.totalAmount | currency : "COP" : "symbol" : "1.0-0" }}
-                        </span>
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
+        <app-card-tipo-checkout />
     </div>
 </div> <br>
 
 <!-- Nuevo diseño con menú lateral -->
 <div class="row justify-content-center">
     <!-- Menú lateral -->
-    <!-- Nuevo diseño con menú lateral -->
-<div class="col-lg-2 col-md-3 sidebar">
-    <mat-card class="mb-25 tagus-card">
-        <mat-card-header>
-            <h5 class="mb-0">Flujo de Caja</h5>
-        </mat-card-header>
-        <mat-card-content>
-            <ul class="menu-list p-0"> <!-- Usamos una clase para el ul -->
-                <li>
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        class="btn-sm w-100 d-block"
-                        (click)="openModalPrefactura('300ms', '100ms')"
-                    >
-                        Caja    
-                    </button>
-                </li>
-                <li>
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        class="btn-sm w-100 d-block"
-                        (click)="openModalEgresos('300ms', '100ms')"
-                    >
-                        Egresos
-                    </button>
-                </li>
-                <li>
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        class="btn-sm w-100 d-block"
-                        (click)="navigateToSection('section3')"
-                    >
-                        Anticipos
-                    </button>
-                </li>
-                <li>
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        class="btn-sm w-100 d-block"
-                        (click)="openModalEgresos('300ms', '100ms')"
-                    >
-                        Cerrar Caja
-                    </button>
-                </li>
-            </ul>
-        </mat-card-content>
-    </mat-card>
-</div>
-    
+    <div class="col-lg-2 col-md-3 sidebar">
+        <app-menu-checkout />
+        <!-- <mat-card class="mb-25 tagus-card">
+            <mat-card-header>
+                <h5 class="mb-0">Flujo de Caja</h5>
+            </mat-card-header>
+            <mat-card-content>
+                <ul class="menu-list p-0">
+                    <li>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="btn-sm w-100 d-block"
+                            (click)="openModalPrefactura('300ms', '100ms')"
+                        >
+                            Caja    
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="btn-sm w-100 d-block"
+                            (click)="openModalEgresos('300ms', '100ms')"
+                        >
+                            Egresos
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="btn-sm w-100 d-block"
+                            (click)="navigateToSection('section3')"
+                        >
+                            Anticipos
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="btn-sm w-100 d-block"
+                            (click)="openModalEgresos('300ms', '100ms')"
+                        >
+                            Cerrar Caja
+                        </button>
+                    </li>
+                </ul>
+            </mat-card-content>
+        </mat-card> -->
+    </div>   
 
-    <!-- Tabla de Ordenes -->
+    <!-- DIV para Mostrar componentes Dinamicos -->
     <div class="col-lg-10 col-md-9 col-sm-12">
         <mat-card class="mb-25 tagus-card">
             <mat-card-header>
