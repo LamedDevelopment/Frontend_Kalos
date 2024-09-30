@@ -139,4 +139,11 @@ export class CheckoutComponent implements OnInit {
             });
         }, 1000);
     }
+
+    navigateToSection(section: string): void {
+        const element = document.getElementById(section);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
 }
