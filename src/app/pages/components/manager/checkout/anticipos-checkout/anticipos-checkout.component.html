@@ -1,1 +1,124 @@
-<p>anticipos-checkout works!</p>
+<div class="row">
+    <!-- CARD TOTAL DE VENTAS -->
+    <div class="col-lg-4 col-md-4">
+        <app-card-total-checkout />
+    </div> 
+    <!-- Card de Tipos de Pago para mostrar sus respectivos Valores -->
+    <div class="col-lg-8 col-md-12">
+        <app-card-tipo-checkout />
+    </div>
+</div> <br>
+
+<!-- Nuevo diseño con menú lateral -->
+<div class="row justify-content-center">
+    <!-- Menú lateral -->
+    <div class="col-lg-2 col-md-3 sidebar">
+        <app-menu-checkout />
+        <!-- <mat-card class="mb-25 tagus-card">
+            <mat-card-header>
+                <h5 class="mb-0">Flujo de Caja</h5>
+            </mat-card-header>
+            <mat-card-content>
+                <ul class="menu-list p-0">
+                    <li>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="btn-sm w-100 d-block"
+                            (click)="openModalPrefactura('300ms', '100ms')"
+                        >
+                            Caja    
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="btn-sm w-100 d-block"
+                            (click)="openModalEgresos('300ms', '100ms')"
+                        >
+                            Egresos
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="btn-sm w-100 d-block"
+                            (click)="navigateToSection('section3')"
+                        >
+                            Anticipos
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="btn-sm w-100 d-block"
+                            (click)="openModalEgresos('300ms', '100ms')"
+                        >
+                            Cerrar Caja
+                        </button>
+                    </li>
+                </ul>
+            </mat-card-content>
+        </mat-card> -->
+    </div>   
+
+    <!-- DIV para Mostrar componentes Dinamicos -->
+    <div class="col-lg-10 col-md-9 col-sm-12">
+        <mat-card class="mb-25 tagus-card">
+            <mat-card-header>
+                <h5 class="mb-0">Anticipos</h5>
+            </mat-card-header>
+            <!-- <mat-card-content>
+                <div class="mat-elevation-z8 tagus-mat-table table-responsive">
+                    <table mat-table [dataSource]="dataSource" class="table">
+                        
+                        <ng-container matColumnDef="item">
+                            <th mat-header-cell *matHeaderCellDef class="text-start">Item</th>
+                            <td mat-cell *matCellDef="let element; let index = index" class="fw-semibold text-start">
+                                {{ index + 1 }}
+                            </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="servicio">
+                            <th mat-header-cell *matHeaderCellDef class="text-start">Servicio</th>
+                            <td mat-cell *matCellDef="let element" class="text-start">
+                                {{ element.services?.name }}
+                            </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="cliente">
+                            <th mat-header-cell *matHeaderCellDef>Cliente</th>
+                            <td mat-cell *matCellDef="let element">{{ element.services.client }}</td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="precio">
+                            <th mat-header-cell *matHeaderCellDef>Precio</th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.services.price | currency : "COP" : "symbol" : "1.0-0" }}
+                            </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="colaborador">
+                            <th mat-header-cell *matHeaderCellDef>Colaborador</th>
+                            <td mat-cell *matCellDef="let element">{{ element.services.collaborator }}</td>
+                        </ng-container>
+    
+                        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+    
+                    
+                    <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+                </div>
+            </mat-card-content> -->
+        </mat-card>
+    </div>
+    
+</div>
+
+
+
