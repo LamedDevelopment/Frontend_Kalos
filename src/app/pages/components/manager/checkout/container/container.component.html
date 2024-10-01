@@ -1,0 +1,17 @@
+<div class="row justify-content-center">
+  <!-- Menú lateral -->
+  <div class="col-md-3 sidebar">
+    <app-menu-checkout />
+  </div>
+
+  <div class="col-md-9 col-sm-12">
+    <mat-card class="mb-25 tagus-card">
+      <mat-card-header>
+        <h5 class="mb-0">{{ titulo }}</h5>
+      </mat-card-header>
+      <mat-card-content>
+        <ng-content></ng-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

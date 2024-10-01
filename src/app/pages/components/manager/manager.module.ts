@@ -103,6 +103,8 @@ import { BalanceCheckoutComponent } from './checkout/balance-checkout/balance-ch
 import { CierreCheckoutComponent } from './checkout/cierre-checkout/cierre-checkout.component';
 import { CardTipoCheckoutComponent } from './checkout/card-tipo-checkout/card-tipo-checkout.component';
 import { CardTotalCheckoutComponent } from './checkout/card-total-checkout/card-total-checkout.component';
+import { HeaderComponent } from './checkout/header/header.component';
+import { ContainerComponent } from './checkout/container/container.component';
 @NgModule({
     declarations: [
         AgendadayComponent,
@@ -153,6 +155,8 @@ import { CardTotalCheckoutComponent } from './checkout/card-total-checkout/card-
         CierreCheckoutComponent,
         CardTipoCheckoutComponent,
         CardTotalCheckoutComponent,
+        HeaderComponent,
+        ContainerComponent,
     ],
     imports: [
         CommonModule,
