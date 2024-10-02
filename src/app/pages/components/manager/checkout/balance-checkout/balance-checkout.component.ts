@@ -49,11 +49,11 @@ export class BalanceCheckoutComponent implements OnInit {
     const totalDia = 5950000; // Ingresos totales
     const totalEgresos = -80000; // Gastos totales (no incluye productos)
     const totalEgresosAnticipos = -100000; // Gastos totales (no incluye productos)
-    const totalComisiones = -2687250; // Comisiones generadas por los colaboradores en el dia
+    // const totalComisiones = -2687250; // Comisiones generadas por los colaboradores en el dia
     const valorSuministros = -225500; // Costos de suministros
     const totalProductosVendidos = 350000; // Valor pagado por los clientes por los productos
     const costoProductos = -250000; // Costo de los productos vendidos
-    const balanceNeto = totalDia + totalEgresos + valorSuministros + costoProductos + totalComisiones + costoProductos + totalEgresosAnticipos ; // Ingresos menos egresos
+    const balanceNeto = totalDia + totalEgresos + valorSuministros + totalEgresosAnticipos ; // Ingresos menos egresos
     // const activosCorrientes = 3000000;
     // const pasivosCorrientes = 1000000;
     // const pagosDeuda = 500000;
@@ -64,7 +64,7 @@ export class BalanceCheckoutComponent implements OnInit {
     this.balanceData = [
       { name: 'Ingresos Totales', value: totalDia || 0 },
       { name: 'Egresos Totales', value: totalEgresos || 0 },
-      { name: 'Comisiones del día', value: totalComisiones || 0 },
+      // { name: 'Comisiones del día', value: | 0 },
       { name: 'Valor Total Suministros', value: valorSuministros || 0 },
       { 
         name: 'Total Productos Vendidos', 
@@ -75,13 +75,13 @@ export class BalanceCheckoutComponent implements OnInit {
         ] 
       },
       { name: 'Balance Neto', value: balanceNeto },
-      { name: 'Margen de Ganancia Bruta (%)', value: ((totalDia + (totalEgresos + valorSuministros + costoProductos + totalComisiones + costoProductos + totalEgresosAnticipos)) / totalDia) * 100 || 0 },
+      { name: 'Margen de Ganancia Bruta (%)', value: ((totalDia + (totalEgresos + valorSuministros +  totalEgresosAnticipos)) / totalDia) * 100 || 0 },
       { name: 'Rentabilidad Neta (%)', value: (balanceNeto / totalDia) * 100 || 0 },
       { name: 'Cuentas por Cobrar Prestamos', value: totalEgresosAnticipos || 0 },
       // { name: 'Ratio de Liquidez', value: activosCorrientes / pasivosCorrientes || 0 },
       // { name: 'Capacidad de Pago de Deuda (%)', value: (pagosDeuda / totalDia) * 100 || 0 },
       // { name: 'Endeudamiento (%)', value: (totalDeudas / totalActivos) * 100 || 0 },
-      { name: 'Saldo en Caja', value: totalDia + (totalEgresos +valorSuministros + costoProductos + totalComisiones + costoProductos + totalEgresosAnticipos) || 0 },
+      { name: 'Saldo en Caja', value: totalDia + (totalEgresos + valorSuministros + totalEgresosAnticipos) || 0 },
     ];
   }
   
