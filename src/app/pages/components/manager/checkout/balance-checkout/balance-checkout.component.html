@@ -4,29 +4,37 @@
   <table class="balance-table">
     <tbody>
       <!-- Fila principal para cada ítem -->
-      <tr *ngFor="let item of balanceData">
-        <td class="balance-item-name">{{ item.name }}</td>
-        <td class="balance-item-value" [ngClass]="getBalanceClass(item.value)">
-          {{ item.value | currency:'COP':'symbol':'1.0-0' }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Tabla para los hijos al final -->
-  <table class="sub-balance-table">
-    <tbody>
       <ng-container *ngFor="let item of balanceData">
+        <tr [ngClass]="{'bold-row': item.name === 'UTILIDAD'}" [ngClass]="{'bold-row': item.name === 'Total Productos Vendidos'}">
+          <td class="balance-item-name">
+            <span [ngClass]="{'bold-text': item.name === 'UTILIDAD'}">{{ item.name }}</span>
+          </td>
+          <td class="balance-item-value" 
+            [ngClass]="getBalanceClass(item.value)">
+            {{ formatValue(item) }}
+          </td>
+        </tr>
+
+        <!-- Si hay hijos, los mostramos con indentación -->
         <ng-container *ngIf="item.children && item.children.length > 0">
           <tr *ngFor="let child of item.children">
-            <td class="balance-item-name" style="padding-left: 20px;">{{ child.name }}</td>
-            <td class="balance-item-value" [ngClass]="getBalanceClass(child.value)">
-              {{ child.value | currency:'COP':'symbol':'1.0-0' }}
+            <td class="balance-item-name small-text" style="padding-left: 20px;">
+              {{ child.name }}
+            </td>
+            <td class="balance-item-value small-text" [ngClass]="getBalanceClass(child.value)">
+              {{ formatValue(child) }}
             </td>
           </tr>
         </ng-container>
+
+        <!-- Fila para las líneas dobles -->
+        <tr *ngIf="item.name === 'UTILIDAD'">
+          <td colspan="2" class="double-line"></td> <!-- Dibuja la primera línea simple -->
+        </tr>
+        <!-- <tr *ngIf="item.name === 'UTILIDAD'">
+          <td colspan="2" class="double-line-bottom"></td>
+        </tr> -->
       </ng-container>
     </tbody>
   </table>
 </app-container>
-

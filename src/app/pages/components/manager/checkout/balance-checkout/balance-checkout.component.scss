@@ -75,4 +75,31 @@
       border-bottom: 1px solid #e0e0e0;
     }
   }
+
+  .bold-text {
+    font-weight: bold;
+  }
+
+  .small-text {
+    font-size: 0.9em; /* Cambia el tamaño de la fuente a un 90% del tamaño normal */
+  }
+
+  .bold-row {
+    font-weight: bold; /* Para que toda la fila de UTILIDAD esté en negrita */
+  }
+  
+  .double-line, .double-line-bottom {
+    border-top: 2px solid black; /* Dibuja una línea simple */
+    height: 0; /* Altura cero para que la fila no ocupe espacio adicional */
+  }
+  
+  .double-line {
+    margin-bottom: -1px; /* Reducir el espacio entre las líneas */
+  }
+  
+  .double-line-bottom {
+    margin-top: -2px; /* Reducir el espacio entre las líneas */
+  }
+  
+  
   
