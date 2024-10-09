@@ -166,7 +166,7 @@ export class BalanceCheckoutComponent implements OnInit {
                 "tradename": dataUser?.branchOffices[0]?.tradeName
             },
             // TODO Validar con backend y e.p
-            "dateSupply": fecha
+            "dateCommissions": fecha
         }
         this.managerService.getComisiones(body).subscribe(
             (response) => {
