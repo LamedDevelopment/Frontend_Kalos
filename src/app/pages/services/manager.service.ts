@@ -193,8 +193,9 @@ export class ManagerService {
             })
         );
     }
+
     getEgresos(body: any): Observable<any> {
-        return this._apiServiceHttp.post('outf/viewoutflow', body).pipe(
+        return this._apiServiceHttp.post('outf/viewoutflowtot', body).pipe(
             map((response: any) => {
                 return response;
             })
@@ -279,4 +280,24 @@ export class ManagerService {
             })
         );
     }
+
+    getSuministros(body: any): Observable<any> {
+        return this._apiServiceHttp.post('dash/ttlsupply', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    // TODO Cambiar e.p de comisiones
+
+    getComisiones(body: any): Observable<any> {
+        return this._apiServiceHttp.post('dash/ttlsupply', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+
 }
