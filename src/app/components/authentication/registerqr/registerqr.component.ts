@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { AuthService } from "src/app/pages/services/auth/auth.service";
+import { AuthGoogleService } from "src/app/shared/services/auth-google.service.service";
 import { CustomizerSettingsService } from "src/app/shared/services/customizer-settings.service";
 import Swal from "sweetalert2";
 
@@ -36,7 +37,8 @@ export class RegisterqrComponent {
     private _formBuilder: FormBuilder,
     private _router: Router,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private authGoogleService: AuthGoogleService
   ) {}
 
   /**
@@ -49,16 +51,21 @@ export class RegisterqrComponent {
       lastName: ["", Validators.required],
       movil: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      pass: ["", Validators.required],
-      confirmPassword: ["", Validators.required],
+      document: ["", Validators.required],
       terms: [false, Validators.requiredTrue],
     });
 
     this.route.queryParams.subscribe((params) => {
       // 'd' es el nombre del parámetro en tu URL
-      this.dataqr = params["d"];
-      console.log("log registerqr", this.dataqr);
+      if(params["d"]){
+          this.dataqr = params["d"];
+          localStorage.setItem('qr', this.dataqr);
+          console.log("log registerqr", this.dataqr);
+      }
     });
+    setTimeout(() => {
+        this.showData();
+    }, 500);
   }
 
   /**
@@ -82,13 +89,12 @@ export class RegisterqrComponent {
     body.movil = body.movil.toString();
     body.terms = body.terms.toString();
     delete body.emailConfirm;
-    delete body.confirmPassword;
     const data = {
       name: body.name,
       lastName: body.lastName,
       movil: body.movil.toString(),
       email: body.email,
-      pass: body.pass,
+      document: body.document,
       terms: body.terms.toString(),
     };
     // Sign up
@@ -220,5 +226,29 @@ export class RegisterqrComponent {
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.signUpForm.get("email")?.setValue(input.value.toLowerCase());
+  }
+
+  showData() {
+    const data = this.authGoogleService.getProfile();
+    console.log(data)
+    if(data){
+        this.signUpForm.controls['name'].setValue(data['given_name']);
+        this.signUpForm.controls['lastName'].setValue(data['family_name']);
+        this.signUpForm.controls['email'].setValue(data['email']);
+        this.signUpForm.controls['name'].setValue(data['given_name']);
+        this.signUpForm.controls['name'].setValue(data['given_name']);
+
+        this.dataqr = localStorage.getItem('qr') ?? '';
+        console.log(this.dataqr);
+    }
+  }
+
+  loginOauth() {
+        console.log('entro a Oauth')
+        this.authGoogleService.login();
+    }
+
+  logOut() {
+    this.authGoogleService.logout();
   }
 }

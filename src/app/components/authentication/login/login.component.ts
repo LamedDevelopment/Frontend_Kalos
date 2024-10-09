@@ -1,10 +1,11 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/pages/services/auth/auth.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { CreateUserDialogBox } from 'src/app/shared/componentsShared/modal-dialog/modal-dialog.component';
+import { AuthGoogleService } from 'src/app/shared/services/auth-google.service.service';
+import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class LoginComponent {
         private _formBuilder: FormBuilder,
         private _router: Router,
         public dialog: MatDialog,
+        private authGoogleService: AuthGoogleService
     ) {}
 
     /**
@@ -102,6 +104,12 @@ export class LoginComponent {
                 this.showAlert = true;
             },
         );
+    }
+
+
+    loginOauth() {
+        console.log('entro a Oauth')
+        this.authGoogleService.login();
     }
 
     toggleTheme() {

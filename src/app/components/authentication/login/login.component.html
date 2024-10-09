@@ -16,13 +16,14 @@
                     <p>Crear Cuenta <a routerLink="/auth/register" class="main-color fw-medium">Registrarse</a></p>
                 </div>
                 <form [formGroup]="signInForm" #signInNgForm="ngForm">
-                    <!-- <div class="login-with-socials d-md-flex align-items-center justify-content-space-between">
-                        <button mat-flat-button class="gray fw-semibold d-block me-5"><img src="assets/img/icon/google.png" alt="google"> Ingreso con Google</button>
-                        <button mat-flat-button class="tagus fw-semibold d-block ms-5"><img src="assets/img/icon/facebook.png" alt="facebook"> Ingreso con Facebook</button>
+                    <div class="login-with-socials d-md-flex align-items-center justify-content-space-between">
+                        <button mat-flat-button class="gray fw-semibold d-block me-5" (click)="loginOauth()"><img src="assets/img/icon/google.png" alt="google"> Ingreso con Google</button>
+                        <!-- <button mat-flat-button class="tagus fw-semibold d-block ms-5"><img src="assets/img/icon/facebook.png" alt="facebook"> Ingreso con Facebook</button>-->
                     </div>
+
                     <div class="or text-center position-relative">
                         <span class="fw-semibold fs-16">or</span>
-                    </div> -->
+                    </div>
                     <div class="bg-white border-radius pt-20 ps-20 pe-20">
                         <div class="tagus-form-group without-icon">
                             <label class="d-block mb-12 fw-semibold gray-color">Correo Electrónico <span>*</span></label>
@@ -36,7 +37,7 @@
                                     Correo inválido
                                 </mat-error>
                             </mat-form-field>
-                        </div>                        
+                        </div>
                         <div class="tagus-form-group without-icon">
                             <label class="d-block mb-12 fw-semibold gray-color">Contraseña <span>*</span></label>
                             <mat-form-field appearance="fill">
