@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/pages/services/auth/auth.service';
 import { CreateUserDialogBox } from 'src/app/shared/componentsShared/modal-dialog/modal-dialog.component';
-import { AuthGoogleService } from 'src/app/shared/services/auth-google.service.service';
+import { AuthLoginGoogleService } from 'src/app/shared/services/auth-login-google.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
 
@@ -29,7 +29,7 @@ export class LoginComponent {
         private _formBuilder: FormBuilder,
         private _router: Router,
         public dialog: MatDialog,
-        private authGoogleService: AuthGoogleService
+        private authLoginGoogleService: AuthLoginGoogleService
     ) {}
 
     /**
@@ -109,7 +109,7 @@ export class LoginComponent {
 
     loginOauth() {
         console.log('entro a Oauth')
-        this.authGoogleService.login();
+        this.authLoginGoogleService.login();
     }
 
     toggleTheme() {
