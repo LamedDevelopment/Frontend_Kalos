@@ -1,10 +1,11 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/pages/services/auth/auth.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 import { CreateUserDialogBox } from 'src/app/shared/componentsShared/modal-dialog/modal-dialog.component';
+import { AuthLoginGoogleService } from 'src/app/shared/services/auth-login-google.service';
+import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class LoginComponent {
         private _formBuilder: FormBuilder,
         private _router: Router,
         public dialog: MatDialog,
+        private authLoginGoogleService: AuthLoginGoogleService
     ) {}
 
     /**
@@ -41,6 +43,10 @@ export class LoginComponent {
             pass: ['', Validators.required],
             rememberMe: [false],
         });
+        setTimeout(() => {
+            this.showData();
+        }, 900);
+
     }
 
     openCreateUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
@@ -67,7 +73,13 @@ export class LoginComponent {
         this.showAlert = false;
 
         // Sign in
-        this._authService.signIn(this.signInForm.value).subscribe(
+        this.postLogin(this.signInForm.value);
+
+    }
+
+    postLogin(value: any) {
+        // Sign in
+        this._authService.signIn(value).subscribe(
             async (res) => {
                 if(res.ok){
                     const redirectURL =
@@ -102,6 +114,24 @@ export class LoginComponent {
                 this.showAlert = true;
             },
         );
+    }
+
+    showData() {
+        // const data = this.authLoginGoogleService.getProfile();
+        const data = sessionStorage.getItem('id_token');
+        if(data){
+            const body = this.signInForm.getRawValue();
+            body.googleToken = data;
+            console.log(body);
+            this.postLogin(body);
+
+        }
+    }
+
+
+    loginOauth() {
+        console.log('entro a Oauth')
+        this.authLoginGoogleService.login();
     }
 
     toggleTheme() {
