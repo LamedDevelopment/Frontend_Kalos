@@ -51,7 +51,8 @@ export class RegisterqrComponent {
       lastName: ["", Validators.required],
       movil: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      document: ["", Validators.required],
+      document: [""],
+      img: [""],
       terms: [false, Validators.requiredTrue],
     });
 
@@ -95,6 +96,8 @@ export class RegisterqrComponent {
       movil: body.movil.toString(),
       email: body.email,
       document: body.document,
+      img: body.img,
+      loginType: 'Google',
       terms: body.terms.toString(),
     };
     // Sign up
@@ -110,7 +113,7 @@ export class RegisterqrComponent {
             duration: this.durationInSeconds * 1000,
           });
           setTimeout(() => {
-            this._router.navigateByUrl("/auth/login");
+            this._router.navigateByUrl("/usr/login");
           }, 3000);
         }
       },
@@ -236,8 +239,7 @@ export class RegisterqrComponent {
         this.signUpForm.controls['lastName'].setValue(data['family_name']);
         this.signUpForm.controls['email'].setValue(data['email']);
         this.signUpForm.controls['name'].setValue(data['given_name']);
-        this.signUpForm.controls['name'].setValue(data['given_name']);
-
+        this.signUpForm.controls['img'].setValue(data['picture']);
         this.dataqr = localStorage.getItem('qr') ?? '';
         console.log(this.dataqr);
     }
