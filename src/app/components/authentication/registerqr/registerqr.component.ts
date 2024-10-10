@@ -113,7 +113,8 @@ export class RegisterqrComponent {
             duration: this.durationInSeconds * 1000,
           });
           setTimeout(() => {
-            this._router.navigateByUrl("/usr/login");
+            sessionStorage.clear();
+            this._router.navigateByUrl("/");
           }, 3000);
         }
       },

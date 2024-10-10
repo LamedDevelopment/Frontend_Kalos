@@ -43,6 +43,10 @@ export class LoginComponent {
             pass: ['', Validators.required],
             rememberMe: [false],
         });
+        setTimeout(() => {
+            this.showData();
+        }, 900);
+
     }
 
     openCreateUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
@@ -69,7 +73,13 @@ export class LoginComponent {
         this.showAlert = false;
 
         // Sign in
-        this._authService.signIn(this.signInForm.value).subscribe(
+        this.postLogin(this.signInForm.value);
+
+    }
+
+    postLogin(value: any) {
+        // Sign in
+        this._authService.signIn(value).subscribe(
             async (res) => {
                 if(res.ok){
                     const redirectURL =
@@ -104,6 +114,18 @@ export class LoginComponent {
                 this.showAlert = true;
             },
         );
+    }
+
+    showData() {
+        // const data = this.authLoginGoogleService.getProfile();
+        const data = sessionStorage.getItem('id_token');
+        if(data){
+            const body = this.signInForm.getRawValue();
+            body.googleToken = data;
+            console.log(body);
+            this.postLogin(body);
+
+        }
     }
 
 
