@@ -15,8 +15,8 @@ export class AuthLoginGoogleService {
     const config: AuthConfig = {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
-      clientId: environment.clientIdLogin,
-      redirectUri: 'http://localhost:4200/auth/login',
+      clientId: environment.clientIdQr,
+      redirectUri: `${environment.urlFront}auth/login`,
       scope: 'openid profile email',
     }
 

@@ -16,7 +16,7 @@ export class AuthGoogleService {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
       clientId: environment.clientIdQr,
-      redirectUri: 'http://localhost:4200/usr/qr',
+      redirectUri: `${environment.urlFront}usr/qr`,
       scope: 'openid profile email',
     }
 

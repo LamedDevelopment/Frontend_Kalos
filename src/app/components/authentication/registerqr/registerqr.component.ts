@@ -113,9 +113,8 @@ export class RegisterqrComponent {
             duration: this.durationInSeconds * 1000,
           });
           setTimeout(() => {
-            sessionStorage.clear();
             this._router.navigateByUrl("/");
-          }, 3000);
+          }, 2000);
         }
       },
       (error) => {
