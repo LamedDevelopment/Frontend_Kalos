@@ -262,11 +262,12 @@
                     [matMenuTriggerFor]="profileMenu"
                     class="profile-btn main-color border-none bg-transparent position-relative"
                 >
-                    <img
-                        [src]="tokenUser"
-                        class="rounded-circle"
-                        alt="admin"
-                    />
+                <img
+                    [src]="userImage ? userImage : 'assets/img/icon/kalos_general.png'"
+                    class="rounded-circle"
+                    alt="admin"
+                />
+
 
                     <span class="fw-semibold"
                         >{{ user?.name ? user?.name : user?.staff?.name }}

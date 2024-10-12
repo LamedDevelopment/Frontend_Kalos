@@ -17,6 +17,7 @@ import { ToggleService } from '../../services/toggle.service';
 export class HeaderComponent {
     isSticky: boolean = false;
     user: any;
+    userImage: string = 'assets/img/icon/kalos_general.png';  // Imagen por defecto
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     tokenUser: any;
     @HostListener('window:scroll', ['$event'])
@@ -51,13 +52,19 @@ export class HeaderComponent {
     }
     ngOnInit(): void {
         this._userToken.InfoUserApi().subscribe((data:any) => {
-            this.tokenUser = data.msg.staff.img;
+            this.tokenUser = data.msg.staff.img || this.userImage;
         });
         this.authService.InfoUserApi().subscribe((data: any) => {});
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((user: any) => {
                 this.user = user.user ? user.user : user;
+                // Si el usuario tiene una imagen específica, se actualiza la variable `userImage`
+                console.log('Datos del Usuario: ', this.user.img)
+                console.log('Datos del Usuario Default: ', this.userImage)
+                if (this.user?.img) {
+                    this.tokenUser = this.user.img || this.userImage;
+                }
             });
     }
 
