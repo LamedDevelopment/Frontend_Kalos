@@ -17,7 +17,7 @@ import { ToggleService } from '../../services/toggle.service';
 export class HeaderComponent {
     isSticky: boolean = false;
     user: any;
-    userImage: string = 'assets/img/icon/kalos_general.png';  // Imagen por defecto
+    userImage: string = 'https://bellezaap.com/busdocu/802127585/img_avatars/kalos_general.png';  // Imagen por defecto
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     tokenUser: any;
     @HostListener('window:scroll', ['$event'])
@@ -52,6 +52,7 @@ export class HeaderComponent {
     }
     ngOnInit(): void {
         this._userToken.InfoUserApi().subscribe((data:any) => {
+            console.log('Datos de Imagen: ', data.msg.staff.img);
             this.tokenUser = data.msg.staff.img || this.userImage;
         });
         this.authService.InfoUserApi().subscribe((data: any) => {});
