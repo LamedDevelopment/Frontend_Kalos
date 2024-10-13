@@ -52,8 +52,9 @@ export class HeaderComponent {
     }
     ngOnInit(): void {
         this._userToken.InfoUserApi().subscribe((data:any) => {
-            console.log('Datos de Imagen: ', data.msg.staff.img);
             this.tokenUser = data.msg.staff.img || this.userImage;
+            console.log('tokenUser: ', this.tokenUser);
+            console.log('userImage: ', this.userImage);
         });
         this.authService.InfoUserApi().subscribe((data: any) => {});
         this._userService.user$
