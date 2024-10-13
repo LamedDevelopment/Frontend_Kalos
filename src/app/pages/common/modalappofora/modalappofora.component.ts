@@ -104,6 +104,7 @@ export class ModalappoforaComponent {
 
     /** Evento que obtiene el colaborador seleccionado */
     collaSelected(event: any) {
+        // TODO Agregar la Imagen del Colabroador GERSON SAENZ
         this.startServiceform.patchValue({
             staff: event.valor.branchoffices.collaborators.user,
         });
