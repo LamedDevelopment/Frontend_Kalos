@@ -1,0 +1,23 @@
+<mat-card class="mb-25 tagus-card">
+    <mat-card-content>
+        <div class="d-flex align-items-center">
+            <div class="icon me-12 text-center rounded-circle">
+                <i class="ri-money-dollar-circle-line"></i>
+            </div>
+            <h5 class="mb-0">Total Ventas</h5>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <ul class="list ps-0 d-flex align-items-center justify-content-space-between mb-0">
+                    <li class="muted-color fw-medium">
+                        <span class="d-block">Total de Servicios</span>
+                        <span class="gray-color d-inline-block position-relative fw-semibold">
+                            {{ totalVentas?.totalSales | currency: "COP": "symbol": "1.0-0" }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

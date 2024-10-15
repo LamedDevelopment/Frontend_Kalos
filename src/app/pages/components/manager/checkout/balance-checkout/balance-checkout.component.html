@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<app-container [titulo]="'Balance de Caja Diario'">
+  <table class="balance-table">
+    <tbody>
+      <!-- Fila principal para cada ítem -->
+      <ng-container *ngFor="let item of balanceData">
+        <tr [ngClass]="{'bold-row': item.name === 'UTILIDAD'}" [ngClass]="{'bold-row': item.name === 'Total Productos Vendidos'}">
+          <td class="balance-item-name">
+            <span [ngClass]="{'bold-text': item.name === 'UTILIDAD'}">{{ item.name }}</span>
+          </td>
+          <td class="balance-item-value" 
+            [ngClass]="getBalanceClass(item.value)">
+            {{ formatValue(item) }}
+          </td>
+        </tr>
+
+        <!-- Si hay hijos, los mostramos con indentación -->
+        <ng-container *ngIf="item.children && item.children.length > 0">
+          <tr *ngFor="let child of item.children">
+            <td class="balance-item-name small-text" style="padding-left: 20px;">
+              {{ child.name }}
+            </td>
+            <td class="balance-item-value small-text" [ngClass]="getBalanceClass(child.value)">
+              {{ formatValue(child) }}
+            </td>
+          </tr>
+        </ng-container>
+
+        <!-- Fila para las líneas dobles -->
+        <tr *ngIf="item.name === 'UTILIDAD'">
+          <td colspan="2" class="double-line"></td> <!-- Dibuja la primera línea simple -->
+        </tr>
+        <!-- <tr *ngIf="item.name === 'UTILIDAD'">
+          <td colspan="2" class="double-line-bottom"></td>
+        </tr> -->
+      </ng-container>
+    </tbody>
+  </table>
+</app-container>

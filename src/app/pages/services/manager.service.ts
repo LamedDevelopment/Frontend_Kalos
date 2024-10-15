@@ -7,7 +7,7 @@ import { ApiServiceHttp } from './api.service';
     providedIn: 'root',
 })
 export class ManagerService {
-    constructor(private _apiServiceHttp: ApiServiceHttp) {}
+    constructor(private _apiServiceHttp: ApiServiceHttp) { }
 
     getBusiness(): Observable<any> {
         return this._apiServiceHttp.get('bus/manbus').pipe(
@@ -188,6 +188,28 @@ export class ManagerService {
 
     createEgreso(body: any): Observable<any> {
         return this._apiServiceHttp.post('outf/outflow', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+    getEgresos(body: any): Observable<any> {
+        return this._apiServiceHttp.post('outf/viewoutflow', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+
+    getAnticipos(body: any): Observable<any> {
+        return this._apiServiceHttp.post('apu/advpay', body).pipe(
+            map((response: any) => {
+                return response;
+            })
+        );
+    }
+    getBalance(body: any): Observable<any> {
+        return this._apiServiceHttp.post('dash/ttlsls', body).pipe(
             map((response: any) => {
                 return response;
             })

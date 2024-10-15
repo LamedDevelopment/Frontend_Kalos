@@ -95,6 +95,16 @@ import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component
 import { ChecksloansComponent } from './wallet/components/checksloans/checksloans.component';
 import { ModalliquidacionComponent } from './wallet/modals/modalliquidacion/modalliquidacion.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { MenuCheckoutComponent } from './checkout/menu-checkout/menu-checkout.component';
+import { CajaCheckoutComponent } from './checkout/caja-checkout/caja-checkout.component';
+import { EgresoCheckoutComponent } from './checkout/egreso-checkout/egreso-checkout.component';
+import { AnticiposCheckoutComponent } from './checkout/anticipos-checkout/anticipos-checkout.component';
+import { BalanceCheckoutComponent } from './checkout/balance-checkout/balance-checkout.component';
+import { CierreCheckoutComponent } from './checkout/cierre-checkout/cierre-checkout.component';
+import { CardTipoCheckoutComponent } from './checkout/card-tipo-checkout/card-tipo-checkout.component';
+import { CardTotalCheckoutComponent } from './checkout/card-total-checkout/card-total-checkout.component';
+import { HeaderComponent } from './checkout/header/header.component';
+import { ContainerComponent } from './checkout/container/container.component';
 @NgModule({
     declarations: [
         AgendadayComponent,
@@ -137,6 +147,16 @@ import { WalletComponent } from './wallet/wallet.component';
         configModalComponent,
         SeesupliesComponent,
         ModalSuppliesComponent,
+        MenuCheckoutComponent,
+        CajaCheckoutComponent,
+        EgresoCheckoutComponent,
+        AnticiposCheckoutComponent,
+        BalanceCheckoutComponent,
+        CierreCheckoutComponent,
+        CardTipoCheckoutComponent,
+        CardTotalCheckoutComponent,
+        HeaderComponent,
+        ContainerComponent,
     ],
     imports: [
         CommonModule,

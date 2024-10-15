@@ -30,6 +30,10 @@ import { TicketComponent } from './ticket/ticket.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ViewAllCollaComponent } from './view-all-colla/view-all-colla.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { EgresoCheckoutComponent } from './checkout/egreso-checkout/egreso-checkout.component';
+import { BalanceCheckoutComponent } from './checkout/balance-checkout/balance-checkout.component';
+import { AnticiposCheckoutComponent } from './checkout/anticipos-checkout/anticipos-checkout.component';
+import { CierreCheckoutComponent } from './checkout/cierre-checkout/cierre-checkout.component';
 
 const routes: Routes = [
     {
@@ -126,6 +130,26 @@ const routes: Routes = [
             {
                 path: 'checkout',
                 component: CheckoutComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'checkout/egr',
+                component: EgresoCheckoutComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'checkout/bal',
+                component: BalanceCheckoutComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'checkout/ant',
+                component: AnticiposCheckoutComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'checkout/cier',
+                component: CierreCheckoutComponent,
                 canActivate: [AuthGuard],
             },
             {

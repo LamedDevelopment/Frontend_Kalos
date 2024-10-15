@@ -1,0 +1,22 @@
+.sidebar .list-group-item {
+    padding: 0.5rem; /* Espaciado entre elementos */
+}
+
+.sidebar .btn-sm {
+    margin: 5px 0; /* Espaciado vertical entre botones */
+}
+
+.menu-list {
+    list-style-type: none;      /* Elimina las viñetas de la lista */
+    padding: 0;                 /* Quita el padding del <ul> */
+    margin: 0;                  /* Quita el margen del <ul> */
+}
+
+.menu-list li {
+    margin-bottom: 10px;        /* Añade un pequeño margen entre los botones */
+}
+
+.menu-list li button {
+    border: none;               /* Elimina cualquier borde del botón */
+    box-shadow: none;           /* Elimina la sombra por defecto de Material */
+}

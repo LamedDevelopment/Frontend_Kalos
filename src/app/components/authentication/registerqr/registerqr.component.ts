@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { AuthService } from "src/app/pages/services/auth/auth.service";
+import { AuthGoogleService } from "src/app/shared/services/auth-google.service.service";
 import { CustomizerSettingsService } from "src/app/shared/services/customizer-settings.service";
 import Swal from "sweetalert2";
 
@@ -25,6 +26,7 @@ export class RegisterqrComponent {
   validar: boolean = false;
   dataqr: string = "";
   progress3: number;
+  googleData: any = {};
 
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
@@ -36,7 +38,8 @@ export class RegisterqrComponent {
     private _formBuilder: FormBuilder,
     private _router: Router,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private authGoogleService: AuthGoogleService
   ) {}
 
   /**
@@ -49,16 +52,23 @@ export class RegisterqrComponent {
       lastName: ["", Validators.required],
       movil: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      pass: ["", Validators.required],
-      confirmPassword: ["", Validators.required],
+      document: [""],
+      img: [""],
       terms: [false, Validators.requiredTrue],
     });
+    
 
     this.route.queryParams.subscribe((params) => {
       // 'd' es el nombre del parámetro en tu URL
-      this.dataqr = params["d"];
-      console.log("log registerqr", this.dataqr);
+      if(params["d"]){
+          this.dataqr = params["d"];
+          localStorage.setItem('qr', this.dataqr);
+          console.log("log registerqr", this.dataqr);
+      }
     });
+    setTimeout(() => {
+        this.showData();
+    }, 500);
   }
 
   /**
@@ -73,6 +83,8 @@ export class RegisterqrComponent {
       return;
     }
 
+    const googleData = this.authGoogleService.getProfile();
+
     // Disable the form
     this.signUpForm.disable();
 
@@ -82,13 +94,14 @@ export class RegisterqrComponent {
     body.movil = body.movil.toString();
     body.terms = body.terms.toString();
     delete body.emailConfirm;
-    delete body.confirmPassword;
     const data = {
-      name: body.name,
-      lastName: body.lastName,
+      name: googleData["given_name"],
+      lastName: googleData["family_name"],
       movil: body.movil.toString(),
-      email: body.email,
-      pass: body.pass,
+      email: googleData["email"],
+      document: body.document,
+      img: body.img,
+      loginType: 'Google',
       terms: body.terms.toString(),
     };
     // Sign up
@@ -104,8 +117,8 @@ export class RegisterqrComponent {
             duration: this.durationInSeconds * 1000,
           });
           setTimeout(() => {
-            this._router.navigateByUrl("/auth/login");
-          }, 3000);
+            this._router.navigateByUrl("/");
+          }, 2000);
         }
       },
       (error) => {
@@ -220,5 +233,46 @@ export class RegisterqrComponent {
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.signUpForm.get("email")?.setValue(input.value.toLowerCase());
+  }
+
+  showData() {
+    const data = this.authGoogleService.getProfile();
+    if (data) {
+      this.googleData = {
+        name: data["given_name"],
+        lastName: data["family_name"],
+        email: data["email"],
+        img: data["picture"],
+      };
+
+      this.signUpForm.controls["name"].setValue(this.googleData.name);
+      this.signUpForm.controls["lastName"].setValue(this.googleData.lastName);
+      this.signUpForm.controls["email"].setValue(this.googleData.email);
+      this.signUpForm.controls["img"].setValue(this.googleData.img);
+      this.dataqr = localStorage.getItem("qr") ?? "";
+    }
+  }
+
+  // showData() {
+  //   const data = this.authGoogleService.getProfile();
+  //   console.log(data)
+  //   if(data){
+  //       this.signUpForm.controls['name'].setValue(data['given_name']);
+  //       this.signUpForm.controls['lastName'].setValue(data['family_name']);
+  //       this.signUpForm.controls['email'].setValue(data['email']);
+  //       this.signUpForm.controls['name'].setValue(data['given_name']);
+  //       this.signUpForm.controls['img'].setValue(data['picture']);
+  //       this.dataqr = localStorage.getItem('qr') ?? '';
+  //       console.log(this.dataqr);
+  //   }
+  // }
+
+  loginOauth() {
+        console.log('entro a Oauth')
+        this.authGoogleService.login();
+    }
+
+  logOut() {
+    this.authGoogleService.logout();
   }
 }

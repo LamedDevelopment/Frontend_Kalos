@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1726850768261,
+  "timestamp": 1728993777178,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,14 +11,14 @@
         "ignoreVary": true
       },
       "urls": [
-        "/707.63b0c1846ef8aaac.js",
+        "/749.3b3a49336d964fb4.js",
         "/favicon.ico",
         "/index.html",
-        "/main.fe8dc13124939bb5.js",
+        "/main.36158b3bb784aa62.js",
         "/manifest.webmanifest",
-        "/polyfills.5863cf0503f1c646.js",
-        "/quill.701d03c22985ddfc.js",
-        "/runtime.30deb2d99af42726.js",
+        "/polyfills.af616319b33ef5f4.js",
+        "/quill.4ff4dd5baf857228.js",
+        "/runtime.603c61fe4556911e.js",
         "/scripts.b7765409369989ed.js",
         "/styles.df5b34dba03d0e69.css"
       ],
@@ -547,7 +547,7 @@
     }
   ],
   "hashTable": {
-    "/707.63b0c1846ef8aaac.js": "60a323b82aabdd9db85717ed0ca8c8c3b434bded",
+    "/749.3b3a49336d964fb4.js": "758964736a886e5340f6907bb8b9897689341e8e",
     "/assets/assets/.gitkeep": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "/assets/assets/fonts/backup.txt": "b8a8f41a60c506fa826f766685a73fa179d78b6d",
     "/assets/assets/fonts/flaticon_tagus.css": "0a7f36bdea4e04b6d2c197da20946be390adf685",
@@ -1019,17 +1019,17 @@
     "/flaticon_tagus.6c4d542299c7fef8.svg": "bbefa59266cc5dba7580d13935ce22508566b270",
     "/flaticon_tagus.e2b41719e51dd36d.woff2": "ea03eecff6a961bc57ad975593dc1518d2c2d5d7",
     "/flaticon_tagus.f7e8a42ad6fd5c19.woff": "f55edefb70f73b9bb2a2598819ad0a5f7e11ce7a",
-    "/index.html": "659ee6b4a54ac093b5eed4923ca942dc33601adc",
-    "/main.fe8dc13124939bb5.js": "111c49d7c3f91ed2e1a0aa233c99af8d4b780abc",
+    "/index.html": "a2016a01e58b77d38b99956aa0b9a075efb90ab3",
+    "/main.36158b3bb784aa62.js": "16b9671251423d26ef36a5aa17716ae9bed15be4",
     "/manifest.webmanifest": "9ac52b0e462d9f5d0720bbccbdd86489530f8b7e",
     "/owl.video.play.e3b436436832b027.png": "c0d64356ec2758cb280d183b4829c923e5ff61e5",
-    "/polyfills.5863cf0503f1c646.js": "881954c968f1c809289eebef64a6ba4887a658f6",
-    "/quill.701d03c22985ddfc.js": "c9cd42d93d5f363cb6d177a6fe096d391e695398",
+    "/polyfills.af616319b33ef5f4.js": "b4f34cbe19497c9ef58ee6a4f083d6682a1d6944",
+    "/quill.4ff4dd5baf857228.js": "06f30353cb163a0c188914fae1f8cd90b3f171ef",
     "/remixicon.26f18b51546b4b47.woff": "accfcb52d9e12d3b79c8953cb9b3c1987ab98e98",
     "/remixicon.5d6b0a1302bd3046.woff2": "bf5516dcc619f8458cf0c2087347e3182d9062cb",
     "/remixicon.7cc5770eb9c13d55.ttf": "c11e2709171f141e730e4e4b98dbc4d34ead5643",
     "/remixicon.e0a546f7dfeb1afa.svg": "2efd0e9251fadd9c13251408c4ae756822bf7400",
-    "/runtime.30deb2d99af42726.js": "53d138b3ef2a21f49f5cf1c7498b18b89800ad21",
+    "/runtime.603c61fe4556911e.js": "6032e8feeca041f2e79611990f2ccb52c7ec5b91",
     "/scripts.b7765409369989ed.js": "0e92fe7e8952fd92d3f32b4ee3c4a047b0a5ab75",
     "/styles.df5b34dba03d0e69.css": "a07c76200aeb2a32216f717fc257c37a17fd2eda"
   },

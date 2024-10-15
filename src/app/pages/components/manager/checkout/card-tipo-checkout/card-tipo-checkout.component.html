@@ -1,0 +1,20 @@
+<mat-card class="mb-25 tagus-card h-100"> <!-- Se asegura de ocupar todo el espacio -->
+    <mat-card-content>
+        <div class="d-flex align-items-center">
+            <div class="icon me-12 text-center rounded-circle">
+                <i class="ri-money-dollar-circle-line"></i>
+            </div>
+            <h5 class="mb-0">Medios de Pago</h5>
+        </div>
+
+        <div class="row mt-2">
+            <!-- Las columnas de cada medio de pago se ajustan automáticamente -->
+            <div class="col-12 col-md-6 mt-2" *ngFor="let item of dataPagos">
+                <span class="d-block">{{ item.paymentType }}</span>
+                <span class="gray-color d-inline-block position-relative fw-semibold">
+                    {{ item?.totalAmount | currency : "COP" : "symbol" : "1.0-0" }}
+                </span>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
