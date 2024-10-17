@@ -8,6 +8,5 @@ export const environment = {
     urlFront: "http://localhost:4200/",
 
     // url_api: 'http://localhost:3000/api/v1/',
-
 };
 

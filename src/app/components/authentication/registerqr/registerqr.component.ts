@@ -26,6 +26,7 @@ export class RegisterqrComponent {
   validar: boolean = false;
   dataqr: string = "";
   progress3: number;
+  googleData: any = {};
 
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
@@ -55,6 +56,7 @@ export class RegisterqrComponent {
       img: [""],
       terms: [false, Validators.requiredTrue],
     });
+    
 
     this.route.queryParams.subscribe((params) => {
       // 'd' es el nombre del parámetro en tu URL
@@ -81,6 +83,8 @@ export class RegisterqrComponent {
       return;
     }
 
+    const googleData = this.authGoogleService.getProfile();
+
     // Disable the form
     this.signUpForm.disable();
 
@@ -91,10 +95,10 @@ export class RegisterqrComponent {
     body.terms = body.terms.toString();
     delete body.emailConfirm;
     const data = {
-      name: body.name,
-      lastName: body.lastName,
+      name: googleData["given_name"],
+      lastName: googleData["family_name"],
       movil: body.movil.toString(),
-      email: body.email,
+      email: googleData["email"],
       document: body.document,
       img: body.img,
       loginType: 'Google',
@@ -233,17 +237,35 @@ export class RegisterqrComponent {
 
   showData() {
     const data = this.authGoogleService.getProfile();
-    console.log(data)
-    if(data){
-        this.signUpForm.controls['name'].setValue(data['given_name']);
-        this.signUpForm.controls['lastName'].setValue(data['family_name']);
-        this.signUpForm.controls['email'].setValue(data['email']);
-        this.signUpForm.controls['name'].setValue(data['given_name']);
-        this.signUpForm.controls['img'].setValue(data['picture']);
-        this.dataqr = localStorage.getItem('qr') ?? '';
-        console.log(this.dataqr);
+    if (data) {
+      this.googleData = {
+        name: data["given_name"],
+        lastName: data["family_name"],
+        email: data["email"],
+        img: data["picture"],
+      };
+
+      this.signUpForm.controls["name"].setValue(this.googleData.name);
+      this.signUpForm.controls["lastName"].setValue(this.googleData.lastName);
+      this.signUpForm.controls["email"].setValue(this.googleData.email);
+      this.signUpForm.controls["img"].setValue(this.googleData.img);
+      this.dataqr = localStorage.getItem("qr") ?? "";
     }
   }
+
+  // showData() {
+  //   const data = this.authGoogleService.getProfile();
+  //   console.log(data)
+  //   if(data){
+  //       this.signUpForm.controls['name'].setValue(data['given_name']);
+  //       this.signUpForm.controls['lastName'].setValue(data['family_name']);
+  //       this.signUpForm.controls['email'].setValue(data['email']);
+  //       this.signUpForm.controls['name'].setValue(data['given_name']);
+  //       this.signUpForm.controls['img'].setValue(data['picture']);
+  //       this.dataqr = localStorage.getItem('qr') ?? '';
+  //       console.log(this.dataqr);
+  //   }
+  // }
 
   loginOauth() {
         console.log('entro a Oauth')

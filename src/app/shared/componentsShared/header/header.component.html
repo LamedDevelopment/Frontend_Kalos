@@ -262,11 +262,8 @@
                     [matMenuTriggerFor]="profileMenu"
                     class="profile-btn main-color border-none bg-transparent position-relative"
                 >
-                    <img
-                        [src]="tokenUser"
-                        class="rounded-circle"
-                        alt="admin"
-                    />
+                <img [src]="tokenUser" class="rounded-circle" width="110" alt="user">
+
 
                     <span class="fw-semibold"
                         >{{ user?.name ? user?.name : user?.staff?.name }}

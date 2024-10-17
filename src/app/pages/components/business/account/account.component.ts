@@ -59,6 +59,7 @@ export class AccountComponentBis {
             });
         this._userToken.InfoUserApi().subscribe((data:any) => {
             this.tokenUser = data.msg.staff.img;
+            console.log(this.tokenUser)
         });
         // Create the form
         this.accountForm = this._formBuilder.group({
