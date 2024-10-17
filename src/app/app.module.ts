@@ -75,6 +75,7 @@ import { SidebarModule } from './shared/componentsShared/sidebar/sidebar.module'
 
 import { CustomizerSettingsModule } from './shared/componentsShared/customizer-settings/customizer-settings.module';
 
+import { SocialLoginModule } from '@abacritt/angularx-social-login';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -185,7 +186,8 @@ registerLocaleData(localeEs, 'es');
           // or after 30 seconds (whichever comes first).
           registrationStrategy: 'registerWhenStable:30000'
         }),
-        OAuthModule.forRoot()
+        OAuthModule.forRoot(),
+        SocialLoginModule,
     ],
     providers: [
         DatePipe,
@@ -201,6 +203,28 @@ registerLocaleData(localeEs, 'es');
             useValue: 'es',
         },
         /* { provide: LocationStrategy, useClass: HashLocationStrategy }, */
+        /* {
+          provide: 'SocialAuthServiceConfig',
+          useValue: {
+            autoLogin: false,
+            lang: 'es',
+            providers: [
+              {
+                id: GoogleLoginProvider.PROVIDER_ID,
+                provider: new GoogleLoginProvider(
+                  '171572853823-to9tfe6gosnlek0ervd7psc4v1s2udl0.apps.googleusercontent.com'
+                )
+              },
+              {
+                id: FacebookLoginProvider.PROVIDER_ID,
+                provider: new FacebookLoginProvider('2291263627940351')
+              }
+            ],
+            onError: (err) => {
+              console.error(err);
+            }
+          } as SocialAuthServiceConfig,
+        } */
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

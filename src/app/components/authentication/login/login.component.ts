@@ -1,9 +1,11 @@
+// import { SocialAuthService } from "@abacritt/angularx-social-login";
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/pages/services/auth/auth.service';
 import { CreateUserDialogBox } from 'src/app/shared/componentsShared/modal-dialog/modal-dialog.component';
+import { FacebookAuthService } from "src/app/shared/services/auth-Fb.service.service";
 import { AuthLoginGoogleService } from 'src/app/shared/services/auth-login-google.service';
 import { CustomizerSettingsService } from 'src/app/shared/services/customizer-settings.service';
 
@@ -29,7 +31,9 @@ export class LoginComponent {
         private _formBuilder: FormBuilder,
         private _router: Router,
         public dialog: MatDialog,
-        private authLoginGoogleService: AuthLoginGoogleService
+        private authLoginGoogleService: AuthLoginGoogleService,
+        // private authService: SocialAuthService,
+        private authServiceFB: FacebookAuthService,
     ) {}
 
     /**
@@ -132,6 +136,33 @@ export class LoginComponent {
     loginOauth() {
         console.log('entro a Oauth')
         this.authLoginGoogleService.login();
+    }
+
+    signInWithFB(): void {
+        // default usage without defining access level
+        // this.authService.signIn(VKLoginProvider.PROVIDER_ID);
+        // define access level
+        // https://dev.vk.com/referencne/access-rights
+
+        this.authServiceFB.loginWithFacebook().then((response) => {
+          this.authServiceFB.getUserDetails().then((userData) => {
+            console.log(userData)
+          });
+        }).catch((error) => {
+          console.error('Error al iniciar sesión con Facebook: ', error);
+        });
+        // this.authService.signIn(FacebookLoginProvider.PROVIDER_ID, ['name','email','last_name','first_name']).then((data) => {
+        //     console.log(data)
+        // });
+
+
+    }
+
+    signOut(): void {
+        // this.authService.signOut();
+        this.authServiceFB.logout().then(() => {
+
+        });
     }
 
     toggleTheme() {
