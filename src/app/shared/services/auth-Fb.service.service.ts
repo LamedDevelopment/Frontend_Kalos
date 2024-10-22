@@ -46,7 +46,7 @@ export class FacebookAuthService {
 
   getUserDetails(): Promise<any> {
     return new Promise((resolve, reject) => {
-      FB.api('/me', { fields: 'name,email,first_name,last_name,gender,avatar_2d_profile_picture' }, (response: any) => {
+      FB.api('/me', { fields: 'name,email,first_name,last_name,gender,picture' }, (response: any) => {
         if (response && !response.error) {
           resolve(response);
         } else {
