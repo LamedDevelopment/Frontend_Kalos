@@ -99,6 +99,7 @@ export class RegisterqrComponent {
 
     // Verificar si los datos son de Google o de Facebook
     const googleData = this.authGoogleService.getProfile();
+    console.log('googleData: ', googleData)
     if (googleData) {
         loginData = {
             name: googleData["given_name"],
