@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { AuthService } from "src/app/pages/services/auth/auth.service";
+import { FacebookAuthService } from "src/app/shared/services/auth-Fb.service.service";
 import { AuthGoogleService } from "src/app/shared/services/auth-google.service.service";
 import { CustomizerSettingsService } from "src/app/shared/services/customizer-settings.service";
 import Swal from "sweetalert2";
@@ -27,6 +28,7 @@ export class RegisterqrComponent {
   dataqr: string = "";
   progress3: number;
   googleData: any = {};
+  facebookData: any = {};
 
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
@@ -39,7 +41,8 @@ export class RegisterqrComponent {
     private _router: Router,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
-    private authGoogleService: AuthGoogleService
+    private authGoogleService: AuthGoogleService,
+    private authServiceFB: FacebookAuthService,
   ) {}
 
   /**
@@ -75,61 +78,159 @@ export class RegisterqrComponent {
    * Register
    */
   signUp(): void {
-    // Do nothing if the form is invalid
-    if (this.signUpForm.invalid) {
-      return;
-    }
-    if (!this.validateClient()) {
-      return;
+    // No hacer nada si el formulario es inválido
+    if (this.signUpForm.invalid || !this.validateClient()) {
+        return;
     }
 
-    const googleData = this.authGoogleService.getProfile();
-
-    // Disable the form
+    // Deshabilitar el formulario
     this.signUpForm.disable();
 
-    // Hide the alert
+    // Ocultar la alerta
     this.showAlert = false;
+
+    // Obtener los datos del formulario
     const body = this.signUpForm.getRawValue();
     body.movil = body.movil.toString();
     body.terms = body.terms.toString();
     delete body.emailConfirm;
-    const data = {
-      name: googleData["given_name"],
-      lastName: googleData["family_name"],
+
+    let loginData: any = null;
+
+    // Verificar si los datos son de Google o de Facebook
+    const googleData = this.authGoogleService.getProfile();
+    if (googleData) {
+        loginData = {
+            name: googleData["given_name"],
+            lastName: googleData["family_name"],
+            email: googleData["email"],
+            img: googleData["picture"],
+            loginType: 'Google'
+        };
+    } else {
+        // Obtener los datos de Facebook si no se encontró Google
+        this.authServiceFB.loginWithFacebook().then((response) => {
+            this.authServiceFB.getUserDetails().then((facebookData) => {
+                loginData = {
+                    name: facebookData.first_name,
+                    lastName: facebookData.last_name,
+                    email: facebookData.email,
+                    img: facebookData.picture.data.url, // URL de la imagen de perfil
+                    loginType: 'Facebook'
+                };
+
+                // Una vez que tenemos los datos de Facebook, llamamos al backend
+                this.completeSignUp(loginData, body);
+            }).catch((error) => {
+                console.error('Error al obtener detalles del usuario de Facebook:', error);
+            });
+        }).catch((error) => {
+            console.error('Error al iniciar sesión con Facebook:', error);
+        });
+        return; // Detener aquí para esperar el callback de Facebook
+    }
+
+    // Si los datos provienen de Google, se completa el registro directamente
+    if (loginData) {
+        this.completeSignUp(loginData, body);
+    }
+}
+/**
+ * Método auxiliar para realizar el registro en el backend
+ */
+completeSignUp(loginData: any, body: any): void {
+  // Construir el objeto final a enviar al backend
+  const data = {
+      name: loginData.name,
+      lastName: loginData.lastName,
       movil: body.movil.toString(),
-      email: googleData["email"],
+      email: loginData.email,
       document: body.document,
       img: body.img,
-      loginType: 'Google',
+      loginType: loginData.loginType,
       terms: body.terms.toString(),
-    };
-    // Sign up
-    this._authService.signUpQR(`usr/qr?d=${this.dataqr}`, data).subscribe(
+  };
+
+  // Llamada al backend para registrar al usuario
+  this._authService.signUpQR(`usr/qr?d=${this.dataqr}`, data).subscribe(
       (res: any) => {
-        console.log("====================================");
-        console.log(res);
-        console.log("====================================");
-        if (res.ok) {
-          this._snackBar.open(res.msg, "", {
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-            duration: this.durationInSeconds * 1000,
-          });
-          setTimeout(() => {
-            this._router.navigateByUrl("/");
-          }, 2000);
-        }
+          console.log(res);
+          if (res.ok) {
+              this._snackBar.open(res.msg, "", {
+                  horizontalPosition: this.horizontalPosition,
+                  verticalPosition: this.verticalPosition,
+                  duration: this.durationInSeconds * 1000,
+              });
+              setTimeout(() => {
+                  this._router.navigateByUrl("/");
+              }, 2000);
+          }
       },
       (error) => {
-        this._snackBar.open(error.error.msg, "", {
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-          duration: this.durationInSeconds * 1000,
-        });
+          this._snackBar.open(error.error.msg, "", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: this.durationInSeconds * 1000,
+          });
       }
-    );
-  }
+  );
+}
+  // signUp(): void {
+  //   // Do nothing if the form is invalid
+  //   if (this.signUpForm.invalid) {
+  //     return;
+  //   }
+  //   if (!this.validateClient()) {
+  //     return;
+  //   }
+
+  //   const googleData = this.authGoogleService.getProfile();
+
+  //   // Disable the form
+  //   this.signUpForm.disable();
+
+  //   // Hide the alert
+  //   this.showAlert = false;
+  //   const body = this.signUpForm.getRawValue();
+  //   body.movil = body.movil.toString();
+  //   body.terms = body.terms.toString();
+  //   delete body.emailConfirm;
+  //   const data = {
+  //     name: googleData["given_name"],
+  //     lastName: googleData["family_name"],
+  //     movil: body.movil.toString(),
+  //     email: googleData["email"],
+  //     document: body.document,
+  //     img: body.img,
+  //     loginType: 'Google',
+  //     terms: body.terms.toString(),
+  //   };
+  //   // Sign up
+  //   this._authService.signUpQR(`usr/qr?d=${this.dataqr}`, data).subscribe(
+  //     (res: any) => {
+  //       console.log("====================================");
+  //       console.log(res);
+  //       console.log("====================================");
+  //       if (res.ok) {
+  //         this._snackBar.open(res.msg, "", {
+  //           horizontalPosition: this.horizontalPosition,
+  //           verticalPosition: this.verticalPosition,
+  //           duration: this.durationInSeconds * 1000,
+  //         });
+  //         setTimeout(() => {
+  //           this._router.navigateByUrl("/");
+  //         }, 2000);
+  //       }
+  //     },
+  //     (error) => {
+  //       this._snackBar.open(error.error.msg, "", {
+  //         horizontalPosition: this.horizontalPosition,
+  //         verticalPosition: this.verticalPosition,
+  //         duration: this.durationInSeconds * 1000,
+  //       });
+  //     }
+  //   );
+  // }
 
   toggleTheme() {
     this.themeService.toggleTheme();
@@ -235,23 +336,108 @@ export class RegisterqrComponent {
     this.signUpForm.get("email")?.setValue(input.value.toLowerCase());
   }
 
-  showData() {
-    const data = this.authGoogleService.getProfile();
-    if (data) {
-      this.googleData = {
-        name: data["given_name"],
-        lastName: data["family_name"],
-        email: data["email"],
-        img: data["picture"],
-      };
+  // showData() {
+  //   const dataGoogle = this.authGoogleService.getProfile();
+    
+  //   if (dataGoogle) {
+  //     this.googleData = {
+  //       name: dataGoogle["given_name"],
+  //       lastName: dataGoogle["family_name"],
+  //       email: dataGoogle["email"],
+  //       img: dataGoogle["picture"],
+  //     };
 
-      this.signUpForm.controls["name"].setValue(this.googleData.name);
-      this.signUpForm.controls["lastName"].setValue(this.googleData.lastName);
-      this.signUpForm.controls["email"].setValue(this.googleData.email);
-      this.signUpForm.controls["img"].setValue(this.googleData.img);
-      this.dataqr = localStorage.getItem("qr") ?? "";
+  //     this.signUpForm.controls["name"].setValue(this.googleData.name);
+  //     this.signUpForm.controls["lastName"].setValue(this.googleData.lastName);
+  //     this.signUpForm.controls["email"].setValue(this.googleData.email);
+  //     this.signUpForm.controls["img"].setValue(this.googleData.img);
+  //     this.dataqr = localStorage.getItem("qr") ?? "";
+  //   } else {
+  //     this.authServiceFB.loginWithFacebook().then((response) => {
+  //         this.authServiceFB.getUserDetails().then((userData) => {
+  //           // Aquí obtienes los datos de usuario de Facebook
+  //           console.log(userData);
+  //           if (userData) {
+  //             this.facebookData = {
+  //               name: userData.first_name,
+  //               lastName: userData.last_name,
+  //               email: userData.email,
+  //               img: userData.picture,
+  //             };
+  //           }
+  //           this.signUpForm.controls["name"].setValue(this.facebookData.name);
+  //           this.signUpForm.controls["lastName"].setValue(this.facebookData.lastName);
+  //           this.signUpForm.controls["email"].setValue(this.facebookData.email);
+  //           this.signUpForm.controls["img"].setValue(this.facebookData.img);
+  //           this.dataqr = localStorage.getItem("qr") ?? "";
+
+  //           // Llama al método postLogin para enviar los datos al backend
+            
+  //       });
+  //     }).catch((error) => {
+  //         console.error('Error al iniciar sesión con Facebook: ', error);
+  //     }); 
+  //   }
+
+  // }
+
+
+  showData() {
+    // Verificar si hay datos de Google
+    const googleData = this.authGoogleService.getProfile();
+    
+    if (googleData) {
+        this.googleData = {
+            name: googleData["given_name"],
+            lastName: googleData["family_name"],
+            email: googleData["email"],
+            img: googleData["picture"],
+        };
+
+        this.fillFormWithData(this.googleData);
+    } else {
+        // Si no hay datos de Google, verificar si hay datos de Facebook
+        this.authServiceFB.loginWithFacebook().then((response) => {
+            this.authServiceFB.getUserDetails().then((userData) => {
+                console.log(userData);
+                if (userData) {
+                    this.facebookData = {
+                        name: userData.first_name,
+                        lastName: userData.last_name,
+                        email: userData.email,
+                        img: userData.picture.data.url, // Obtener la imagen desde el campo correcto
+                    };
+
+                    this.fillFormWithData(this.facebookData);
+                }
+            }).catch((error) => {
+                console.error('Error al obtener detalles del usuario de Facebook:', error);
+            });
+        }).catch((error) => {
+            console.error('Error al iniciar sesión con Facebook:', error);
+        });
     }
-  }
+
+    // Obtener el QR desde el localStorage
+    this.dataqr = localStorage.getItem("qr") ?? "";
+}
+
+/**
+ * Método auxiliar para rellenar el formulario con los datos de Google o Facebook
+ */
+fillFormWithData(data: { name: string; lastName: string; email: string; img: string }) {
+    this.signUpForm.controls["name"].setValue(data.name);
+    this.signUpForm.controls["lastName"].setValue(data.lastName);
+    this.signUpForm.controls["email"].setValue(data.email);
+    this.signUpForm.controls["img"].setValue(data.img);
+    
+    // Llama al método postLogin para enviar los datos al backend si es necesario
+    // this.postLogin(data);
+}
+
+  // showDataFB() {
+     
+  // }
 
   // showData() {
   //   const data = this.authGoogleService.getProfile();

@@ -185,7 +185,7 @@ registerLocaleData(localeEs, 'es');
           // or after 30 seconds (whichever comes first).
           registrationStrategy: 'registerWhenStable:30000'
         }),
-        OAuthModule.forRoot()
+        OAuthModule.forRoot(),
     ],
     providers: [
         DatePipe,
@@ -201,6 +201,7 @@ registerLocaleData(localeEs, 'es');
             useValue: 'es',
         },
         /* { provide: LocationStrategy, useClass: HashLocationStrategy }, */
+
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

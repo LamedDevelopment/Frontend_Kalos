@@ -1,24 +1,23 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { SharedRoutingModule } from './shared-routing.module';
 import { ClassComponent } from './class/class.component';
+import { SharedRoutingModule } from './shared-routing.module';
 
-import { ModelsComponent } from './models/models.component';
-import { PipesComponent } from './pipes/pipes.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { CreateUserDialogBox } from './componentsShared/modal-dialog/modal-dialog.component';
-import { MatButtonModule } from '@angular/material/button';
-import { QrComponent } from './pages/qr/qr.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateDocumentDialogBoxComponent } from './create-document-dialog-box/create-document-dialog-box.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { DropzoneModule } from 'ngx-dropzone-wrapper';
-import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
-import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
+import { CreateUserDialogBox } from './componentsShared/modal-dialog/modal-dialog.component';
+import { CreateDocumentDialogBoxComponent } from './create-document-dialog-box/create-document-dialog-box.component';
+import { ModelsComponent } from './models/models.component';
+import { QrComponent } from './pages/qr/qr.component';
+import { PipesComponent } from './pipes/pipes.component';
+import { FacebookAuthService } from './services/auth-Fb.service.service';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
  // Change this to your upload POST address:
@@ -63,6 +62,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
           provide: DROPZONE_CONFIG,
           useValue: DEFAULT_DROPZONE_CONFIG
         },
+        FacebookAuthService
     ]
 })
 export class SharedModule {}
