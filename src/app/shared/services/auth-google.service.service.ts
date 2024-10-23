@@ -14,7 +14,8 @@ export class AuthGoogleService {
 
   
   initLogin() {
-    console.log('environment.clientIdQr: ', environment.clientIdQr);  
+    console.log('environment.clientIdQr: ', environment.clientIdQr)
+    console.log('environment.urlFront: ', environment.urlFront); 
     const config: AuthConfig = {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
