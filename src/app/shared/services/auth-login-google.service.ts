@@ -7,11 +7,13 @@ import { environment } from 'src/environments/environment.staging';
 })
 export class AuthLoginGoogleService {
 
-  constructor(private oauthService: OAuthService) {
+  constructor(private readonly oauthService: OAuthService) {
     this.initLogin();
   }
 
   initLogin() {
+    console.log('environment.clientIdQr: ', environment.clientIdQr)
+    console.log('environment.urlFront: ', environment.urlFront);
     const config: AuthConfig = {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
