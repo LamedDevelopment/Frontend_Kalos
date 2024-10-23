@@ -125,30 +125,15 @@ export class LoginComponent {
         if(data){
             const body = this.signInForm.getRawValue();
             body.googleToken = data;
-            console.log(body);
             this.postLogin(body);
 
         }
     }
-
-    
-
-
     loginOauth() {
         console.log('entro a Oauth')
         this.authLoginGoogleService.login();
     }
 
-    // signInWithFB(): void {
-
-    //     this.authServiceFB.loginWithFacebook().then((response) => {
-    //       this.authServiceFB.getUserDetails().then((userData) => {
-    //         console.log('Datos de Entrada de FB: ',userData)
-    //       });
-    //     }).catch((error) => {
-    //       console.error('Error al iniciar sesión con Facebook: ', error);
-    //     });
-    // }
     signInWithFB(): void {
         this.authServiceFB.loginWithFacebook().then((response) => {
             this.authServiceFB.getUserDetails().then((userData) => {
@@ -164,7 +149,6 @@ export class LoginComponent {
                     fbId: userData.id,
                     facebookToken: response.accessToken, // Este es el token de acceso de Facebook que necesitas enviar al backend
                 };
-                console.log('fbLoginData: ', fbLoginData);
     
                 // Llama al método postLogin para enviar los datos al backend
                 this.postLogin(fbLoginData);

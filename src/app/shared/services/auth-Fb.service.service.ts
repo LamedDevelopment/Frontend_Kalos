@@ -12,7 +12,6 @@ export class FacebookAuthService {
 
   async initLogin() {
     // Cargar e inicializar el SDK de Facebook
-        console.log('init');
       return await FB.init({
         appId: '2291263627940351',  // Reemplaza con tu App ID de Facebook
         cookie: true,
