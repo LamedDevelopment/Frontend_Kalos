@@ -8,6 +8,8 @@
         "dev": "ng serve -o",
         "serve": "ng serve --proxy-config proxy.conf.json",
         "build": "ng build --configuration production",
+        "prod": "ng serve -o",
+        "build-prod": "ng build --configuration production",
         "build-dev": "ng build --configuration staging",
         "test": "ng test",
         "lint": "ng lint",

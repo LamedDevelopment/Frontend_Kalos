@@ -53,8 +53,6 @@ export class HeaderComponent {
     ngOnInit(): void {
         this._userToken.InfoUserApi().subscribe((data:any) => {
             this.tokenUser = data.msg.staff.img || this.userImage;
-            console.log('tokenUser: ', this.tokenUser);
-            console.log('userImage: ', this.userImage);
         });
         this.authService.InfoUserApi().subscribe((data: any) => {});
         this._userService.user$
@@ -62,8 +60,6 @@ export class HeaderComponent {
             .subscribe((user: any) => {
                 this.user = user.user ? user.user : user;
                 // Si el usuario tiene una imagen específica, se actualiza la variable `userImage`
-                console.log('Datos del Usuario: ', this.user.img)
-                console.log('Datos del Usuario Default: ', this.userImage)
                 if (this.user?.img) {
                     this.tokenUser = this.user.img || this.userImage;
                 }

@@ -81,7 +81,6 @@ export class LoginComponent {
 
     postLogin(value: any) {
         // Sign in
-        console.log('Datos enviados al PostLogin: ',value);
         this._authService.signIn(value).subscribe(
             async (res) => {
                 if(res.ok){
@@ -130,7 +129,6 @@ export class LoginComponent {
         }
     }
     loginOauth() {
-        console.log('entro a Oauth')
         this.authLoginGoogleService.login();
     }
 
@@ -138,7 +136,6 @@ export class LoginComponent {
         this.authServiceFB.loginWithFacebook().then((response) => {
             this.authServiceFB.getUserDetails().then((userData) => {
                 // Aquí obtienes los datos de usuario de Facebook
-                console.log(userData);
     
                 // Ahora crea el cuerpo para el login
                 const fbLoginData = {
