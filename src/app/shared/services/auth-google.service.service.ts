@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
-import { environment } from 'src/environments/environment.staging';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
